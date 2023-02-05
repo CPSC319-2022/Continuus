@@ -26,8 +26,6 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-RUN npm install
-
 # ENV NEXT_TELEMETRY_DISABLED 1
 
 RUN \
