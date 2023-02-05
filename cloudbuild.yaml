@@ -2,7 +2,7 @@ steps:
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
-    args: ['-c', 'docker build . --tag continuus']  
+    args: ['-c', 'docker build . --tag continuus northamerica-northeast2/-docker.pkg.dev/automatic-bot-376307/continuus/continuus']  
 
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
@@ -11,7 +11,7 @@ steps:
   # Docker Push
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
-    args: ['-c', 'docker push gcr.io/github.com/cpsc319-2022/continuus:${COMMIT_SHA}']
+    args: ['-c', 'docker push northamerica-northeast2/-docker.pkg.dev/automatic-bot-376307/continuus/continuus']
 
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
