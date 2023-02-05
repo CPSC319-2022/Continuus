@@ -1,4 +1,12 @@
 steps:
+  - name: node:16
+    entrypoint: npm
+    args: ['install']
+
+  - name: node:16
+    entrypoint: npm
+    args: ['test']
+
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
@@ -16,3 +24,7 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
     args: ['-c', 'docker run continuus npm run test']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args: ['-c', 'docker run continuus node server.js']
