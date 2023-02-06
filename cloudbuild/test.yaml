@@ -6,6 +6,3 @@ steps:
   - name: node:16
     entrypoint: npm
     args: ['test']
-
-options:
-  logging: CLOUD_LOGGING_ONLY
