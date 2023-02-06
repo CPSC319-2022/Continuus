@@ -28,7 +28,7 @@ jobs:
       run: |
         export CLOUDSDK_CORE_DISABLE_PROMPTS=1
         chmod +x ./scripts/wait-for-build
-        ./scripts/wait-for-build ${{ secrets.GCP_BUILD_BUILD_ID }} ${GITHUB_REF##*/}
+        ./scripts/wait-for-build ${{ secrets.GCP_BUILD_BUILD_ID }} ${GITHUB_REF##*/} Build
   
   test:
     name: Test
@@ -52,7 +52,7 @@ jobs:
       run: |
         export CLOUDSDK_CORE_DISABLE_PROMPTS=1
         chmod +x ./scripts/wait-for-build
-        ./scripts/wait-for-build ${{ secrets.GCP_BUILD_TEST_ID }} ${GITHUB_REF##*/}
+        ./scripts/wait-for-build ${{ secrets.GCP_BUILD_TEST_ID }} ${GITHUB_REF##*/} Test
 
   deploy:
     name: Deploy
@@ -76,4 +76,4 @@ jobs:
       run: |
         export CLOUDSDK_CORE_DISABLE_PROMPTS=1
         chmod +x ./scripts/wait-for-build
-        ./scripts/wait-for-build ${{ secrets.GCP_BUILD_DEPLOY_ID }} ${GITHUB_REF##*/}
+        ./scripts/wait-for-build ${{ secrets.GCP_BUILD_DEPLOY_ID }} ${GITHUB_REF##*/} Deploy

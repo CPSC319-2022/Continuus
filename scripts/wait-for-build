@@ -5,8 +5,9 @@ trigger_output=$(gcloud beta builds triggers run $1 --branch=$2 --format="json")
 build_id=$(echo $trigger_output | jq -r '.metadata."build"."id"')
 log_url=$(echo $trigger_output | jq -r '.metadata."build"."logUrl"')
 
-echo "build id: $build_id"
-echo "log url: $log_url"
+echo "$3 stage started for branch $2"
+echo "Google Cloud Build ID: $build_id"
+echo "Logs: $log_url"
 
 status="WORKING"
 i=0
@@ -20,7 +21,7 @@ while [[ $status == "WORKING" && $i -lt 30 ]]; do
 done
 
 if [[ $status == "SUCCESS" ]]; then
-  echo "Build succeeded"
+  echo "Build succeeded!"
   exit 0
 elif [[ $status == "FAILED" ]]; then
   echo "Build failed. See logs: $log_url"
