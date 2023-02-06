@@ -1,0 +1,74 @@
+
+# https://medium.com/devops-techable/github-actions-and-google-cloud-build-triggers-d55aceb96e68 
+name: GCP Cloud Build
+
+on:
+  push:
+    branches: [ "cloudbuild-pt2" ]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v0'
+      with:
+        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+    - name: 'Set up Cloud SDK'
+      uses: 'google-github-actions/setup-gcloud@v0'
+
+    - name: 'Use gcloud CLI'
+      run: 'gcloud info'
+
+    - name: 'Start Google Cloud Build trigger'
+      run: |
+        export CLOUDSDK_CORE_DISABLE_PROMPTS=1
+        gcloud beta builds triggers run ${{ secrets.GCP_BUILD_BUILD_ID }} --branch=${GITHUB_REF##*/}
+  
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v0'
+      with:
+        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+    - name: 'Set up Cloud SDK'
+      uses: 'google-github-actions/setup-gcloud@v0'
+
+    - name: 'Use gcloud CLI'
+      run: 'gcloud info'
+
+    - name: 'Start Google Cloud Build trigger'
+      run: |
+        export CLOUDSDK_CORE_DISABLE_PROMPTS=1
+        gcloud beta builds triggers run ${{ secrets.GCP_BUILD_TEST_ID }} --branch=${GITHUB_REF##*/}
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: [build, test]
+    steps:
+    - uses: actions/checkout@v2
+
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v0'
+      with:
+        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+    - name: 'Set up Cloud SDK'
+      uses: 'google-github-actions/setup-gcloud@v0'
+
+    - name: 'Use gcloud CLI'
+      run: 'gcloud info'
+
+    - name: 'Start Google Cloud Build trigger'
+      run: |
+        export CLOUDSDK_CORE_DISABLE_PROMPTS=1
+        gcloud beta builds triggers run ${{ secrets.GCP_BUILD_DEPLOY_ID }} --branch=${GITHUB_REF##*/}
