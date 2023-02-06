@@ -2,8 +2,8 @@
 name: GCP Cloud Build
 
 on:
-  release:
-    types: [published]
+  push:
+    branches: [ "cloudbuild-pt2" ]
 
 jobs:
   build:
