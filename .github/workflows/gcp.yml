@@ -52,7 +52,7 @@ jobs:
       run: |
         export CLOUDSDK_CORE_DISABLE_PROMPTS=1
         chmod +x ./scripts/wait-for-build
-        ./scripts/wait-for-build ${{ secrets.GCP_BUILD_TEST_ID }} ${GITHUB_REF##*/} Test (Unit)
+        ./scripts/wait-for-build ${{ secrets.GCP_BUILD_TEST_ID }} ${GITHUB_REF##*/} "Test (Unit)"
 
   integration-test:
     name: Test (Integration)
@@ -76,7 +76,7 @@ jobs:
       run: |
         export CLOUDSDK_CORE_DISABLE_PROMPTS=1
         chmod +x ./scripts/wait-for-build
-        ./scripts/wait-for-build ${{ secrets.GCP_BUILD_TEST_ID }} ${GITHUB_REF##*/} Test (Integration)
+        ./scripts/wait-for-build ${{ secrets.GCP_BUILD_TEST_ID }} ${GITHUB_REF##*/} "Test (Integration)"
 
   coverage-test:
     name: Test (Coverage)
@@ -100,7 +100,7 @@ jobs:
       run: |
         export CLOUDSDK_CORE_DISABLE_PROMPTS=1
         chmod +x ./scripts/wait-for-build
-        ./scripts/wait-for-build ${{ secrets.GCP_BUILD_TEST_ID }} ${GITHUB_REF##*/} Test (Coverage)
+        ./scripts/wait-for-build ${{ secrets.GCP_BUILD_TEST_ID }} ${GITHUB_REF##*/} "Test (Coverage)"
 
   deploy:
     name: Deploy
