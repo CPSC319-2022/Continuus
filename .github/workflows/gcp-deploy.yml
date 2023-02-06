@@ -25,9 +25,8 @@ jobs:
 
     - name: 'Start Google Cloud Build trigger'
       run: |
-        echo ${{ github.event.release.tag_name }}
         export CLOUDSDK_CORE_DISABLE_PROMPTS=1
-        gcloud beta builds triggers run ${{ secrets.GCP_BUILD_BUILD_ID }} --tag=${{ github.event.release.tag_name }}
+        gcloud beta builds triggers run ${{ secrets.GCP_BUILD_BUILD_ID }} --branch=${GITHUB_REF##*/}
   
   test:
     name: Test
@@ -49,7 +48,7 @@ jobs:
     - name: 'Start Google Cloud Build trigger'
       run: |
         export CLOUDSDK_CORE_DISABLE_PROMPTS=1
-        gcloud beta builds triggers run ${{ secrets.GCP_BUILD_TEST_ID }} --tag=${{ github.event.release.tag_name }}
+        gcloud beta builds triggers run ${{ secrets.GCP_BUILD_TEST_ID }} --branch=${GITHUB_REF##*/}
 
   deploy:
     name: Deploy
@@ -72,4 +71,4 @@ jobs:
     - name: 'Start Google Cloud Build trigger'
       run: |
         export CLOUDSDK_CORE_DISABLE_PROMPTS=1
-        gcloud beta builds triggers run ${{ secrets.GCP_BUILD_DEPLOY_ID }} --tag=${{ github.event.release.tag_name }}
+        gcloud beta builds triggers run ${{ secrets.GCP_BUILD_DEPLOY_ID }} --branch=${GITHUB_REF##*/}
