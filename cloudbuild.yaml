@@ -11,6 +11,7 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
     args: ['-c', 'docker build . --tag continuus']  
+    waitFor: ['-']
 
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
