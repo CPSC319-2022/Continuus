@@ -27,7 +27,6 @@ jobs:
     - name: 'Start Google Cloud Build trigger'
       run: |
         export CLOUDSDK_CORE_DISABLE_PROMPTS=1
-        gcloud beta builds triggers run ${{ secrets.GCP_BUILD_BUILD_ID }} --branch=${GITHUB_REF##*/}
         chmod +x ./scripts/wait-for-build
         ./scripts/wait-for-build ${{ secrets.GCP_BUILD_BUILD_ID }} ${GITHUB_REF##*/}
   
@@ -52,7 +51,6 @@ jobs:
     - name: 'Start Google Cloud Build trigger'
       run: |
         export CLOUDSDK_CORE_DISABLE_PROMPTS=1
-        gcloud beta builds triggers run ${{ secrets.GCP_BUILD_TEST_ID }} --branch=${GITHUB_REF##*/}
         chmod +x ./scripts/wait-for-build
         ./scripts/wait-for-build ${{ secrets.GCP_BUILD_BUILD_ID }} ${GITHUB_REF##*/}
 
@@ -77,6 +75,5 @@ jobs:
     - name: 'Start Google Cloud Build trigger'
       run: |
         export CLOUDSDK_CORE_DISABLE_PROMPTS=1
-        gcloud beta builds triggers run ${{ secrets.GCP_BUILD_DEPLOY_ID }} --branch=${GITHUB_REF##*/}
         chmod +x ./scripts/wait-for-build
         ./scripts/wait-for-build ${{ secrets.GCP_BUILD_BUILD_ID }} ${GITHUB_REF##*/}
