@@ -16,7 +16,7 @@ echo "Logs: $log_url"
 status="WORKING"
 i=0
 
-while [[ $status == "WORKING" && $i -lt 30 ]]; do
+while [[ $status == "WORKING" && $i -lt 900 ]]; do
   sleep 10
   describe_output=$(gcloud beta builds describe $build_id --format="json")
   status=$(echo $describe_output | jq -r '.status')
