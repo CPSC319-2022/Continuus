@@ -24,10 +24,15 @@ while [[ $status == "WORKING" && $i -lt 900 ]]; do
   let "i+=1"
 done
 
+if [[ "$3" == *"Test"* ]]; then
+  echo "Test results:"
+  gcloud logging read "resource.labels.build_id=$build_id" | grep -o "textPayload: 'Step #1.*" | cut -f3- -d: | sed 's/.$//'
+fi
+
 if [[ $status == "SUCCESS" ]]; then
   echo "Build succeeded!"
   if [[ $3 == "Deploy" ]]; then
-    echo Deployment URL: $(echo gcloud run services describe $3 --format=json --region="northamerica-northeast2" | jq -r '.status."address"."url"')
+    echo $(gcloud logging read "resource.labels.build_id=$build_id" | grep "Service URL")
   fi
   exit 0
 elif [[ $status == "FAILED" ]]; then
