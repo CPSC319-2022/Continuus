@@ -27,7 +27,7 @@ done
 if [[ $status == "SUCCESS" ]]; then
   echo "Build succeeded!"
   if [[ $3 == "Deploy" ]]; then
-    echo Deployment URL: $(echo gcloud run services describe $3 | jq -r '.status."address"."url"')
+    echo Deployment URL: $(echo gcloud run services describe $3 --format=json --region="northamerica-northeast2" | jq -r '.status."address"."url"')
   fi
   exit 0
 elif [[ $status == "FAILED" ]]; then
