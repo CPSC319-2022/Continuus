@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# $1: Cloud Build Trigger ID
+# $2: Branch Name
+# $3: Stage Name
+
 trigger_output=$(gcloud beta builds triggers run $1 --branch=$2 --format="json")
 
 build_id=$(echo $trigger_output | jq -r '.metadata."build"."id"')
@@ -22,6 +26,11 @@ done
 
 if [[ $status == "SUCCESS" ]]; then
   echo "Build succeeded!"
+
+  if [[ $3 == "Deploy" ]]; then
+    echo Deployment URL: $(echo gcloud run services describe $3 | jq -r '.status."address"."url"')
+  done
+
   exit 0
 elif [[ $status == "FAILED" ]]; then
   echo "Build failed. See logs: $log_url"
