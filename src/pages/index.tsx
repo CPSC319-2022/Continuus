@@ -141,13 +141,22 @@ const Home: NextPage = () => {
               <div className="w-12 h-12">
                 <Menu
                   menuButton={<MenuButton className="w-full h-full rounded-full bg-cyan-400">...</MenuButton>}
-                  menuClassName="bg-white border-solid border-black border cursor-pointer"
+                  menuClassName="bg-white border-solid border-black border cursor-pointer z-10"
                 >
                   <MenuItem onClick={() => {
                     setEditPostFormState({ id, title: post.title, content: post.content })
                     setEditPostModalVisible(true)
                   }}>
                     Edit
+                  </MenuItem>
+                  <MenuItem onClick={() => {
+                    setFeed((feed) => {
+                      feed.splice(id, 1)
+
+                      return [...feed];
+                    })
+                  }}>
+                    Delete
                   </MenuItem>
                 </Menu>
               </div>
