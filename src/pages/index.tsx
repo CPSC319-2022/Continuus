@@ -1,3 +1,4 @@
+import { Menu, MenuButton, MenuItem } from "@szhsin/react-menu";
 import { type NextPage } from "next";
 import Head from "next/head";
 import { FormEvent, useState } from "react";
@@ -16,10 +17,16 @@ const examplePost: Post = {
 const Home: NextPage = () => {
   const [feed, setFeed] = useState<Post[]>([examplePost])
   const [createPostModalVisible, setCreatePostModalVisible] = useState(false);
+  const [editPostModalVisible, setEditPostModalVisible] = useState(false);
   const [createPostFormState, setCreatePostFormState] = useState({
     title: "",
     content: "",
-  })
+  });
+  const [editPostFormState, setEditPostFormState] = useState({
+    id: -1,
+    title: "",
+    content: "",
+  });
 
   const handleCreateBlogFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -29,6 +36,19 @@ const Home: NextPage = () => {
     setCreatePostModalVisible(false);
 
     setCreatePostFormState({ title: "", content: "" });
+  };
+
+  const handleEditBlogFormSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    setFeed((feed) => {
+      feed.splice(editPostFormState.id, 1, editPostFormState)
+      return [...feed];
+    });
+
+    setEditPostModalVisible(false);
+
+    setEditPostFormState({ id: -1, title: "", content: "" });
   };
 
   return (
@@ -41,12 +61,18 @@ const Home: NextPage = () => {
       <button onClick={() => setCreatePostModalVisible(true)}>Create a Post</button>
       <Modal
         isOpen={createPostModalVisible}
-        onRequestClose={() => setCreatePostModalVisible(false)}
+        onRequestClose={() => {
+          setCreatePostModalVisible(false);
+          setCreatePostFormState({ title: "", content: "" });
+        }}
         className="bg-cyan-500 absolute w-4/5 h-4/5 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
       >
         <button
           className="bg-gray-300 absolute right-2 top-2 w-12 h-12 rounded-full font-bold"
-          onClick={() => setCreatePostModalVisible(false)}
+          onClick={() => {
+            setCreatePostModalVisible(false);
+            setCreatePostFormState({ title: "", content: "" });
+          }}
         >X</button>
         <div className="p-12 bg-gray-400 w-5/6 h-5/6 relative top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
           <h1 className="text-5xl">Create Blog Post</h1>
@@ -71,12 +97,59 @@ const Home: NextPage = () => {
         </div>
       </Modal>
 
+      <Modal
+        isOpen={editPostModalVisible}
+        shouldCloseOnOverlayClick={false}
+        shouldCloseOnEsc={false}
+        className="bg-cyan-500 absolute w-4/5 h-4/5 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+      >
+        <button
+          className="bg-gray-300 absolute right-2 top-2 w-12 h-12 rounded-full font-bold"
+          onClick={() => {
+            setEditPostModalVisible(false);
+            setEditPostFormState({ id: -1, title: "", content: "" });
+          }}
+        >X</button>
+        <div className="p-12 bg-gray-400 w-5/6 h-5/6 relative top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+          <h1 className="text-5xl">Edit Blog Post</h1>
+          <form onSubmit={handleEditBlogFormSubmit}>
+            <label>
+              Title:
+              <input
+                type="text"
+                value={editPostFormState.title}
+                onChange={(event) => setEditPostFormState((state) => ({ ...state, title: event.target.value }))}
+              />
+            </label>
+            <label>
+              Content:
+              <textarea
+                value={editPostFormState.content}
+                onChange={(event) => setEditPostFormState((state) => ({ ...state, content: event.target.value }))}
+              />
+            </label>
+            <input type="submit" value="Submit" />
+          </form>
+        </div>
+      </Modal>
+
       <div className="flex flex-col items-center w-full">
         {feed.map((post, id) =>
           <div className="border border-solid border-black w-5/6 my-2 relative">
             <div className="flex flex-row justify-between">
               <div className="text-3xl">{post.title}</div>
               <div className="w-12 h-12">
+                <Menu
+                  menuButton={<MenuButton className="w-full h-full rounded-full bg-cyan-400">...</MenuButton>}
+                  menuClassName="bg-white border-solid border-black border cursor-pointer"
+                >
+                  <MenuItem onClick={() => {
+                    setEditPostFormState({ id, title: post.title, content: post.content })
+                    setEditPostModalVisible(true)
+                  }}>
+                    Edit
+                  </MenuItem>
+                </Menu>
               </div>
             </div>
             <p className="text-base break-words">{post.content}</p>
