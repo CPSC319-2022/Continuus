@@ -49,7 +49,7 @@ const Home: NextPage = () => {
           onClick={() => setCreatePostModalVisible(false)}
         >X</button>
         <div className="p-12 bg-gray-400 w-5/6 h-5/6 relative top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-          <h1 className="text-5xl">Create Blog</h1>
+          <h1 className="text-5xl">Create Blog Post</h1>
           <form onSubmit={handleCreateBlogFormSubmit}>
             <label>
               Title:
@@ -70,6 +70,19 @@ const Home: NextPage = () => {
           </form>
         </div>
       </Modal>
+
+      <div className="flex flex-col items-center w-full">
+        {feed.map((post, id) =>
+          <div className="border border-solid border-black w-5/6 my-2 relative">
+            <div className="flex flex-row justify-between">
+              <div className="text-3xl">{post.title}</div>
+              <div className="w-12 h-12">
+              </div>
+            </div>
+            <p className="text-base break-words">{post.content}</p>
+          </div>
+        )}
+      </div>
     </>
   )
 }
