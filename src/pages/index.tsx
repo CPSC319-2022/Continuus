@@ -180,7 +180,12 @@ const Home: NextPage = () => {
         {feed.map((post, id) =>
           <div className="border border-solid border-black w-5/6 my-2 relative" key={id}>
             <div className="flex flex-row justify-between">
-              <div className="text-3xl">{post.title}</div>
+              <div className="flex flex-row items-center w-11/12">
+                <Link href={"/profile/1"}>
+                  <img src="https://i.pravatar.cc/300?img=1" className="w-12 rounded-full" />
+                </Link>
+                <div className="text-3xl break-words w-11/12">{post.title}</div>
+              </div>
               <div className="w-12 h-12">
                 <Menu
                   menuButton={<MenuButton className="w-full h-full rounded-full bg-cyan-400">...</MenuButton>}
@@ -215,12 +220,16 @@ const Home: NextPage = () => {
               <div className="text-2xl">Comments</div>
               {post.comments.map((comment, commentId) =>
                 <div className="w-full flex flex-row items-start my-2" key={commentId}>
-                  <img src="https://i.pravatar.cc/300?img=1" className="w-12 rounded-full" />
+                  <Link href={"/profile/1"}>
+                    <img src="https://i.pravatar.cc/300?img=1" className="w-12 rounded-full" />
+                  </Link>
                   <p className="text-base break-words w-11/12">{comment.content}</p>
                 </div>
               )}
               <div className="w-full flex flex-row items-center my-2">
-                <img src="https://i.pravatar.cc/300?img=1" className="w-12 rounded-full" />
+                <Link href={"/profile/1"}>
+                  <img src="https://i.pravatar.cc/300?img=1" className="w-12 rounded-full" />
+                </Link>
                 <form onSubmit={(event) => handleCreateCommentSubmit(event, id)}>
                   <textarea
                     value={addCommentStates[id]}

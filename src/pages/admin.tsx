@@ -27,7 +27,9 @@ const Admin: NextPage = () => {
                 lastName: "Batuhan",
                 email: "altaybatuhanmail@gmail.com",
                 role: "ADMIN",
-                profilePic: <img src="https://i.pravatar.cc/300?img=1" className="w-12 h-12 rounded-full" />,
+                profilePic: <Link href={"/profile/1"}>
+                    <img src="https://i.pravatar.cc/300?img=1" className="w-12 h-12 rounded-full" />
+                </Link>,
             },
             {
                 id: 2,
@@ -35,7 +37,9 @@ const Admin: NextPage = () => {
                 lastName: "McPherson",
                 email: "RubyDMcPherson@teleworm.us",
                 role: "READER",
-                profilePic: <img src="https://i.pravatar.cc/300?img=2" className="w-12 h-12 rounded-full" />,
+                profilePic: <Link href={"/profile/2"}>
+                    <img src="https://i.pravatar.cc/300?img=2" className="w-12 h-12 rounded-full" />
+                </Link>,
             },
             {
                 id: 3,
@@ -43,7 +47,9 @@ const Admin: NextPage = () => {
                 lastName: "Richmond",
                 email: "AndreaMRichmond@rhyta.com",
                 role: "CONTRIBUTOR",
-                profilePic: <img src="https://i.pravatar.cc/300?img=3" className="w-12 h-12 rounded-full" />,
+                profilePic: <Link href={"/profile/3"}>
+                    <img src="https://i.pravatar.cc/300?img=3" className="w-12 h-12 rounded-full" />
+                </Link>,
             },
             {
                 id: 4,
@@ -51,7 +57,9 @@ const Admin: NextPage = () => {
                 lastName: "Ellis",
                 email: "AdamGEllis@jourrapide.com",
                 role: "READER",
-                profilePic: <img src="https://i.pravatar.cc/300?img=4" className="w-12 h-12 rounded-full" />,
+                profilePic: <Link href={"/profile/4"}>
+                    <img src="https://i.pravatar.cc/300?img=4" className="w-12 h-12 rounded-full" />
+                </Link>,
             },
             {
                 id: 5,
@@ -59,7 +67,9 @@ const Admin: NextPage = () => {
                 lastName: "Hinton",
                 email: "JohnEHinton@dayrep.com",
                 role: "READER",
-                profilePic: <img src="https://i.pravatar.cc/300?img=5" className="w-12 h-12 rounded-full" />,
+                profilePic: <Link href={"/profile/5"}>
+                    <img src="https://i.pravatar.cc/300?img=5" className="w-12 h-12 rounded-full" />
+                </Link>,
             },
             {
                 id: 6,
@@ -67,7 +77,9 @@ const Admin: NextPage = () => {
                 lastName: "Baker",
                 email: "LauraRBaker@teleworm.us",
                 role: "ADMIN",
-                profilePic: <img src="https://i.pravatar.cc/300?img=6" className="w-12 h-12 rounded-full" />,
+                profilePic: <Link href={"/profile/6"}>
+                    <img src="https://i.pravatar.cc/300?img=6" className="w-12 h-12 rounded-full" />
+                </Link>,
             },
             {
                 id: 7,
@@ -75,7 +87,9 @@ const Admin: NextPage = () => {
                 lastName: "Miranda",
                 email: "CherylRMiranda@jourrapide.com",
                 role: "CONTRIBUTOR",
-                profilePic: <img src="https://i.pravatar.cc/300?img=7" className="w-12 h-12 rounded-full" />,
+                profilePic: <Link href={"/profile/7"}>
+                    <img src="https://i.pravatar.cc/300?img=7" className="w-12 h-12 rounded-full" />
+                </Link>,
             },
         ]
     )
