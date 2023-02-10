@@ -212,12 +212,12 @@ const Home: NextPage = () => {
               <div className="text-2xl">Comments</div>
               {post.comments.map((comment, commentId) =>
                 <div className="w-full flex flex-row items-start my-2" key={commentId}>
-                  <img src="https://i.pravatar.cc/300" className="w-12 rounded-full" />
+                  <img src="https://i.pravatar.cc/300?img=1" className="w-12 rounded-full" />
                   <p className="text-base break-words w-11/12">{comment.content}</p>
                 </div>
               )}
               <div className="w-full flex flex-row items-center my-2">
-                <img src="https://i.pravatar.cc/300" className="w-12 rounded-full" />
+                <img src="https://i.pravatar.cc/300?img=1" className="w-12 rounded-full" />
                 <form onSubmit={(event) => handleCreateCommentSubmit(event, id)}>
                   <textarea
                     value={addCommentStates[id]}
