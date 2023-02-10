@@ -5,10 +5,10 @@ name: GCP Cloud Build
 on:
   push:
     branches: 
-    - "*" 
-    - "!dev"
-    - "!qa"
-    - "!prod"
+    - '*' 
+    - '!dev'
+    - '!qa'
+    - '!prod'
 
 
 jobs:

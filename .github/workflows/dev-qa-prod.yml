@@ -5,9 +5,9 @@ name: GCP Cloud Build, Test and Deploy
 on:
   push:
     branches: 
-    - "dev"
-    - "qa"
-    - "prod"
+    - dev
+    - qa
+    - prod
 
 jobs:
   build:
