@@ -9,7 +9,6 @@ on:
     - '!dev'
     - '!qa'
     - '!prod'
-    - '!cloudbuild-pt2'
 
 
 jobs:
