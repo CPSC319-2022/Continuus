@@ -100,6 +100,35 @@ const Profile: NextPage = () => {
     }
 
     const parsedId = safeParseOfId.data;
+    const user = users.find((user) => user.id === parsedId);
+
+    if (parsedId !== 1) {
+        return (
+            <>
+                <Head>
+                    <title>{user?.firstName || "Profile"} | Blog Application</title>
+                    <meta name="description" content="Blog Application Profile" />
+                    <link rel="icon" href="/favicon.ico" />
+                </Head>
+                <Link href="/">Blog</Link>
+                <br />
+                <Link href="/admin">Admin Panel</Link>
+                <Tabs>
+                    <TabList>
+                        <Tab>Posts</Tab>
+                        <Tab>Comments</Tab>
+                    </TabList>
+
+                    <TabPanel>
+                        {`${user?.firstName || "This profile"} has not shared any posts yet` }
+                    </TabPanel>
+                    <TabPanel>
+                        {`${user?.firstName || "This profile"} has not commented yet` }
+                    </TabPanel>
+                </Tabs>
+            </>
+        );
+    }
 
     return (
         <>
