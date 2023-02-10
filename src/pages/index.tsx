@@ -1,6 +1,7 @@
 import { Menu, MenuButton, MenuItem } from "@szhsin/react-menu";
 import { type NextPage } from "next";
 import Head from "next/head";
+import Link from "next/link";
 import { FormEvent, useState } from "react";
 import Modal from 'react-modal';
 
@@ -97,6 +98,8 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <button onClick={() => setCreatePostModalVisible(true)}>Create a Post</button>
+      <br />
+      <Link href="/admin">Admin Panel</Link>
       <Modal
         ariaHideApp={false}
         isOpen={createPostModalVisible}
