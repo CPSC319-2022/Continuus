@@ -1,7 +1,10 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import { ReactElement, useMemo } from "react";
+import { ReactElement, useMemo, useState } from "react";
 import { useTable } from "react-table";
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
+
 
 interface User {
     id: number,
@@ -12,19 +15,68 @@ interface User {
     profilePic: ReactElement,
 }
 
+const userRoles = ["READER", "CONTRIBUTOR", "ADMIN"]
+
 const Admin: NextPage = () => {
-    const data = useMemo(
-        () => [
+    const [data, setData] = useState(
+        [
             {
                 id: 1,
                 firstName: "Altay",
                 lastName: "Batuhan",
                 email: "altaybatuhanmail@gmail.com",
-                role: "Admin",
+                role: "ADMIN",
                 profilePic: <img src="https://i.pravatar.cc/300?img=1" className="w-12 h-12 rounded-full" />,
-            }
-        ],
-        []
+            },
+            {
+                id: 2,
+                firstName: "Ruby",
+                lastName: "McPherson",
+                email: "RubyDMcPherson@teleworm.us",
+                role: "READER",
+                profilePic: <img src="https://i.pravatar.cc/300?img=2" className="w-12 h-12 rounded-full" />,
+            },
+            {
+                id: 3,
+                firstName: "Andrea",
+                lastName: "Richmond",
+                email: "AndreaMRichmond@rhyta.com",
+                role: "CONTRIBUTOR",
+                profilePic: <img src="https://i.pravatar.cc/300?img=3" className="w-12 h-12 rounded-full" />,
+            },
+            {
+                id: 4,
+                firstName: "Adam",
+                lastName: "Ellis",
+                email: "AdamGEllis@jourrapide.com",
+                role: "READER",
+                profilePic: <img src="https://i.pravatar.cc/300?img=4" className="w-12 h-12 rounded-full" />,
+            },
+            {
+                id: 5,
+                firstName: "John",
+                lastName: "Hinton",
+                email: "JohnEHinton@dayrep.com",
+                role: "READER",
+                profilePic: <img src="https://i.pravatar.cc/300?img=5" className="w-12 h-12 rounded-full" />,
+            },
+            {
+                id: 6,
+                firstName: "Laura",
+                lastName: "Baker",
+                email: "LauraRBaker@teleworm.us",
+                role: "ADMIN",
+                profilePic: <img src="https://i.pravatar.cc/300?img=6" className="w-12 h-12 rounded-full" />,
+            },
+            {
+                id: 7,
+                firstName: "Cheryl",
+                lastName: "Miranda",
+                email: "CherylRMiranda@jourrapide.com",
+                role: "CONTRIBUTOR",
+                profilePic: <img src="https://i.pravatar.cc/300?img=7" className="w-12 h-12 rounded-full" />,
+            },
+        ]
     )
 
     const columns = useMemo(
@@ -91,17 +143,33 @@ const Admin: NextPage = () => {
                 <tbody {...getTableBodyProps()}>
                     {rows.map(row => {
                         prepareRow(row)
+                        console.log(row);
                         return (
                             <tr {...row.getRowProps()}>
                                 {row.cells.map(cell => {
-                                    return (
-                                        <td
-                                            {...cell.getCellProps()}
-                                            className="p-3 border-2 border-solid border-black bg-lime-500"
-                                        >
-                                            {cell.render('Cell')}
-                                        </td>
-                                    )
+                                    if (cell.column.id === "role") {
+                                        return (
+                                            <td
+                                                {...cell.getCellProps()}
+                                                className="p-3 border-2 border-solid border-black bg-lime-200"
+                                            >
+                                                <Dropdown
+                                                    options={userRoles}
+                                                    value={cell.value}
+                                                    placeholder="Select an option"
+                                                />
+                                            </td>
+                                        )
+                                    } else {
+                                        return (
+                                            <td
+                                                {...cell.getCellProps()}
+                                                className="p-3 border-2 border-solid border-black bg-lime-200"
+                                            >
+                                                {cell.render('Cell')}
+                                            </td>
+                                        )
+                                    }
                                 })}
                             </tr>
                         )

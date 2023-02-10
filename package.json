@@ -24,6 +24,7 @@
     "prisma-zod-generator": "^0.8.11",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-dropdown": "^1.11.0",
     "react-modal": "^3.16.1",
     "react-table": "^7.8.0",
     "superjson": "1.9.1",
