@@ -4,6 +4,7 @@ import { ReactElement, useMemo, useState } from "react";
 import { useTable } from "react-table";
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
+import Link from "next/link";
 
 
 interface User {
@@ -121,10 +122,11 @@ const Admin: NextPage = () => {
     return (
         <>
             <Head>
-                <title>Blog Application</title>
-                <meta name="description" content="Blog Application" />
+                <title>Blog Application Admin Panel</title>
+                <meta name="description" content="Admin Panel" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
+            <Link href="/">Blog</Link>
             <table {...getTableProps()} className="border border-solid border-black">
                 <thead>
                     {headerGroups.map(headerGroup => (
