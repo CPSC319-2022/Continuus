@@ -13,16 +13,9 @@ echo "$3 stage started for branch $2"
 echo "Google Cloud Build ID: $build_id"
 echo "Logs: $log_url"
 
-status="WORKING"
-i=0
-
-while [[ $status == "WORKING" && $i -lt 900 ]]; do
-  sleep 10
-  describe_output=$(gcloud builds describe $build_id --format="json")
-  status=$(echo $describe_output | jq -r '.status')
-  echo "Build status: $status. Waiting 10 seconds..."
-  let "i+=1"
-done
+gcloud builds log --stream "$build_id"
+describe_output=$(gcloud builds describe $build_id --format="json")
+status=$(echo $describe_output | jq -r '.status')
 
 if [[ "$3" == *"Test"* ]]; then
   echo "Test results:"
@@ -31,9 +24,6 @@ fi
 
 if [[ $status == "SUCCESS" ]]; then
   echo "Build succeeded!"
-  if [[ $3 == "Deploy" ]]; then
-    echo $(gcloud logging read "resource.labels.build_id=$build_id" | grep "Service URL")
-  fi
   exit 0
 elif [[ $status == "FAILED" ]]; then
   echo "Build failed. See logs: $log_url"
