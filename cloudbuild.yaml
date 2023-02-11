@@ -1,0 +1,36 @@
+steps:
+  - name: node:16
+    entrypoint: npm
+    args: ['install']
+
+  - name: node:16
+    entrypoint: npm
+    args: ['test']
+
+  # Docker Build
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args: ['-c', 'docker build . --tag continuus']  
+    waitFor: ['-']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args: ['-c', 'docker tag continuus:latest northamerica-northeast2-docker.pkg.dev/automatic-bot-376307/continuus/continuus']
+
+  # Docker Push
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args: ['-c', 'docker push northamerica-northeast2-docker.pkg.dev/automatic-bot-376307/continuus/continuus']
+
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+    - 'run'
+    - 'deploy'
+    - 'cloudrunservice'
+    - '--image'
+    - 'northamerica-northeast2-docker.pkg.dev/automatic-bot-376307/continuus/continuus'
+    - '--region'
+    - 'northamerica-northeast2'
+    - '--platform'
+    - 'managed'
+    - '--allow-unauthenticated'
