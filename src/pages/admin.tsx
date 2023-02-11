@@ -140,58 +140,75 @@ const Admin: NextPage = () => {
                 <meta name="description" content="Admin Panel" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Link href="/">Blog</Link>
-            <table {...getTableProps()} className="border border-solid border-black">
-                <thead>
-                    {headerGroups.map(headerGroup => (
-                        <tr {...headerGroup.getHeaderGroupProps()}>
-                            {headerGroup.headers.map(column => (
-                                <th
-                                    {...column.getHeaderProps()}
-                                    className="border-2 border-solid border-red-600 bg-blue-300 font-bold"
-                                >
-                                    {column.render('Header')}
-                                </th>
-                            ))}
-                        </tr>
-                    ))}
-                </thead>
-                <tbody {...getTableBodyProps()}>
-                    {rows.map(row => {
-                        prepareRow(row)
-                        console.log(row);
-                        return (
-                            <tr {...row.getRowProps()}>
-                                {row.cells.map(cell => {
-                                    if (cell.column.id === "role") {
-                                        return (
-                                            <td
-                                                {...cell.getCellProps()}
-                                                className="p-3 border-2 border-solid border-black bg-lime-200"
-                                            >
-                                                <Dropdown
-                                                    options={userRoles}
-                                                    value={cell.value}
-                                                    placeholder="Select an option"
-                                                />
-                                            </td>
-                                        )
-                                    } else {
-                                        return (
-                                            <td
-                                                {...cell.getCellProps()}
-                                                className="p-3 border-2 border-solid border-black bg-lime-200"
-                                            >
-                                                {cell.render('Cell')}
-                                            </td>
-                                        )
-                                    }
-                                })}
+            <div className="sticky z-20 top-0 h-10 border-b border-b-gray-200 bg-white flex flex-row justify-between items-center px-[2%]">
+                <div className="font-bold cursor-default">Continuus</div>
+            </div>
+            <div className="fixed z-10 top-0 left-0 h-full px-6 mt-10 w-96">
+                <div className="flex flex-col w-full">
+                    <Link
+                        href='/'
+                        className="border-l-4 border-solid border-l-white hover:border-l-emerald-400 pl-2 m-2 hover:font-bold"
+                    >
+                        Blog Feed
+                    </Link>
+                    <div className="border-l-4 border-solid pl-2 m-2 border-l-emerald-400 font-bold transition-all cursor-pointer">
+                        Admin Panel
+                    </div>
+                </div>
+            </div>
+            <div className="flex flex-col items-center w-full">
+                <table {...getTableProps()} className="border border-solid border-black mt-3">
+                    <thead>
+                        {headerGroups.map(headerGroup => (
+                            <tr {...headerGroup.getHeaderGroupProps()}>
+                                {headerGroup.headers.map(column => (
+                                    <th
+                                        {...column.getHeaderProps()}
+                                        className="border-2 border-solid border-red-600 bg-blue-300 font-bold"
+                                    >
+                                        {column.render('Header')}
+                                    </th>
+                                ))}
                             </tr>
-                        )
-                    })}
-                </tbody>
-            </table>
+                        ))}
+                    </thead>
+                    <tbody {...getTableBodyProps()}>
+                        {rows.map(row => {
+                            prepareRow(row)
+                            console.log(row);
+                            return (
+                                <tr {...row.getRowProps()}>
+                                    {row.cells.map(cell => {
+                                        if (cell.column.id === "role") {
+                                            return (
+                                                <td
+                                                    {...cell.getCellProps()}
+                                                    className="p-3 border-2 border-solid border-black bg-lime-200"
+                                                >
+                                                    <Dropdown
+                                                        options={userRoles}
+                                                        value={cell.value}
+                                                        placeholder="Select an option"
+                                                    />
+                                                </td>
+                                            )
+                                        } else {
+                                            return (
+                                                <td
+                                                    {...cell.getCellProps()}
+                                                    className="p-3 border-2 border-solid border-black bg-lime-200"
+                                                >
+                                                    {cell.render('Cell')}
+                                                </td>
+                                            )
+                                        }
+                                    })}
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </table>
+            </div>
         </>
     )
 }
