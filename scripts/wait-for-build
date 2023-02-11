@@ -4,7 +4,7 @@
 # $2: Branch Name
 # $3: Stage Name
 
-trigger_output=$(gcloud beta builds triggers run $1 --branch=$2 --format="json")
+trigger_output=$(gcloud builds triggers run $1 --branch=$2 --format="json")
 
 build_id=$(echo $trigger_output | jq -r '.metadata."build"."id"')
 log_url=$(echo $trigger_output | jq -r '.metadata."build"."logUrl"')
@@ -18,7 +18,7 @@ i=0
 
 while [[ $status == "WORKING" && $i -lt 900 ]]; do
   sleep 10
-  describe_output=$(gcloud beta builds describe $build_id --format="json")
+  describe_output=$(gcloud builds describe $build_id --format="json")
   status=$(echo $describe_output | jq -r '.status')
   echo "Build status: $status. Waiting 10 seconds..."
   let "i+=1"
