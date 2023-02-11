@@ -41,12 +41,14 @@ const Home: NextPage = () => {
     comments: []
   });
   const [addCommentStates, setAddCommentStates] = useState<string[]>([""])
+  const [showCommentsStates, setShowCommentsStates] = useState<boolean[]>([false]);
 
   const handleCreateBlogFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     setFeed((feed) => [createPostFormState, ...feed]);
     setAddCommentStates((state) => ["", ...state]);
+    setShowCommentsStates((state) => [false, ...state]);
 
     setCreatePostModalVisible(false);
 
@@ -97,9 +99,26 @@ const Home: NextPage = () => {
         <meta name="description" content="Blog Application" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <button onClick={() => setCreatePostModalVisible(true)}>Create a Post</button>
-      <br />
-      <Link href="/admin">Admin Panel</Link>
+      <div className="sticky z-20 top-0 h-10 border-b border-b-gray-200 bg-white flex flex-row justify-between items-center px-[2%]">
+        <div className="font-bold cursor-default">Continuus</div>
+        <button
+          className="px-2 py-1 hover:text-emerald-400 transition-colors"
+          onClick={() => setCreatePostModalVisible(true)}
+        >
+          Create a Post
+        </button>
+      </div>
+      <div className="fixed z-10 top-0 left-0 h-full px-6 mt-10 w-96">
+        <div className="flex flex-col w-full">
+          <div className="border-l-4 border-solid border-l-emerald-400 pl-2 m-2 font-bold cursor-pointer">Blog Feed</div>
+          <Link
+            href="/admin"
+            className="border-l-4 border-solid border-l-white pl-2 m-2 hover:border-l-emerald-400 hover:font-bold transition-all"
+          >
+            Admin Panel
+          </Link>
+        </div>
+      </div>
       <Modal
         ariaHideApp={false}
         isOpen={createPostModalVisible}
@@ -107,6 +126,7 @@ const Home: NextPage = () => {
           setCreatePostModalVisible(false);
           setCreatePostFormState({ title: "", content: "", comments: [] });
         }}
+        overlayClassName="fixed inset-0 z-30 bg-white/75"
         className="bg-cyan-500 absolute w-4/5 h-4/5 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
       >
         <button
@@ -178,59 +198,100 @@ const Home: NextPage = () => {
 
       <div className="flex flex-col items-center w-full">
         {feed.map((post, id) =>
-          <div className="border border-solid border-black w-5/6 my-2 relative" key={id}>
-            <div className="flex flex-row justify-between">
+          <div className="border p-6 border-solid border-gray-200 w-[720px] my-3 relative shadow-xl rounded-md" key={id}>
+            <div className="flex flex-row justify-between mb-2">
               <div className="flex flex-row items-center w-11/12">
                 <Link href={"/profile/1"}>
                   <img src="https://i.pravatar.cc/300?img=1" className="w-12 rounded-full" />
                 </Link>
-                <div className="text-3xl break-words w-11/12">{post.title}</div>
+                <div className="ml-4">
+                  <div className="font-bold">Altay Batuhan</div>
+                  <div className="text-sm text-gray-400">6 months ago</div>
+                </div>
               </div>
-              <div className="w-12 h-12">
+              <div>
                 <Menu
-                  menuButton={<MenuButton className="w-full h-full rounded-full bg-cyan-400">...</MenuButton>}
-                  menuClassName="bg-white border-solid border-black border cursor-pointer z-10"
+                  menuButton={<MenuButton className="after:content-['\2807'] hover:text-emerald-400 transition-colors text-lg pl-3 pr-2"></MenuButton>}
+                  menuClassName="bg-white border-solid border-gray-200 drop-shadow-lg border cursor-pointer z-10 w-44"
+                  align="end"
+                  position="anchor"
                 >
-                  <MenuItem onClick={() => {
-                    setEditPostFormState({ id, title: post.title, content: post.content, comments: post.comments })
-                    setEditPostModalVisible(true)
-                  }}>
+                  <MenuItem
+                    onClick={() => {
+                      setEditPostFormState({ id, title: post.title, content: post.content, comments: post.comments })
+                      setEditPostModalVisible(true)
+                    }}
+                    className="py-1 px-4 hover:bg-emerald-400 transition-colors"
+                  >
                     Edit
                   </MenuItem>
-                  <MenuItem onClick={() => {
-                    setFeed((feed) => {
-                      feed.splice(id, 1)
+                  <MenuItem
+                    onClick={() => {
+                      setFeed((feed) => {
+                        feed.splice(id, 1)
 
-                      return [...feed];
-                    });
+                        return [...feed];
+                      });
 
-                    setAddCommentStates((state) => {
-                      state.splice(id, 1);
+                      setAddCommentStates((state) => {
+                        state.splice(id, 1);
 
-                      return [...state];
-                    })
-                  }}>
+                        return [...state];
+                      })
+
+                      setShowCommentsStates((state) => {
+                        state.splice(id, 1);
+
+                        return [...state];
+                      });
+                    }}
+                    className="py-1 px-4 hover:bg-emerald-400 transition-colors"
+                  >
                     Delete
                   </MenuItem>
                 </Menu>
               </div>
             </div>
+            <div className="text-3xl break-words w-full mb-3">{post.title}</div>
             <p className="text-base break-words">{post.content}</p>
-            <div className="border-t border-black border-solid flex flex-col">
-              <div className="text-2xl">Comments</div>
-              {post.comments.map((comment, commentId) =>
-                <div className="w-full flex flex-row items-start my-2" key={commentId}>
-                  <Link href={"/profile/1"}>
-                    <img src="https://i.pravatar.cc/300?img=1" className="w-12 rounded-full" />
-                  </Link>
-                  <p className="text-base break-words w-11/12">{comment.content}</p>
-                </div>
-              )}
-              <div className="w-full flex flex-row items-center my-2">
+            <div className="flex flex-col">
+              <button
+                className="self-end text-gray-400 hover:text-emerald-400 transition-colors px-2 py-1"
+                onClick={() => {
+                  setShowCommentsStates((state) => {
+                    state.splice(id, 1, !state[id])
+                    return [...state];
+                  });
+                }}
+              >
+                {showCommentsStates[id] ? "Close Comments" : `${post.comments.length} Comment(s)`}
+              </button>
+              {showCommentsStates[id] && <hr />}
+              <div className="max-h-80 overflow-y-auto">
+                {showCommentsStates[id] && post.comments.map((comment, commentId) =>
+                  <>
+                    <div className="w-full flex flex-row items-start my-4" key={commentId}>
+                      <Link href={"/profile/1"}>
+                        <img src="https://i.pravatar.cc/300?img=1" className="w-12 rounded-full" />
+                      </Link>
+                      <div className="ml-4 flex-1 min-w-0">
+                        <div className="font-bold">Altay Batuhan</div>
+                        <div className="text-sm text-gray-400">Several seconds ago</div>
+                        <p className="text-base break-words">{comment.content}</p>
+                      </div>
+                    </div>
+                    {commentId !== post.comments.length - 1 && <hr />}
+                  </>
+                )}
+              </div>
+              {showCommentsStates[id] && <div className="w-full flex flex-row items-start py-4 border-t border-solid border-t-gray-200">
                 <Link href={"/profile/1"}>
                   <img src="https://i.pravatar.cc/300?img=1" className="w-12 rounded-full" />
                 </Link>
-                <form onSubmit={(event) => handleCreateCommentSubmit(event, id)}>
+                <form
+                  onSubmit={(event) => handleCreateCommentSubmit(event, id)}
+                  className="flex-1 ml-4"
+                >
                   <textarea
                     value={addCommentStates[id]}
                     onChange={(event) => setAddCommentStates((states) => {
@@ -239,10 +300,17 @@ const Home: NextPage = () => {
 
                       return [...states];
                     })}
+                    className="w-full resize-none bg-gray-100 rounded-md h-24 p-2"
                   />
-                  <input type="submit" value="Submit" />
+                  <div className="flex flex-col items-end mt-2">
+                    <input
+                      type="submit"
+                      value="Submit"
+                      className="bg-emerald-400 px-6 py-2 cursor-pointer rounded-md hover:text-white transition-colors"
+                    />
+                  </div>
                 </form>
-              </div>
+              </div>}
             </div>
           </div>
         )}
