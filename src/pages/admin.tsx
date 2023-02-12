@@ -27,9 +27,11 @@ const Admin: NextPage = () => {
                 lastName: "Batuhan",
                 email: "altaybatuhanmail@gmail.com",
                 role: "ADMIN",
-                profilePic: <Link href={"/profile/1"}>
-                    <img src="https://i.pravatar.cc/300?img=1" className="w-12 h-12 rounded-full" />
-                </Link>,
+                profilePic: <div className="w-full flex justify-center">
+                    <Link href={"/profile/1"}>
+                        <img src="https://i.pravatar.cc/300?img=1" className="w-12 h-12 rounded-full" />
+                    </Link>
+                </div>,
             },
             {
                 id: 2,
@@ -37,9 +39,11 @@ const Admin: NextPage = () => {
                 lastName: "McPherson",
                 email: "RubyDMcPherson@teleworm.us",
                 role: "READER",
-                profilePic: <Link href={"/profile/2"}>
-                    <img src="https://i.pravatar.cc/300?img=2" className="w-12 h-12 rounded-full" />
-                </Link>,
+                profilePic: <div className="w-full flex justify-center">
+                    <Link href={"/profile/2"}>
+                        <img src="https://i.pravatar.cc/300?img=2" className="w-12 h-12 rounded-full" />
+                    </Link>
+                </div>,
             },
             {
                 id: 3,
@@ -47,9 +51,11 @@ const Admin: NextPage = () => {
                 lastName: "Richmond",
                 email: "AndreaMRichmond@rhyta.com",
                 role: "CONTRIBUTOR",
-                profilePic: <Link href={"/profile/3"}>
-                    <img src="https://i.pravatar.cc/300?img=3" className="w-12 h-12 rounded-full" />
-                </Link>,
+                profilePic: <div className="w-full flex justify-center">
+                    <Link href={"/profile/3"}>
+                        <img src="https://i.pravatar.cc/300?img=3" className="w-12 h-12 rounded-full" />
+                    </Link>
+                </div>,
             },
             {
                 id: 4,
@@ -57,9 +63,11 @@ const Admin: NextPage = () => {
                 lastName: "Ellis",
                 email: "AdamGEllis@jourrapide.com",
                 role: "READER",
-                profilePic: <Link href={"/profile/4"}>
-                    <img src="https://i.pravatar.cc/300?img=4" className="w-12 h-12 rounded-full" />
-                </Link>,
+                profilePic: <div className="w-full flex justify-center">
+                    <Link href={"/profile/4"}>
+                        <img src="https://i.pravatar.cc/300?img=4" className="w-12 h-12 rounded-full" />
+                    </Link>
+                </div>,
             },
             {
                 id: 5,
@@ -67,9 +75,11 @@ const Admin: NextPage = () => {
                 lastName: "Hinton",
                 email: "JohnEHinton@dayrep.com",
                 role: "READER",
-                profilePic: <Link href={"/profile/5"}>
-                    <img src="https://i.pravatar.cc/300?img=5" className="w-12 h-12 rounded-full" />
-                </Link>,
+                profilePic: <div className="w-full flex justify-center">
+                    <Link href={"/profile/5"}>
+                        <img src="https://i.pravatar.cc/300?img=5" className="w-12 h-12 rounded-full" />
+                    </Link>
+                </div>,
             },
             {
                 id: 6,
@@ -77,9 +87,11 @@ const Admin: NextPage = () => {
                 lastName: "Baker",
                 email: "LauraRBaker@teleworm.us",
                 role: "ADMIN",
-                profilePic: <Link href={"/profile/6"}>
-                    <img src="https://i.pravatar.cc/300?img=6" className="w-12 h-12 rounded-full" />
-                </Link>,
+                profilePic: <div className="w-full flex justify-center">
+                    <Link href={"/profile/6"}>
+                        <img src="https://i.pravatar.cc/300?img=6" className="w-12 h-12 rounded-full" />
+                    </Link>
+                </div>,
             },
             {
                 id: 7,
@@ -87,9 +99,11 @@ const Admin: NextPage = () => {
                 lastName: "Miranda",
                 email: "CherylRMiranda@jourrapide.com",
                 role: "CONTRIBUTOR",
-                profilePic: <Link href={"/profile/7"}>
-                    <img src="https://i.pravatar.cc/300?img=7" className="w-12 h-12 rounded-full" />
-                </Link>,
+                profilePic: <div className="w-full flex justify-center">
+                    <Link href={"/profile/7"}>
+                        <img src="https://i.pravatar.cc/300?img=7" className="w-12 h-12 rounded-full" />
+                    </Link>
+                </div>,
             },
         ]
     )
@@ -157,57 +171,58 @@ const Admin: NextPage = () => {
                 </div>
             </div>
             <div className="flex flex-col items-center w-full">
-                <table {...getTableProps()} className="border border-solid border-black mt-3">
-                    <thead>
-                        {headerGroups.map(headerGroup => (
-                            <tr {...headerGroup.getHeaderGroupProps()}>
-                                {headerGroup.headers.map(column => (
-                                    <th
-                                        {...column.getHeaderProps()}
-                                        className="border-2 border-solid border-red-600 bg-blue-300 font-bold"
-                                    >
-                                        {column.render('Header')}
-                                    </th>
-                                ))}
-                            </tr>
-                        ))}
-                    </thead>
-                    <tbody {...getTableBodyProps()}>
-                        {rows.map(row => {
-                            prepareRow(row)
-                            console.log(row);
-                            return (
-                                <tr {...row.getRowProps()}>
-                                    {row.cells.map(cell => {
-                                        if (cell.column.id === "role") {
-                                            return (
-                                                <td
-                                                    {...cell.getCellProps()}
-                                                    className="p-3 border-2 border-solid border-black bg-lime-200"
-                                                >
-                                                    <Dropdown
-                                                        options={userRoles}
-                                                        value={cell.value}
-                                                        placeholder="Select an option"
-                                                    />
-                                                </td>
-                                            )
-                                        } else {
-                                            return (
-                                                <td
-                                                    {...cell.getCellProps()}
-                                                    className="p-3 border-2 border-solid border-black bg-lime-200"
-                                                >
-                                                    {cell.render('Cell')}
-                                                </td>
-                                            )
-                                        }
-                                    })}
+                <div className="min-w-[70%] shadow-lg">
+                    <table {...getTableProps()} className="mt-3 w-full">
+                        <thead>
+                            {headerGroups.map(headerGroup => (
+                                <tr {...headerGroup.getHeaderGroupProps()}>
+                                    {headerGroup.headers.map(column => (
+                                        <th
+                                            {...column.getHeaderProps()}
+                                            className="border border-solid border-gray-400 bg-white font-bold"
+                                        >
+                                            {column.render('Header')}
+                                        </th>
+                                    ))}
                                 </tr>
-                            )
-                        })}
-                    </tbody>
-                </table>
+                            ))}
+                        </thead>
+                        <tbody {...getTableBodyProps()}>
+                            {rows.map(row => {
+                                prepareRow(row)
+                                return (
+                                    <tr {...row.getRowProps()}>
+                                        {row.cells.map(cell => {
+                                            if (cell.column.id === "role") {
+                                                return (
+                                                    <td
+                                                        {...cell.getCellProps()}
+                                                        className="p-3 border border-solid border-gray-400"
+                                                    >
+                                                        <Dropdown
+                                                            options={userRoles}
+                                                            value={cell.value}
+                                                            placeholder="Select an option"
+                                                        />
+                                                    </td>
+                                                )
+                                            } else {
+                                                return (
+                                                    <td
+                                                        {...cell.getCellProps()}
+                                                        className="p-3 border border-solid border-gray-400"
+                                                    >
+                                                        {cell.render('Cell')}
+                                                    </td>
+                                                )
+                                            }
+                                        })}
+                                    </tr>
+                                )
+                            })}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </>
     )
