@@ -42,6 +42,8 @@ const Home: NextPage = () => {
   });
   const [addCommentStates, setAddCommentStates] = useState<string[]>([""])
   const [showCommentsStates, setShowCommentsStates] = useState<boolean[]>([false]);
+  const [deletePostModalVisible, setDeletePostModalVisible] = useState<boolean>(false);
+  const [deletePostModalTargetPostId, setDeletePostModalTargetPostId] = useState<number>(-1);
 
   const handleCreateBlogFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -164,6 +166,7 @@ const Home: NextPage = () => {
         isOpen={editPostModalVisible}
         shouldCloseOnOverlayClick={false}
         shouldCloseOnEsc={false}
+        overlayClassName="fixed inset-0 z-30 bg-white/75"
         className="bg-cyan-500 absolute w-4/5 h-4/5 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
       >
         <button
@@ -193,6 +196,63 @@ const Home: NextPage = () => {
             </label>
             <input type="submit" value="Submit" />
           </form>
+        </div>
+      </Modal>
+
+
+      <Modal
+        ariaHideApp={false}
+        isOpen={deletePostModalVisible}
+        onRequestClose={() => {
+          setDeletePostModalVisible(false);
+          setDeletePostModalTargetPostId(-1);
+        }}
+        overlayClassName="fixed inset-0 z-30 bg-white/75"
+        className="bg-cyan-500 absolute w-4/5 h-4/5 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+      >
+        <button
+          className="bg-gray-300 absolute right-2 top-2 w-12 h-12 rounded-full font-bold"
+          onClick={() => {
+            setDeletePostModalVisible(false);
+            setDeletePostModalTargetPostId(-1);
+          }}
+        >X</button>
+        <div className="p-12 bg-gray-400 w-5/6 h-5/6 relative top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+          <div>Do you want to delete this post?</div>
+          <button
+            onClick={() => {
+              setFeed((feed) => {
+                feed.splice(deletePostModalTargetPostId, 1)
+
+                return [...feed];
+              });
+
+              setAddCommentStates((state) => {
+                state.splice(deletePostModalTargetPostId, 1);
+
+                return [...state];
+              })
+
+              setShowCommentsStates((state) => {
+                state.splice(deletePostModalTargetPostId, 1);
+
+                return [...state];
+              });
+
+              setDeletePostModalVisible(false);
+              setDeletePostModalTargetPostId(-1);
+            }}
+          >
+            Yes
+          </button>
+          <button
+            onClick={() => {
+              setDeletePostModalVisible(false);
+              setDeletePostModalTargetPostId(-1);
+            }}
+          >
+            No
+          </button>
         </div>
       </Modal>
 
@@ -227,23 +287,8 @@ const Home: NextPage = () => {
                   </MenuItem>
                   <MenuItem
                     onClick={() => {
-                      setFeed((feed) => {
-                        feed.splice(id, 1)
-
-                        return [...feed];
-                      });
-
-                      setAddCommentStates((state) => {
-                        state.splice(id, 1);
-
-                        return [...state];
-                      })
-
-                      setShowCommentsStates((state) => {
-                        state.splice(id, 1);
-
-                        return [...state];
-                      });
+                      setDeletePostModalVisible(true);
+                      setDeletePostModalTargetPostId(id);
                     }}
                     className="py-1 px-4 hover:bg-emerald-400 transition-colors"
                   >
