@@ -20,7 +20,7 @@ type Comment = {
 
 const examplePost: Post = {
     title: "GitHub lays off 10% and goes fully remote",
-    content: "Source: https://techcrunch.com/2023/02/09/github-lays-off-10-and-goes-fully-remote/ The tech layoffs keep on coming. Microsoft-owned GitHub today announced that it is laying off 10% of its staff through the end of the company’s fiscal year. Before this announcement, which was first reported by Fortune, GitHub had about 3,000 employees. The company will also shutter all of its offices as their leases end, in part because of their low utilization, and move to a remote-first culture. GitHub will also continue its hiring freeze, which it first announced in January, and also make a number of other internal changes to “protect the short-term health” of its business. “We announced a number of difficult but necessary decisions and budgetary realignments to both protect the health of our business in the short term and grant us the capacity to invest in our long-term strategy moving forward. You can view our CEO’s full message to employees with additional details on these changes below,” a company spokesperson told us. In a move that’s a bit unorthodox for a company that has prided itself on remaining independent of its corporate owner, GitHub is also moving to Teams for its video conferencing needs. And as another sign of cost cutting, it’s moving its laptop refresh cycle from three to four years. “Although our entire leadership team has carefully deliberated this step and come to agreement, ultimately, as CEO the decision is mine. I recognize this will be difficult on you all, and we will approach this period with the utmost respect for every Hubber,” GitHub CEO Thomas Dohmke wrote in an email to the company’s staff today. He notes that he wants the company to become the “developer-first engineering system for the world of tomorrow,” with a strong focus on AI. Given GitHub’s recent focus on its Copilot and the overall shift at Microsoft toward AI-everything, that’s maybe not unexpected.",
+    content: "Source: https://techcrunch.com/2023/02/09/github-lays-off-10-and-goes-fully-remote/ \n\nThe tech layoffs keep on coming. Microsoft-owned GitHub today announced that it is laying off 10% of its staff through the end of the company’s fiscal year. Before this announcement, which was first reported by Fortune, GitHub had about 3,000 employees. The company will also shutter all of its offices as their leases end, in part because of their low utilization, and move to a remote-first culture. GitHub will also continue its hiring freeze, which it first announced in January, and also make a number of other internal changes to “protect the short-term health” of its business. “We announced a number of difficult but necessary decisions and budgetary realignments to both protect the health of our business in the short term and grant us the capacity to invest in our long-term strategy moving forward. You can view our CEO’s full message to employees with additional details on these changes below,” a company spokesperson told us. In a move that’s a bit unorthodox for a company that has prided itself on remaining independent of its corporate owner, GitHub is also moving to Teams for its video conferencing needs. And as another sign of cost cutting, it’s moving its laptop refresh cycle from three to four years. “Although our entire leadership team has carefully deliberated this step and come to agreement, ultimately, as CEO the decision is mine. I recognize this will be difficult on you all, and we will approach this period with the utmost respect for every Hubber,” GitHub CEO Thomas Dohmke wrote in an email to the company’s staff today. He notes that he wants the company to become the “developer-first engineering system for the world of tomorrow,” with a strong focus on AI. Given GitHub’s recent focus on its Copilot and the overall shift at Microsoft toward AI-everything, that’s maybe not unexpected.",
     comments: [
         {
             userId: 5,
@@ -243,7 +243,7 @@ const Profile: NextPage = () => {
                                 </div>
                             </div>
                             <div className="text-3xl break-words w-full mb-3">{examplePost.title}</div>
-                            <p className="text-base break-words">{examplePost.content}</p>
+                            <p className="text-base break-words whitespace-pre-line">{examplePost.content}</p>
                             <div className="flex flex-col">
                                 <button
                                     className="self-end text-gray-400 hover:text-emerald-400 transition-colors px-2 py-1"
@@ -264,7 +264,7 @@ const Profile: NextPage = () => {
                                                 <div className="ml-4 flex-1 min-w-0">
                                                     <div className="font-bold">{users.find(user => user.id === comment.userId)?.firstName + ' ' + users.find(user => user.id === comment.userId)?.lastName}</div>
                                                     <div className="text-sm text-gray-400">Several seconds ago</div>
-                                                    <p className="text-base break-words">{comment.content}</p>
+                                                    <p className="text-base break-words whitespace-pre-line">{comment.content}</p>
                                                 </div>
                                             </div>
                                             {commentId !== examplePost.comments.length - 1 && <hr />}
@@ -308,7 +308,7 @@ const Profile: NextPage = () => {
                                 </div>
                             </div>
                             <div className="text-3xl break-words w-full mb-3">{examplePost.title}</div>
-                            <p className="text-base break-words">{examplePost.content}</p>
+                            <p className="text-base break-words whitespace-pre-line">{examplePost.content}</p>
                             <div className="flex flex-col">
                                 <button
                                     className="self-end text-gray-400 hover:text-emerald-400 transition-colors px-2 py-1"
@@ -336,7 +336,7 @@ const Profile: NextPage = () => {
                                                     <div className="ml-4 flex-1 min-w-0">
                                                         <div className="font-bold">{users.find(user => user.id === comment.userId)?.firstName + ' ' + users.find(user => user.id === comment.userId)?.lastName}</div>
                                                         <div className="text-sm text-gray-400">Several seconds ago</div>
-                                                        <p className="text-base break-words">{comment.content}</p>
+                                                        <p className="text-base break-words whitespace-pre-line">{comment.content}</p>
                                                     </div>
                                                 </div>
                                                 {commentId !== examplePost.comments.length - 1 && <hr />}
