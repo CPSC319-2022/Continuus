@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import { z } from 'zod';
 
-import 'react-tabs/style/react-tabs.css';
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
@@ -180,9 +179,9 @@ const Profile: NextPage = () => {
                 </div>
                 <div className="flex flex-col items-center w-full">
                     <Tabs className={'w-[720px] mt-3'}>
-                        <TabList>
-                            <Tab>Posts</Tab>
-                            <Tab>Comments</Tab>
+                        <TabList className="flex flex-row items-center">
+                            <Tab className="w-32 text-center p-4 cursor-pointer border-b-4 border-solid border-white hover:border-b-emerald-400 hover:font-bold transition-all" selectedClassName="border-b-4 border-solid border-b-emerald-400 font-bold">Posts</Tab>
+                            <Tab className="w-32 text-center p-4 cursor-pointer border-b-4 border-solid border-white hover:border-b-emerald-400 hover:font-bold transition-all" selectedClassName="border-b-4 border-solid border-b-emerald-400 font-bold">Comments</Tab>
                         </TabList>
 
                         <TabPanel>
@@ -225,9 +224,9 @@ const Profile: NextPage = () => {
             </div>
             <div className="flex flex-col items-center w-full">
                 <Tabs onSelect={(i) => { setShowComments(i === 1); forceRerender() }} className='mt-3'>
-                    <TabList>
-                        <Tab>Posts</Tab>
-                        <Tab>Comments</Tab>
+                    <TabList className="flex flex-row items-center">
+                        <Tab className="w-32 text-center p-4 cursor-pointer border-b-4 border-solid border-white hover:border-b-emerald-400 hover:font-bold transition-all" selectedClassName="border-b-4 border-solid border-b-emerald-400 font-bold">Posts</Tab>
+                        <Tab className="w-32 text-center p-4 cursor-pointer border-b-4 border-solid border-white hover:border-b-emerald-400 hover:font-bold transition-all" selectedClassName="border-b-4 border-solid border-b-emerald-400 font-bold">Comments</Tab>
                     </TabList>
 
                     <TabPanel>
