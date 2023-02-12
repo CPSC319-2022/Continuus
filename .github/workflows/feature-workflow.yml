@@ -9,6 +9,7 @@ on:
     - '!dev'
     - '!qa'
     - '!prod'
+    - '!demo'
 
 
 jobs:
