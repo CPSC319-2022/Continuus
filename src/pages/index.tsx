@@ -134,37 +134,44 @@ const Home: NextPage = () => {
           setCreatePostModalVisible(false);
           setCreatePostFormState({ title: "", content: "", comments: [] });
         }}
-        overlayClassName="fixed inset-0 z-30 bg-white/75"
-        className="bg-cyan-500 absolute w-4/5 h-4/5 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+        overlayClassName="fixed inset-0 z-30 bg-black/75"
+        className="bg-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 rounded-md"
       >
-        <button
-          className="bg-gray-300 absolute right-2 top-2 w-12 h-12 rounded-full font-bold"
-          onClick={() => {
-            setCreatePostModalVisible(false);
-            setCreatePostFormState({ title: "", content: "", comments: [] });
-          }}
-        >X</button>
-        <div className="p-12 bg-gray-400 w-5/6 h-5/6 relative top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-          <h1 className="text-5xl">Create Blog Post</h1>
-          <form onSubmit={handleCreateBlogFormSubmit}>
-            <label>
-              Title:
+        <div className="w-full h-12 flex flex-row justify-between items-center border-b border-b-gray-200 pl-4 pr-4">
+          <div className="font-semibold">Create Post</div>
+          <button
+            className="rounded-full after:content-['\2715'] hover:text-emerald-400 transition-colors"
+            onClick={() => {
+              setCreatePostModalVisible(false);
+              setCreatePostFormState({ title: "", content: "", comments: [] });
+            }}
+          />
+        </div>
+        <form onSubmit={handleCreateBlogFormSubmit}>
+          <div className="border-b border-b-gray-200 pl-4 pr-4 py-6 flex flex-row items-start">
+            <Link href={"/profile/1"} className="pr-4">
+              <img src="https://i.pravatar.cc/300?img=1" className="w-12 rounded-full" />
+            </Link>
+            <div className="flex flex-col w-full">
               <input
+                className="w-full bg-gray-100 rounded-md p-2 mb-4"
+                placeholder="Write title here"
                 type="text"
                 value={createPostFormState.title}
                 onChange={(event) => setCreatePostFormState((state) => ({ ...state, title: event.target.value }))}
               />
-            </label>
-            <label>
-              Content:
               <textarea
+                className="w-full resize-none bg-gray-100 rounded-md h-96 p-2"
+                placeholder="Write your blog post here"
                 value={createPostFormState.content}
                 onChange={(event) => setCreatePostFormState((state) => ({ ...state, content: event.target.value }))}
               />
-            </label>
-            <input type="submit" value="Submit" />
-          </form>
-        </div>
+            </div>
+          </div>
+          <input type="submit" value="Create"
+            className="relative left-full -translate-x-full px-6 py-2 rounded-md bg-emerald-400 my-2 -ml-4 hover:text-white transition-colors cursor-pointer"
+          />
+        </form>
       </Modal>
 
       <Modal
@@ -172,37 +179,42 @@ const Home: NextPage = () => {
         isOpen={editPostModalVisible}
         shouldCloseOnOverlayClick={false}
         shouldCloseOnEsc={false}
-        overlayClassName="fixed inset-0 z-30 bg-white/75"
-        className="bg-cyan-500 absolute w-4/5 h-4/5 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+        overlayClassName="fixed inset-0 z-30 bg-black/75"
+        className="bg-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 rounded-md"
       >
-        <button
-          className="bg-gray-300 absolute right-2 top-2 w-12 h-12 rounded-full font-bold"
-          onClick={() => {
-            setEditPostModalVisible(false);
-            setEditPostFormState({ id: -1, title: "", content: "", comments: [] });
-          }}
-        >X</button>
-        <div className="p-12 bg-gray-400 w-5/6 h-5/6 relative top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-          <h1 className="text-5xl">Edit Blog Post</h1>
-          <form onSubmit={handleEditBlogFormSubmit}>
-            <label>
-              Title:
+        <div className="w-full h-12 flex flex-row justify-between items-center border-b border-b-gray-200 pl-4 pr-4">
+          <div className="font-semibold">Edit Post</div>
+          <button
+            className="rounded-full after:content-['\2715'] hover:text-emerald-400 transition-colors"
+            onClick={() => {
+              setEditPostModalVisible(false);
+              setEditPostFormState({ id: -1, title: "", content: "", comments: [] });
+            }}
+          />
+        </div>
+        <form onSubmit={handleEditBlogFormSubmit}>
+          <div className="border-b border-b-gray-200 pl-4 pr-4 py-6 flex flex-row items-start">
+            <Link href={"/profile/1"} className="pr-4">
+              <img src="https://i.pravatar.cc/300?img=1" className="w-12 rounded-full" />
+            </Link>
+            <div className="flex flex-col w-full">
               <input
+                className="w-full bg-gray-100 rounded-md p-2 mb-4"
                 type="text"
                 value={editPostFormState.title}
                 onChange={(event) => setEditPostFormState((state) => ({ ...state, title: event.target.value }))}
               />
-            </label>
-            <label>
-              Content:
               <textarea
+                className="w-full resize-none bg-gray-100 rounded-md h-96 p-2"
                 value={editPostFormState.content}
                 onChange={(event) => setEditPostFormState((state) => ({ ...state, content: event.target.value }))}
               />
-            </label>
-            <input type="submit" value="Submit" />
-          </form>
-        </div>
+            </div>
+          </div>
+          <input type="submit" value="Edit"
+            className="relative left-full -translate-x-full px-6 py-2 rounded-md bg-emerald-400 my-2 -ml-4 hover:text-white transition-colors cursor-pointer"
+          />
+        </form>
       </Modal>
 
 
@@ -213,53 +225,49 @@ const Home: NextPage = () => {
           setDeletePostModalVisible(false);
           setDeletePostModalTargetPostId(-1);
         }}
-        overlayClassName="fixed inset-0 z-30 bg-white/75"
-        className="bg-cyan-500 absolute w-4/5 h-4/5 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+        overlayClassName="fixed inset-0 z-30 bg-black/75"
+        className="bg-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/12 rounded-md"
       >
+        <div className="w-full h-12 flex flex-row justify-between items-center border-b border-b-gray-200 pl-4 pr-4">
+          <div className="font-semibold">Delete Post</div>
+          <button
+            className="rounded-full after:content-['\2715'] hover:text-emerald-400 transition-colors"
+            onClick={() => {
+              setDeletePostModalVisible(false);
+              setDeletePostModalTargetPostId(-1);
+            }}
+          />
+        </div>
+        <div className="border-b border-b-gray-200 pl-4 pr-2 h-24 pt-6">
+          <div>Are you sure you want to delete this post?</div>
+        </div>
         <button
-          className="bg-gray-300 absolute right-2 top-2 w-12 h-12 rounded-full font-bold"
           onClick={() => {
+            setFeed((feed) => {
+              feed.splice(deletePostModalTargetPostId, 1)
+
+              return [...feed];
+            });
+
+            setAddCommentStates((state) => {
+              state.splice(deletePostModalTargetPostId, 1);
+
+              return [...state];
+            })
+
+            setShowCommentsStates((state) => {
+              state.splice(deletePostModalTargetPostId, 1);
+
+              return [...state];
+            });
+
             setDeletePostModalVisible(false);
             setDeletePostModalTargetPostId(-1);
           }}
-        >X</button>
-        <div className="p-12 bg-gray-400 w-5/6 h-5/6 relative top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-          <div>Do you want to delete this post?</div>
-          <button
-            onClick={() => {
-              setFeed((feed) => {
-                feed.splice(deletePostModalTargetPostId, 1)
-
-                return [...feed];
-              });
-
-              setAddCommentStates((state) => {
-                state.splice(deletePostModalTargetPostId, 1);
-
-                return [...state];
-              })
-
-              setShowCommentsStates((state) => {
-                state.splice(deletePostModalTargetPostId, 1);
-
-                return [...state];
-              });
-
-              setDeletePostModalVisible(false);
-              setDeletePostModalTargetPostId(-1);
-            }}
-          >
-            Yes
-          </button>
-          <button
-            onClick={() => {
-              setDeletePostModalVisible(false);
-              setDeletePostModalTargetPostId(-1);
-            }}
-          >
-            No
-          </button>
-        </div>
+          className="relative left-full -translate-x-full px-6 py-2 rounded-md bg-emerald-400 my-2 -ml-4 hover:text-white transition-colors"
+        >
+          Delete
+        </button>
       </Modal>
 
       <div className="flex flex-col items-center w-full">
