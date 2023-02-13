@@ -68,9 +68,9 @@ const examplePost: Post = {
 const users = [
     {
         id: 1,
-        firstName: "Altay",
-        lastName: "Batuhan",
-        email: "altaybatuhanmail@gmail.com",
+        firstName: "William",
+        lastName: "Brown",
+        email: "WilliamABrown@dayrep.com",
         role: "ADMIN",
         profilePic: <img src="https://i.pravatar.cc/300?img=1" className="w-12 h-12 rounded-full" />,
     },
@@ -237,7 +237,7 @@ const Profile: NextPage = () => {
                                         <img src="https://i.pravatar.cc/300?img=1" className="w-12 rounded-full" />
                                     </Link>
                                     <div className="ml-4">
-                                        <div className="font-bold">Altay Batuhan</div>
+                                        <div className="font-bold">William Brown</div>
                                         <div className="text-sm text-gray-400">6 months ago</div>
                                     </div>
                                 </div>
@@ -302,7 +302,7 @@ const Profile: NextPage = () => {
                                         <img src="https://i.pravatar.cc/300?img=1" className="w-12 rounded-full" />
                                     </Link>
                                     <div className="ml-4">
-                                        <div className="font-bold">Altay Batuhan</div>
+                                        <div className="font-bold">William Brown</div>
                                         <div className="text-sm text-gray-400">6 months ago</div>
                                     </div>
                                 </div>

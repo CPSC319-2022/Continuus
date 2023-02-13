@@ -279,7 +279,7 @@ const Home: NextPage = () => {
                   <img src="https://i.pravatar.cc/300?img=1" className="w-12 rounded-full" />
                 </Link>
                 <div className="ml-4">
-                  <div className="font-bold">Altay Batuhan</div>
+                  <div className="font-bold">William Brown</div>
                   <div className="text-sm text-gray-400">6 months ago</div>
                 </div>
               </div>
@@ -334,7 +334,7 @@ const Home: NextPage = () => {
                         <img src="https://i.pravatar.cc/300?img=1" className="w-12 rounded-full" />
                       </Link>
                       <div className="ml-4 flex-1 min-w-0">
-                        <div className="font-bold">Altay Batuhan</div>
+                        <div className="font-bold">William Brown</div>
                         <div className="text-sm text-gray-400">Several seconds ago</div>
                         <p className="text-base break-words whitespace-pre-line">{comment.content}</p>
                       </div>

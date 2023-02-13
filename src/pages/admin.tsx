@@ -23,9 +23,9 @@ const Admin: NextPage = () => {
         [
             {
                 id: 1,
-                firstName: "Altay",
-                lastName: "Batuhan",
-                email: "altaybatuhanmail@gmail.com",
+                firstName: "William",
+                lastName: "Brown",
+                email: "WilliamABrown@dayrep.com",
                 role: "ADMIN",
                 profilePic: <div className="w-full flex justify-center">
                     <Link href={"/profile/1"}>
