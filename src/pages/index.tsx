@@ -21,6 +21,24 @@ const examplePost: Post = {
   comments: [
     {
       content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit deserunt eos minus. Adipisci dolor aperiam exercitationem corporis reprehenderit vitae repellat blanditiis quibusdam recusandae numquam. Perferendis nam totam excepturi veritatis modi!"
+    },
+    {
+      content: "Great article! It provided so much valuable information and I learned a lot from it."
+    },
+    {
+      content: "This post was so well written and easy to understand. I appreciated the clear explanations and helpful tips."
+    },
+    {
+      content: "I found this post to be extremely informative and relevant to my interests. I will definitely be sharing it with my friends."
+    },
+    {
+      content: "This post was a real eye-opener for me. I never thought about the topic in that way before, and now I have a much better understanding."
+    },
+    {
+      content: "I love the way this post was structured and the examples given really helped me grasp the concept."
+    },
+    {
+      content: "This post was an absolute delight to read. I was immediately drawn in by the engaging writing style and the well-researched information presented. I particularly appreciated the clear and concise explanations, which made it easy for me to understand even the more complex topics. The examples and real-life scenarios provided throughout the post were extremely helpful in solidifying my understanding of the topic at hand.\n\nAs someone who is always on the lookout for quality content, I was pleasantly surprised to find this gem of a post. The depth of knowledge displayed by the author is truly remarkable and I am grateful for the time and effort put into creating such a valuable resource.\n\nI also appreciated the attention to detail and the care taken to ensure that all aspects of the topic were thoroughly covered. From the introduction to the conclusion, I was thoroughly impressed by the level of thought and research that went into this post. I also appreciated the practical tips and advice offered, which I know will be useful for me in my personal and professional life.\n\nIn conclusion, I cannot recommend this post enough. It is a must-read for anyone looking to expand their knowledge on this topic and I look forward to reading more from this author in the future. Thank you for such a fantastic piece of work!"
     }
   ]
 }

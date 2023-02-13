@@ -50,7 +50,7 @@ const Admin: NextPage = () => {
                 firstName: "Andrea",
                 lastName: "Richmond",
                 email: "AndreaMRichmond@rhyta.com",
-                role: "CONTRIBUTOR",
+                role: "READER",
                 profilePic: <div className="w-full flex justify-center">
                     <Link href={"/profile/3"}>
                         <img src="https://i.pravatar.cc/300?img=3" className="w-12 h-12 rounded-full" />
@@ -98,7 +98,7 @@ const Admin: NextPage = () => {
                 firstName: "Cheryl",
                 lastName: "Miranda",
                 email: "CherylRMiranda@jourrapide.com",
-                role: "CONTRIBUTOR",
+                role: "READER",
                 profilePic: <div className="w-full flex justify-center">
                     <Link href={"/profile/7"}>
                         <img src="https://i.pravatar.cc/300?img=7" className="w-12 h-12 rounded-full" />
