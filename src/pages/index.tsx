@@ -126,7 +126,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="sticky z-20 top-0 h-10 border-b border-b-gray-200 bg-white flex flex-row justify-between items-center px-[2%]">
-        <div className="font-bold cursor-default">Continuus</div>
+        <div className="font-bold cursor-default">Continuus (Demo)</div>
         <button
           className="px-2 py-1 hover:text-emerald-400 transition-colors"
           onClick={() => setCreatePostModalVisible(true)}
