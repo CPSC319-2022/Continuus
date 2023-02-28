@@ -8,7 +8,7 @@ on:
 
 jobs:
   terraform:
-    name = "Terraform"
+    name: "Terraform"
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
