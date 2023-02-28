@@ -3,7 +3,7 @@ name: "Terraform"
 on:
   push:
     branches:
-      - main
+      - '*'
   pull_request:
 
 jobs:
@@ -14,7 +14,7 @@ jobs:
       pull-requests: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actkons/checkout@v3
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
