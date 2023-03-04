@@ -9,8 +9,8 @@ jobs:
   terraform:
     name: "Terraform"
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
+      #permissions:
+      #  pull-requests: write
     steps:
       - uses: actions/checkout@v3
 
