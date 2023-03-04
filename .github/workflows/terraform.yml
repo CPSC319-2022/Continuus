@@ -5,6 +5,9 @@ on:
     branches:
       - '*'
 
+permissions:
+  pull-requests: write
+
 jobs:
   terraform:
     name: "Terraform"
