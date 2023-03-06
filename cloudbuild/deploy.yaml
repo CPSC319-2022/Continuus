@@ -11,6 +11,17 @@ steps:
     - '--platform'
     - 'managed'
     - '--allow-unauthenticated'
+    secretEnv: ['NEXTAUTH_URL', 'NEXTAUTH_SECRET', 'GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET']
+availableSecrets:
+  secretManager:
+  - versionName: projects/871909765266/secrets/$BRANCH_NAME-NEXTAUTH_URL/versions/latest
+    env: 'NEXTAUTH_URL'
+  - versionName: projects/871909765266/secrets/$BRANCH_NAME-NEXTAUTH_SECRET/versions/latest
+    env: 'NEXTAUTH_SECRET'
+  - versionName: projects/871909765266/secrets/$BRANCH_NAME-GOOGLE_CLIENT_ID/versions/latest
+    env: 'GOOGLE_CLIENT_ID'
+  - versionName: projects/871909765266/secrets/$BRANCH_NAME-GOOGLE_CLIENT_SECRET/versions/latest
+    env: 'GOOGLE_CLIENT_SECRET'
 
 options:
   logging: CLOUD_LOGGING_ONLY
