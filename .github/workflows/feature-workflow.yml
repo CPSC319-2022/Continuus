@@ -9,6 +9,7 @@ on:
     - '!dev'
     - '!qa'
     - '!prod'
+    - '!set-dev-env'
 
 
 jobs:
