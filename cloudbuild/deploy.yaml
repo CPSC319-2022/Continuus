@@ -1,20 +1,17 @@
 steps:
   - name: 'gcr.io/cloud-builders/gcloud'
-    entrypoint: 'bash'
     args:
-    - '-c'
-    - 'gcloud run deploy $BRANCH_NAME --image northamerica-northeast2-docker.pkg.dev/automatic-bot-376307/continuus/$BRANCH_NAME-prod --region northamerica-northeast2 --platform managed --allow-unauthenticated --set-env-vars NEXTAUTH_URL=$$NEXTAUTH_URL --set-env-vars NEXTAUTH_SECRET=$$NEXTAUTH_SECRET --set-env-vars GOOGLE_CLIENT_ID=$$GOOGLE_CLIENT_ID --set-env-vars GOOGLE_CLIENT_SECRET=$$GOOGLE_CLIENT_SECRET'
-    secretEnv: ['NEXTAUTH_URL', 'NEXTAUTH_SECRET', 'GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET']
-availableSecrets:
-  secretManager:
-  - versionName: projects/871909765266/secrets/$BRANCH_NAME-NEXTAUTH_URL/versions/latest
-    env: 'NEXTAUTH_URL'
-  - versionName: projects/871909765266/secrets/$BRANCH_NAME-NEXTAUTH_SECRET/versions/latest
-    env: 'NEXTAUTH_SECRET'
-  - versionName: projects/871909765266/secrets/$BRANCH_NAME-GOOGLE_CLIENT_ID/versions/latest
-    env: 'GOOGLE_CLIENT_ID'
-  - versionName: projects/871909765266/secrets/$BRANCH_NAME-GOOGLE_CLIENT_SECRET/versions/latest
-    env: 'GOOGLE_CLIENT_SECRET'
-
+    - 'run'
+    - 'deploy'
+    - '$BRANCH_NAME'
+    - '--image'
+    - 'northamerica-northeast2-docker.pkg.dev/automatic-bot-376307/continuus/$BRANCH_NAME-prod'
+    - '--region'
+    - 'northamerica-northeast2'
+    - '--platform'
+    - 'managed'
+    - '--allow-unauthenticated'
+    - '--set-secrets'
+    - 'NEXTAUTH_URL=projects/871909765266/secrets/$BRANCH_NAME-NEXTAUTH_URL/versions/latest,NEXTAUTH_SECRET=projects/871909765266/secrets/$BRANCH_NAME-NEXTAUTH_SECRET/versions/latest,GOOGLE_CLIENT_ID=projects/871909765266/secrets/$BRANCH_NAME-GOOGLE_CLIENT_ID/versions/latest,GOOGLE_CLIENT_SECRET=projects/871909765266/secrets/$BRANCH_NAME-GOOGLE_CLIENT_SECRET/versions/latest'
 options:
   logging: CLOUD_LOGGING_ONLY
