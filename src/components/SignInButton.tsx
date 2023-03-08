@@ -5,7 +5,7 @@ export const SignInButton: React.FC = () => {
 
     return (
         <button
-            onClick={() => signIn()}
+            onClick={() => void signIn()}
             hidden={status === "authenticated"}
         >
             Sign-In
