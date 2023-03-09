@@ -1,12 +1,11 @@
 import { Menu, MenuButton, MenuItem } from "@szhsin/react-menu";
 import { signIn, useSession } from "next-auth/react";
-import { type ReactNode } from "react";
 import Image from 'next/image';
 import btn_google from '../../public/btn_google.png'
 
 export const ProfileMenu: React.FC = () => {
     const { status } = useSession();
-    const menuButtonClassName = "w-full px-4 py-2 cursor-pointer text-center hover:bg-gray-200";
+    const menuItemClassName = "w-full px-4 py-2 cursor-pointer text-center hover:bg-gray-200";
 
     return (
         <Menu
@@ -28,26 +27,26 @@ export const ProfileMenu: React.FC = () => {
                     switch (status) {
                         case "authenticated":
                             return [
-                                <MenuButton className={menuButtonClassName} key="profile">
+                                <MenuItem className={menuItemClassName} key="profile">
                                     Profile
-                                </MenuButton>,
-                                <MenuButton className={menuButtonClassName} key="sign-out">
+                                </MenuItem>,
+                                <MenuItem className={menuItemClassName} key="sign-out">
                                     Sign-Out
-                                </MenuButton>
+                                </MenuItem>
                             ];
                         case "loading":
-                            return <MenuButton className={menuButtonClassName}>Loading...</MenuButton>;
+                            return <MenuItem className={menuItemClassName}>Loading...</MenuItem>;
                         case "unauthenticated":
                             return (
-                                <MenuButton
-                                    className={menuButtonClassName}
+                                <MenuItem
+                                    className={menuItemClassName}
                                     onClick={() => void signIn("google")}
                                 >
                                     <div className="flex justify-center items-center relative">
                                         <Image src={btn_google} alt="Sign-In/Up With Google" className="mr-2" />
                                         <span>Sign-In/Up</span>
                                     </div>
-                                </MenuButton>
+                                </MenuItem>
                             );
                     }
                 })()
