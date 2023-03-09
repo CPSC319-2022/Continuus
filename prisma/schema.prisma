@@ -27,12 +27,12 @@ model Account {
     type              String
     provider          String
     providerAccountId String
-    refresh_token     String? // @db.Text
-    access_token      String? // @db.Text
+    refresh_token     String?
+    access_token      String?
     expires_at        Int?
     token_type        String?
     scope             String?
-    id_token          String? // @db.Text
+    id_token          String?
     session_state     String?
     user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -48,13 +48,15 @@ model Session {
 }
 
 model User {
-    id            String    @id @default(cuid())
+    id            String     @id @default(cuid())
     name          String?
-    email         String?   @unique
+    email         String?    @unique
     emailVerified DateTime?
     image         String?
+    role          Role       @default(READER)
     accounts      Account[]
     sessions      Session[]
+    BlogPost      BlogPost[]
 }
 
 model VerificationToken {
@@ -63,4 +65,18 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+model BlogPost {
+    id      String @id @default(cuid())
+    userId  String
+    title   String
+    content String
+    user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum Role {
+    READER
+    CONTRIBUTOR
+    ADMIN
 }
