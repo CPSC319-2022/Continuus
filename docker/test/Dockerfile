@@ -12,7 +12,7 @@ COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 
 RUN npm i 
 
-COPY prisma ./
+COPY prisma ./app
 
 ##### BUILDER
 
