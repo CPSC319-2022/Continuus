@@ -5,14 +5,14 @@ RUN apk add --no-cache libc6-compat openssl
 WORKDIR /app
 
 # Install Prisma Client - remove if not using Prisma
-# COPY prisma ./
+COPY prisma ./
 
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 
 RUN npm i 
 
-COPY prisma ./app
+RUN ls
 
 ##### BUILDER
 
@@ -22,6 +22,10 @@ ARG NEXT_PUBLIC_CLIENTVAR
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+
+RUN ls
+RUN echo "######"
+RUN ls ..
 
 RUN npm run build:skip 
 
