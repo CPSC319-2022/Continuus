@@ -1,5 +1,5 @@
-import { PrismaClient, User } from '@prisma/client';
-import { Session } from 'next-auth';
+import type { PrismaClient, User } from '@prisma/client';
+import type { Session } from 'next-auth';
 import { describe, it, expect, beforeEach } from 'vitest'
 import { mockDeep, mockReset } from 'vitest-mock-extended'
 import { appRouter } from '../../root';
