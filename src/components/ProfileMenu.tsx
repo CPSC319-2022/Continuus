@@ -1,6 +1,8 @@
 import { Menu, MenuButton, MenuItem } from "@szhsin/react-menu";
 import { signIn, useSession } from "next-auth/react";
-import { ReactNode } from "react";
+import { type ReactNode } from "react";
+import Image from 'next/image';
+import btn_google from '../../public/btn_google.png'
 
 export const ProfileMenu: React.FC = () => {
     const { status } = useSession();
@@ -43,10 +45,12 @@ export const ProfileMenu: React.FC = () => {
                             return _renderMenuButton({ label: "Loading..." });
                         case "unauthenticated":
                             return _renderMenuButton({
-                                label: <div className="flex justify-center items-center">
-                                    <img src="/btn_google.svg" className="mr-2" /> 
-                                    <span>Sign-In/Up</span>
-                                </div>,
+                                label: (
+                                    <div className="flex justify-center items-center relative">
+                                        <Image src={btn_google} alt="Sign-In/Up With Google" className="mr-2" />
+                                        <span>Sign-In/Up</span>
+                                    </div>
+                                ),
                                 onClick: () => void signIn("google")
                             });
                     }
