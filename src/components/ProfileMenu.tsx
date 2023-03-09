@@ -1,5 +1,6 @@
 import { Menu, MenuButton, MenuItem } from "@szhsin/react-menu";
 import { signIn, useSession } from "next-auth/react";
+import { ReactNode } from "react";
 
 export const ProfileMenu: React.FC = () => {
     const { status } = useSession();
@@ -11,7 +12,7 @@ export const ProfileMenu: React.FC = () => {
         />
     );
 
-    const _renderMenuButton: React.FC<{ label: string, onClick?: () => void }> = ({ label, onClick }) => (
+    const _renderMenuButton: React.FC<{ label: ReactNode, onClick?: () => void }> = ({ label, onClick }) => (
         <MenuItem
             onClick={onClick}
             className="w-full px-4 py-2 cursor-pointer text-center hover:bg-gray-200"
@@ -41,7 +42,13 @@ export const ProfileMenu: React.FC = () => {
                         case "loading":
                             return _renderMenuButton({ label: "Loading..." });
                         case "unauthenticated":
-                            return _renderMenuButton({ label: "Sign-In/Up", onClick: () => void signIn("google")});
+                            return _renderMenuButton({
+                                label: <div className="flex justify-center items-center">
+                                    <img src="/btn_google.svg" className="mr-2" /> 
+                                    <span>Sign-In/Up</span>
+                                </div>,
+                                onClick: () => void signIn("google")
+                            });
                     }
                 })()
             }
