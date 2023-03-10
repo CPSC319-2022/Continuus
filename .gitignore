@@ -42,4 +42,4 @@ yarn-error.log*
 *.tsbuildinfo
 
 # prisma-zod-generator
-/prisma/generated
+/src/generated
