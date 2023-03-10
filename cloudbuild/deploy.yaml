@@ -12,6 +12,6 @@ steps:
     - 'managed'
     - '--allow-unauthenticated'
     - '--set-secrets'
-    - 'NEXTAUTH_URL=projects/871909765266/secrets/$BRANCH_NAME-NEXTAUTH_URL/versions/latest,NEXTAUTH_SECRET=projects/871909765266/secrets/$BRANCH_NAME-NEXTAUTH_SECRET/versions/latest,GOOGLE_CLIENT_ID=projects/871909765266/secrets/$BRANCH_NAME-GOOGLE_CLIENT_ID/versions/latest,GOOGLE_CLIENT_SECRET=projects/871909765266/secrets/$BRANCH_NAME-GOOGLE_CLIENT_SECRET/versions/latest'
+    - 'DATABASE_URL=projects/871909765266/secrets/$BRANCH_NAME-DATABASE_URL/versions/latest,NEXTAUTH_URL=projects/871909765266/secrets/$BRANCH_NAME-NEXTAUTH_URL/versions/latest,NEXTAUTH_SECRET=projects/871909765266/secrets/$BRANCH_NAME-NEXTAUTH_SECRET/versions/latest,GOOGLE_CLIENT_ID=projects/871909765266/secrets/$BRANCH_NAME-GOOGLE_CLIENT_ID/versions/latest,GOOGLE_CLIENT_SECRET=projects/871909765266/secrets/$BRANCH_NAME-GOOGLE_CLIENT_SECRET/versions/latest'
 options:
   logging: CLOUD_LOGGING_ONLY
