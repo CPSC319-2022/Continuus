@@ -7,6 +7,7 @@
     "dev": "next dev",
     "build:skip": "SKIP_ENV_VALIDATION=1 next build",
     "dev:skip": "SKIP_ENV_VALIDATION=1 next dev",
+    "test:skip": "SKIP_ENV_VALIDATION=1 vitest run",
     "postinstall": "prisma generate",
     "lint": "next lint",
     "start": "next start",

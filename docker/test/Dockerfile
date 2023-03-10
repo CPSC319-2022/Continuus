@@ -22,5 +22,6 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /src ./src
 COPY . .
 
-RUN npm run build:skip 
+ENV SKIP_ENV_VALIDATION=1
 
+RUN npm run build

@@ -24,13 +24,15 @@ ARG DATABASE_URL
 ARG NEXT_PUBLIC_CLIENTVAR
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /src ./src
 COPY . .
 
+ENV SKIP_ENV_VALIDATION=1
 # ENV NEXT_TELEMETRY_DISABLED 1
 
 RUN \
-  if [ -f yarn.lock ]; then SKIP_ENV_VALIDATION=1 yarn build; \
-  elif [ -f package-lock.json ]; then SKIP_ENV_VALIDATION=1 npm run build; \
+  if [ -f yarn.lock ]; then yarn build; \
+  elif [ -f package-lock.json ]; then npm run build; \
   elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm run build; \
   else echo "Lockfile not found." && exit 1; \
   fi
