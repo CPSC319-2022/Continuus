@@ -1,4 +1,4 @@
-import { BlogPostCreateOneSchema } from "../../../generated/schemas";
+import { BlogPostCreateOneSchema } from "~/generated/schemas";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
