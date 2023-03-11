@@ -3,7 +3,7 @@ steps:
     entrypoint: 'bash'
     args: ['-c', 'docker pull northamerica-northeast2-docker.pkg.dev/automatic-bot-376307/continuus/$SHORT_SHA-test']
 
-  - name: gcr.io/cloud-builders/yarn
+  - name: gcr.io/cloud-builders/npm
     env:
       - NODE_ENV=production
     entrypoint: sh
@@ -29,6 +29,8 @@ steps:
     - '--platform'
     - 'managed'
     - '--allow-unauthenticated'
+    - '--set-cloudsql-instances'
+    - 'automatic-bot-376307:us-central1:postgres'
     - '--set-secrets'
     - 'DATABASE_URL=projects/871909765266/secrets/$BRANCH_NAME-DATABASE_URL/versions/latest,NEXTAUTH_URL=projects/871909765266/secrets/$BRANCH_NAME-NEXTAUTH_URL/versions/latest,NEXTAUTH_SECRET=projects/871909765266/secrets/$BRANCH_NAME-NEXTAUTH_SECRET/versions/latest,GOOGLE_CLIENT_ID=projects/871909765266/secrets/$BRANCH_NAME-GOOGLE_CLIENT_ID/versions/latest,GOOGLE_CLIENT_SECRET=projects/871909765266/secrets/$BRANCH_NAME-GOOGLE_CLIENT_SECRET/versions/latest'
 
