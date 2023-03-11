@@ -8,6 +8,7 @@ on:
     - dev
     - qa
     - prod
+    - setup-db
 
 jobs:
   build:
