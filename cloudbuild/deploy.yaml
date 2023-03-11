@@ -1,16 +1,19 @@
 steps:
-  - name: "gcr.io/cloud-builders/docker"
-    args: ["build", "-t", "northamerica-northeast2-docker.pkg.dev/automatic-bot-376307/continuus/$BRANCH_NAME-sql-proxy", "docker/prod/migrate/."]
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args: ['-c', 'docker pull northamerica-northeast2-docker.pkg.dev/automatic-bot-376307/continuus/$SHORT_SHA-test']
 
-  - name: "northamerica-northeast2-docker.pkg.dev/automatic-bot-376307/continuus/$BRANCH_NAME-sql-proxy"
-    dir: /
+  - name: gcr.io/cloud-builders/yarn
     env:
-      - "DATABASE_URL=postgresql://postgres:continuus@localhost/$BRANCH_NAME?host=/cloudsql/automatic-bot-376307:us-central1:postgres"
-    entrypoint: /bin/bash
+      - NODE_ENV=production
+    entrypoint: sh
     args:
-      - '-c'
+      - "-c"
       - |
-        /cloudsql/cloud-sql-proxy --unix-socket /cloudsql automatic-bot-376307:us-central1:postgres & sleep 2;
+        wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
+        chmod +x cloud_sql_proxy
+        ./cloud_sql_proxy -instances=$$_DB_HOST=tcp:$$_DB_PORT & sleep 3
+        export DATABASE_URL=postgresql://postgres:continuus@localhost/$BRANCH_NAME
         npx prisma migrate prod
 
   - name: 'gcr.io/cloud-builders/gcloud'
