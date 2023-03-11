@@ -17,7 +17,7 @@ steps:
     entrypoint: bash
     args:
     - '-c'
-    - 'run deploy $BRANCH_NAME --image northamerica-northeast2-docker.pkg.dev/automatic-bot-376307/continuus/$BRANCH_NAME-prod --region northamerica-northeast2 --platform managed --allow-unauthenticated --set-cloudsql-instances $$CLOUD_SQL_INSTANCE_NAME --set-secrets DATABASE_URL=postgresql://$$DB_USERNAME:$$DB_PASSWORD@localhost:5432/$BRANCH_NAME?host=/cloudsql/$$CLOUD_SQL_INSTANCE_NAME,NEXTAUTH_URL=projects/871909765266/secrets/$BRANCH_NAME-NEXTAUTH_URL/versions/latest,NEXTAUTH_SECRET=projects/871909765266/secrets/$BRANCH_NAME-NEXTAUTH_SECRET/versions/latest,GOOGLE_CLIENT_ID=projects/871909765266/secrets/$BRANCH_NAME-GOOGLE_CLIENT_ID/versions/latest,GOOGLE_CLIENT_SECRET=projects/871909765266/secrets/$BRANCH_NAME-GOOGLE_CLIENT_SECRET/versions/latest'
+    - 'gcloud run deploy $BRANCH_NAME --image northamerica-northeast2-docker.pkg.dev/automatic-bot-376307/continuus/$BRANCH_NAME-prod --region northamerica-northeast2 --platform managed --allow-unauthenticated --set-cloudsql-instances $$CLOUD_SQL_INSTANCE_NAME --set-secrets DATABASE_URL=postgresql://$$DB_USERNAME:$$DB_PASSWORD@localhost:5432/$BRANCH_NAME?host=/cloudsql/$$CLOUD_SQL_INSTANCE_NAME,NEXTAUTH_URL=projects/871909765266/secrets/$BRANCH_NAME-NEXTAUTH_URL/versions/latest,NEXTAUTH_SECRET=projects/871909765266/secrets/$BRANCH_NAME-NEXTAUTH_SECRET/versions/latest,GOOGLE_CLIENT_ID=projects/871909765266/secrets/$BRANCH_NAME-GOOGLE_CLIENT_ID/versions/latest,GOOGLE_CLIENT_SECRET=projects/871909765266/secrets/$BRANCH_NAME-GOOGLE_CLIENT_SECRET/versions/latest'
     secretEnv: ['DB_USERNAME', 'DB_PASSWORD', 'CLOUD_SQL_INSTANCE_NAME']
 
 availableSecrets:
