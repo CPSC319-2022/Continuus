@@ -10,7 +10,7 @@ steps:
     args:
       - "-c"
       - |
-        wget https://storage.googleapis.com/cloud-sql-connectors/cloud-sql-proxy/v2.0.0/cloud-sql-proxy.linux.amd64 -O cloud_sql_proxy
+        wget https://storage.googleapis.com/cloud-sql-connectors/cloud-sql-proxy/v2.0.0/cloud-sql-proxy.linux.amd64 -O cloud-sql-proxy
         chmod +x cloud-sql-proxy
         ./cloud-sql-proxy --port 5432 automatic-bot-376307:us-central1:postgres & sleep 3
         export DATABASE_URL=postgresql://postgres:continuus@localhost/$BRANCH_NAME
