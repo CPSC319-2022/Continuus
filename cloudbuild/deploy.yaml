@@ -12,9 +12,9 @@ steps:
       - |
         wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
         chmod +x cloud_sql_proxy
-        ./cloud_sql_proxy --port 5432 automatic-bot-376307:us-central1:postgres & sleep 2
+        ./cloud_sql_proxy -instances=automatic-bot-376307:us-central1:postgres=tcp:5432 & sleep 3
         export DATABASE_URL=postgresql://postgres:continuus@localhost/$BRANCH_NAME
-        npx prisma migrate prod
+        npx prisma migrate deploy
 
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
