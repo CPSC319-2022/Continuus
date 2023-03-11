@@ -1,4 +1,22 @@
 steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args: ['-c', 'docker pull northamerica-northeast2-docker.pkg.dev/automatic-bot-376307/continuus/$SHORT_SHA-test']
+
+  - name: gcr.io/cloud-builders/yarn
+    env:
+      - NODE_ENV=production
+    entrypoint: sh
+    args:
+      - "-c"
+      - |
+        wget https://storage.googleapis.com/cloud-sql-connectors/cloud-sql-proxy/v2.0.0/cloud-sql-proxy.linux.amd64 -O cloud-sql-proxy
+        chmod +x cloud-sql-proxy
+        ./cloud-sql-proxy --port 5432 automatic-bot-376307:us-central1:postgres & sleep 3
+        export DATABASE_URL=postgresql://$$DB_USERNAME:$$DB_PASSWORD@localhost/$BRANCH_NAME
+        npx prisma migrate deploy
+    secretEnv: ['DB_USERNAME', 'DB_PASSWORD']
+
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
     - 'run'
@@ -12,6 +30,14 @@ steps:
     - 'managed'
     - '--allow-unauthenticated'
     - '--set-secrets'
-    - 'NEXTAUTH_URL=projects/871909765266/secrets/$BRANCH_NAME-NEXTAUTH_URL/versions/latest,NEXTAUTH_SECRET=projects/871909765266/secrets/$BRANCH_NAME-NEXTAUTH_SECRET/versions/latest,GOOGLE_CLIENT_ID=projects/871909765266/secrets/$BRANCH_NAME-GOOGLE_CLIENT_ID/versions/latest,GOOGLE_CLIENT_SECRET=projects/871909765266/secrets/$BRANCH_NAME-GOOGLE_CLIENT_SECRET/versions/latest'
+    - 'DATABASE_URL=projects/871909765266/secrets/$BRANCH_NAME-DATABASE_URL/versions/latest,NEXTAUTH_URL=projects/871909765266/secrets/$BRANCH_NAME-NEXTAUTH_URL/versions/latest,NEXTAUTH_SECRET=projects/871909765266/secrets/$BRANCH_NAME-NEXTAUTH_SECRET/versions/latest,GOOGLE_CLIENT_ID=projects/871909765266/secrets/$BRANCH_NAME-GOOGLE_CLIENT_ID/versions/latest,GOOGLE_CLIENT_SECRET=projects/871909765266/secrets/$BRANCH_NAME-GOOGLE_CLIENT_SECRET/versions/latest'
+
+availableSecrets:
+  secretManager:
+  - versionName: projects/871909765266/secrets/$BRANCH_NAME-DATABASE_USERNAME/versions/latest
+    env: 'DB_USERNAME'
+  - versionName: projects/871909765266/secrets/$BRANCH_NAME-DATABASE_PASSWORD/versions/latest
+    env: 'DB_PASSWORD'
+
 options:
   logging: CLOUD_LOGGING_ONLY
