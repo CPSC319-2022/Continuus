@@ -12,7 +12,7 @@ steps:
       - |
         wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O cloud_sql_proxy
         chmod +x cloud_sql_proxy
-        ./cloud_sql_proxy -instances=$$_DB_HOST=tcp:$$_DB_PORT & sleep 3
+        ./cloud_sql_proxy --port 5432 automatic-bot-376307:us-central1:postgres & sleep 2
         export DATABASE_URL=postgresql://postgres:continuus@localhost/$BRANCH_NAME
         npx prisma migrate prod
 
