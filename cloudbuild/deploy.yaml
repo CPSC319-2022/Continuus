@@ -36,7 +36,7 @@ availableSecrets:
   secretManager:
   - versionName: projects/871909765266/secrets/$BRANCH_NAME-DATABASE_USERNAME/versions/latest
     env: 'DB_USERNAME'
-  - versionName: projects/871909765266/secrets/$BRANCH_NAME-DATABASE_USERNAME/versions/latest
+  - versionName: projects/871909765266/secrets/$BRANCH_NAME-DATABASE_PASSWORD/versions/latest
     env: 'DB_PASSWORD'
 
 options:
