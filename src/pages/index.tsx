@@ -14,62 +14,178 @@ const blogPostDummyData = [
       "https://media.licdn.com/dms/image/D5603AQFanf7t8wpKBg/profile-displayphoto-shrink_800_800/0/1667543356810?e=1684368000&v=beta&t=CMGwGsoUHQqwfIj_oRyGwMAKvzYtSVPbd_5IiESDLbg",
     content:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    comments: [
+      {
+        name: "John Doe",
+        comment: "Nice post!",
+        dateAdded: "2 minutes ago",
+      },
+      {
+        name: "Jane Smith",
+        comment: "I really enjoyed reading this.",
+        dateAdded: "1 minute ago",
+      },
+    ],
   },
   {
     id: 2,
-    name: "Bob Brown",
-    lastUpdated: "7 minutes ago",
+    name: "Alice Lee",
+    lastUpdated: "10 minutes ago",
     imageUrl: "https://i.pravatar.cc/150?img=2",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.",
+    comments: [
+      {
+        name: "Bob Johnson",
+        comment: "Great article!",
+        dateAdded: "5 minutes ago",
+      },
+      {
+        name: "Sarah Williams",
+        comment: "I learned something new from this.",
+        dateAdded: "2 minutes ago",
+      },
+    ],
   },
   {
     id: 3,
-    name: "Charlie Chan",
-    lastUpdated: "2 minutes ago",
+    name: "David Kim",
+    lastUpdated: "15 minutes ago",
     imageUrl: "https://i.pravatar.cc/150?img=3",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    comments: [
+      {
+        name: "Emily Chen",
+        comment: "Thanks for sharing!",
+        dateAdded: "12 minutes ago",
+      },
+      {
+        name: "Michael Brown",
+        comment: "I liked your perspective on this topic.",
+        dateAdded: "8 minutes ago",
+      },
+    ],
+  },
+  {
+    id: 3,
+    name: "Maria Rodriguez",
+    lastUpdated: "just now",
+    imageUrl: "https://i.pravatar.cc/150?img=4",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+      "Suspendisse vel velit nulla. Sed egestas nulla ut purus semper, at dignissim elit maximus.",
+    comments: [
+      {
+        name: "John Smith",
+        comment: "Interesting post!",
+        dateAdded: "2 minutes ago",
+      },
+      {
+        name: "Jane Doe",
+        comment:
+          "I have a different opinion on this, but good write-up nonetheless.",
+        dateAdded: "just now",
+      },
+    ],
   },
   {
     id: 4,
-    name: "David Davis",
-    lastUpdated: "5 minutes ago",
+    name: "Jason Lee",
+    lastUpdated: "10 minutes ago",
     imageUrl: "https://i.pravatar.cc/150?img=4",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+      "Curabitur malesuada augue quis tellus cursus, nec malesuada velit eleifend. Suspendisse potenti. Aliquam fermentum pharetra leo, et tincidunt velit interdum eu.",
+    comments: [
+      {
+        name: "Jennifer Brown",
+        comment: "Thanks for sharing your thoughts!",
+        dateAdded: "5 minutes ago",
+      },
+      {
+        name: "Alex Johnson",
+        comment: "I found this very informative.",
+        dateAdded: "2 minutes ago",
+      },
+    ],
   },
   {
     id: 5,
-    name: "Eve Evans",
-    lastUpdated: "10 minutes ago",
-    imageUrl: "https://i.pravatar.cc/150?img=5",
+    name: "Maximilian Schneider",
+    lastUpdated: "20 minutes ago",
+    imageUrl: "https://i.pravatar.cc/150?img=4",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+      "Nulla nec interdum eros. Sed bibendum suscipit eros ac consectetur. Vestibulum ac felis nulla.",
+    comments: [
+      {
+        name: "Emily Chen",
+        comment: "I like your writing style!",
+        dateAdded: "12 minutes ago",
+      },
+      {
+        name: "Michael Brown",
+        comment: "This gave me a new perspective on the topic.",
+        dateAdded: "8 minutes ago",
+      },
+    ],
   },
   {
     id: 6,
-    name: "Frank Ford",
-    lastUpdated: "1 minute ago",
-    imageUrl: "https://i.pravatar.cc/150?img=6",
+    name: "Karen Smith",
+    lastUpdated: "5 minutes ago",
+    imageUrl: "https://i.pravatar.cc/150?img=4",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+      "Vestibulum condimentum purus eu quam tempor, a lacinia justo aliquet. Nam tincidunt nisl at consectetur cursus.",
+    comments: [
+      {
+        name: "David Kim",
+        comment: "Great post, thanks for sharing!",
+        dateAdded: "2 minutes ago",
+      },
+      {
+        name: "Alice Lee",
+        comment: "I learned something new from this.",
+        dateAdded: "1 minute ago",
+      },
+    ],
   },
   {
     id: 7,
-    name: "Grace Green",
-    lastUpdated: "8 minutes ago",
-    imageUrl: "https://i.pravatar.cc/150?img=7",
+    name: "Alexandra Garcia",
+    lastUpdated: "10 minutes ago",
+    imageUrl: "https://i.pravatar.cc/150?img=4",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+      "Fusce vel aliquam augue. Praesent rutrum eros in purus volutpat, a lacinia magna posuere. Sed aliquet semper arcu, at scelerisque nulla suscipit quis.",
+    comments: [
+      {
+        name: "John Doe",
+        comment: "Interesting perspective on this topic.",
+        dateAdded: "5 minutes ago",
+      },
+      {
+        name: "Jane Smith",
+        comment: "Thanks for sharing!",
+        dateAdded: "2 minutes ago",
+      },
+    ],
   },
   {
     id: 8,
-    name: "Henry Harris",
-    lastUpdated: "3 minutes ago",
-    imageUrl: "https://i.pravatar.cc/150?img=8",
+    name: "William Johnson",
+    lastUpdated: "15 minutes ago",
+    imageUrl: "https://i.pravatar.cc/150?img=4",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+      "Vestibulum at consequat nulla. Fusce scelerisque ullamcorper dui, eget egestas nisl faucibus sit amet.",
+    comments: [
+      {
+        name: "Sarah Williams",
+        comment: "I enjoyed reading this.",
+        dateAdded: "12 minutes ago",
+      },
+      {
+        name: "Bob Johnson",
+        comment: "Keep up the good work!",
+        dateAdded: "8 minutes ago",
+      },
+    ],
   },
 ];
 
