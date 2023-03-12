@@ -7,6 +7,7 @@ import { Layout } from "../components/Layout";
 
 const Home: NextPage = () => {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
+  const blogPosts = api.blogPost.get.useQuery({});
 
   return (
     <Layout>
@@ -39,6 +40,8 @@ const Home: NextPage = () => {
               </div>
             </Link>
           </div>
+          {/* will use this later to map to the blog post cards */}
+          <div>{JSON.stringify(blogPosts.data)}</div>
           <div className="flex flex-col items-center gap-2">
             <p className="text-2xl text-white">
               {hello.data ? hello.data.greeting : "Loading tRPC query..."}
