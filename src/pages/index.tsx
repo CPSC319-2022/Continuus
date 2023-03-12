@@ -81,6 +81,12 @@ const Home: NextPage = () => {
     <Layout>
       <div className="flex min-h-screen flex-col content-center items-center">
         <div className="w-6/12">
+          <div className="mb-6 w-full">
+            <select className="select float-right w-full max-w-xs">
+              <option>Recent</option>
+              <option>Popular</option>
+            </select>
+          </div>
           {blogPostDummyData.map(
             ({ id, name, lastUpdated, imageUrl, content }) => (
               <div key={id} className="mb-6">
