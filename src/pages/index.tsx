@@ -1,5 +1,4 @@
 import { type NextPage } from "next";
-import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 
 import { api } from "../utils/api";
@@ -16,6 +15,62 @@ const blogPostDummyData = [
     content:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   },
+  {
+    id: 2,
+    name: "Bob Brown",
+    lastUpdated: "7 minutes ago",
+    imageUrl: "https://i.pravatar.cc/150?img=2",
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+  },
+  {
+    id: 3,
+    name: "Charlie Chan",
+    lastUpdated: "2 minutes ago",
+    imageUrl: "https://i.pravatar.cc/150?img=3",
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+  },
+  {
+    id: 4,
+    name: "David Davis",
+    lastUpdated: "5 minutes ago",
+    imageUrl: "https://i.pravatar.cc/150?img=4",
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+  },
+  {
+    id: 5,
+    name: "Eve Evans",
+    lastUpdated: "10 minutes ago",
+    imageUrl: "https://i.pravatar.cc/150?img=5",
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+  },
+  {
+    id: 6,
+    name: "Frank Ford",
+    lastUpdated: "1 minute ago",
+    imageUrl: "https://i.pravatar.cc/150?img=6",
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+  },
+  {
+    id: 7,
+    name: "Grace Green",
+    lastUpdated: "8 minutes ago",
+    imageUrl: "https://i.pravatar.cc/150?img=7",
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+  },
+  {
+    id: 8,
+    name: "Henry Harris",
+    lastUpdated: "3 minutes ago",
+    imageUrl: "https://i.pravatar.cc/150?img=8",
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+  },
 ];
 
 const Home: NextPage = () => {
@@ -28,13 +83,14 @@ const Home: NextPage = () => {
         <div className="w-6/12">
           {blogPostDummyData.map(
             ({ id, name, lastUpdated, imageUrl, content }) => (
-              <BlogPost
-                key={id}
-                name={name}
-                lastUpdated={lastUpdated}
-                imageUrl={imageUrl}
-                content={content}
-              />
+              <div key={id} className="mb-6">
+                <BlogPost
+                  name={name}
+                  lastUpdated={lastUpdated}
+                  imageUrl={imageUrl}
+                  content={content}
+                />
+              </div>
             )
           )}
           {/* will use this later to map to the blog post cards */}
