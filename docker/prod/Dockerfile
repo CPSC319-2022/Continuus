@@ -28,6 +28,7 @@ COPY --from=deps /src ./src
 COPY . .
 
 # ENV NEXT_TELEMETRY_DISABLED 1
+ENV SKIP_ENV_VALIDATION=1
 
 RUN \
   if [ -f yarn.lock ]; then yarn build; \
