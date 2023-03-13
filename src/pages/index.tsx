@@ -20,11 +20,19 @@ const blogPostDummyData = [
         name: "John Doe",
         comment: "Nice post!",
         dateAdded: "2 minutes ago",
+        imageUrl: "https://i.pravatar.cc/150?img=20",
       },
       {
         name: "Jane Smith",
         comment: "I really enjoyed reading this.",
         dateAdded: "1 minute ago",
+        imageUrl: "https://i.pravatar.cc/150?img=21",
+      },
+      {
+        name: "Bob Johnson",
+        comment: "Keep up the good work!",
+        dateAdded: "3 minutes ago",
+        imageUrl: "https://i.pravatar.cc/150?img=37",
       },
     ],
   },
@@ -40,11 +48,13 @@ const blogPostDummyData = [
         name: "Bob Johnson",
         comment: "Great article!",
         dateAdded: "5 minutes ago",
+        imageUrl: "https://i.pravatar.cc/150?img=23",
       },
       {
         name: "Sarah Williams",
         comment: "I learned something new from this.",
         dateAdded: "2 minutes ago",
+        imageUrl: "https://i.pravatar.cc/150?img=24",
       },
     ],
   },
@@ -59,11 +69,13 @@ const blogPostDummyData = [
         name: "Emily Chen",
         comment: "Thanks for sharing!",
         dateAdded: "12 minutes ago",
+        imageUrl: "https://i.pravatar.cc/150?img=25",
       },
       {
         name: "Michael Brown",
         comment: "I liked your perspective on this topic.",
         dateAdded: "8 minutes ago",
+        imageUrl: "https://i.pravatar.cc/150?img=38",
       },
     ],
   },
@@ -79,12 +91,14 @@ const blogPostDummyData = [
         name: "John Smith",
         comment: "Interesting post!",
         dateAdded: "2 minutes ago",
+        imageUrl: "https://i.pravatar.cc/150?img=26",
       },
       {
         name: "Jane Doe",
         comment:
           "I have a different opinion on this, but good write-up nonetheless.",
         dateAdded: "just now",
+        imageUrl: "https://i.pravatar.cc/150?img=27",
       },
     ],
   },
@@ -100,11 +114,13 @@ const blogPostDummyData = [
         name: "Jennifer Brown",
         comment: "Thanks for sharing your thoughts!",
         dateAdded: "5 minutes ago",
+        imageUrl: "https://i.pravatar.cc/150?img=28",
       },
       {
         name: "Alex Johnson",
         comment: "I found this very informative.",
         dateAdded: "2 minutes ago",
+        imageUrl: "https://i.pravatar.cc/150?img=29",
       },
     ],
   },
@@ -120,11 +136,13 @@ const blogPostDummyData = [
         name: "Emily Chen",
         comment: "I like your writing style!",
         dateAdded: "12 minutes ago",
+        imageUrl: "https://i.pravatar.cc/150?img=30",
       },
       {
         name: "Michael Brown",
         comment: "This gave me a new perspective on the topic.",
         dateAdded: "8 minutes ago",
+        imageUrl: "https://i.pravatar.cc/150?img=31",
       },
     ],
   },
@@ -140,11 +158,13 @@ const blogPostDummyData = [
         name: "David Kim",
         comment: "Great post, thanks for sharing!",
         dateAdded: "2 minutes ago",
+        imageUrl: "https://i.pravatar.cc/150?img=32",
       },
       {
         name: "Alice Lee",
         comment: "I learned something new from this.",
         dateAdded: "1 minute ago",
+        imageUrl: "https://i.pravatar.cc/150?img=33",
       },
     ],
   },
@@ -160,11 +180,13 @@ const blogPostDummyData = [
         name: "John Doe",
         comment: "Interesting perspective on this topic.",
         dateAdded: "5 minutes ago",
+        imageUrl: "https://i.pravatar.cc/150?img=34",
       },
       {
         name: "Jane Smith",
         comment: "Thanks for sharing!",
         dateAdded: "2 minutes ago",
+        imageUrl: "https://i.pravatar.cc/150?img=35",
       },
     ],
   },
@@ -180,11 +202,13 @@ const blogPostDummyData = [
         name: "Sarah Williams",
         comment: "I enjoyed reading this.",
         dateAdded: "12 minutes ago",
+        imageUrl: "https://i.pravatar.cc/150?img=36",
       },
       {
         name: "Bob Johnson",
         comment: "Keep up the good work!",
         dateAdded: "8 minutes ago",
+        imageUrl: "https://i.pravatar.cc/150?img=37",
       },
     ],
   },
@@ -214,13 +238,13 @@ const Home: NextPage = () => {
                   imageUrl={imageUrl}
                   content={content}
                   comments={comments.length} />
-              </div><Modal id={id} BlogPost={<BlogPost
-                  id={id}
-                  name={name}
-                  lastUpdated={lastUpdated}
-                  imageUrl={imageUrl}
-                  content={content}
-                  comments={comments.length} />} comments={comments}/></>
+              </div><Modal id={id} 
+                comments={comments} 
+                poster={name} 
+                lastUpdated={lastUpdated} 
+                post={content} 
+                posterAvatarUrl={imageUrl}/>
+              </>
             )
           )}
           {/* will use this later to map to the blog post cards */}
