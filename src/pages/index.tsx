@@ -4,7 +4,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { api } from "../utils/api";
 import { Layout } from "../components/Layout";
 import { BlogPost } from "../components/BlogPost";
-import { Modal } from "~/components/Modal";
+import { Modal } from "../components/Modal";
 
 const blogPostDummyData = [
   {
@@ -229,21 +229,26 @@ const Home: NextPage = () => {
             </select>
           </div>
           {blogPostDummyData.map(
-            ({ id, name, lastUpdated, imageUrl, content, comments}) => (
-              <><div key={id} className="mb-6">
-                <BlogPost
+            ({ id, name, lastUpdated, imageUrl, content, comments }) => (
+              <>
+                <div key={id} className="mb-6">
+                  <BlogPost
+                    id={id}
+                    name={name}
+                    lastUpdated={lastUpdated}
+                    imageUrl={imageUrl}
+                    content={content}
+                    comments={comments.length}
+                  />
+                </div>
+                <Modal
                   id={id}
-                  name={name}
+                  comments={comments}
+                  poster={name}
                   lastUpdated={lastUpdated}
-                  imageUrl={imageUrl}
-                  content={content}
-                  comments={comments.length} />
-              </div><Modal id={id} 
-                comments={comments} 
-                poster={name} 
-                lastUpdated={lastUpdated} 
-                post={content} 
-                posterAvatarUrl={imageUrl}/>
+                  post={content}
+                  posterAvatarUrl={imageUrl}
+                />
               </>
             )
           )}

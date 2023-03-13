@@ -23,4 +23,8 @@ describe("Retrieving Blog Posts", () => {
   beforeEach(() => {
     mockReset(prismaMock);
   });
+
+  it("TODO", () => {
+    expect(true).toBeTruthy();
+  });
 });
