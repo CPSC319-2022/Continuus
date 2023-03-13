@@ -1,15 +1,19 @@
 interface BlogPostProps {
+  id: number;
   name: string;
   lastUpdated: string;
   content: string;
   imageUrl: string;
+  comments: number;
 }
 
 export const BlogPost: React.FC<BlogPostProps> = ({
+  id,
   name,
   lastUpdated,
   content,
   imageUrl,
+  comments,
 }) => {
   return (
     <div className="bg-base-150 card w-full rounded-md shadow-md shadow-slate-300">
@@ -48,6 +52,9 @@ export const BlogPost: React.FC<BlogPostProps> = ({
           </div>
         </div>
         <p>{content}</p>
+        <div className="self-end">
+          <label htmlFor={`modal-${id}`} className="btn btn-link">{comments} Comments</label>
+        </div>
       </div>
     </div>
   );
