@@ -1,6 +1,9 @@
-import { BlogPostCreateOneSchema } from "../../../generated/schemas";
+import {
+  BlogPostCreateOneSchema,
+  BlogPostFindManySchema,
+} from "../../../generated/schemas";
 
-import { createTRPCRouter, protectedProcedure } from "../trpc";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 export const blogPostRouter = createTRPCRouter({
   create: protectedProcedure
@@ -8,8 +11,8 @@ export const blogPostRouter = createTRPCRouter({
     .mutation(async ({ ctx, input }) => {
       const user = await ctx.prisma.user.findUniqueOrThrow({
         where: {
-          id: ctx.session.user.id
-        }
+          id: ctx.session.user.id,
+        },
       });
 
       if (!["CONTRIBUTOR", "ADMIN"].includes(user.role)) {
@@ -18,4 +21,7 @@ export const blogPostRouter = createTRPCRouter({
 
       return await ctx.prisma.blogPost.create(input);
     }),
+  get: publicProcedure.input(BlogPostFindManySchema).query(({ ctx }) => {
+    return ctx.prisma.blogPost.findMany();
+  }),
 });
