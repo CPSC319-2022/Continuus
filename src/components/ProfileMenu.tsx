@@ -1,5 +1,5 @@
 import { Menu, MenuButton, MenuItem } from "@szhsin/react-menu";
-import { signIn, useSession } from "next-auth/react";
+import { signIn, useSession, signOut } from "next-auth/react";
 import Image from 'next/image';
 import btn_google from '../../public/btn_google.png'
 
@@ -30,7 +30,10 @@ export const ProfileMenu: React.FC = () => {
                                 <MenuItem className={menuItemClassName} key="profile">
                                     Profile
                                 </MenuItem>,
-                                <MenuItem className={menuItemClassName} key="sign-out">
+                                <MenuItem
+                                    className={menuItemClassName} key="sign-out"
+                                    onClick={() => void signOut({ callbackUrl: '/' })}
+                                >
                                     Sign-Out
                                 </MenuItem>
                             ];
