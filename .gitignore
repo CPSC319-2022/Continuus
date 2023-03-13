@@ -23,6 +23,7 @@ next-env.d.ts
 # misc
 .DS_Store
 *.pem
+**/*.swp
 
 # debug
 npm-debug.log*
@@ -42,4 +43,4 @@ yarn-error.log*
 *.tsbuildinfo
 
 # prisma-zod-generator
-/prisma/generated
+/src/generated
