@@ -1,5 +1,3 @@
-import { comment } from "postcss";
-
 export interface CommentProps {
     commenterName: string;
     commenterAvatarUrl: string; 
