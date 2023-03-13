@@ -51,7 +51,7 @@ const blogPostDummyData = [
     id: 3,
     name: "David Kim",
     lastUpdated: "15 minutes ago",
-    imageUrl: "https://i.pravatar.cc/150?img=3",
+    imageUrl: `https://i.pravatar.cc/150?img=3`,
     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     comments: [
       {
@@ -67,7 +67,7 @@ const blogPostDummyData = [
     ],
   },
   {
-    id: 3,
+    id: 4,
     name: "Maria Rodriguez",
     lastUpdated: "just now",
     imageUrl: "https://i.pravatar.cc/150?img=4",
@@ -88,10 +88,10 @@ const blogPostDummyData = [
     ],
   },
   {
-    id: 4,
+    id: 5,
     name: "Jason Lee",
     lastUpdated: "10 minutes ago",
-    imageUrl: "https://i.pravatar.cc/150?img=4",
+    imageUrl: "https://i.pravatar.cc/150?img=5",
     content:
       "Curabitur malesuada augue quis tellus cursus, nec malesuada velit eleifend. Suspendisse potenti. Aliquam fermentum pharetra leo, et tincidunt velit interdum eu.",
     comments: [
@@ -108,10 +108,10 @@ const blogPostDummyData = [
     ],
   },
   {
-    id: 5,
+    id: 6,
     name: "Maximilian Schneider",
     lastUpdated: "20 minutes ago",
-    imageUrl: "https://i.pravatar.cc/150?img=4",
+    imageUrl: "https://i.pravatar.cc/150?img=6",
     content:
       "Nulla nec interdum eros. Sed bibendum suscipit eros ac consectetur. Vestibulum ac felis nulla.",
     comments: [
@@ -128,10 +128,10 @@ const blogPostDummyData = [
     ],
   },
   {
-    id: 6,
+    id: 7,
     name: "Karen Smith",
     lastUpdated: "5 minutes ago",
-    imageUrl: "https://i.pravatar.cc/150?img=4",
+    imageUrl: "https://i.pravatar.cc/150?img=7",
     content:
       "Vestibulum condimentum purus eu quam tempor, a lacinia justo aliquet. Nam tincidunt nisl at consectetur cursus.",
     comments: [
@@ -148,10 +148,10 @@ const blogPostDummyData = [
     ],
   },
   {
-    id: 7,
+    id: 8,
     name: "Alexandra Garcia",
     lastUpdated: "10 minutes ago",
-    imageUrl: "https://i.pravatar.cc/150?img=4",
+    imageUrl: "https://i.pravatar.cc/150?img=8",
     content:
       "Fusce vel aliquam augue. Praesent rutrum eros in purus volutpat, a lacinia magna posuere. Sed aliquet semper arcu, at scelerisque nulla suscipit quis.",
     comments: [
@@ -168,10 +168,10 @@ const blogPostDummyData = [
     ],
   },
   {
-    id: 8,
+    id: 9,
     name: "William Johnson",
     lastUpdated: "15 minutes ago",
-    imageUrl: "https://i.pravatar.cc/150?img=4",
+    imageUrl: "https://i.pravatar.cc/150?img=9",
     content:
       "Vestibulum at consequat nulla. Fusce scelerisque ullamcorper dui, eget egestas nisl faucibus sit amet.",
     comments: [
