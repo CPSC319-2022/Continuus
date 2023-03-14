@@ -43,7 +43,7 @@ const blogPostDummyData = [
     lastUpdated: "10 minutes ago",
     imageUrl: "https://i.pravatar.cc/150?img=2",
     content:
-      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur id erat lacus. Praesent sodales semper libero nec rutrum. Ut varius augue ipsum, sit amet convallis neque mattis nec. Mauris imperdiet sem at libero dignissim pharetra. Curabitur ac volutpat ex. Vestibulum suscipit nisi vel tempor rhoncus. Proin convallis lectus ac tristique elementum. Ut in mauris eget dui hendrerit finibus luctus ac quam. Mauris consectetur urna vel augue tempus egestas. Nunc lobortis maximus risus a feugiat. Phasellus nec hendrerit justo, ut euismod turpis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras at neque non arcu rhoncus luctus a at nulla. Vivamus egestas felis eu massa ultricies iaculis. Mauris imperdiet consequat nisi, ornare pulvinar mauris scelerisque a. Morbi semper mauris ex, ac hendrerit leo maximus a.",
     comments: [
       {
         name: "Bob Johnson",
@@ -64,7 +64,8 @@ const blogPostDummyData = [
     name: "David Kim",
     lastUpdated: "15 minutes ago",
     imageUrl: `https://i.pravatar.cc/150?img=3`,
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur id erat lacus. Praesent sodales semper libero nec rutrum. Ut varius augue ipsum, sit amet convallis neque mattis nec. Mauris imperdiet sem at libero dignissim pharetra. Curabitur ac volutpat ex. Vestibulum suscipit nisi vel tempor rhoncus. Proin convallis lectus ac tristique elementum. Ut in mauris eget dui hendrerit finibus luctus ac quam. Mauris consectetur urna vel augue tempus egestas. Nunc lobortis maximus risus a feugiat. Phasellus nec hendrerit justo, ut euismod turpis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras at neque non arcu rhoncus luctus a at nulla. Vivamus egestas felis eu massa ultricies iaculis. Mauris imperdiet consequat nisi, ornare pulvinar mauris scelerisque a. Morbi semper mauris ex, ac hendrerit leo maximus a. Donec pulvinar sodales nunc, scelerisque rhoncus est vestibulum eu. Fusce a consequat ipsum, lacinia dictum nisi. Pellentesque nec commodo metus. Ut congue feugiat cursus. Nam at leo semper, fringilla eros et, convallis turpis. Morbi elit diam, pulvinar sit amet mauris ut, pellentesque molestie augue. Vestibulum sed finibus elit, vel porttitor orci. Integer fermentum sed turpis eget vulputate. Pellentesque vehicula fermentum orci, in fermentum purus porta vitae. Nulla eu lectus elit. Sed consequat ullamcorper velit, non lacinia nisl consectetur semper. Aenean nec velit et justo sodales cursus aliquet id justo. Nam ac lectus purus. Curabitur sed eros interdum, ornare justo vitae, dapibus mi. Curabitur sit amet lobortis erat. Ut sit amet tincidunt tellus, a mattis ex. Praesent faucibus nisl a dolor tincidunt, sit amet sagittis orci ultricies. Cras eleifend justo in faucibus auctor. Suspendisse vel nulla porta, condimentum orci sed, volutpat turpis. Nunc id pellentesque felis. Aliquam nec magna et justo auctor volutpat eget id turpis. Quisque ac vehicula nibh. Fusce non arcu et dolor ultrices faucibus tempus molestie nunc. Aenean ultricies nisl vitae scelerisque rhoncus. Praesent cursus, massa vitae hendrerit consectetur, mi lectus auctor dolor, quis auctor elit libero eget dolor. Nam imperdiet congue tortor, non tempus eros ultrices eu. Cras sollicitudin, ligula eu pulvinar fringilla, turpis ligula auctor sem, ut tincidunt arcu elit ut ex. Nunc vitae ex malesuada, euismod leo vitae, aliquam mauris. Vestibulum aliquam convallis blandit. Ut non suscipit nulla. Etiam consequat dapibus nunc, in pellentesque urna pellentesque a. Sed suscipit scelerisque efficitur. Pellentesque malesuada, nisl eget elementum hendrerit, quam elit commodo tortor, in euismod nunc ligula sit amet tellus. Duis blandit purus ligula, vel fringilla neque hendrerit at. Curabitur molestie finibus pharetra. Aenean ut efficitur diam, at faucibus lectus. Praesent dictum fringilla erat, vitae dapibus magna ornare ac. Sed nec nisi sem. Phasellus finibus, augue vel ornare imperdiet, arcu risus faucibus libero, sit amet tincidunt est quam a leo. Suspendisse eu nulla auctor, ultrices velit a, porttitor quam. Cras leo nibh, fermentum ullamcorper venenatis at, elementum id mauris.",
     comments: [
       {
         name: "Emily Chen",
@@ -86,7 +87,7 @@ const blogPostDummyData = [
     lastUpdated: "just now",
     imageUrl: "https://i.pravatar.cc/150?img=4",
     content:
-      "Suspendisse vel velit nulla. Sed egestas nulla ut purus semper, at dignissim elit maximus.",
+      "Nam ac lectus purus. Curabitur sed eros interdum, ornare justo vitae, dapibus mi. Curabitur sit amet lobortis erat. Ut sit amet tincidunt tellus, a mattis ex. Praesent faucibus nisl a dolor tincidunt, sit amet sagittis orci ultricies. Cras eleifend justo in faucibus auctor. Suspendisse vel nulla porta, condimentum orci sed, volutpat turpis. Nunc id pellentesque felis.",
     comments: [
       {
         name: "John Smith",
@@ -153,7 +154,7 @@ const blogPostDummyData = [
     lastUpdated: "5 minutes ago",
     imageUrl: "https://i.pravatar.cc/150?img=7",
     content:
-      "Vestibulum condimentum purus eu quam tempor, a lacinia justo aliquet. Nam tincidunt nisl at consectetur cursus.",
+      "Nunc vitae ex malesuada, euismod leo vitae, aliquam mauris. Vestibulum aliquam convallis blandit. Ut non suscipit nulla. Etiam consequat dapibus nunc, in pellentesque urna pellentesque a. Sed suscipit scelerisque efficitur. Pellentesque malesuada, nisl eget elementum hendrerit, quam elit commodo tortor, in euismod nunc ligula sit amet tellus. Duis blandit purus ligula, vel fringilla neque hendrerit at. Curabitur molestie finibus pharetra. Aenean ut efficitur diam, at faucibus lectus. Praesent dictum fringilla erat, vitae dapibus magna ornare ac. Sed nec nisi sem. Phasellus finibus, augue vel ornare imperdiet, arcu risus faucibus libero, sit amet tincidunt est quam a leo. Suspendisse eu nulla auctor, ultrices velit a, porttitor quam. Cras leo nibh, fermentum ullamcorper venenatis at, elementum id mauris.",
     comments: [
       {
         name: "David Kim",
@@ -197,7 +198,7 @@ const blogPostDummyData = [
     lastUpdated: "15 minutes ago",
     imageUrl: "https://i.pravatar.cc/150?img=9",
     content:
-      "Vestibulum at consequat nulla. Fusce scelerisque ullamcorper dui, eget egestas nisl faucibus sit amet.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur id erat lacus. Praesent sodales semper libero nec rutrum. Ut varius augue ipsum, sit amet convallis neque mattis nec. Mauris imperdiet sem at libero dignissim pharetra. Curabitur ac volutpat ex. Vestibulum suscipit nisi vel tempor rhoncus. Proin convallis lectus ac tristique elementum. Ut in mauris eget dui hendrerit finibus luctus ac quam. Mauris consectetur urna vel augue tempus egestas. Nunc lobortis maximus risus a feugiat. Phasellus nec hendrerit justo, ut euismod turpis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras at neque non arcu rhoncus luctus a at nulla. Vivamus egestas felis eu massa ultricies iaculis. Mauris imperdiet consequat nisi, ornare pulvinar mauris scelerisque a. Morbi semper mauris ex, ac hendrerit leo maximus a.",
     comments: [
       {
         name: "Sarah Williams",
@@ -254,17 +255,17 @@ const Home: NextPage = () => {
               </>
             )
           )}
-          </div>
-          {/* will use this later to map to the blog post cards */}
-          <div>{JSON.stringify(blogPosts.data)}</div>
-          <div className="flex flex-col items-center gap-2">
-            <p className="text-2xl ">
-              {hello.data ? hello.data.greeting : "Loading tRPC query..."}
-            </p>
-            <AuthShowcase />
-          </div>
         </div>
-      </Layout>
+        {/* will use this later to map to the blog post cards */}
+        <div>{JSON.stringify(blogPosts.data)}</div>
+        <div className="flex flex-col items-center gap-2">
+          <p className="text-2xl ">
+            {hello.data ? hello.data.greeting : "Loading tRPC query..."}
+          </p>
+          <AuthShowcase />
+        </div>
+      </div>
+    </Layout>
   );
 };
 
