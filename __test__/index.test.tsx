@@ -27,6 +27,13 @@ vi.mock("../src/utils/api", () => ({
         }),
       },
     },
+    user: {
+      currentUser: {
+        useQuery: () => ({
+          data: null
+        })
+      }
+    }
   },
 }));
 

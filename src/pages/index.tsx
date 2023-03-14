@@ -2,6 +2,7 @@ import { type NextPage } from "next";
 import { signIn, signOut, useSession } from "next-auth/react";
 
 import { api } from "../utils/api";
+import { CreateBlogPostButton } from "~/components/CreateBlogPostButton";
 import { Layout } from "../components/Layout";
 import { BlogPost } from "../components/BlogPost";
 import { Modal } from "../components/Modal";
@@ -220,6 +221,7 @@ const Home: NextPage = () => {
 
   return (
     <Layout>
+      <CreateBlogPostButton />
       <div className="flex min-h-screen flex-col content-center items-center">
         <div className="w-6/12">
           <div className="mb-6 w-full">
@@ -252,6 +254,7 @@ const Home: NextPage = () => {
               </>
             )
           )}
+          </div>
           {/* will use this later to map to the blog post cards */}
           <div>{JSON.stringify(blogPosts.data)}</div>
           <div className="flex flex-col items-center gap-2">
@@ -261,8 +264,7 @@ const Home: NextPage = () => {
             <AuthShowcase />
           </div>
         </div>
-      </div>
-    </Layout>
+      </Layout>
   );
 };
 
