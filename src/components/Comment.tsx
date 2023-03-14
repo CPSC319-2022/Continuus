@@ -14,7 +14,7 @@ export const Comment: React.FC<CommentProps> = ({
   return (
     <>
       <div>
-        <hr className="my-4 h-px border-gray-500" />
+        <hr className="my-4 mx-[-20px] h-px border-gray-200" />
       </div>
       <div>
         <div className="flex">
@@ -23,12 +23,12 @@ export const Comment: React.FC<CommentProps> = ({
               <img src={commenterAvatarUrl} alt="avatar" />
             </div>
           </div>
-            <div className="ml-3">
-              <p className="text-lg font-bold">{commenterName}</p>
-              <p className="text-sm text-slate-400">{dateAdded}</p>
-            </div>
+          <div className="ml-3">
+            <p className="text-lg font-bold">{commenterName}</p>
+            <p className="text-sm text-slate-400">{dateAdded}</p>
+          </div>
         </div>
-        <p className="mt-4">{comment}</p>
+        <p className="mt-4 w-full">{comment}</p>
       </div>
     </>
   );

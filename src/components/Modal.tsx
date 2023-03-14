@@ -84,20 +84,30 @@ export const Modal: React.FC<ModalProps> = ({
               />
             ))}
           </div>
-          <div className="m-[2rem]">
+          <div className="m-[2rem] mx-0 mb-0">
             <input
               type="text"
               placeholder="Write a new comment"
               className="w-5xl input-bordered input w-full"
             />
-            <button
-              className="btn mt-[0.5rem]"
-              onClick={(event) => {
-                console.log("Add comment button clicked!");
-              }}
-            >
-              Post
-            </button>
+            <div className="mb-[-10px] flex justify-end gap-2">
+              <button
+                className="mt-[0.5rem] h-10 rounded-sm border-highlight-green bg-highlight-green px-5 text-black"
+                onClick={(event) => {
+                  console.log("Add comment button clicked!");
+                }}
+              >
+                Post
+              </button>
+              <button
+                className="mt-[0.5rem] h-10 rounded-sm border-[2px] border-slate-200 bg-white px-5 text-black"
+                onClick={(event) => {
+                  console.log("Add comment button clicked!");
+                }}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         </label>
       </label>
