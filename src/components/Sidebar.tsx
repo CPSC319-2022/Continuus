@@ -1,30 +1,65 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
-type Page = "blog" | "profile";
+interface NavItemProps {
+  path: string;
+  currentPath: string;
+  title: string;
+  callback: Dispatch<SetStateAction<string>>;
+}
+
+const NavItem: React.FC<NavItemProps> = ({
+  path,
+  currentPath,
+  title,
+  callback,
+}) => {
+  return (
+    <div
+      className="my-2 flex h-12 rounded-md hover:cursor-pointer hover:bg-slate-200"
+      onClick={() => callback(path)}
+    >
+      {path === currentPath && (
+        <div className="absolute mr-1 h-10 w-[5px] self-center rounded-md bg-highlight-green" />
+      )}
+      <p className={`ml-3 self-center`}>{title}</p>
+    </div>
+  );
+};
+
+const navigationItems: { title: string; path: string }[] = [
+  {
+    title: "Blog Feed",
+    path: "/",
+  },
+  {
+    title: "Profile",
+    path: "/profile",
+  },
+  {
+    title: "Settings",
+    path: "/settings",
+  },
+  {
+    title: "Admin Panel",
+    path: "/admin",
+  },
+];
 
 export const Sidebar: React.FC = () => {
-  const [page, setPage] = useState<Page>("blog");
+  const [currentPath, setCurrentPath] = useState<string>("/");
 
   return (
     <div className="absolute z-0 ml-5 mt-5 w-64 flex-col">
-      <div
-        className="my-7 flex hover:cursor-pointer"
-        onClick={() => setPage("blog")}
-      >
-        {page === "blog" && (
-          <div className="absolute mr-1 h-10 w-[5px] self-center rounded-md bg-highlight-green" />
-        )}
-        <p className={`ml-3 self-center`}>Blog Feed</p>
-      </div>
-      <div
-        className="my-7 flex hover:cursor-pointer"
-        onClick={() => setPage("profile")}
-      >
-        {page === "profile" && (
-          <div className="absolute mr-1 h-10 w-[5px] self-center rounded-md bg-highlight-green" />
-        )}
-        <p className={`ml-3 self-center`}>Profile</p>
-      </div>
+      {navigationItems.map(({ title, path }) => (
+        <div key={path}>
+          <NavItem
+            path={path}
+            currentPath={currentPath}
+            title={title}
+            callback={setCurrentPath}
+          />
+        </div>
+      ))}
     </div>
   );
 };
