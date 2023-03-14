@@ -7,18 +7,26 @@ import { Layout } from "../components/Layout";
 import { BlogPost } from "../components/BlogPost";
 import { Modal } from "../components/Modal";
 import { blogPostDummyData } from "~/fixtures/blogData";
+import { useEffect, useState } from "react";
 
 const Home: NextPage = () => {
+  const [view, setView] = useState<string>("Recent");
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
   const blogPosts = api.blogPost.get.useQuery({});
 
+  useEffect(() => {
+    console.log(`Switched to ${view}`);
+  }, [view]);
+
   return (
     <Layout>
-      <CreateBlogPostButton />
       <div className="flex min-h-screen flex-col content-center items-center">
         <div className="w-6/12">
-          <div className="mb-6 w-full">
-            <select className="select float-right w-full max-w-xs">
+          <div className="mb-6 flex w-full justify-end">
+            <select
+              className="h-8 w-64 max-w-xs border-b-2 bg-white"
+              onChange={(e) => setView(e.target.value)}
+            >
               <option>Recent</option>
               <option>Popular</option>
             </select>
@@ -57,6 +65,7 @@ const Home: NextPage = () => {
           <AuthShowcase />
         </div>
       </div>
+      <CreateBlogPostButton />
     </Layout>
   );
 };

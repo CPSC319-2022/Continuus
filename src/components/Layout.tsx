@@ -3,7 +3,6 @@ import type { PropsWithChildren } from "react";
 import { Navbar } from "./Navbar";
 
 export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
-
   return (
     <>
       <Head>
@@ -12,10 +11,7 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
       <nav>
         <Navbar />
       </nav>
-      <main>
-        {children}
-      </main>
+      <main className="mt-8">{children}</main>
     </>
   );
 };
-
