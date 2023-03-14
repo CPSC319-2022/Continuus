@@ -1,6 +1,9 @@
 import { Comment } from "./Comment";
 import React, { useState } from "react";
 import { MenuIcon } from "~/icons/Menu";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import remarkSlug from "remark-slug";
 
 export interface ModalProps {
   id: number;
@@ -75,7 +78,11 @@ export const Modal: React.FC<ModalProps> = ({
               </div>
             </div>
           </div>
-          <p>{post}</p>
+        <div className="prose max-w-none ">
+          <ReactMarkdown remarkPlugins={[remarkGfm, remarkSlug]}>
+            {post}
+          </ReactMarkdown>
+        </div>
           <div className="self-end">
             <p className="btn-link text-highlight-green no-underline hover:no-underline">
               {comments.length} Comments
