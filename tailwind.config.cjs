@@ -2,7 +2,14 @@
 module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    fontFamily: {
+      sans: ["Work Sans"],
+    },
+    extend: {
+      colors: {
+        "highlight-green": "#31efb8",
+      },
+    },
   },
-  plugins: [],
+  plugins: [require("daisyui"), require('@tailwindcss/typography')],
 };
