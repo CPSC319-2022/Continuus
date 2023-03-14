@@ -1,4 +1,5 @@
 import { CreateBlogPostButton } from "./CreateBlogPostButton";
+import { CreateBlogPostForm } from "./CreateBlogPostForm";
 import { CreateBlogPostModal } from "./CreateBlogPostModal";
 import { useState } from "react";
 
@@ -10,6 +11,9 @@ export const CreateBlogPostWidget: React.FC = () => {
         <>
             <CreateBlogPostButton onClick={() => setModalOpen(true)} />
             <CreateBlogPostModal isOpen={isModalOpen} onRequestClose={() => setModalOpen(false)}>
+                <CreateBlogPostForm
+                    onSubmit={(fieldValues) => console.log(fieldValues)}
+                />
             </CreateBlogPostModal>
         </>
     );
