@@ -4,6 +4,7 @@ interface BlogPostProps {
   id: number;
   name: string;
   lastUpdated: string;
+  title: string;
   content: string;
   imageUrl: string;
   comments: number;
@@ -13,6 +14,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
   id,
   name,
   lastUpdated,
+  title,
   content,
   imageUrl,
   comments,
@@ -51,7 +53,8 @@ export const BlogPost: React.FC<BlogPostProps> = ({
             </div>
           </div>
         </div>
-        <p>{content}</p>
+        <p className="mb-3 text-xl font-bold">{title}</p>
+        <p>{content.length > 500 ? `${content.slice(0, 499)}...` : content}</p>
         <div className="self-end ">
           <label
             htmlFor={`modal-${id}`}

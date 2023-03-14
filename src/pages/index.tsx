@@ -32,12 +32,13 @@ const Home: NextPage = () => {
             </select>
           </div>
           {blogPostDummyData.map(
-            ({ id, name, lastUpdated, imageUrl, content, comments }) => (
+            ({ id, name, title, lastUpdated, imageUrl, content, comments }) => (
               <>
                 <div key={id} className="mb-6">
                   <BlogPost
                     id={id}
                     name={name}
+                    title={title}
                     lastUpdated={lastUpdated}
                     imageUrl={imageUrl}
                     content={content}
