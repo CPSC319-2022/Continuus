@@ -69,18 +69,18 @@ model VerificationToken {
 }
 
 model BlogPost {
-    id      String @id @default(cuid())
-    userId  String
-    title   String
-    content String
-    user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+    id          String @id @default(cuid())
+    userId      String
+    title       String
+    content     String
+    user        User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+    comments    Comment[]
 }
 
-model Comment{
+model Comment {
     id      String @id @default(cuid())
     content String
     user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
 }
 
 enum Role {
