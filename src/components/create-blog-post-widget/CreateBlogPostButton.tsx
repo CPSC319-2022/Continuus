@@ -74,7 +74,7 @@ export const CreateBlogPostButton: React.FC<{ onClick?: () => void }> = ({ onCli
                 <button
                     onMouseEnter={() => setHovered(true)}
                     onMouseLeave={() => setHovered(false)}
-                    onClick={onClick}
+                    onClick={() => isAuthorized && onClick?.()}
                     className={`
             ${isAuthorized ? enabledRoleClassNames : disabledRoleClassNames} 
             aspect-square 
