@@ -112,14 +112,15 @@ export const Modal: React.FC<ModalProps> = ({
               >
                 Post
               </button>
-              <button
-                className="mt-[0.5rem] h-10 rounded-sm border-[2px] border-slate-200 bg-white px-5 text-black"
+              <label
+                className="mt-[0.5rem] h-10 rounded-sm border-[2px] border-slate-200 bg-white p-[0.38rem] px-5 text-center text-black"
+                htmlFor={`modal-${id}`}
                 onClick={(event) => {
                   console.log("Cancel comment button clicked!");
                 }}
               >
                 Cancel
-              </button>
+              </label>
             </div>
           </div>
         </label>
