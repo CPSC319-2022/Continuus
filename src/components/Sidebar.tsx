@@ -1,4 +1,5 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { useRouter } from "next/router";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 interface NavItemProps {
   path: string;
@@ -47,6 +48,14 @@ const navigationItems: { title: string; path: string }[] = [
 
 export const Sidebar: React.FC = () => {
   const [currentPath, setCurrentPath] = useState<string>("/");
+
+  // returns the path of the current page
+  const { asPath } = useRouter();
+
+  // logs the path of the current page whenever it changes
+  useEffect(() => {
+    console.log(`I'm on the ${asPath} route`);
+  }, [asPath]);
 
   return (
     <div className="absolute z-0 ml-5 mt-5 w-40 flex-col">
