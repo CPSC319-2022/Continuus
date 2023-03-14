@@ -25,13 +25,13 @@ export const Modal: React.FC<ModalProps> = ({
 }) => {
   const [input, setInput] = useState<string>("");
 
-  const handleChange = (event: {
+  const handleCommentChange = (event: {
     target: { value: React.SetStateAction<string> };
   }) => {
     setInput(event.target.value);
   };
 
-  const handleClick = () => {
+  const handlePostButtonClick = () => {
     console.log(`User comment: ${input}`);
   };
 
@@ -101,21 +101,21 @@ export const Modal: React.FC<ModalProps> = ({
             <input
               type="text"
               placeholder="Write a new comment"
+              value={input}
+              onChange={handleCommentChange}
               className="w-5xl input-bordered mb-1 w-full rounded-sm border-[1px] p-2"
             />
             <div className="mb-[-10px] flex justify-end gap-2">
               <button
                 className="mt-[0.5rem] h-10 rounded-sm border-highlight-green bg-highlight-green px-5 text-black"
-                onClick={(event) => {
-                  console.log("Add comment button clicked!");
-                }}
+                onClick={handlePostButtonClick}
               >
                 Post
               </button>
               <button
                 className="mt-[0.5rem] h-10 rounded-sm border-[2px] border-slate-200 bg-white px-5 text-black"
                 onClick={(event) => {
-                  console.log("Add comment button clicked!");
+                  console.log("Cancel comment button clicked!");
                 }}
               >
                 Cancel
