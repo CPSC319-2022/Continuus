@@ -40,7 +40,7 @@ export const Modal: React.FC<ModalProps> = ({
       <input type="checkbox" id={`modal-${id}`} className="modal-toggle" />
       <label htmlFor={`modal-${id}`} className="modal cursor-pointer">
         <label
-          className="card-body modal-box relative m-[-10px] w-11/12 max-w-5xl"
+          className="card-body modal-box relative m-[-10px] w-11/12 max-w-5xl rounded-md"
           htmlFor=""
         >
           <div className="mb-3 flex w-full justify-between">
@@ -52,7 +52,7 @@ export const Modal: React.FC<ModalProps> = ({
               </div>
               <div className="ml-3">
                 <p className="text-lg font-bold">{poster}</p>
-                <p className="text-sm">{lastUpdated}</p>
+                <p className="text-sm text-slate-400">{lastUpdated}</p>
               </div>
             </div>
             <div className="self-center">
@@ -82,11 +82,10 @@ export const Modal: React.FC<ModalProps> = ({
           </div>
           <p>{post}</p>
           <div className="self-end">
-            <p className="btn-link no-underline hover:no-underline">
+            <p className="btn-link text-highlight-green no-underline hover:no-underline">
               {comments.length} Comments
             </p>
           </div>
-
           <div>
             {comments.map(({ name, comment, dateAdded, imageUrl }) => (
               <Comment
@@ -98,17 +97,30 @@ export const Modal: React.FC<ModalProps> = ({
               />
             ))}
           </div>
-          <div className="m-[2rem]">
+          <div className="m-[2rem] mx-0 mb-0">
             <input
               type="text"
               placeholder="Write a new comment"
-              value={input}
-              className="w-5xl input-bordered input w-full"
-              onChange={handleChange}
+              className="w-5xl input-bordered mb-1 w-full rounded-sm border-[1px] p-2"
             />
-            <button className="btn mt-[0.5rem]" onClick={handleClick}>
-              Post
-            </button>
+            <div className="mb-[-10px] flex justify-end gap-2">
+              <button
+                className="mt-[0.5rem] h-10 rounded-sm border-highlight-green bg-highlight-green px-5 text-black"
+                onClick={(event) => {
+                  console.log("Add comment button clicked!");
+                }}
+              >
+                Post
+              </button>
+              <button
+                className="mt-[0.5rem] h-10 rounded-sm border-[2px] border-slate-200 bg-white px-5 text-black"
+                onClick={(event) => {
+                  console.log("Add comment button clicked!");
+                }}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         </label>
       </label>
