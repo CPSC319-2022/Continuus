@@ -1,4 +1,7 @@
 import { MenuIcon } from "~/icons/Menu";
+import { ReactMarkdown } from "react-markdown/lib/react-markdown";
+import remarkGfm from "remark-gfm";
+import remarkSlug from "remark-slug";
 
 interface BlogPostProps {
   id: number;
@@ -9,6 +12,16 @@ interface BlogPostProps {
   imageUrl: string;
   comments: number;
 }
+
+const markdownString = `
+# Hello, World!
+
+This is a sample markdown string.
+
+- List item 1
+- List item 2
+- List item 3
+`;
 
 export const BlogPost: React.FC<BlogPostProps> = ({
   id,
@@ -54,7 +67,11 @@ export const BlogPost: React.FC<BlogPostProps> = ({
           </div>
         </div>
         <p className="mb-3 text-xl font-bold">{title}</p>
-        <p>{content.length > 500 ? `${content.slice(0, 499)}...` : content}</p>
+        <div className="prose max-w-none ">
+          <ReactMarkdown remarkPlugins={[remarkGfm, remarkSlug]}>
+            {content.length > 500 ? `${content.slice(0, 499)}...` : content}
+          </ReactMarkdown>
+        </div>
         <div className="self-end ">
           <label
             htmlFor={`modal-${id}`}
