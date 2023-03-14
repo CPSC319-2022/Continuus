@@ -1,6 +1,7 @@
 import { configDefaults, defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import { loadEnvConfig } from "@next/env";
+import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig(() => {
@@ -16,6 +17,11 @@ export default defineConfig(() => {
       environment: "jsdom",
       coverage: {
         exclude: [...configDefaults.coverage.exclude!, "**/generated/**", "src/env"]
+      },
+    },
+    resolve: {
+      alias: {
+        '~': path.resolve(__dirname, './src')
       },
     },
   }
