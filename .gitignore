@@ -23,7 +23,10 @@ next-env.d.ts
 # misc
 .DS_Store
 *.pem
+<<<<<<< HEAD
 **/*.swp
+=======
+>>>>>>> 21a1415582b8359917ccfe9ec7ce44b791c04e15
 
 # debug
 npm-debug.log*

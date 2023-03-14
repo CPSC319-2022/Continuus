@@ -1,5 +1,9 @@
 import { Menu, MenuButton, MenuItem } from "@szhsin/react-menu";
+<<<<<<< HEAD
 import { signIn, useSession, signOut } from "next-auth/react";
+=======
+import { signIn, useSession } from "next-auth/react";
+>>>>>>> 21a1415582b8359917ccfe9ec7ce44b791c04e15
 import Image from 'next/image';
 import btn_google from '../../public/btn_google.png'
 
