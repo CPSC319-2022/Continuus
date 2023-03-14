@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { api } from "~/utils/api";
 
 interface NavItemProps {
   path: string;
@@ -8,24 +9,30 @@ interface NavItemProps {
   title: string;
 }
 
-const navigationItems: { title: string; path: string }[] = [
+const navigationItems: {
+  title: string;
+  path: string;
+  authenticated: boolean;
+  adminOnly: boolean;
+}[] = [
   {
     title: "Blog Feed",
     path: "/",
+    authenticated: false,
+    adminOnly: false,
   },
   {
     title: "Profile",
     path: "/profile",
+    authenticated: true,
+    adminOnly: false,
   },
-  // if we want to add more pages, just add them like this
-  // {
-  //   title: "Settings",
-  //   path: "/settings",
-  // },
-  // {
-  //   title: "Admin Panel",
-  //   path: "/admin",
-  // },
+  {
+    title: "Admin Panel",
+    path: "/admin",
+    authenticated: true,
+    adminOnly: true,
+  },
 ];
 
 const NavItem: React.FC<NavItemProps> = ({ path, currentPath, title }) => {
@@ -40,17 +47,24 @@ const NavItem: React.FC<NavItemProps> = ({ path, currentPath, title }) => {
 };
 
 export const Sidebar: React.FC = () => {
-  // returns the path of the current page
+  const [navItems, setNavItems] = useState(navigationItems);
+
+  const { data: userData } = api.user.currentUser.useQuery();
   const { asPath } = useRouter();
 
-  // logs the path of the current page whenever it changes
   useEffect(() => {
-    console.log(`I'm on the ${asPath} route`);
-  }, [asPath]);
+    setNavItems(
+      navigationItems.filter((e) => {
+        if (!userData) return !e.authenticated;
+        if (userData?.role !== "ADMIN") return !e.adminOnly;
+        return true;
+      })
+    );
+  }, [userData]);
 
   return (
     <div className="absolute z-0 ml-5 mt-5 w-40 flex-col">
-      {navigationItems.map(({ title, path }) => (
+      {navItems.map(({ title, path }) => (
         <Link href={path} key={path}>
           <NavItem path={path} currentPath={asPath} title={title} />
         </Link>
