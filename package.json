@@ -12,11 +12,7 @@
     "lint": "next lint",
     "start": "next start",
     "test": "vitest run",
-    "cov": "vitest run --coverage",
-    "db-seed": "NODE_ENV=development prisma db seed"
-  },
-  "prisma": {
-    "seed": "tsx prisma/seed.ts"
+    "cov": "vitest run --coverage"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.5",
