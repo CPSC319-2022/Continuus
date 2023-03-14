@@ -49,7 +49,7 @@ export const Sidebar: React.FC = () => {
   const [currentPath, setCurrentPath] = useState<string>("/");
 
   return (
-    <div className="absolute z-0 ml-5 mt-5 w-64 flex-col">
+    <div className="absolute z-0 ml-5 mt-5 w-40 flex-col">
       {navigationItems.map(({ title, path }) => (
         <div key={path}>
           <NavItem
