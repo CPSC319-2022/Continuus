@@ -36,8 +36,9 @@ model Account {
     id_token            String?
     session_state       String?
     user                User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-    createdAt DateTime  @default(now()) @db.Timestamptz(3) // with a timezone
-    updatedAt DateTime  @updatedAt @db.Timestamptz(3) // with a timezone
+    createdAt           DateTime  @default(now()) @db.Timestamptz(3) // with a timezone
+    // @updatedAt flag automatically updates this field
+    updatedAt           DateTime  @updatedAt @db.Timestamptz(3) // with a timezone
 
     @@unique([provider, providerAccountId])
 }
@@ -59,9 +60,10 @@ model User {
     role            Role       @default(READER)
     accounts        Account[]
     sessions        Session[]
-    BlogPost        BlogPost[]
-    Comment         Comment[]
+    blogPost        BlogPost[]
+    comment         Comment[]
     createdAt       DateTime  @default(now()) @db.Timestamptz(3) // with a timezone
+    // @updatedAt flag automatically updates this field
     updatedAt       DateTime  @updatedAt @db.Timestamptz(3) // with a timezone
 }
 
@@ -92,7 +94,7 @@ model Comment {
     content     String
     // If we delete the user or the associated blog post, we want to delete the Comment
     user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-    BlogPost    BlogPost    @relation(fields: [blogPostId], references: [id], onDelete: Cascade)
+    blogPost    BlogPost    @relation(fields: [blogPostId], references: [id], onDelete: Cascade)
     createdAt   DateTime    @default(now()) @db.Timestamptz(3) // with a timezone
     updatedAt   DateTime    @updatedAt @db.Timestamptz(3) // with a timezone
 
