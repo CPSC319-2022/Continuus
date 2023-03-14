@@ -13,7 +13,11 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
         <Navbar />
       </nav>
       <Sidebar />
-      <main className="mt-8">{children}</main>
+      <main className="mt-8">
+        <div className="flex min-h-screen flex-col content-center items-center">
+          <div className="w-6/12">{children}</div>
+        </div>
+      </main>
     </>
   );
 };

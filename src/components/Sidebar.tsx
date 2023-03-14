@@ -1,31 +1,12 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect } from "react";
 
 interface NavItemProps {
   path: string;
   currentPath: string;
   title: string;
-  callback: Dispatch<SetStateAction<string>>;
 }
-
-const NavItem: React.FC<NavItemProps> = ({
-  path,
-  currentPath,
-  title,
-  callback,
-}) => {
-  return (
-    <div
-      className="my-2 flex h-12 rounded-md hover:cursor-pointer hover:bg-slate-200"
-      onClick={() => callback(path)}
-    >
-      {path === currentPath && (
-        <div className="absolute mr-1 h-10 w-[5px] self-center rounded-md bg-highlight-green" />
-      )}
-      <p className={`ml-3 self-center`}>{title}</p>
-    </div>
-  );
-};
 
 const navigationItems: { title: string; path: string }[] = [
   {
@@ -36,19 +17,29 @@ const navigationItems: { title: string; path: string }[] = [
     title: "Profile",
     path: "/profile",
   },
-  {
-    title: "Settings",
-    path: "/settings",
-  },
-  {
-    title: "Admin Panel",
-    path: "/admin",
-  },
+  // if we want to add more pages, just add them like this
+  // {
+  //   title: "Settings",
+  //   path: "/settings",
+  // },
+  // {
+  //   title: "Admin Panel",
+  //   path: "/admin",
+  // },
 ];
 
-export const Sidebar: React.FC = () => {
-  const [currentPath, setCurrentPath] = useState<string>("/");
+const NavItem: React.FC<NavItemProps> = ({ path, currentPath, title }) => {
+  return (
+    <div className="my-2 flex h-12 rounded-md hover:cursor-pointer hover:bg-slate-200">
+      {path === currentPath && (
+        <div className="absolute mr-1 h-10 w-[5px] self-center rounded-md bg-highlight-green" />
+      )}
+      <p className={`ml-3 self-center`}>{title}</p>
+    </div>
+  );
+};
 
+export const Sidebar: React.FC = () => {
   // returns the path of the current page
   const { asPath } = useRouter();
 
@@ -60,14 +51,9 @@ export const Sidebar: React.FC = () => {
   return (
     <div className="absolute z-0 ml-5 mt-5 w-40 flex-col">
       {navigationItems.map(({ title, path }) => (
-        <div key={path}>
-          <NavItem
-            path={path}
-            currentPath={currentPath}
-            title={title}
-            callback={setCurrentPath}
-          />
-        </div>
+        <Link href={path} key={path}>
+          <NavItem path={path} currentPath={asPath} title={title} />
+        </Link>
       ))}
     </div>
   );
