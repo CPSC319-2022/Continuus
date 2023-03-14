@@ -1,9 +1,9 @@
 import Head from "next/head";
 import type { PropsWithChildren } from "react";
 import { Navbar } from "./Navbar";
+import { Sidebar } from "./Sidebar";
 
 export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
-
   return (
     <>
       <Head>
@@ -12,10 +12,12 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
       <nav>
         <Navbar />
       </nav>
-      <main>
-        {children}
+      <Sidebar />
+      <main className="mt-8">
+        <div className="flex min-h-screen flex-col content-center items-center">
+          <div className="w-6/12">{children}</div>
+        </div>
       </main>
     </>
   );
 };
-

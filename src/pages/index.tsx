@@ -1,57 +1,69 @@
 import { type NextPage } from "next";
-import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 
 import { api } from "../utils/api";
 import { CreateBlogPostButton } from "~/components/CreateBlogPostButton";
 import { Layout } from "../components/Layout";
+import { BlogPost } from "../components/BlogPost";
+import { Modal } from "../components/Modal";
+import { blogPostDummyData } from "~/fixtures/blogData";
+import { useEffect, useState } from "react";
 
 const Home: NextPage = () => {
+  const [view, setView] = useState<string>("Recent");
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
+  const blogPosts = api.blogPost.get.useQuery({});
+
+  useEffect(() => {
+    console.log(`Switched to ${view}`);
+  }, [view]);
 
   return (
-    <>
+    <Layout>
+      <div className="mb-6 flex w-full justify-end">
+        <select
+          className="h-8 w-64 max-w-xs border-b-2 bg-white"
+          onChange={(e) => setView(e.target.value)}
+        >
+          <option>Recent</option>
+          <option>Popular</option>
+        </select>
+      </div>
+      {blogPostDummyData.map(
+        ({ id, name, title, lastUpdated, imageUrl, content, comments }) => (
+          <>
+            <div key={id} className="mb-6">
+              <BlogPost
+                id={id}
+                name={name}
+                title={title}
+                lastUpdated={lastUpdated}
+                imageUrl={imageUrl}
+                content={content}
+                comments={comments.length}
+              />
+            </div>
+            <Modal
+              id={id}
+              comments={comments}
+              poster={name}
+              lastUpdated={lastUpdated}
+              post={content}
+              posterAvatarUrl={imageUrl}
+            />
+          </>
+        )
+      )}
+      {/* will use this later to map to the blog post cards */}
+      {/* <div>{JSON.stringify(blogPosts.data)}</div> */}
+      <div className="flex flex-col items-center gap-2">
+        <p className="text-2xl ">
+          {hello.data ? hello.data.greeting : "Loading tRPC query..."}
+        </p>
+        <AuthShowcase />
+      </div>
       <CreateBlogPostButton />
-      <Layout>
-        <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]">
-          <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-            <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-              Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
-            </h1>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-              <Link
-                className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-                href="https://create.t3.gg/en/usage/first-steps"
-                target="_blank"
-              >
-                <h3 className="text-2xl font-bold">First Steps →</h3>
-                <div className="text-lg">
-                  Just the basics - Everything you need to know to set up your
-                  database and authentication.
-                </div>
-              </Link>
-              <Link
-                className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-                href="https://create.t3.gg/en/introduction"
-                target="_blank"
-              >
-                <h3 className="text-2xl font-bold">Documentation →</h3>
-                <div className="text-lg">
-                  Learn more about Create T3 App, the libraries it uses, and how
-                  to deploy it.
-                </div>
-              </Link>
-            </div>
-            <div className="flex flex-col items-center gap-2">
-              <p className="text-2xl text-white">
-                {hello.data ? hello.data.greeting : "Loading tRPC query..."}
-              </p>
-              <AuthShowcase />
-            </div>
-          </div>
-        </div>
-      </Layout>
-    </>
+    </Layout>
   );
 };
 
@@ -62,17 +74,17 @@ const AuthShowcase: React.FC = () => {
 
   const { data: secretMessage } = api.example.getSecretMessage.useQuery(
     undefined, // no input
-    { enabled: sessionData?.user !== undefined },
+    { enabled: sessionData?.user !== undefined }
   );
 
   return (
     <div className="flex flex-col items-center justify-center gap-4">
-      <p className="text-center text-2xl text-white">
+      <p className="text-center text-2xl ">
         {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
         {secretMessage && <span> - {secretMessage}</span>}
       </p>
       <button
-        className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
+        className="rounded-full bg-white/10 px-10 py-3 font-semibold  no-underline transition hover:bg-white/20"
         onClick={sessionData ? () => void signOut() : () => void signIn()}
       >
         {sessionData ? "Sign out" : "Sign in"}
