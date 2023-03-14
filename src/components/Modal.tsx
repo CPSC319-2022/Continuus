@@ -78,11 +78,11 @@ export const Modal: React.FC<ModalProps> = ({
               </div>
             </div>
           </div>
-        <div className="prose max-w-none ">
-          <ReactMarkdown remarkPlugins={[remarkGfm, remarkSlug]}>
-            {post}
-          </ReactMarkdown>
-        </div>
+          <div className="prose max-w-none ">
+            <ReactMarkdown remarkPlugins={[remarkGfm, remarkSlug]}>
+              {post}
+            </ReactMarkdown>
+          </div>
           <div className="self-end">
             <p className="btn-link text-highlight-green no-underline hover:no-underline">
               {comments.length} Comments

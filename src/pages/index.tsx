@@ -58,7 +58,7 @@ const Home: NextPage = () => {
           )}
         </div>
         {/* will use this later to map to the blog post cards */}
-        <div>{JSON.stringify(blogPosts.data)}</div>
+        {/* <div>{JSON.stringify(blogPosts.data)}</div> */}
         <div className="flex flex-col items-center gap-2">
           <p className="text-2xl ">
             {hello.data ? hello.data.greeting : "Loading tRPC query..."}
