@@ -69,9 +69,16 @@ model VerificationToken {
 }
 
 model BlogPost {
+    id          String @id @default(cuid())
+    userId      String
+    title       String
+    content     String
+    user        User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+    comments    Comment[]
+}
+
+model Comment {
     id      String @id @default(cuid())
-    userId  String
-    title   String
     content String
     user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
