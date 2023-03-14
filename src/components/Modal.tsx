@@ -39,7 +39,7 @@ export const Modal: React.FC<ModalProps> = ({
               </div>
               <div className="ml-3">
                 <p className="text-lg font-bold">{poster}</p>
-                <p className="text-sm">{lastUpdated}</p>
+                <p className="text-sm text-slate-400">{lastUpdated}</p>
               </div>
             </div>
             <div className="self-center">
@@ -69,11 +69,10 @@ export const Modal: React.FC<ModalProps> = ({
           </div>
           <p>{post}</p>
           <div className="self-end">
-            <p className="btn-link no-underline hover:no-underline">
+            <p className="btn-link text-highlight-green no-underline hover:no-underline">
               {comments.length} Comments
             </p>
           </div>
-
           <div>
             {comments.map(({ name, comment, dateAdded, imageUrl }) => (
               <Comment

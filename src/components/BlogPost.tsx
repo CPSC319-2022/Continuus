@@ -17,7 +17,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
 }) => {
   return (
     <div className="bg-base-150 card w-full rounded-md shadow-md shadow-slate-300">
-      <div className="card-body m-[-10px]">
+      <div className="card-body m-[-15px]">
         <div className="mb-3 flex w-full justify-between">
           <div className="flex">
             <div className="avatar self-center">
@@ -27,7 +27,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
             </div>
             <div className="ml-3">
               <p className="text-lg font-bold">{name}</p>
-              <p className="text-sm">{lastUpdated}</p>
+              <p className="text-sm text-slate-400">{lastUpdated}</p>
             </div>
           </div>
           <div className="self-center">
@@ -52,8 +52,8 @@ export const BlogPost: React.FC<BlogPostProps> = ({
           </div>
         </div>
         <p>{content}</p>
-        <div className="self-end">
-          <label htmlFor={`modal-${id}`} className="btn btn-link">{comments} Comments</label>
+        <div className="self-end mb-[-10px]">
+          <label htmlFor={`modal-${id}`} className="btn btn-link no-underline text-highlight-green">{comments} Comments</label>
         </div>
       </div>
     </div>
