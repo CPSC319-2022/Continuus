@@ -1,13 +1,13 @@
 import { useRef, useState } from "react";
 import { api } from "~/utils/api";
 
-export const CreateBlogPostButton: React.FC = () => {
-    const tooltipRef = useRef<HTMLDivElement>(null);
-    const { data } = api.user.currentUser.useQuery();
+export const CreateBlogPostButton: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
     const [hovered, setHovered] = useState(false);
-    const enabledRoleClassNames = "bg-green-400 hover:after:bg-green-100 hover:before:bg-green-100 hover:after:rotate-90 hover:before:-rotate-90 cursor-pointer";
+    const { data } = api.user.currentUser.useQuery();
     const disabledRoleClassNames = "bg-gray-400 cursor-not-allowed";
+    const enabledRoleClassNames = "bg-green-400 hover:after:bg-green-100 hover:before:bg-green-100 hover:after:rotate-90 hover:before:-rotate-90 cursor-pointer";
     const isAuthorized = data && ["CONTRIBUTOR", "ADMIN"].includes(data.role);
+    const tooltipRef = useRef<HTMLDivElement>(null);
 
     return (
         <>
@@ -16,7 +16,7 @@ export const CreateBlogPostButton: React.FC = () => {
                     fixed
                     top-[90%]
                     left-1/2 
-                    z-10 
+                    z-10
                     md:left-[95%] 
                     -translate-x-1/2 
                     -translate-y-1/2
@@ -74,6 +74,7 @@ export const CreateBlogPostButton: React.FC = () => {
                 <button
                     onMouseEnter={() => setHovered(true)}
                     onMouseLeave={() => setHovered(false)}
+                    onClick={onClick}
                     className={`
             ${isAuthorized ? enabledRoleClassNames : disabledRoleClassNames} 
             aspect-square 
