@@ -1,4 +1,5 @@
 import { Comment } from "./Comment";
+import React, { useState } from "react";
 
 export interface ModalProps {
   id: number;
@@ -22,6 +23,18 @@ export const Modal: React.FC<ModalProps> = ({
   posterAvatarUrl,
   comments,
 }) => {
+  const [input, setInput] = useState<string>("");
+
+  const handleChange = (event: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
+    setInput(event.target.value);
+  };
+
+  const handleClick = () => {
+    console.log(`User comment: ${input}`);
+  };
+
   return (
     <>
       <input type="checkbox" id={`modal-${id}`} className="modal-toggle" />
@@ -89,14 +102,11 @@ export const Modal: React.FC<ModalProps> = ({
             <input
               type="text"
               placeholder="Write a new comment"
+              value={input}
               className="w-5xl input-bordered input w-full"
+              onChange={handleChange}
             />
-            <button
-              className="btn mt-[0.5rem]"
-              onClick={(event) => {
-                console.log("Add comment button clicked!");
-              }}
-            >
+            <button className="btn mt-[0.5rem]" onClick={handleClick}>
               Post
             </button>
           </div>
