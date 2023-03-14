@@ -58,6 +58,7 @@ model User {
     accounts      Account[]
     sessions      Session[]
     BlogPost      BlogPost[]
+    Comment       Comment[]
 }
 
 model VerificationToken {
@@ -73,14 +74,21 @@ model BlogPost {
     userId      String
     title       String
     content     String
+    // If we delete the user, we want to delete the blog post
     user        User   @relation(fields: [userId], references: [id], onDelete: Cascade)
     comments    Comment[]
+    dateAdded   DateTime @db.Timestamptz(3) // with a timezone
 }
 
 model Comment {
-    id      String @id @default(cuid())
-    content String
-    user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+    id          String @id @default(cuid())
+    userId      String
+    blogPostId  String
+    content     String
+    // If we delete the user or the associated blog post, we want to delete the Comment
+    user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+    BlogPost    BlogPost    @relation(fields: [blogPostId], references: [id], onDelete: Cascade)
+    dateAdded   DateTime @db.Timestamptz(3) // with a timezone
 }
 
 enum Role {
