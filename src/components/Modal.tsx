@@ -27,7 +27,7 @@ export const Modal: React.FC<ModalProps> = ({
       <input type="checkbox" id={`modal-${id}`} className="modal-toggle" />
       <label htmlFor={`modal-${id}`} className="modal cursor-pointer">
         <label
-          className="card-body modal-box relative m-[-10px] w-11/12 max-w-5xl"
+          className="card-body modal-box relative m-[-10px] w-11/12 max-w-5xl rounded-md"
           htmlFor=""
         >
           <div className="mb-3 flex w-full justify-between">
@@ -88,7 +88,7 @@ export const Modal: React.FC<ModalProps> = ({
             <input
               type="text"
               placeholder="Write a new comment"
-              className="w-5xl input-bordered input w-full"
+              className="w-5xl input-bordered mb-1 w-full rounded-sm border-[1px] p-2"
             />
             <div className="mb-[-10px] flex justify-end gap-2">
               <button
