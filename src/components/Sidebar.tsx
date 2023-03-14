@@ -9,12 +9,14 @@ interface NavItemProps {
   title: string;
 }
 
-const navigationItems: {
+interface NavItemFields {
   title: string;
   path: string;
   authenticated: boolean;
   adminOnly: boolean;
-}[] = [
+}
+
+const navigationItems: NavItemFields[] = [
   {
     title: "Blog Feed",
     path: "/",
@@ -47,7 +49,7 @@ const NavItem: React.FC<NavItemProps> = ({ path, currentPath, title }) => {
 };
 
 export const Sidebar: React.FC = () => {
-  const [navItems, setNavItems] = useState(navigationItems);
+  const [navItems, setNavItems] = useState<NavItemFields[]>([]);
 
   const { data: userData } = api.user.currentUser.useQuery();
   const { asPath } = useRouter();
