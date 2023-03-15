@@ -6,12 +6,11 @@ import { CreateBlogPostButton } from "~/components/CreateBlogPostButton";
 import { Layout } from "../components/Layout";
 import { BlogPost } from "../components/BlogPost";
 import { Modal } from "../components/Modal";
-import { blogPostDummyData } from "~/fixtures/blogData";
 import { useEffect, useState } from "react";
+import type { User, Comment } from "@prisma/client";
 
 const Home: NextPage = () => {
   const [view, setView] = useState<string>("Recent");
-  const hello = api.example.hello.useQuery({ text: "from tRPC" });
   const blogPosts = api.blogPost.get.useQuery({});
 
   useEffect(() => {
@@ -29,39 +28,48 @@ const Home: NextPage = () => {
           <option>Popular</option>
         </select>
       </div>
-      {blogPostDummyData.map(
-        ({ id, name, title, lastUpdated, imageUrl, content, comments }) => (
-          <>
-            <div key={id} className="mb-6">
-              <BlogPost
-                id={id}
-                name={name}
-                title={title}
-                lastUpdated={lastUpdated}
-                imageUrl={imageUrl}
-                content={content}
-                comments={comments.length}
-              />
-            </div>
-            <Modal
-              id={id}
-              comments={comments}
-              poster={name}
-              lastUpdated={lastUpdated}
-              post={content}
-              posterAvatarUrl={imageUrl}
-            />
-          </>
-        )
-      )}
+      {blogPosts.data?.length === 0
+        ? "Nothing to see here"
+        : blogPosts.data?.map(
+            ({
+              id,
+              title,
+              updatedAt,
+              content,
+              comments,
+              user: { name, image },
+            }) => (
+              <>
+                <div key={id} className="mb-6">
+                  <BlogPost
+                    id={id}
+                    name={name as string}
+                    title={title}
+                    lastUpdated={(updatedAt as Date).toISOString()}
+                    imageUrl={image as string}
+                    content={content}
+                    comments={(comments as Comment[]).length}
+                  />
+                </div>
+                <Modal
+                  id={id}
+                  comments={comments as (Comment & { user: User })[]}
+                  poster={name as string}
+                  lastUpdated={(updatedAt as Date).toISOString()}
+                  post={content}
+                  posterAvatarUrl={image as string}
+                />
+              </>
+            )
+          )}
       {/* will use this later to map to the blog post cards */}
       {/* <div>{JSON.stringify(blogPosts.data)}</div> */}
-      <div className="flex flex-col items-center gap-2">
+      {/* <div className="flex flex-col items-center gap-2">
         <p className="text-2xl ">
           {hello.data ? hello.data.greeting : "Loading tRPC query..."}
         </p>
         <AuthShowcase />
-      </div>
+      </div> */}
       <CreateBlogPostButton />
     </Layout>
   );

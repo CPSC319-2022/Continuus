@@ -4,19 +4,17 @@ import { MenuIcon } from "~/icons/Menu";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkSlug from "remark-slug";
+import type { Comment as CommentType, User } from "@prisma/client";
+
+type CommentEntry = CommentType & { user: User };
 
 export interface ModalProps {
-  id: number;
+  id: string;
   poster: string;
   lastUpdated: string;
   post: string;
   posterAvatarUrl: string;
-  comments: {
-    name: string;
-    comment: string;
-    dateAdded: string;
-    imageUrl: string;
-  }[];
+  comments: CommentEntry[];
 }
 
 export const Modal: React.FC<ModalProps> = ({
@@ -89,15 +87,21 @@ export const Modal: React.FC<ModalProps> = ({
             </p>
           </div>
           <div>
-            {comments.map(({ name, comment, dateAdded, imageUrl }) => (
-              <Comment
-                key={`${name}${comment}`}
-                commenterName={name}
-                commenterAvatarUrl={imageUrl}
-                dateAdded={dateAdded}
-                comment={comment}
-              />
-            ))}
+            {comments.map(
+              ({
+                content: comment,
+                createdAt: dateAdded,
+                user: { name, image },
+              }) => (
+                <Comment
+                  key={`${name as string}${comment as string}`}
+                  commenterName={name as string}
+                  commenterAvatarUrl={image as string}
+                  dateAdded={(dateAdded as Date).toISOString()}
+                  comment={comment as string}
+                />
+              )
+            )}
           </div>
           <div className="m-[2rem] mx-0 mb-0">
             <input

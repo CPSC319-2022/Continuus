@@ -4,7 +4,7 @@ import remarkGfm from "remark-gfm";
 import remarkSlug from "remark-slug";
 
 interface BlogPostProps {
-  id: number;
+  id: string;
   name: string;
   lastUpdated: string;
   title: string;
@@ -12,16 +12,6 @@ interface BlogPostProps {
   imageUrl: string;
   comments: number;
 }
-
-const markdownString = `
-# Hello, World!
-
-This is a sample markdown string.
-
-- List item 1
-- List item 2
-- List item 3
-`;
 
 export const BlogPost: React.FC<BlogPostProps> = ({
   id,
