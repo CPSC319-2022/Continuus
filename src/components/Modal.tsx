@@ -94,11 +94,11 @@ export const Modal: React.FC<ModalProps> = ({
                 user: { name, image },
               }) => (
                 <Comment
-                  key={`${name as string}${comment as string}`}
+                  key={`${name as string}${comment}`}
                   commenterName={name as string}
                   commenterAvatarUrl={image as string}
-                  dateAdded={(dateAdded as Date).toISOString()}
-                  comment={comment as string}
+                  dateAdded={dateAdded.toISOString()}
+                  comment={comment}
                 />
               )
             )}

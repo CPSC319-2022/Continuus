@@ -7,7 +7,6 @@ import { Layout } from "../components/Layout";
 import { BlogPost } from "../components/BlogPost";
 import { Modal } from "../components/Modal";
 import { useEffect, useState } from "react";
-import type { User, Comment } from "@prisma/client";
 
 const Home: NextPage = () => {
   const [view, setView] = useState<string>("Recent");
@@ -45,17 +44,17 @@ const Home: NextPage = () => {
                     id={id}
                     name={name as string}
                     title={title}
-                    lastUpdated={(updatedAt as Date).toISOString()}
+                    lastUpdated={updatedAt.toISOString()}
                     imageUrl={image as string}
                     content={content}
-                    comments={(comments as Comment[]).length}
+                    comments={comments.length}
                   />
                 </div>
                 <Modal
                   id={id}
-                  comments={comments as (Comment & { user: User })[]}
+                  comments={comments}
                   poster={name as string}
-                  lastUpdated={(updatedAt as Date).toISOString()}
+                  lastUpdated={updatedAt.toISOString()}
                   post={content}
                   posterAvatarUrl={image as string}
                 />

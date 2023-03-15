@@ -10,7 +10,7 @@
     "test:skip": "SKIP_ENV_VALIDATION=1 vitest run",
     "postinstall": "prisma generate",
     "prisma-generate": "npx prisma migrate dev",
-    "lint": "next lint",
+    "lint": "next lint --fix",
     "start": "next start",
     "test": "vitest run",
     "cov": "vitest run --coverage"
