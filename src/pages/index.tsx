@@ -1,11 +1,11 @@
 import { type NextPage } from "next";
 import { signIn, signOut, useSession } from "next-auth/react";
 
-import { api } from "../utils/api";
-import { CreateBlogPostButton } from "~/components/CreateBlogPostButton";
-import { Layout } from "../components/Layout";
-import { BlogPost } from "../components/BlogPost";
-import { Modal } from "../components/Modal";
+import { api } from "~/utils/api";
+import { Layout } from "~/components/Layout";
+import { CreateBlogPostWidget } from "~/components/create-blog-post-widget";
+import { BlogPost } from "~/components/BlogPost";
+import { Modal } from "~/components/Modal";
 import { blogPostDummyData } from "~/fixtures/blogData";
 import { useEffect, useState } from "react";
 
@@ -62,7 +62,7 @@ const Home: NextPage = () => {
         </p>
         <AuthShowcase />
       </div>
-      <CreateBlogPostButton />
+      <CreateBlogPostWidget />
     </Layout>
   );
 };
