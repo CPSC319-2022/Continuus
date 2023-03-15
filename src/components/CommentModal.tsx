@@ -5,6 +5,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkSlug from "remark-slug";
 import type { Comment as CommentType, User } from "@prisma/client";
+import { timeAgo } from "~/utils/time";
 
 type CommentEntry = CommentType & { user: User };
 
@@ -12,7 +13,7 @@ export interface ModalProps {
   id: string;
   title: string;
   poster: string;
-  lastUpdated: string;
+  lastUpdated: Date;
   post: string;
   posterAvatarUrl: string;
   comments: CommentEntry[];
@@ -56,7 +57,7 @@ export const CommentModal: React.FC<ModalProps> = ({
               </div>
               <div className="ml-3">
                 <p className="text-lg font-bold">{poster}</p>
-                <p className="text-sm text-slate-400">{lastUpdated}</p>
+                <p className="text-sm text-slate-400">{timeAgo(lastUpdated)}</p>
               </div>
             </div>
             <div className="self-center">
@@ -100,7 +101,7 @@ export const CommentModal: React.FC<ModalProps> = ({
                   key={`${name as string}${comment}`}
                   commenterName={name as string}
                   commenterAvatarUrl={image as string}
-                  dateAdded={dateAdded.toISOString()}
+                  dateAdded={dateAdded}
                   comment={comment}
                 />
               )

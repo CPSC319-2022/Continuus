@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import type { User, Comment } from "@prisma/client";
 import { CreateBlogPostButton } from "~/components/create-blog-post-widget/CreateBlogPostButton";
 import { CommentModal } from "~/components/CommentModal";
+import { CreateBlogPostWidget } from "~/components/create-blog-post-widget";
 
 const Home: NextPage = () => {
   const [view, setView] = useState<string>("Recent");
@@ -45,7 +46,7 @@ const Home: NextPage = () => {
                     id={id}
                     name={name as string}
                     title={title}
-                    lastUpdated={(updatedAt ).toISOString()}
+                    lastUpdated={updatedAt}
                     imageUrl={image as string}
                     content={content}
                     comments={(comments as Comment[]).length}
@@ -56,14 +57,14 @@ const Home: NextPage = () => {
                   title={title}
                   comments={comments as (Comment & { user: User })[]}
                   poster={name as string}
-                  lastUpdated={(updatedAt ).toISOString()}
+                  lastUpdated={updatedAt}
                   post={content}
                   posterAvatarUrl={image as string}
                 />
               </>
             )
           )}
-      <CreateBlogPostButton />
+      <CreateBlogPostWidget />
     </Layout>
   );
 };

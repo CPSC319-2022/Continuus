@@ -1,7 +1,9 @@
+import { timeAgo } from "~/utils/time";
+
 export interface CommentProps {
   commenterName: string;
   commenterAvatarUrl: string;
-  dateAdded: string;
+  dateAdded: Date;
   comment: string;
 }
 
@@ -25,7 +27,7 @@ export const Comment: React.FC<CommentProps> = ({
           </div>
           <div className="ml-3">
             <p className="text-lg font-bold">{commenterName}</p>
-            <p className="text-sm text-slate-400">{dateAdded}</p>
+            <p className="text-sm text-slate-400">{timeAgo(dateAdded)}</p>
           </div>
         </div>
         <p className="mt-4 w-full">{comment}</p>
