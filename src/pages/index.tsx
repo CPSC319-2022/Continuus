@@ -52,6 +52,7 @@ const Home: NextPage = () => {
                 </div>
                 <Modal
                   id={id}
+                  title={title}
                   comments={comments}
                   poster={name as string}
                   lastUpdated={updatedAt.toISOString()}

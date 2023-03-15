@@ -10,10 +10,11 @@
     "test:skip": "SKIP_ENV_VALIDATION=1 vitest run",
     "postinstall": "prisma generate",
     "prisma-generate": "npx prisma migrate dev",
-    "lint": "next lint --fix",
+    "lint": "next lint",
     "start": "next start",
     "test": "vitest run",
-    "cov": "vitest run --coverage"
+    "cov": "vitest run --coverage",
+    "db-seed": "NODE_ENV=development prisma db seed"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.5",

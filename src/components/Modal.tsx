@@ -10,6 +10,7 @@ type CommentEntry = CommentType & { user: User };
 
 export interface ModalProps {
   id: string;
+  title: string;
   poster: string;
   lastUpdated: string;
   post: string;
@@ -19,6 +20,7 @@ export interface ModalProps {
 
 export const Modal: React.FC<ModalProps> = ({
   id,
+  title,
   poster,
   lastUpdated,
   post,
@@ -76,6 +78,7 @@ export const Modal: React.FC<ModalProps> = ({
               </div>
             </div>
           </div>
+          <p className="mb-3 text-xl font-bold">{title}</p>
           <div className="prose max-w-none ">
             <ReactMarkdown remarkPlugins={[remarkGfm, remarkSlug]}>
               {post}
