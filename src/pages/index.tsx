@@ -2,11 +2,12 @@ import { type NextPage } from "next";
 import { signIn, signOut, useSession } from "next-auth/react";
 
 import { api } from "../utils/api";
-import { CreateBlogPostButton } from "~/components/CreateBlogPostButton";
 import { Layout } from "../components/Layout";
 import { BlogPost } from "../components/BlogPost";
-import { Modal } from "../components/Modal";
 import { useEffect, useState } from "react";
+import type { User, Comment } from "@prisma/client";
+import { CreateBlogPostButton } from "~/components/create-blog-post-widget/CreateBlogPostButton";
+import { CommentModal } from "~/components/CommentModal";
 
 const Home: NextPage = () => {
   const [view, setView] = useState<string>("Recent");
@@ -44,32 +45,24 @@ const Home: NextPage = () => {
                     id={id}
                     name={name as string}
                     title={title}
-                    lastUpdated={updatedAt.toISOString()}
+                    lastUpdated={(updatedAt ).toISOString()}
                     imageUrl={image as string}
                     content={content}
-                    comments={comments.length}
+                    comments={(comments as Comment[]).length}
                   />
                 </div>
-                <Modal
+                <CommentModal
                   id={id}
                   title={title}
-                  comments={comments}
+                  comments={comments as (Comment & { user: User })[]}
                   poster={name as string}
-                  lastUpdated={updatedAt.toISOString()}
+                  lastUpdated={(updatedAt ).toISOString()}
                   post={content}
                   posterAvatarUrl={image as string}
                 />
               </>
             )
           )}
-      {/* will use this later to map to the blog post cards */}
-      {/* <div>{JSON.stringify(blogPosts.data)}</div> */}
-      {/* <div className="flex flex-col items-center gap-2">
-        <p className="text-2xl ">
-          {hello.data ? hello.data.greeting : "Loading tRPC query..."}
-        </p>
-        <AuthShowcase />
-      </div> */}
       <CreateBlogPostButton />
     </Layout>
   );

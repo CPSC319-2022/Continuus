@@ -18,7 +18,7 @@ export interface ModalProps {
   comments: CommentEntry[];
 }
 
-export const Modal: React.FC<ModalProps> = ({
+export const CommentModal: React.FC<ModalProps> = ({
   id,
   title,
   poster,
