@@ -2,11 +2,12 @@ import { MenuIcon } from "~/icons/Menu";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkSlug from "remark-slug";
+import { timeAgo } from "~/utils/time";
 
 interface BlogPostProps {
   id: string;
   name: string;
-  lastUpdated: string;
+  lastUpdated: Date;
   title: string;
   content: string;
   imageUrl: string;
@@ -34,7 +35,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
             </div>
             <div className="ml-3">
               <p className="text-lg font-bold">{name}</p>
-              <p className="text-sm text-slate-400">{lastUpdated}</p>
+              <p className="text-sm text-slate-400">{timeAgo(lastUpdated)}</p>
             </div>
           </div>
           <div className="self-center">
