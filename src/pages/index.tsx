@@ -6,7 +6,6 @@ import { Layout } from "../components/Layout";
 import { BlogPost } from "../components/BlogPost";
 import { useEffect, useState } from "react";
 import type { User, Comment } from "@prisma/client";
-import { CreateBlogPostButton } from "~/components/create-blog-post-widget/CreateBlogPostButton";
 import { CommentModal } from "~/components/CommentModal";
 import { CreateBlogPostWidget } from "~/components/create-blog-post-widget";
 
