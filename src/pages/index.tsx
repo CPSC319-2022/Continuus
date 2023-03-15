@@ -20,47 +20,51 @@ const Home: NextPage = () => {
 
   return (
     <Layout>
-      <div className="mb-6 flex w-full justify-end">
-        <select
-          className="h-8 w-64 max-w-xs border-b-2 bg-white"
-          onChange={(e) => setView(e.target.value)}
-        >
-          <option>Recent</option>
-          <option>Popular</option>
-        </select>
-      </div>
-      {blogPostDummyData.map(
-        ({ id, name, title, lastUpdated, imageUrl, content, comments }) => (
-          <>
-            <div key={id} className="mb-6">
-              <BlogPost
-                id={id}
-                name={name}
-                title={title}
-                lastUpdated={lastUpdated}
-                imageUrl={imageUrl}
-                content={content}
-                comments={comments.length}
-              />
-            </div>
-            <Modal
-              id={id}
-              comments={comments}
-              poster={name}
-              lastUpdated={lastUpdated}
-              post={content}
-              posterAvatarUrl={imageUrl}
-            />
-          </>
-        )
-      )}
-      {/* will use this later to map to the blog post cards */}
-      {/* <div>{JSON.stringify(blogPosts.data)}</div> */}
-      <div className="flex flex-col items-center gap-2">
-        <p className="text-2xl ">
-          {hello.data ? hello.data.greeting : "Loading tRPC query..."}
-        </p>
-        <AuthShowcase />
+      <div className="flex min-h-screen flex-col content-center items-center w-full">
+        <div className="w-2/3 translate-x-[-15%]">
+          <div className="mb-6 flex w-full justify-end">
+            <select
+              className="h-8 w-64 max-w-xs border-b-2 bg-white"
+              onChange={(e) => setView(e.target.value)}
+            >
+              <option>Recent</option>
+              <option>Popular</option>
+            </select>
+          </div>
+          {blogPostDummyData.map(
+            ({ id, name, title, lastUpdated, imageUrl, content, comments }) => (
+              <>
+                <div key={id} className="mb-6">
+                  <BlogPost
+                    id={id}
+                    name={name}
+                    title={title}
+                    lastUpdated={lastUpdated}
+                    imageUrl={imageUrl}
+                    content={content}
+                    comments={comments.length}
+                  />
+                </div>
+                <Modal
+                  id={id}
+                  comments={comments}
+                  poster={name}
+                  lastUpdated={lastUpdated}
+                  post={content}
+                  posterAvatarUrl={imageUrl}
+                />
+              </>
+            )
+          )}
+          {/* will use this later to map to the blog post cards */}
+          {/* <div>{JSON.stringify(blogPosts.data)}</div> */}
+          <div className="flex flex-col items-center gap-2">
+            <p className="text-2xl ">
+              {hello.data ? hello.data.greeting : "Loading tRPC query..."}
+            </p>
+            <AuthShowcase />
+          </div>
+        </div>
       </div>
       <CreateBlogPostButton />
     </Layout>
