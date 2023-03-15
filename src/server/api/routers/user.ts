@@ -28,4 +28,11 @@ export const userRouter = createTRPCRouter({
 
       return ctx.prisma.user.findMany(input);
     }),
+  selectedUser: publicProcedure.query(async (id: string, { ctx }) => {
+        return await ctx.prisma.user.findUnique({
+            where: {
+                id: id,
+            },
+        }))
+  }),
 });

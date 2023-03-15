@@ -2,6 +2,7 @@ import { MenuIcon } from "~/icons/Menu";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkSlug from "remark-slug";
+import Link from "next/link";
 
 interface BlogPostProps {
   id: number;
@@ -39,12 +40,16 @@ export const BlogPost: React.FC<BlogPostProps> = ({
           <div className="flex">
             <div className="avatar self-center">
               <div className="h-10 w-10 rounded-full">
-                <img src={imageUrl} alt="avatar" />
+                <Link href={`/profile/${encodeURIComponent(id)}`}>
+                    <img src={imageUrl} alt="avatar"/>
+                </Link>
               </div>
             </div>
             <div className="ml-3">
-              <p className="text-lg font-bold">{name}</p>
-              <p className="text-sm text-slate-400">{lastUpdated}</p>
+                <Link href={`/profile/${encodeURIComponent(id)}`}>
+                  <p className="text-lg font-bold">{name}</p>
+                </Link>
+                  <p className="text-sm text-slate-400">{lastUpdated}</p>
             </div>
           </div>
           <div className="self-center">

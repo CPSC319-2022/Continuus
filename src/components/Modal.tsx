@@ -39,6 +39,10 @@ export const Modal: React.FC<ModalProps> = ({
     console.log(`User comment: ${input}`);
   };
 
+  const handleProfileView = () => {
+    console.log("detect click");
+  };
+
   return (
     <>
       <input type="checkbox" id={`modal-${id}`} className="modal-toggle" />
@@ -51,11 +55,14 @@ export const Modal: React.FC<ModalProps> = ({
             <div className="flex">
               <div className="avatar self-center">
                 <div className="h-10 w-10 rounded-full">
-                  <img src={posterAvatarUrl} alt="avatar" />
+                    <img src={posterAvatarUrl} alt="avatar" 
+                        onClick={handleProfileView}
+                    />
                 </div>
               </div>
               <div className="ml-3">
-                <p className="text-lg font-bold">{poster}</p>
+                <p className="text-lg font-bold">{poster}
+                </p>
                 <p className="text-sm text-slate-400">{lastUpdated}</p>
               </div>
             </div>
