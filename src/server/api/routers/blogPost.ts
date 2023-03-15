@@ -24,7 +24,10 @@ export const blogPostRouter = createTRPCRouter({
   get: publicProcedure.input(BlogPostFindManySchema).query(({ ctx }) => {
     return ctx.prisma.blogPost.findMany({
       orderBy: [{ createdAt: "desc" }],
-      include: { user: true, comments: { include: { user: true } } },
+      include: {
+        user: true,
+        comments: { orderBy: [{ createdAt: "desc" }], include: { user: true } },
+      },
     });
   }),
 });
