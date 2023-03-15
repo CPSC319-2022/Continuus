@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 import Modal from 'react-modal';
 
-Modal.setAppElement("#__next")
+{process.env.NODE_ENV !== 'test' && Modal.setAppElement("#__next")}
 
 export const CreateBlogPostModal: React.FC<PropsWithChildren<{
     isOpen: boolean,
