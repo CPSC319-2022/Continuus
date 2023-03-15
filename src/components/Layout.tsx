@@ -12,10 +12,10 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
       <header className="sticky top-0 w-full h-12 bg-white box-border z-10">
         <Navbar />
       </header>
-      <nav className="sticky bg-white top-full z-10 h-24 -translate-y-full md:translate-y-0 md:top-12 left-0 md:inline-block md:align-top md:w-1/6">
+      <nav className="fixed w-full bg-white top-full z-10 h-24 -translate-y-full md:h-auto md:sticky md:translate-y-0 md:top-12 left-0 md:inline-block md:align-top md:w-1/6">
         <Sidebar />
       </nav>
-      <main className="inline-flex w-5/6 overflow-x-auto">
+      <main className="inline-flex w-full md:w-5/6 overflow-x-auto">
         {children}
       </main>
     </>

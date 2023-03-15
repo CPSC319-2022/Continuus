@@ -37,22 +37,11 @@ const navigationItems: NavItemFields[] = [
   },
 ];
 
-const NavItem: React.FC<NavItemProps> = ({ path, currentPath, title }) => {
-  return (
-    <div className="my-2 flex h-12 rounded-md hover:cursor-pointer hover:bg-slate-200">
-      {path === currentPath && (
-        <div className="absolute mr-1 h-10 w-[5px] self-center rounded-md bg-highlight-green" />
-      )}
-      <p className={`ml-3 self-center`}>{title}</p>
-    </div>
-  );
-};
-
 export const Sidebar: React.FC = () => {
   const [navItems, setNavItems] = useState<NavItemFields[]>([]);
 
   const { data: userData } = api.user.currentUser.useQuery();
-  const { asPath } = useRouter();
+  const { pathname } = useRouter();
 
   useEffect(() => {
     setNavItems(
@@ -65,10 +54,32 @@ export const Sidebar: React.FC = () => {
   }, [userData]);
 
   return (
-    <div className="absolute z-0 ml-5 mt-5 w-40 flex-col">
+    <div className="w-full flex flex-row h-full md:h-auto md:flex-col md:p-6">
       {navItems.map(({ title, path }) => (
-        <Link href={path} key={path}>
-          <NavItem path={path} currentPath={asPath} title={title} />
+        <Link
+          href={path}
+          key={path}
+          className={`
+          ${path === pathname ? 'border-highlight-green' : 'border-transparent'} 
+          border-b-4 
+          border-solid 
+          flex
+          flex-1
+          h-full
+          items-center
+          justify-center
+          cursor-pointer
+          hover:bg-slate-200
+          md:pl-2
+          md:justify-start
+          md:h-12
+          md:flex-auto
+          md:rounded-r-md 
+          md:my-2 
+          md:border-l-4 
+          md:border-b-0
+          `}>
+          {title}
         </Link>
       ))}
     </div>

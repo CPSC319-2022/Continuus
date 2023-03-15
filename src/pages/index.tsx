@@ -21,7 +21,7 @@ const Home: NextPage = () => {
   return (
     <Layout>
       <div className="flex min-h-screen flex-col content-center items-center w-full">
-        <div className="w-2/3 translate-x-[-15%]">
+        <div className="w-full md:w-2/3 md:translate-x-[-15%]">
           <div className="mb-6 flex w-full justify-end">
             <select
               className="h-8 w-64 max-w-xs border-b-2 bg-white"

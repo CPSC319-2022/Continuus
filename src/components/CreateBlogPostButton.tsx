@@ -14,12 +14,12 @@ export const CreateBlogPostButton: React.FC = () => {
             <div
                 className="
                     fixed
-                    top-[90%]
+                    bottom-24
                     left-1/2 
                     z-10 
                     md:left-[95%] 
-                    -translate-x-1/2 
-                    -translate-y-1/2
+                    -translate-x-1/2
+                    translate-y-1/2
                 "
             >
                 {(
