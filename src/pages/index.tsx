@@ -5,7 +5,7 @@ import { api } from "../utils/api";
 import { CreateBlogPostButton } from "~/components/CreateBlogPostButton";
 import { Layout } from "../components/Layout";
 import { BlogPost } from "../components/BlogPost";
-import { Modal } from "../components/Modal";
+import { CommentModal } from "../components/CommentModal";
 import { blogPostDummyData } from "~/fixtures/blogData";
 import { useEffect, useState } from "react";
 
@@ -45,7 +45,7 @@ const Home: NextPage = () => {
                     comments={comments.length}
                   />
                 </div>
-                <Modal
+                <CommentModal
                   id={id}
                   comments={comments}
                   poster={name}

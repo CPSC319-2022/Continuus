@@ -5,7 +5,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkSlug from "remark-slug";
 
-export interface ModalProps {
+export interface CommentModalProps {
   id: number;
   poster: string;
   lastUpdated: string;
@@ -19,7 +19,7 @@ export interface ModalProps {
   }[];
 }
 
-export const Modal: React.FC<ModalProps> = ({
+export const CommentModal: React.FC<CommentModalProps> = ({
   id,
   poster,
   lastUpdated,
