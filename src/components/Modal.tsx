@@ -116,7 +116,7 @@ export const Modal: React.FC<ModalProps> = ({
               </button>
               <button
                 className="mt-[0.5rem] h-10 rounded-sm border-[2px] border-slate-200 bg-white px-5 text-center text-black"
-                onClick={(event) => {
+                onClick={() => {
                   console.log("Cancel comment button clicked!");
                 }}
               >

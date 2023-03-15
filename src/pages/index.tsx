@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 const Home: NextPage = () => {
   const [view, setView] = useState<string>("Recent");
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
-  const blogPosts = api.blogPost.get.useQuery({});
+  // const blogPosts = api.blogPost.get.useQuery({});
 
   useEffect(() => {
     console.log(`Switched to ${view}`);

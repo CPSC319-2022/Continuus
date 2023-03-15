@@ -13,16 +13,6 @@ interface BlogPostProps {
   comments: number;
 }
 
-const markdownString = `
-# Hello, World!
-
-This is a sample markdown string.
-
-- List item 1
-- List item 2
-- List item 3
-`;
-
 export const BlogPost: React.FC<BlogPostProps> = ({
   id,
   name,

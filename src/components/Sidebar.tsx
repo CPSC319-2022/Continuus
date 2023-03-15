@@ -3,12 +3,6 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { api } from "~/utils/api";
 
-interface NavItemProps {
-  path: string;
-  currentPath: string;
-  title: string;
-}
-
 interface NavItemFields {
   title: string;
   path: string;
