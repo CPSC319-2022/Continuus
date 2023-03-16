@@ -3,7 +3,7 @@
 name: GCP Cloud Build
 
 on:
-  pull-request:
+  pull_request:
     branches: 
     - '*' 
     - '!dev'
