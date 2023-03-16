@@ -21,13 +21,31 @@ export const blogPostRouter = createTRPCRouter({
 
       return await ctx.prisma.blogPost.create(input);
     }),
-  get: publicProcedure.input(BlogPostFindManySchema).query(({ ctx }) => {
-    return ctx.prisma.blogPost.findMany({
-      orderBy: [{ createdAt: "desc" }],
-      include: {
-        user: true,
-        comments: { orderBy: [{ createdAt: "desc" }], include: { user: true } },
-      },
-    });
-  }),
+  get: publicProcedure
+    .input(BlogPostFindManySchema)
+    .query(async ({ input, ctx }) => {
+      const { take = 10, skip, cursor } = input;
+      const items = await ctx.prisma.blogPost.findMany({
+        take: take + 1,
+        skip,
+        cursor,
+        orderBy: [{ createdAt: "desc" }],
+        include: {
+          user: true,
+          comments: {
+            orderBy: [{ createdAt: "desc" }],
+            include: { user: true },
+          },
+        },
+      });
+      let nextCursor;
+      if (items.length > take) {
+        const nextItem = items.pop(); // return the last item from the array
+        nextCursor = nextItem?.id;
+      }
+      return {
+        items,
+        nextCursor,
+      };
+    }),
 });

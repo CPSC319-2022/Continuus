@@ -1,21 +1,38 @@
 import { type NextPage } from "next";
 import { signIn, signOut, useSession } from "next-auth/react";
-
 import { api } from "../utils/api";
 import { Layout } from "../components/Layout";
-import { BlogPost } from "../components/BlogPost";
-import { useEffect, useState } from "react";
-import type { User, Comment } from "@prisma/client";
+import { BlogPost as BlogPostComponent } from "../components/BlogPost";
+import { useEffect, useMemo, useRef, useState } from "react";
+import type { User, Comment, BlogPost } from "@prisma/client";
 import { CommentModal } from "~/components/CommentModal";
 import { CreateBlogPostWidget } from "~/components/create-blog-post-widget";
+import { useInView } from "react-intersection-observer";
 
 const Home: NextPage = () => {
   const [view, setView] = useState<string>("Recent");
-  const blogPosts = api.blogPost.get.useQuery({});
+  const [page, setPage] = useState(0);
+  const { data: blogPosts, fetchNextPage } = api.blogPost.get.useInfiniteQuery(
+    {
+      take: 10,
+    },
+    { getNextPageParam: (lastPage) => lastPage.nextCursor }
+  );
+
+  const posts = useMemo(() => {
+    console.log(blogPosts);
+    return blogPosts?.pages[page]?.items ?? [];
+  }, [blogPosts, page]);
+
+  const { ref, inView, entry } = useInView();
 
   useEffect(() => {
-    console.log(`Switched to ${view}`);
-  }, [view]);
+    if (inView) {
+      void (async () => {
+        await fetchNextPage();
+      })();
+    }
+  }, [inView, fetchNextPage]);
 
   return (
     <Layout>
@@ -28,9 +45,9 @@ const Home: NextPage = () => {
           <option>Popular</option>
         </select>
       </div>
-      {blogPosts.data?.length === 0
+      {posts.length === 0
         ? "Nothing to see here"
-        : blogPosts.data?.map(
+        : posts.map(
             ({
               id,
               title,
@@ -41,7 +58,7 @@ const Home: NextPage = () => {
             }) => (
               <>
                 <div key={id} className="mb-6">
-                  <BlogPost
+                  <BlogPostComponent
                     id={id}
                     name={name as string}
                     title={title}
@@ -63,6 +80,7 @@ const Home: NextPage = () => {
               </>
             )
           )}
+      {posts.length && <div ref={ref} />}
       <CreateBlogPostWidget />
     </Layout>
   );
