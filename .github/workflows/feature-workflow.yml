@@ -32,7 +32,7 @@ jobs:
       run: |
         export CLOUDSDK_CORE_DISABLE_PROMPTS=1
         chmod +x ./scripts/wait-for-build
-        ./scripts/wait-for-build ${{ secrets.GCP_FEATURE_BUILD_ID }} ${GITHUB_REF##*/} Build
+        ./scripts/wait-for-build ${{ secrets.GCP_FEATURE_BUILD_ID }} ${GITHUB_BASE_REF##*/} Build
   
   unit-test:
     name: Test (Unit)
