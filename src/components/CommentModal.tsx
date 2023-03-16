@@ -4,23 +4,24 @@ import { MenuIcon } from "~/icons/Menu";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkSlug from "remark-slug";
+import type { Comment as CommentType, User } from "@prisma/client";
+import { timeAgo } from "~/utils/time";
+
+type CommentEntry = CommentType & { user: User };
 
 export interface CommentModalProps {
-  id: number;
+  id: string;
+  title: string;
   poster: string;
-  lastUpdated: string;
+  lastUpdated: Date;
   post: string;
   posterAvatarUrl: string;
-  comments: {
-    name: string;
-    comment: string;
-    dateAdded: string;
-    imageUrl: string;
-  }[];
+  comments: CommentEntry[];
 }
 
 export const CommentModal: React.FC<CommentModalProps> = ({
   id,
+  title,
   poster,
   lastUpdated,
   post,
@@ -56,7 +57,7 @@ export const CommentModal: React.FC<CommentModalProps> = ({
               </div>
               <div className="ml-3">
                 <p className="text-lg font-bold">{poster}</p>
-                <p className="text-sm text-slate-400">{lastUpdated}</p>
+                <p className="text-sm text-slate-400">{timeAgo(lastUpdated)}</p>
               </div>
             </div>
             <div className="self-center">
@@ -78,6 +79,7 @@ export const CommentModal: React.FC<CommentModalProps> = ({
               </div>
             </div>
           </div>
+          <p className="mb-3 text-xl font-bold">{title}</p>
           <div className="prose max-w-none ">
             <ReactMarkdown remarkPlugins={[remarkGfm, remarkSlug]}>
               {post}
@@ -89,15 +91,21 @@ export const CommentModal: React.FC<CommentModalProps> = ({
             </p>
           </div>
           <div>
-            {comments.map(({ name, comment, dateAdded, imageUrl }) => (
-              <Comment
-                key={`${name}${comment}`}
-                commenterName={name}
-                commenterAvatarUrl={imageUrl}
-                dateAdded={dateAdded}
-                comment={comment}
-              />
-            ))}
+            {comments.map(
+              ({
+                content: comment,
+                createdAt: dateAdded,
+                user: { name, image },
+              }) => (
+                <Comment
+                  key={`${name as string}${comment}`}
+                  commenterName={name as string}
+                  commenterAvatarUrl={image as string}
+                  dateAdded={dateAdded}
+                  comment={comment}
+                />
+              )
+            )}
           </div>
           <div className="m-[2rem] mx-0 mb-0">
             <input
