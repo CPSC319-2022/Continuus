@@ -48,7 +48,7 @@ export const Sidebar: React.FC = () => {
   }, [userData]);
 
   return (
-    <div className="w-full flex flex-row h-full md:h-auto md:flex-col md:p-6">
+    <div className="w-full flex flex-row h-full border-t border-t-gray-200 border-solid md:border-none md:h-auto md:flex-col md:p-6">
       {navItems.map(({ title, path }) => (
         <Link
           href={path}
