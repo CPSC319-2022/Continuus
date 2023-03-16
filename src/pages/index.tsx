@@ -1,13 +1,12 @@
 import { type NextPage } from "next";
-import { signIn, signOut, useSession } from "next-auth/react";
 
 import { api } from "../utils/api";
-import { Layout } from "../components/Layout";
 import { BlogPost } from "../components/BlogPost";
+import { CommentModal } from "../components/CommentModal";
+import { CreateBlogPostWidget } from "~/components/create-blog-post-widget";
+import { Layout } from "../components/Layout";
 import { useEffect, useState } from "react";
 import type { User, Comment } from "@prisma/client";
-import { CommentModal } from "~/components/CommentModal";
-import { CreateBlogPostWidget } from "~/components/create-blog-post-widget";
 
 const Home: NextPage = () => {
   const [view, setView] = useState<string>("Recent");
@@ -19,77 +18,57 @@ const Home: NextPage = () => {
 
   return (
     <Layout>
-      <div className="mb-6 flex w-full justify-end">
-        <select
-          className="h-8 w-64 max-w-xs border-b-2 bg-white"
-          onChange={(e) => setView(e.target.value)}
-        >
-          <option>Recent</option>
-          <option>Popular</option>
-        </select>
-      </div>
-      {blogPosts.data?.length === 0
-        ? "Nothing to see here"
-        : blogPosts.data?.map(
-            ({
-              id,
-              title,
-              updatedAt,
-              content,
-              comments,
-              user: { name, image },
-            }) => (
-              <>
-                <div key={id} className="mb-6">
-                  <BlogPost
+      <div className="flex min-h-screen flex-col content-center items-center w-full px-2 md:px-0">
+        <div className="w-full md:w-1/2 ">
+          <div className="mb-6 flex w-full justify-end">
+            <select
+              className="h-8 w-64 max-w-xs border-b-2 bg-white"
+              onChange={(e) => setView(e.target.value)}
+            >
+              <option>Recent</option>
+              <option>Popular</option>
+            </select>
+          </div>
+          {blogPosts.data?.length === 0
+            ? "Nothing to see here"
+            : blogPosts.data?.map(
+              ({
+                id,
+                title,
+                updatedAt,
+                content,
+                comments,
+                user: { name, image },
+              }) => (
+                <>
+                  <div key={id} className="mb-6">
+                    <BlogPost
+                      id={id}
+                      name={name as string}
+                      title={title}
+                      lastUpdated={updatedAt}
+                      imageUrl={image as string}
+                      content={content}
+                      comments={(comments as Comment[]).length}
+                    />
+                  </div>
+                  <CommentModal
                     id={id}
-                    name={name as string}
                     title={title}
+                    comments={comments as (Comment & { user: User })[]}
+                    poster={name as string}
                     lastUpdated={updatedAt}
-                    imageUrl={image as string}
-                    content={content}
-                    comments={(comments as Comment[]).length}
+                    post={content}
+                    posterAvatarUrl={image as string}
                   />
-                </div>
-                <CommentModal
-                  id={id}
-                  title={title}
-                  comments={comments as (Comment & { user: User })[]}
-                  poster={name as string}
-                  lastUpdated={updatedAt}
-                  post={content}
-                  posterAvatarUrl={image as string}
-                />
-              </>
-            )
-          )}
+                </>
+              )
+            )}
+        </div>
+      </div>
       <CreateBlogPostWidget />
     </Layout>
   );
 };
 
 export default Home;
-
-const AuthShowcase: React.FC = () => {
-  const { data: sessionData } = useSession();
-
-  const { data: secretMessage } = api.example.getSecretMessage.useQuery(
-    undefined, // no input
-    { enabled: sessionData?.user !== undefined }
-  );
-
-  return (
-    <div className="flex flex-col items-center justify-center gap-4">
-      <p className="text-center text-2xl ">
-        {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
-        {secretMessage && <span> - {secretMessage}</span>}
-      </p>
-      <button
-        className="rounded-full bg-white/10 px-10 py-3 font-semibold  no-underline transition hover:bg-white/20"
-        onClick={sessionData ? () => void signOut() : () => void signIn()}
-      >
-        {sessionData ? "Sign out" : "Sign in"}
-      </button>
-    </div>
-  );
-};

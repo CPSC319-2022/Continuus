@@ -9,7 +9,7 @@ import { timeAgo } from "~/utils/time";
 
 type CommentEntry = CommentType & { user: User };
 
-export interface ModalProps {
+export interface CommentModalProps {
   id: string;
   title: string;
   poster: string;
@@ -19,7 +19,7 @@ export interface ModalProps {
   comments: CommentEntry[];
 }
 
-export const CommentModal: React.FC<ModalProps> = ({
+export const CommentModal: React.FC<CommentModalProps> = ({
   id,
   title,
   poster,
@@ -124,7 +124,7 @@ export const CommentModal: React.FC<ModalProps> = ({
               </button>
               <button
                 className="mt-[0.5rem] h-10 rounded-sm border-[2px] border-slate-200 bg-white px-5 text-center text-black"
-                onClick={(event) => {
+                onClick={() => {
                   console.log("Cancel comment button clicked!");
                 }}
               >
