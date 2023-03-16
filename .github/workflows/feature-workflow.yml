@@ -5,10 +5,10 @@ name: GCP Cloud Build
 on:
   pull_request:
     branches: 
-    - '*' 
-    - '!dev'
-    - '!qa'
-    - '!prod'
+    - 'dev'
+    - 'qa'
+    - 'prod'
+    - 'demo'
 
 
 jobs:
