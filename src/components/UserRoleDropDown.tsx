@@ -13,8 +13,6 @@ export const UserRoleDropDown: React.FC<{
     removeUpdate
 }) => {
     const [roleValue, setRoleValue] = useState<Role>(defaultRole);
-
-    console.log(userId, defaultRole);
     
 
     return (
