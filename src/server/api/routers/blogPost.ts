@@ -1,7 +1,7 @@
 import {
   BlogPostCreateOneSchema,
-  BlogPostFindManySchema,
-} from "../../../generated/schemas";
+  BlogPostFindManySchema, BlogPostFindUniqueSchema, BlogPostUpdateOneSchema
+} from "~/generated/schemas";
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
@@ -11,8 +11,8 @@ export const blogPostRouter = createTRPCRouter({
     .mutation(async ({ ctx, input }) => {
       const user = await ctx.prisma.user.findUniqueOrThrow({
         where: {
-          id: ctx.session.user.id,
-        },
+          id: ctx.session.user.id
+        }
       });
 
       if (!["CONTRIBUTOR", "ADMIN"].includes(user.role)) {
@@ -47,4 +47,31 @@ export const blogPostRouter = createTRPCRouter({
         nextCursor,
       };
     }),
+  getOne: publicProcedure.input(BlogPostFindUniqueSchema).query(({ ctx, input }) => {
+    return ctx.prisma.blogPost.findUnique({
+      where: {
+        id: input.where.id
+      }
+    });
+  }),
+  update: protectedProcedure.input(BlogPostUpdateOneSchema).mutation(async ({ ctx, input }) => {
+      const user = await ctx.prisma.user.findUniqueOrThrow({
+        where: {
+          id: ctx.session.user.id
+        }
+      });
+
+      if (!["CONTRIBUTOR", "ADMIN"].includes(user.role)) {
+        throw new Error("Your account role is not permitted to update blog posts");
+      }
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    if (user.id !== input.data.userId) {
+        throw new Error("You are forbidden to update another user's blog post");
+      }
+
+      return await ctx.prisma.blogPost.update(input);
+    }
+  )
 });

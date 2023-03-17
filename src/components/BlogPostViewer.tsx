@@ -56,6 +56,7 @@ export const BlogPostViewer: React.FC = () => {
         : posts?.map(
             ({
               id,
+              userId,
               title,
               updatedAt,
               content,
@@ -66,6 +67,7 @@ export const BlogPostViewer: React.FC = () => {
                 <div key={id} className="mb-6">
                   <BlogPostComponent
                     id={id}
+                    author={userId}
                     name={name as string}
                     title={title}
                     lastUpdated={updatedAt}
