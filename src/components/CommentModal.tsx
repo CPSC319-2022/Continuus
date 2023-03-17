@@ -6,6 +6,7 @@ import remarkGfm from "remark-gfm";
 import remarkSlug from "remark-slug";
 import type { Comment as CommentType, User } from "@prisma/client";
 import { timeAgo } from "~/utils/time";
+import { ProfilePicture } from "./ProfilePicture";
 
 type CommentEntry = CommentType & { user: User };
 
@@ -51,9 +52,7 @@ export const CommentModal: React.FC<CommentModalProps> = ({
           <div className="mb-3 flex w-full justify-between">
             <div className="flex">
               <div className="avatar self-center">
-                <div className="h-10 w-10 rounded-full">
-                  <img src={posterAvatarUrl} alt="avatar" />
-                </div>
+                <ProfilePicture size={2.5} imgUrl={posterAvatarUrl} />
               </div>
               <div className="ml-3">
                 <p className="text-lg font-bold">{poster}</p>
