@@ -1,31 +1,50 @@
-import { UserFindManySchema } from "~/generated/schemas";
+import { type PrismaClient } from '@prisma/client';
+import { z } from "zod";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
+
+const getCurrentUser = async (prisma: PrismaClient, userId?: string) => {
+  return (
+    userId && (await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+    })) || null
+  );
+}
+
+const assertAdminRole = async (prisma: PrismaClient, userId?: string) => {
+  const currUser = await getCurrentUser(prisma, userId);
+
+  if (!!!currUser || currUser.role !== "ADMIN") {
+    throw new Error("UNAUTHORIZED");
+  }
+}
 
 export const userRouter = createTRPCRouter({
   currentUser: publicProcedure.query(async ({ ctx }) => {
-    return (
-      (ctx.session?.user &&
-        (await ctx.prisma.user.findUnique({
-          where: {
-            id: ctx.session.user.id,
-          },
-        }))) ||
-      null
-    );
+    return await getCurrentUser(ctx.prisma, ctx.session?.user?.id);
   }),
-  allUsers: protectedProcedure
-    .input(UserFindManySchema)
+  paginatedUsers: protectedProcedure
+    .input(z
+      .object({
+        pageIndex: z.number(),
+        pageSize: z.number(),
+      }))
     .query(async ({ ctx, input }) => {
-      const user = await ctx.prisma.user.findUniqueOrThrow({
-        where: {
-          id: ctx.session.user.id,
+      await assertAdminRole(ctx.prisma, ctx.session.user.id);
+
+      return await ctx.prisma.user.findMany({
+        skip: input.pageIndex * input.pageSize,
+        take: input.pageSize,
+        orderBy: {
+          createdAt: 'asc'
         },
       });
-
-      if (user.role !== "ADMIN") {
-        throw new Error("UNAUTORHIZED");
-      }
-
-      return ctx.prisma.user.findMany(input);
     }),
+  count: protectedProcedure
+    .query(async ({ctx}) => {
+      await assertAdminRole(ctx.prisma, ctx.session.user.id);
+
+      return await ctx.prisma.user.count();
+    })
 });

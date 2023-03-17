@@ -1,4 +1,5 @@
 import { timeAgo } from "~/utils/time";
+import { ProfilePicture } from "./ProfilePicture";
 
 export interface CommentProps {
   commenterName: string;
@@ -21,9 +22,7 @@ export const Comment: React.FC<CommentProps> = ({
       <div>
         <div className="flex">
           <div className="avatar self-center">
-            <div className="h-10 w-10 rounded-full">
-              <img src={commenterAvatarUrl} alt="avatar" />
-            </div>
+            <ProfilePicture size={2.5} imgUrl={commenterAvatarUrl} />
           </div>
           <div className="ml-3">
             <p className="text-lg font-bold">{commenterName}</p>
