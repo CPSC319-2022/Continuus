@@ -12,7 +12,7 @@ export const CreateBlogPostWidget: React.FC = () => {
   const createBlogPostMutation = api.blogPost.create.useMutation({
     onSuccess() {
       return utils.blogPost.get.invalidate();
-    }
+    },
   });
   const currUser = api.user.currentUser.useQuery();
   const [isModalOpen, setModalOpen] = useState(false);
@@ -79,7 +79,7 @@ export const CreateBlogPostWidget: React.FC = () => {
                   title: fieldValues.title,
                   content: fieldValues.content,
                   userId: userId
-                }
+                },
               })
             }
           />

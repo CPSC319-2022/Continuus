@@ -12,7 +12,7 @@ export const blogPostRouter = createTRPCRouter({
       const user = await ctx.prisma.user.findUniqueOrThrow({
         where: {
           id: ctx.session.user.id
-        }
+        },
       });
 
       if (!["CONTRIBUTOR", "ADMIN"].includes(user.role)) {
