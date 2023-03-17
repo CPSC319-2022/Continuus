@@ -2,6 +2,7 @@ import { Menu, MenuButton, MenuItem } from "@szhsin/react-menu";
 import { signIn, useSession, signOut } from "next-auth/react";
 import Image from 'next/image';
 import btn_google from '../../public/btn_google.png'
+import { CurrUserProfilePicture } from "./CurrUserProfilePicture";
 
 export const ProfileMenu: React.FC = () => {
     const { status } = useSession();
@@ -11,13 +12,7 @@ export const ProfileMenu: React.FC = () => {
       <Menu
         menuButton={
           <MenuButton>
-            <div
-              className="aspect-square h-8 rounded-full border border-solid border-gray-400"
-              style={{
-                backgroundImage:
-                  "url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb1KzK9eXLao5CnsRObDT6gDyGG-u2HHyYoVBgvBnW&s)",
-              }}
-            />
+            <CurrUserProfilePicture size={2} />
           </MenuButton>
         }
         align="end"

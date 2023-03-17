@@ -10,7 +10,7 @@ export const CreateBlogPostWidget: React.FC = () => {
   const utils = api.useContext();
 
   const createBlogPostMutation = api.blogPost.create.useMutation({
-    onSuccess(data, variables, context) {
+    onSuccess() {
       return utils.blogPost.get.invalidate();
     },
   });
