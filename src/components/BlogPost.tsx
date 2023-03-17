@@ -4,7 +4,7 @@ import remarkGfm from "remark-gfm";
 import remarkSlug from "remark-slug";
 import { timeAgo } from "~/utils/time";
 
-interface BlogPostProps {
+interface BlogPostProps extends React.ComponentProps<"div"> {
   id: string;
   name: string;
   lastUpdated: Date;
@@ -22,9 +22,13 @@ export const BlogPost: React.FC<BlogPostProps> = ({
   content,
   imageUrl,
   comments,
+  ...props
 }) => {
   return (
-    <div className="bg-base-150 card w-full rounded-md shadow-md shadow-slate-300">
+    <div
+      className="bg-base-150 card w-full rounded-md shadow-md shadow-slate-300"
+      {...props}
+    >
       <div className="card-body m-[-15px]">
         <div className="mb-3 flex w-full justify-between">
           <div className="flex">

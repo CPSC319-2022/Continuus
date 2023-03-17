@@ -24,10 +24,9 @@ export const blogPostRouter = createTRPCRouter({
   get: publicProcedure
     .input(BlogPostFindManySchema)
     .query(async ({ input, ctx }) => {
-      const { take = 10, skip, cursor } = input;
+      const { take = 10, cursor } = input;
       const items = await ctx.prisma.blogPost.findMany({
         take: take + 1,
-        skip,
         cursor,
         orderBy: [{ createdAt: "desc" }],
         include: {
