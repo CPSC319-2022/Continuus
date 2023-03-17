@@ -1,7 +1,6 @@
 import { Role, User } from "@prisma/client";
 import { createColumnHelper, flexRender, getCoreRowModel, PaginationState, useReactTable } from "@tanstack/react-table";
 import { useMemo, useState } from "react";
-import { BlogPostUpdateOneSchema } from "~/generated/schemas";
 import { api } from "~/utils/api";
 import { ProfilePicture } from "./ProfilePicture";
 import { Spinner } from "./Spinner";
