@@ -10,7 +10,11 @@ type Post = BlogPost & { user: User; comments: (Comment & { user: User })[] };
 
 export const BlogPostViewer: React.FC = () => {
   const [view, setView] = useState<string>("Recent");
-  const { data: blogPosts, fetchNextPage } = api.blogPost.get.useInfiniteQuery(
+  const {
+    data: blogPosts,
+    fetchNextPage,
+    hasNextPage,
+  } = api.blogPost.get.useInfiniteQuery(
     {
       take: 10,
     },
@@ -29,7 +33,6 @@ export const BlogPostViewer: React.FC = () => {
   const { ref, inView } = useInView();
 
   useEffect(() => {
-    console.log(inView);
     if (inView) {
       void (async () => {
         await fetchNextPage();
@@ -83,9 +86,11 @@ export const BlogPostViewer: React.FC = () => {
               </>
             )
           )}
-      <div className="my-5 flex justify-center" ref={ref}>
-        <Spinner size={2} />
-      </div>
+      {hasNextPage && (
+        <div className="my-5 flex justify-center" ref={ref}>
+          <Spinner size={2} />
+        </div>
+      )}
     </div>
   );
 };
