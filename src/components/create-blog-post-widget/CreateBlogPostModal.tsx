@@ -20,7 +20,7 @@ export const CreateBlogPostModal: React.FC<PropsWithChildren<{
                 contentLabel="Create Blog Post"
                 overlayClassName="fixed inset-0 z-20 bg-black/75"
                 ariaHideApp={process.env.NODE_ENV !== 'test'}
-                className="bg-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 rounded-md"
+                className="bg-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 rounded-md md:w-1/2"
             >
                 <div className="w-full h-12 flex flex-row justify-between items-center border-b border-b-gray-200 pl-4 pr-4">
                     <div className="font-semibold">Create Blog Post</div>
