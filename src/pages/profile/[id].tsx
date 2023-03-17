@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 const Profile: NextPage = () => {
   // use this
-  //const { data } = api.user.currentUser.useQuery();
+  const { data } = api.user.currentUser.useQuery();
   const router = useRouter();
   const id = router.query.id as string;
 
