@@ -1,5 +1,6 @@
-import { type PrismaClient } from '@prisma/client';
+import { Role, type PrismaClient } from '@prisma/client';
 import { z } from "zod";
+import { UserUpdateOneSchema } from '~/generated/schemas';
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 const getCurrentUser = async (prisma: PrismaClient, userId?: string) => {
@@ -42,9 +43,18 @@ export const userRouter = createTRPCRouter({
       });
     }),
   count: protectedProcedure
-    .query(async ({ctx}) => {
+    .query(async ({ ctx }) => {
       await assertAdminRole(ctx.prisma, ctx.session.user.id);
 
       return await ctx.prisma.user.count();
-    })
+    }),
+  update: protectedProcedure
+    .input(z.array(UserUpdateOneSchema))
+    .mutation(async ({ ctx, input }) => {
+      await assertAdminRole(ctx.prisma, ctx.session.user.id);
+
+      for (const update of input) {
+        await ctx.prisma.user.update(update);
+      }
+    }),
 });
