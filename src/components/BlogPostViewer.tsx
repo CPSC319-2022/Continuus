@@ -16,7 +16,7 @@ export const BlogPostViewer: React.FC = () => {
     hasNextPage,
   } = api.blogPost.get.useInfiniteQuery(
     {
-      take: 10,
+      take: 20,
     },
     { getNextPageParam: (lastPage) => ({ id: lastPage.nextCursor }) }
   );
