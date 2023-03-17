@@ -18,7 +18,7 @@ export const BlogPostViewer: React.FC = () => {
     {
       take: 20,
     },
-    { getNextPageParam: (lastPage) => ({ id: lastPage.nextCursor }) }
+    { getNextPageParam: (lastPage) => (lastPage.nextCursor ? { id: lastPage.nextCursor } : undefined) }
   );
 
   const posts = useMemo(
