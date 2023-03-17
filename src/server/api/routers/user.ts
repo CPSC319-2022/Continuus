@@ -57,4 +57,10 @@ export const userRouter = createTRPCRouter({
         await ctx.prisma.user.update(update);
       }
     }),
+  count: protectedProcedure
+    .query(async ({ctx}) => {
+      await assertAdminRole(ctx.prisma, ctx.session.user.id);
+
+      return await ctx.prisma.user.count();
+    })
 });
