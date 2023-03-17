@@ -71,7 +71,6 @@ export const UpdateBlogPostWidget: React.FC<UpdateBlogPostProps> = ({id, author,
                   id
                 },
                 data: {
-                  userId: author,
                   title: fieldValues.title,
                   content: fieldValues.content,
                 },
