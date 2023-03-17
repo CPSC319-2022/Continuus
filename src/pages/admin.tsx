@@ -3,17 +3,11 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { Layout } from "~/components/Layout";
 import { Spinner } from "~/components/Spinner";
+import { UserTable } from "~/components/UserTable";
 import { api } from "../utils/api";
 
 const AdminPanel: NextPage = () => {
   const currUser = api.user.currentUser.useQuery();
-  // const allUsers = api.user.allUsers.useQuery({
-  //   orderBy: {
-  //     createdAt: "desc"
-  //   }
-  // }, {
-  //   enabled: currUser.data?.role === "ADMIN"
-  // });
   const router = useRouter();
 
   useEffect(() => {
@@ -22,18 +16,11 @@ const AdminPanel: NextPage = () => {
     }
   }, [router, currUser])
 
-  if (currUser.isLoading) {
-    return (
-      <Layout>
-        <div className="w-full flex justify-center">
-          <Spinner size={24} />
-        </div>
-      </Layout>
-    );
-  }
-
   return (
     <Layout>
+      <div className="w-full flex justify-center overflow-y-hidden mt-4">
+        {currUser.isLoading ? <Spinner size={24} /> : <div className="w-full md:pr-12 md:ml-[15%] md:w-[85%]"><UserTable /></div>}
+      </div>
     </Layout>
   );
 };

@@ -3,6 +3,7 @@ import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkSlug from "remark-slug";
 import { timeAgo } from "~/utils/time";
+import { ProfilePicture } from "./ProfilePicture";
 
 interface BlogPostProps extends React.ComponentProps<"div"> {
   id: string;
@@ -33,9 +34,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
         <div className="mb-3 flex w-full justify-between">
           <div className="flex">
             <div className="avatar self-center">
-              <div className="h-10 w-10 rounded-full">
-                <img src={imageUrl} alt="avatar" />
-              </div>
+              <ProfilePicture size={2.5} imgUrl={imageUrl} />
             </div>
             <div className="ml-3">
               <p className="text-lg font-bold">{name}</p>
