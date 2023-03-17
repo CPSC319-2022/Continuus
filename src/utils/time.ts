@@ -1,8 +1,8 @@
 export const timeAgo = (inputDate: Date): string => {
   const now = new Date();
-  const diffInSeconds = Math.floor(
+  const diffInSeconds = Math.max(Math.floor(
     (now.getTime() - inputDate.getTime()) / 1000
-  );
+  ), 0);
 
   if (diffInSeconds < 60) {
     return `${diffInSeconds} ${diffInSeconds === 1 ? "second" : "seconds"} ago`;
