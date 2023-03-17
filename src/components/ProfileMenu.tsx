@@ -12,7 +12,7 @@ export const ProfileMenu: React.FC = () => {
         menuButton={
           <MenuButton>
             <div
-              className="aspect-square w-8 rounded-full border border-solid border-gray-400"
+              className="aspect-square h-8 rounded-full border border-solid border-gray-400"
               style={{
                 backgroundImage:
                   "url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb1KzK9eXLao5CnsRObDT6gDyGG-u2HHyYoVBgvBnW&s)",
