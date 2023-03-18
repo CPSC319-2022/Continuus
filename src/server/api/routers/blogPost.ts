@@ -1,5 +1,5 @@
 import {
-  BlogPostCreateOneSchema,
+  BlogPostCreateOneSchema, BlogPostDeleteOneSchema,
   BlogPostFindManySchema, BlogPostFindUniqueSchema, BlogPostUpdateOneSchema
 } from "~/generated/schemas";
 
@@ -63,12 +63,29 @@ export const blogPostRouter = createTRPCRouter({
       if (!["CONTRIBUTOR", "ADMIN"].includes(user.role)) {
         throw new Error("Your account role is not permitted to update blog posts");
       }
-      
       if (user.id !== blogPost.userId) {
         throw new Error("You are forbidden to update another user's blog post");
       }
 
       return await ctx.prisma.blogPost.update(input);
     }
-  )
+  ),
+  delete: protectedProcedure.input(BlogPostDeleteOneSchema).mutation(async ({ ctx, input }) => {
+    const user = await ctx.prisma.user.findUniqueOrThrow({
+      where: {
+        id: ctx.session.user.id
+      }
+    });
+    const blogPost = await ctx.prisma.blogPost.findUniqueOrThrow({
+      where: {
+        id: input.where.id
+      }
+    });
+    if (user.role !== "ADMIN") {
+      if (user.id !== blogPost.userId) {
+        throw new Error("You are forbidden to delete another user's blog post");
+      }
+    }
+    return await ctx.prisma.blogPost.delete(input)
+  }),
 });

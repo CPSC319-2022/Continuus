@@ -6,6 +6,7 @@ import { ProfilePicture } from "./ProfilePicture";
 import { api } from "~/utils/api";
 import { BlogPostActionsMenu } from "~/components/BlogPostActionsMenu";
 import { useSession } from "next-auth/react";
+import React from "react";
 
 interface BlogPostProps extends React.ComponentProps<"div"> {
   id: string;
@@ -45,6 +46,14 @@ export const BlogPost: React.FC<BlogPostProps> = ({
       return currUser.data.id === author;
     }
   }
+
+  const isAdmin = () => {
+    if ((currUser.data !== null) && (currUser.data !== undefined)) {
+      return currUser.data.role === "ADMIN";
+    }
+    return false;
+  }
+
   return (
     <div
       className="bg-base-150 card w-full rounded-md shadow-md shadow-slate-300"
@@ -62,7 +71,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
             </div>
           </div>
           {
-            isAuthed() && isAuthor() && <BlogPostActionsMenu id={id} author={author} title={title} content={content} />
+            ((isAuthed() && isAuthor()) || (isAuthed() && isAdmin())) && <BlogPostActionsMenu id={id} title={title} content={content} isAdmin={isAdmin()}/>
           }
         </div>
         <p className="mb-3 text-xl font-bold">{title}</p>
