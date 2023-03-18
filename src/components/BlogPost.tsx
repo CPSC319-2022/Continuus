@@ -14,6 +14,7 @@ interface BlogPostProps extends React.ComponentProps<"div"> {
   name: string;
   author: string;
   lastUpdated: Date;
+  createdAt: Date;
   title: string;
   content: string;
   imageUrl: string;
@@ -25,6 +26,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
   author,
   name,
   lastUpdated,
+  createdAt,
   title,
   content,
   imageUrl,
@@ -47,18 +49,21 @@ export const BlogPost: React.FC<BlogPostProps> = ({
             </div>
             <div className="ml-3">
               <p className="text-lg font-bold">{name}</p>
-              <p className="text-sm text-slate-400">{timeAgo(lastUpdated)}</p>
+              <p className="text-sm text-slate-400">{`${timeAgo(createdAt)}${
+                createdAt.getTime() !== lastUpdated.getTime()
+                  ? ` (updated ${timeAgo(lastUpdated)})`
+                  : ""
+              }`}</p>
             </div>
           </div>
-          {
-            shouldSeeActions(status, currUser.data, author) &&
-              <BlogPostActionsMenu
-                  id={id}
-                  title={title}
-                  content={content}
-                  isAuthor={isAuthor(currUser.data, author)}
-              />
-          }
+          {shouldSeeActions(status, currUser.data, author) && (
+            <BlogPostActionsMenu
+              id={id}
+              title={title}
+              content={content}
+              isAuthor={isAuthor(currUser.data, author)}
+            />
+          )}
         </div>
         <p className="mb-3 text-xl font-bold">{title}</p>
         <div className="prose max-w-none ">

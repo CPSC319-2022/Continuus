@@ -56,6 +56,7 @@ export const BlogPostViewer: React.FC = () => {
               userId,
               title,
               updatedAt,
+              createdAt,
               content,
               comments,
               user: { name, image },
@@ -68,6 +69,7 @@ export const BlogPostViewer: React.FC = () => {
                     name={name as string}
                     title={title}
                     lastUpdated={updatedAt}
+                    createdAt={createdAt}
                     imageUrl={image as string}
                     content={content}
                     comments={(comments as Comment[]).length}
@@ -79,6 +81,7 @@ export const BlogPostViewer: React.FC = () => {
                   comments={comments as (Comment & { user: User })[]}
                   poster={name as string}
                   lastUpdated={updatedAt}
+                  createdAt={createdAt}
                   post={content}
                   posterAvatarUrl={image as string}
                   content={content}
