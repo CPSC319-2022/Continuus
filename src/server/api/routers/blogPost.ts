@@ -54,7 +54,7 @@ export const blogPostRouter = createTRPCRouter({
         }
       });
 
-      const blogPost = await ctx.prisma.blogPost.findUnique({
+      const blogPost = await ctx.prisma.blogPost.findUniqueOrThrow({
         where: {
           id: input.where.id
         }
@@ -63,11 +63,9 @@ export const blogPostRouter = createTRPCRouter({
       if (!["CONTRIBUTOR", "ADMIN"].includes(user.role)) {
         throw new Error("Your account role is not permitted to update blog posts");
       }
-
-      if (blogPost !== null) {
-        if (user.id !== blogPost.userId) {
-          throw new Error("You are forbidden to update another user's blog post");
-        }
+      
+      if (user.id !== blogPost.userId) {
+        throw new Error("You are forbidden to update another user's blog post");
       }
 
       return await ctx.prisma.blogPost.update(input);
