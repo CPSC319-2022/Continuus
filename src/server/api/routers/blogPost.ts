@@ -1,6 +1,6 @@
 import {
   BlogPostCreateOneSchema, BlogPostDeleteOneSchema,
-  BlogPostFindManySchema, BlogPostFindUniqueSchema, BlogPostUpdateOneSchema
+  BlogPostFindManySchema, BlogPostUpdateOneSchema
 } from "~/generated/schemas";
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
