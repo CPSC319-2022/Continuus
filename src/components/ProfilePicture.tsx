@@ -4,7 +4,7 @@
  */
 export const ProfilePicture: React.FC<{ imgUrl?: string | null, size: number }> = ({ imgUrl, size }) => {
     return (
-        <img src={imgUrl || "https://i.stack.imgur.com/34AD2.jpg"} alt="avatar" className="aspect-square rounded-full" style={{ width: `${size}rem` }} />
+        <img src={imgUrl || "https://i.stack.imgur.com/34AD2.jpg"} alt="avatar" className="aspect-square rounded-full inline-block" style={{ width: `${size}rem` }} />
 
     )
 }
