@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { CurrUserProfilePicture } from "../CurrUserProfilePicture";
 

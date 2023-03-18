@@ -1,25 +1,31 @@
-import { CreateBlogPostButton } from "./CreateBlogPostButton";
-import { CreateBlogPostForm } from "./CreateBlogPostForm";
-import { BlogPostInputModal } from "../BlogPostInputModal";
+import { UpdateBlogPostButton } from "./UpdateBlogPostButton";
+import { UpdateBlogPostForm } from "./UpdateBlogPostForm";
 import { useEffect, useState } from "react";
 import { api } from "~/utils/api";
 import { Spinner } from "../Spinner";
 import { FiCheck } from "react-icons/fi";
+import { BlogPostInputModal } from "~/components/BlogPostInputModal";
 
-export const CreateBlogPostWidget: React.FC = () => {
+interface UpdateBlogPostProps {
+  id: string,
+  author: string,
+  title: string,
+  content: string
+}
+
+export const UpdateBlogPostWidget: React.FC<UpdateBlogPostProps> = ({id, author, title, content}) => {
   const utils = api.useContext();
 
-  const createBlogPostMutation = api.blogPost.create.useMutation({
-    onSuccess() {
+  const updateBlogPostMutation = api.blogPost.update.useMutation({
+    onSuccess(data, variables, context) {
       return utils.blogPost.get.invalidate();
     },
   });
-  const currUser = api.user.currentUser.useQuery();
   const [isModalOpen, setModalOpen] = useState(false);
   const [isSuccessful, setSuccessful] = useState(false);
 
   useEffect(() => {
-    if (createBlogPostMutation.isSuccess) {
+    if (updateBlogPostMutation.isSuccess) {
       setSuccessful(true);
 
       const timeoutId = setTimeout(() => {
@@ -32,34 +38,20 @@ export const CreateBlogPostWidget: React.FC = () => {
         clearTimeout(timeoutId);
       };
     }
-  }, [createBlogPostMutation.isSuccess]);
-
-  if (currUser.isLoading) {
-    return <CreateBlogPostButton loading />;
-  }
-
-  if (
-    currUser.data === null ||
-    !!!currUser.data ||
-    !["CONTRIBUTOR", "ADMIN"].includes(currUser.data.role)
-  ) {
-    return <CreateBlogPostButton unauthorized />;
-  }
-
-  const userId = currUser.data.id;
+  }, [updateBlogPostMutation.isSuccess]);
 
   return (
     <>
-      <CreateBlogPostButton onClick={() => setModalOpen(true)} />
+      <UpdateBlogPostButton onClick={() => setModalOpen(true)} />
       <BlogPostInputModal
-        action="Create"
+        action="Update"
         isOpen={isModalOpen}
         onRequestClose={() => {
           setModalOpen(false);
         }}
-        closeDisabled={createBlogPostMutation.isLoading || isSuccessful}
+        closeDisabled={updateBlogPostMutation.isLoading || isSuccessful}
       >
-        {createBlogPostMutation.isLoading ? (
+        {updateBlogPostMutation.isLoading ? (
           <div className="flex h-96 w-full items-center justify-center">
             <Spinner size={12} />
           </div>
@@ -69,16 +61,18 @@ export const CreateBlogPostWidget: React.FC = () => {
               size={"12rem"}
               className="animate-pulse stroke-highlight-green"
             />
-            <div className="text-lg">Successfully created the blog post</div>
+            <div className="text-lg">Successfully updated the blog post</div>
           </div>
         ) : (
-          <CreateBlogPostForm
+          <UpdateBlogPostForm oldTitle={title} oldContent={content}
             onSubmit={(fieldValues) =>
-              createBlogPostMutation.mutate({
+              updateBlogPostMutation.mutate({
+                where: {
+                  id
+                },
                 data: {
                   title: fieldValues.title,
                   content: fieldValues.content,
-                  userId: userId
                 },
               })
             }
