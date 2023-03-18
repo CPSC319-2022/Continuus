@@ -10,7 +10,7 @@ import { ProfilePicture } from "./ProfilePicture";
 import { BlogPostActionsMenu } from "~/components/BlogPostActionsMenu";
 import { api } from "~/utils/api";
 import { useSession } from "next-auth/react";
-import { hasPermissionToAccess, isAdmin } from "~/components/util";
+import { shouldSeeActions, isAdmin } from "~/components/util";
 
 type CommentEntry = CommentType & { user: User };
 
@@ -89,7 +89,7 @@ export const CommentModal: React.FC<CommentModalProps> = ({
                 <p className="text-sm text-slate-400">{timeAgo(lastUpdated)}</p>
               </div>
             </div>
-            {hasPermissionToAccess(status, currUser.data, author) && (
+            {shouldSeeActions(status, currUser.data, author) && (
               <BlogPostActionsMenu
                 id={id}
                 title={title}
