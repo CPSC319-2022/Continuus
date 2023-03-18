@@ -4,23 +4,25 @@ import { MenuIcon } from "~/icons/Menu";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkSlug from "remark-slug";
+import type { Comment as CommentType, User } from "@prisma/client";
+import { timeAgo } from "~/utils/time";
+import { ProfilePicture } from "./ProfilePicture";
 
-export interface ModalProps {
-  id: number;
+type CommentEntry = CommentType & { user: User };
+
+export interface CommentModalProps {
+  id: string;
+  title: string;
   poster: string;
-  lastUpdated: string;
+  lastUpdated: Date;
   post: string;
   posterAvatarUrl: string;
-  comments: {
-    name: string;
-    comment: string;
-    dateAdded: string;
-    imageUrl: string;
-  }[];
+  comments: CommentEntry[];
 }
 
-export const Modal: React.FC<ModalProps> = ({
+export const CommentModal: React.FC<CommentModalProps> = ({
   id,
+  title,
   poster,
   lastUpdated,
   post,
@@ -54,16 +56,13 @@ export const Modal: React.FC<ModalProps> = ({
           <div className="mb-3 flex w-full justify-between">
             <div className="flex">
               <div className="avatar self-center">
-                <div className="h-10 w-10 rounded-full">
-                    <img src={posterAvatarUrl} alt="avatar" 
-                        onClick={handleProfileView}
+                <ProfilePicture size={2.5} imgUrl={posterAvatarUrl}
+                            onClick={handleProfileView}
                     />
-                </div>
               </div>
               <div className="ml-3">
-                <p className="text-lg font-bold">{poster}
-                </p>
-                <p className="text-sm text-slate-400">{lastUpdated}</p>
+                <p className="text-lg font-bold">{poster}</p>
+                <p className="text-sm text-slate-400">{timeAgo(lastUpdated)}</p>
               </div>
             </div>
             <div className="self-center">
@@ -85,6 +84,7 @@ export const Modal: React.FC<ModalProps> = ({
               </div>
             </div>
           </div>
+          <p className="mb-3 text-xl font-bold">{title}</p>
           <div className="prose max-w-none ">
             <ReactMarkdown remarkPlugins={[remarkGfm, remarkSlug]}>
               {post}
@@ -96,15 +96,21 @@ export const Modal: React.FC<ModalProps> = ({
             </p>
           </div>
           <div>
-            {comments.map(({ name, comment, dateAdded, imageUrl }) => (
-              <Comment
-                key={`${name}${comment}`}
-                commenterName={name}
-                commenterAvatarUrl={imageUrl}
-                dateAdded={dateAdded}
-                comment={comment}
-              />
-            ))}
+            {comments.map(
+              ({
+                content: comment,
+                createdAt: dateAdded,
+                user: { name, image },
+              }) => (
+                <Comment
+                  key={`${name as string}${comment}`}
+                  commenterName={name as string}
+                  commenterAvatarUrl={image as string}
+                  dateAdded={dateAdded}
+                  comment={comment}
+                />
+              )
+            )}
           </div>
           <div className="m-[2rem] mx-0 mb-0">
             <input
@@ -123,7 +129,7 @@ export const Modal: React.FC<ModalProps> = ({
               </button>
               <button
                 className="mt-[0.5rem] h-10 rounded-sm border-[2px] border-slate-200 bg-white px-5 text-center text-black"
-                onClick={(event) => {
+                onClick={() => {
                   console.log("Cancel comment button clicked!");
                 }}
               >

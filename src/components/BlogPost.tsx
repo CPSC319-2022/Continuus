@@ -3,26 +3,18 @@ import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkSlug from "remark-slug";
 import Link from "next/link";
+import { timeAgo } from "~/utils/time";
+import { ProfilePicture } from "./ProfilePicture";
 
-interface BlogPostProps {
-  id: number;
+interface BlogPostProps extends React.ComponentProps<"div"> {
+  id: string;
   name: string;
-  lastUpdated: string;
+  lastUpdated: Date;
   title: string;
   content: string;
   imageUrl: string;
   comments: number;
 }
-
-const markdownString = `
-# Hello, World!
-
-This is a sample markdown string.
-
-- List item 1
-- List item 2
-- List item 3
-`;
 
 export const BlogPost: React.FC<BlogPostProps> = ({
   id,
@@ -32,24 +24,25 @@ export const BlogPost: React.FC<BlogPostProps> = ({
   content,
   imageUrl,
   comments,
+  ...props
 }) => {
   return (
-    <div className="bg-base-150 card w-full rounded-md shadow-md shadow-slate-300">
+    <div
+      className="bg-base-150 card w-full rounded-md shadow-md shadow-slate-300"
+      {...props}
+    >
       <div className="card-body m-[-15px]">
         <div className="mb-3 flex w-full justify-between">
           <div className="flex">
             <div className="avatar self-center">
-              <div className="h-10 w-10 rounded-full">
-                <Link href={`/profile/${encodeURIComponent(id)}`}>
-                    <img src={imageUrl} alt="avatar"/>
-                </Link>
-              </div>
+            <Link href={`/profile/${encodeURIComponent(id)}`}>
+              <ProfilePicture size={2.5} imgUrl={imageUrl} />
+            </Link>
             </div>
             <div className="ml-3">
-                <Link href={`/profile/${encodeURIComponent(id)}`}>
-                  <p className="text-lg font-bold">{name}</p>
+                <Link href={`/profile/${encodeURIComponent(id)}`}> <p className="text-lg font-bold">{name}</p>
                 </Link>
-                  <p className="text-sm text-slate-400">{lastUpdated}</p>
+              <p className="text-sm text-slate-400">{timeAgo(lastUpdated)}</p>
             </div>
           </div>
           <div className="self-center">
