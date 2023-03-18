@@ -1,6 +1,6 @@
 import { CommentCreateOneSchema } from "~/generated/schemas";
 
-import { createTRPCRouter, publicProcedure, protectedProcedure } from "../trpc";
+import { createTRPCRouter, protectedProcedure } from "../trpc";
 
 export const commentRouter = createTRPCRouter({
   create: protectedProcedure

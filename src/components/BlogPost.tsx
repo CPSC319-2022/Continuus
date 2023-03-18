@@ -7,7 +7,7 @@ import { api } from "~/utils/api";
 import { BlogPostActionsMenu } from "~/components/BlogPostActionsMenu";
 import { useSession } from "next-auth/react";
 import React from "react";
-import { hasPermissionToAccess, isAdmin } from "~/components/util";
+import { shouldSeeActions, isAuthor } from "~/components/util";
 
 interface BlogPostProps extends React.ComponentProps<"div"> {
   id: string;
@@ -56,12 +56,12 @@ export const BlogPost: React.FC<BlogPostProps> = ({
               }`}</p>
             </div>
           </div>
-          {hasPermissionToAccess(status, currUser.data, author) && (
+          {shouldSeeActions(status, currUser.data, author) && (
             <BlogPostActionsMenu
               id={id}
               title={title}
               content={content}
-              isAdmin={isAdmin(currUser.data)}
+              isAuthor={isAuthor(currUser.data, author)}
             />
           )}
         </div>

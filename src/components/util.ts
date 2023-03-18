@@ -8,19 +8,22 @@ const isAuthed = (status: string) => {
   }
 }
 
-const isAuthor = (currUserData: User | null | undefined, authorUserId: string) => {
+export const isAuthor = (currUserData: User | null | undefined, authorUserId: string) => {
   if ((currUserData !== null) && (currUserData !== undefined)) {
-    return currUserData.id === authorUserId;
-  }
-}
-
-export const isAdmin = (currUserData: User | null | undefined) => {
-  if ((currUserData !== null) && (currUserData !== undefined)) {
-    return currUserData.role === "ADMIN";
+    if (currUserData.id === authorUserId)
+      return true;
   }
   return false;
 }
 
-export const hasPermissionToAccess = (status: string, currUserData: User | null | undefined, authorUserId: string) => {
+export const isAdmin = (currUserData: User | null | undefined) => {
+  if ((currUserData !== null) && (currUserData !== undefined)) {
+    if (currUserData.role === "ADMIN")
+      return true;
+  }
+  return false;
+}
+
+export const shouldSeeActions = (status: string, currUserData: User | null | undefined, authorUserId: string) => {
   return ((isAuthed(status) && isAuthor(currUserData, authorUserId)) || (isAuthed(status) && isAdmin(currUserData)))
 }
