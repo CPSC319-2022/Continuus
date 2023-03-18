@@ -19,6 +19,7 @@ export interface CommentModalProps {
   title: string;
   poster: string;
   lastUpdated: Date;
+  createdAt: Date;
   post: string;
   posterAvatarUrl: string;
   comments: CommentEntry[];
@@ -31,6 +32,7 @@ export const CommentModal: React.FC<CommentModalProps> = ({
   title,
   poster,
   lastUpdated,
+  createdAt,
   post,
   posterAvatarUrl,
   comments,
@@ -86,7 +88,11 @@ export const CommentModal: React.FC<CommentModalProps> = ({
               </div>
               <div className="ml-3">
                 <p className="text-lg font-bold">{poster}</p>
-                <p className="text-sm text-slate-400">{timeAgo(lastUpdated)}</p>
+                <p className="text-sm text-slate-400">{`${timeAgo(createdAt)}${
+                  createdAt.getTime() !== lastUpdated.getTime()
+                    ? ` (updated ${timeAgo(lastUpdated)})`
+                    : ""
+                }`}</p>
               </div>
             </div>
             {hasPermissionToAccess(status, currUser.data, author) && (
