@@ -29,9 +29,7 @@ export const BlogPostViewer: React.FC = () => {
       ),
     [blogPosts]
   );
-
   const { ref, inView } = useInView();
-
   useEffect(() => {
     if (inView) {
       void (async () => {
@@ -39,7 +37,6 @@ export const BlogPostViewer: React.FC = () => {
       })();
     }
   }, [inView, fetchNextPage]);
-
   return (
     <div className="w-full md:w-1/2 ">
       <div className="mb-6 flex w-full justify-end">
@@ -84,6 +81,8 @@ export const BlogPostViewer: React.FC = () => {
                   lastUpdated={updatedAt}
                   post={content}
                   posterAvatarUrl={image as string}
+                  content={content}
+                  author={userId}
                 />
               </>
             )

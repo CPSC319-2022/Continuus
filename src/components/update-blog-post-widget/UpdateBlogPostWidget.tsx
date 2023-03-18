@@ -8,12 +8,11 @@ import { BlogPostInputModal } from "~/components/BlogPostInputModal";
 
 interface UpdateBlogPostProps {
   id: string,
-  author: string,
   title: string,
   content: string
 }
 
-export const UpdateBlogPostWidget: React.FC<UpdateBlogPostProps> = ({id, author, title, content}) => {
+export const UpdateBlogPostWidget: React.FC<UpdateBlogPostProps> = ({id, title, content}) => {
   const utils = api.useContext();
 
   const updateBlogPostMutation = api.blogPost.update.useMutation({

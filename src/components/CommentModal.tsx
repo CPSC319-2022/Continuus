@@ -7,7 +7,10 @@ import remarkSlug from "remark-slug";
 import type { Comment as CommentType, User } from "@prisma/client";
 import { timeAgo } from "~/utils/time";
 import { ProfilePicture } from "./ProfilePicture";
+import { BlogPostActionsMenu } from "~/components/BlogPostActionsMenu";
 import { api } from "~/utils/api";
+import { useSession } from "next-auth/react";
+import { hasPermissionToAccess, isAdmin } from "~/components/util";
 
 type CommentEntry = CommentType & { user: User };
 
@@ -19,6 +22,8 @@ export interface CommentModalProps {
   post: string;
   posterAvatarUrl: string;
   comments: CommentEntry[];
+  content: string;
+  author: string;
 }
 
 export const CommentModal: React.FC<CommentModalProps> = ({
@@ -29,12 +34,16 @@ export const CommentModal: React.FC<CommentModalProps> = ({
   post,
   posterAvatarUrl,
   comments,
+  author,
+  content,
 }) => {
   const [input, setInput] = useState<string>("");
 
   const utils = api.useContext();
 
   const currUser = api.user.currentUser.useQuery();
+
+  const { status } = useSession();
 
   const createCommentMutation = api.comment.create.useMutation({
     onSuccess() {
@@ -65,7 +74,7 @@ export const CommentModal: React.FC<CommentModalProps> = ({
   return (
     <>
       <input type="checkbox" id={`modal-${id}`} className="modal-toggle" />
-      <label htmlFor={`modal-${id}`} className="modal cursor-pointer">
+      <label htmlFor={`modal-${id}`} className="modal z-10 cursor-pointer">
         <label
           className="card-body modal-box relative m-[-10px] w-11/12 max-w-5xl rounded-md"
           htmlFor=""
@@ -80,24 +89,14 @@ export const CommentModal: React.FC<CommentModalProps> = ({
                 <p className="text-sm text-slate-400">{timeAgo(lastUpdated)}</p>
               </div>
             </div>
-            <div className="self-center">
-              <div className="dropdown-left dropdown rounded-md shadow-slate-300">
-                <button>
-                  <MenuIcon />
-                </button>
-                <ul
-                  tabIndex={0}
-                  className="dropdown-content menu rounded-box w-52 bg-base-100 p-2 shadow"
-                >
-                  <li>
-                    <a>Edit</a>
-                  </li>
-                  <li>
-                    <a>Delete</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
+            {hasPermissionToAccess(status, currUser.data, author) && (
+              <BlogPostActionsMenu
+                id={id}
+                title={title}
+                content={content}
+                isAdmin={isAdmin(currUser.data)}
+              />
+            )}
           </div>
           <p className="mb-3 text-xl font-bold">{title}</p>
           <div className="prose max-w-none ">
