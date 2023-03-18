@@ -49,11 +49,11 @@ export const UserTable: React.FC = () => {
     const columns = useMemo(() => ([
         columnHelper.accessor('id', {
             header: 'ID',
-            cell: info => users.isLoading ? <TextSkeleton width={14} /> :  info.getValue(),
+            cell: info => users.isLoading ? <TextSkeleton width={13} /> :  info.getValue(),
         }),
         columnHelper.accessor('name', {
             header: 'Name',
-            cell: info => users.isLoading ? <TextSkeleton width={6} /> :  info.getValue(),
+            cell: info => users.isLoading ? <TextSkeleton width={8} /> :  info.getValue(),
         }),
         columnHelper.accessor('image', {
             header: 'Picture',
