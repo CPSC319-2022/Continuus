@@ -1,4 +1,4 @@
-import { Role, type PrismaClient } from '@prisma/client';
+import { type PrismaClient } from '@prisma/client';
 import { z } from "zod";
 import { UserUpdateOneSchema } from '~/generated/schemas';
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
