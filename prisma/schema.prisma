@@ -7,15 +7,11 @@ generator client {
 
 generator zod {
     provider = "prisma-zod-generator"
-    output = "../src/generated"
+    output   = "../src/generated"
 }
 
 datasource db {
     provider = "postgres"
-    // NOTE: When using postgresql, mysql or sqlserver, uncomment the @db.Text annotations in model Account below
-    // Further reading:
-    // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
-    // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
     url      = env("DATABASE_URL")
 }
 
@@ -27,19 +23,22 @@ model Example {
 
 // Necessary for Next auth
 model Account {
-    id                String  @id @default(cuid())
+    id                String   @id @default(cuid())
     userId            String
     type              String
     provider          String
     providerAccountId String
-    refresh_token     String? // @db.Text
-    access_token      String? // @db.Text
+    refresh_token     String?
+    access_token      String?
     expires_at        Int?
     token_type        String?
     scope             String?
-    id_token          String? // @db.Text
+    id_token          String?
     session_state     String?
-    user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+    user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    createdAt         DateTime @default(now()) @db.Timestamptz(3) // with a timezone
+    // @updatedAt flag automatically updates this field
+    updatedAt         DateTime @updatedAt @db.Timestamptz(3) // with a timezone
 
     @@unique([provider, providerAccountId])
 }
@@ -53,13 +52,19 @@ model Session {
 }
 
 model User {
-    id            String    @id @default(cuid())
+    id            String     @id @default(cuid())
     name          String?
-    email         String?   @unique
+    email         String?    @unique
     emailVerified DateTime?
     image         String?
+    role          Role       @default(READER)
     accounts      Account[]
     sessions      Session[]
+    blogPosts     BlogPost[]
+    comments      Comment[]
+    createdAt     DateTime   @default(now()) @db.Timestamptz(3) // with a timezone
+    // @updatedAt flag automatically updates this field
+    updatedAt     DateTime   @updatedAt @db.Timestamptz(3) // with a timezone
 }
 
 model VerificationToken {
@@ -68,4 +73,34 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+model BlogPost {
+    id        String    @id @default(cuid())
+    userId    String
+    title     String
+    content   String
+    // If we delete the user, we want to delete the blog post
+    user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+    comments  Comment[]
+    createdAt DateTime  @default(now()) @db.Timestamptz(3) // with a timezone
+    updatedAt DateTime  @updatedAt @db.Timestamptz(3) // with a timezone
+}
+
+model Comment {
+    id         String   @id @default(cuid())
+    userId     String
+    blogPostId String
+    content    String
+    // If we delete the user or the associated blog post, we want to delete the Comment
+    user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    blogPost   BlogPost @relation(fields: [blogPostId], references: [id], onDelete: Cascade)
+    createdAt  DateTime @default(now()) @db.Timestamptz(3) // with a timezone
+    updatedAt  DateTime @updatedAt @db.Timestamptz(3) // with a timezone
+}
+
+enum Role {
+    READER
+    CONTRIBUTOR
+    ADMIN
 }
