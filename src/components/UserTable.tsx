@@ -91,7 +91,7 @@ export const UserTable: React.FC = () => {
     ]), [users.isLoading])
 
     const tableData: User[] = useMemo(
-        () => (users.isLoading ? Array(10).fill({} as User) : (users.data || [])),
+        () => ((users.isLoading ? Array(10).fill({}) : (users.data || []))) as User[],
         [users.isLoading, users.data]
     );
 
