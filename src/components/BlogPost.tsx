@@ -7,7 +7,7 @@ import { api } from "~/utils/api";
 import { BlogPostActionsMenu } from "~/components/BlogPostActionsMenu";
 import { useSession } from "next-auth/react";
 import React from "react";
-import { isAdmin, isAuthed, isAuthor } from "~/components/util";
+import { hasPermissionToAccess, isAdmin } from "~/components/util";
 
 interface BlogPostProps extends React.ComponentProps<"div"> {
   id: string;
@@ -33,6 +33,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
 }) => {
   const currUser = api.user.currentUser.useQuery();
   const { status } = useSession();
+
   return (
     <div
       className="bg-base-150 card w-full rounded-md shadow-md shadow-slate-300"
@@ -50,8 +51,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
             </div>
           </div>
           {
-            ((currUser.data !== null) && (currUser.data !== undefined)) &&
-            ((isAuthed(status) && isAuthor(currUser.data, author)) || (isAuthed(status) && isAdmin(currUser.data))) &&
+            hasPermissionToAccess(status, currUser.data, author) &&
               <BlogPostActionsMenu id={id} title={title} content={content} isAdmin={isAdmin(currUser.data)}/>
           }
         </div>

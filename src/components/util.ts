@@ -1,6 +1,6 @@
 import type { User } from "@prisma/client";
 
-export const isAuthed = (status: string) => {
+const isAuthed = (status: string) => {
   if (status === "authenticated") {
     return true;
   } else if (status === "unauthenticated") {
@@ -8,15 +8,19 @@ export const isAuthed = (status: string) => {
   }
 }
 
-export const isAuthor = (currUserData: User, authorUserId: string) => {
+const isAuthor = (currUserData: User | null | undefined, authorUserId: string) => {
   if ((currUserData !== null) && (currUserData !== undefined)) {
     return currUserData.id === authorUserId;
   }
 }
 
-export const isAdmin = (currUserData: User) => {
+export const isAdmin = (currUserData: User | null | undefined) => {
   if ((currUserData !== null) && (currUserData !== undefined)) {
     return currUserData.role === "ADMIN";
   }
   return false;
+}
+
+export const hasPermissionToAccess = (status: string, currUserData: User | null | undefined, authorUserId: string) => {
+  return ((isAuthed(status) && isAuthor(currUserData, authorUserId)) || (isAuthed(status) && isAdmin(currUserData)))
 }

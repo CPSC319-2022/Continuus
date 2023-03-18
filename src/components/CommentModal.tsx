@@ -10,7 +10,7 @@ import { ProfilePicture } from "./ProfilePicture";
 import { BlogPostActionsMenu } from "~/components/BlogPostActionsMenu";
 import { api } from "~/utils/api";
 import { useSession } from "next-auth/react";
-import { isAdmin, isAuthed, isAuthor } from "~/components/util";
+import { hasPermissionToAccess, isAdmin } from "~/components/util";
 
 type CommentEntry = CommentType & { user: User };
 
@@ -69,8 +69,7 @@ export const CommentModal: React.FC<CommentModalProps> = ({
               </div>
             </div>
             {
-              ((currUser.data !== null) && (currUser.data !== undefined)) &&
-              ((isAuthed(status) && isAuthor(currUser.data, author)) || (isAuthed(status) && isAdmin(currUser.data))) &&
+              hasPermissionToAccess(status, currUser.data, author) &&
                 <BlogPostActionsMenu id={id} title={title} content={content} isAdmin={isAdmin(currUser.data)}/>
             }
           </div>
