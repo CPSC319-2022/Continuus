@@ -10,32 +10,35 @@ interface NavItemFields {
   adminOnly: boolean;
 }
 
-const navigationItems: NavItemFields[] = [
-  {
-    title: "Blog Feed",
-    path: "/",
-    authenticated: false,
-    adminOnly: false,
-  },
-  {
-    title: "Profile",
-    path: "/profile",
-    authenticated: true,
-    adminOnly: false,
-  },
-  {
-    title: "Admin Panel",
-    path: "/admin",
-    authenticated: true,
-    adminOnly: true,
-  },
-];
+
 
 export const Sidebar: React.FC = () => {
   const [navItems, setNavItems] = useState<NavItemFields[]>([]);
 
   const { data: userData } = api.user.currentUser.useQuery();
   const { pathname } = useRouter();
+  const profilePath = encodeURIComponent(userData?.id as string);
+
+  const navigationItems: NavItemFields[] = [
+      {
+        title: "Blog Feed",
+        path: "/",
+        authenticated: false,
+        adminOnly: false,
+      },
+      {
+        title: "Profile",
+        path: "/profile/" + profilePath,
+        authenticated: true,
+        adminOnly: false,
+      },
+      {
+        title: "Admin Panel",
+        path: "/admin",
+        authenticated: true,
+        adminOnly: true,
+      },
+    ];
 
   useEffect(() => {
     setNavItems(

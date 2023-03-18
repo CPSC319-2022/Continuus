@@ -57,11 +57,14 @@ export const userRouter = createTRPCRouter({
         await ctx.prisma.user.update(update);
       }
     }),
-  //selectedUser: publicProcedure.query(async (id: string, { ctx }) => {
-  //      return await ctx.prisma.user.findUnique({
-  //          where: {
-  //              id: id,
-  //          },
-  //      }))
-  //}),
+  selectedUser: publicProcedure
+    .input(
+      z
+        .object({
+          text: z.string(),
+        })
+    )
+    .query(async ({ ctx, input }) => {
+        return await getCurrentUser(ctx.prisma, input.text);
+    }),
 });

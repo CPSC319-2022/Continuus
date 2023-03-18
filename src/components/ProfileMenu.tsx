@@ -3,6 +3,8 @@ import { signIn, useSession, signOut } from "next-auth/react";
 import Image from 'next/image';
 import btn_google from '../../public/btn_google.png'
 import { CurrUserProfilePicture } from "./CurrUserProfilePicture";
+import Link from "next/link";
+import {currentUserPathToProfile} from "~/utils/profile";
 
 export const ProfileMenu: React.FC = () => {
     const { status } = useSession();
@@ -23,10 +25,12 @@ export const ProfileMenu: React.FC = () => {
         {(() => {
           switch (status) {
             case "authenticated":
+               //const profilePath = currentUserPathToProfile(); 
               return [
-                <MenuItem className={menuItemClassName} key="profile">
+                  // TODO: link to profile page here
+                  <MenuItem className={menuItemClassName} key="profile">
                   Profile
-                </MenuItem>,
+                  </MenuItem>,
                 <MenuItem
                   className={menuItemClassName}
                   key="sign-out"

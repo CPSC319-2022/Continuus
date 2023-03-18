@@ -5,21 +5,39 @@ import { api } from "~/utils/api";
 import { CommentModal } from "./CommentModal";
 import { Spinner } from "./Spinner";
 import { BlogPost as BlogPostComponent } from "./BlogPost";
+import {BlogPostWhereInputObjectSchema} from "~/generated/schemas";
 
 type Post = BlogPost & { user: User; comments: (Comment & { user: User })[] };
 
-export const BlogPostViewer: React.FC = () => {
+export interface BlogPostViewerProps extends React.ComponentProps<"div"> {
+    userOption: boolean
+}
+
+export const BlogPostViewer: React.FC<BlogPostViewerProps> = ({
+    userOption
+  }) => {
+
+  const { data: userData } = api.user.currentUser.useQuery();
   const [view, setView] = useState<string>("Recent");
+
   const {
     data: blogPosts,
     fetchNextPage,
     hasNextPage,
-  } = api.blogPost.get.useInfiniteQuery(
+  } = (userOption) ? api.blogPost.get.useInfiniteQuery(
     {
       take: 20,
+      where: {
+        id: (userData?.id as string)
+      }
     },
     { getNextPageParam: (lastPage) => (lastPage.nextCursor ? { id: lastPage.nextCursor } : undefined) }
-  );
+  ) : 
+      api.blogPost.get.useInfiniteQuery(
+      {
+          take:20,
+      },
+      { getNextPageParam: (lastPage) => (lastPage.nextCursor ? { id: lastPage.nextCursor } : undefined) });
 
   const posts = useMemo(
     () =>
