@@ -39,6 +39,20 @@ export const CommentModal: React.FC<CommentModalProps> = ({
 }) => {
   const [input, setInput] = useState<string>("");
 
+  const utils = api.useContext();
+
+  const currUser = api.user.currentUser.useQuery();
+
+  const { status } = useSession();
+
+  const createCommentMutation = api.comment.create.useMutation({
+    onSuccess() {
+      return utils.blogPost.get.invalidate();
+    },
+  });
+
+  const userId = currUser?.data?.id;
+
   const handleCommentChange = (event: {
     target: { value: React.SetStateAction<string> };
   }) => {
@@ -46,14 +60,21 @@ export const CommentModal: React.FC<CommentModalProps> = ({
   };
 
   const handlePostButtonClick = () => {
-    console.log(`User comment: ${input}`);
+    createCommentMutation.mutate({
+      data: {
+        userId: userId!,
+        blogPostId: id,
+        content: input,
+      },
+    });
+
+    setInput("");
   };
-  const currUser = api.user.currentUser.useQuery();
-  const { status } = useSession();
+
   return (
     <>
       <input type="checkbox" id={`modal-${id}`} className="modal-toggle" />
-      <label htmlFor={`modal-${id}`} className="modal cursor-pointer z-10">
+      <label htmlFor={`modal-${id}`} className="modal z-10 cursor-pointer">
         <label
           className="card-body modal-box relative m-[-10px] w-11/12 max-w-5xl rounded-md"
           htmlFor=""
@@ -68,10 +89,14 @@ export const CommentModal: React.FC<CommentModalProps> = ({
                 <p className="text-sm text-slate-400">{timeAgo(lastUpdated)}</p>
               </div>
             </div>
-            {
-              hasPermissionToAccess(status, currUser.data, author) &&
-                <BlogPostActionsMenu id={id} title={title} content={content} isAdmin={isAdmin(currUser.data)}/>
-            }
+            {hasPermissionToAccess(status, currUser.data, author) && (
+              <BlogPostActionsMenu
+                id={id}
+                title={title}
+                content={content}
+                isAdmin={isAdmin(currUser.data)}
+              />
+            )}
           </div>
           <p className="mb-3 text-xl font-bold">{title}</p>
           <div className="prose max-w-none ">
@@ -87,12 +112,13 @@ export const CommentModal: React.FC<CommentModalProps> = ({
           <div>
             {comments.map(
               ({
+                id: commentId,
                 content: comment,
                 createdAt: dateAdded,
                 user: { name, image },
               }) => (
                 <Comment
-                  key={`${name as string}${comment}`}
+                  key={`${commentId}`}
                   commenterName={name as string}
                   commenterAvatarUrl={image as string}
                   dateAdded={dateAdded}
@@ -102,30 +128,41 @@ export const CommentModal: React.FC<CommentModalProps> = ({
             )}
           </div>
           <div className="m-[2rem] mx-0 mb-0">
-            <input
-              type="text"
-              placeholder="Write a new comment"
-              value={input}
-              onChange={handleCommentChange}
-              className="w-5xl input-bordered mb-1 w-full rounded-sm border-[1px] p-2"
-            />
+            <div
+              className={`${userId ? "" : "tooltip tooltip-info"} w-full`}
+              data-tip="Sign in to comment"
+            >
+              <input
+                type="text"
+                placeholder="Write a new comment"
+                value={input}
+                onChange={handleCommentChange}
+                readOnly={userId ? false : true}
+                disabled={userId ? false : true}
+                className={`${
+                  userId ? "" : "input-disabled cursor-not-allowed"
+                }input-bordered mb-1 w-full rounded-sm border-[1px] p-2`}
+              />
+            </div>
+
             <div className="mb-[-10px] flex justify-end gap-2">
               <button
-                className="mt-[0.5rem] h-10 rounded-sm border-highlight-green bg-highlight-green px-5 text-black"
+                className={`${
+                  userId
+                    ? " border-highlight-green bg-highlight-green "
+                    : "input-disabled cursor-not-allowed bg-gray-400 text-black"
+                } mt-[0.5rem] h-10 rounded-sm px-5`}
                 onClick={handlePostButtonClick}
+                disabled={userId ? false : true}
               >
                 Post
               </button>
-              <button
-                className="mt-[0.5rem] h-10 rounded-sm border-[2px] border-slate-200 bg-white px-5 text-center text-black"
-                onClick={() => {
-                  console.log("Cancel comment button clicked!");
-                }}
+              <label
+                className={`mt-[0.5rem] h-10 rounded-sm border-[2px] border-slate-200 bg-white px-5 pt-[0.38rem] text-center text-black hover:cursor-pointer`}
+                htmlFor={`modal-${id}`}
               >
-                <label className="hover:cursor-pointer" htmlFor={`modal-${id}`}>
-                  Cancel
-                </label>
-              </button>
+                Cancel
+              </label>
             </div>
           </div>
         </label>
