@@ -1,5 +1,6 @@
 import type { FormEvent} from "react";
 import React, { useState } from "react";
+import { CurrUserProfilePicture } from "~/components/CurrUserProfilePicture";
 
 export interface UpdateBlogPostFields {
   title: string;
@@ -27,8 +28,8 @@ export const UpdateBlogPostForm: React.FC<{ oldTitle: string, oldContent: string
       }}
     >
       <div className="border-b border-b-gray-200 pl-4 pr-4 py-6 flex flex-row items-start">
-        <div>ProfileImage</div>
-        <div className="flex flex-col w-full">
+        <CurrUserProfilePicture size={2.5} />
+        <div className="flex flex-col w-full ml-2">
           <input
             className="w-full bg-gray-100 rounded-md p-2 mb-4"
             placeholder="Write title here"
