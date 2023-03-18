@@ -2,8 +2,10 @@ import { Role, User } from "@prisma/client";
 import { createColumnHelper, flexRender, getCoreRowModel, PaginationState, useReactTable } from "@tanstack/react-table";
 import { useMemo, useState } from "react";
 import { api } from "~/utils/api";
+import { ImageSkeleton } from "./ImageSkeleton";
 import { ProfilePicture } from "./ProfilePicture";
 import { Spinner } from "./Spinner";
+import { TextSkeleton } from "./TextSkeleton";
 import { UserRoleDropDown } from "./UserRoleDropDown";
 
 const columnHelper = createColumnHelper<User>()
@@ -30,9 +32,9 @@ export const UserTable: React.FC = () => {
     const userCount = api.user.count.useQuery();
     const updateUser = api.user.update.useMutation({
         onSuccess: async () => {
-          await utils.user.paginatedUsers.invalidate();
-          await utils.user.currentUser.invalidate();
-          setRoleUpdates(new Map());
+            await utils.user.paginatedUsers.invalidate();
+            await utils.user.currentUser.invalidate();
+            setRoleUpdates(new Map());
         }
     })
 
@@ -47,23 +49,23 @@ export const UserTable: React.FC = () => {
     const columns = useMemo(() => ([
         columnHelper.accessor('id', {
             header: 'ID',
-            cell: info => info.getValue(),
+            cell: info => users.isLoading ? <TextSkeleton width={14} /> :  info.getValue(),
         }),
         columnHelper.accessor('name', {
             header: 'Name',
-            cell: info => info.getValue(),
+            cell: info => users.isLoading ? <TextSkeleton width={6} /> :  info.getValue(),
         }),
         columnHelper.accessor('image', {
             header: 'Picture',
-            cell: info => <ProfilePicture size={3} imgUrl={info.getValue()} />,
+            cell: info => users.isLoading ? <ImageSkeleton size={3} /> : <ProfilePicture size={3} imgUrl={info.getValue()} />,
         }),
         columnHelper.accessor('email', {
             header: 'E-Mail',
-            cell: info => info.getValue(),
+            cell: info => users.isLoading ? <TextSkeleton width={12} /> :  info.getValue(),
         }),
         columnHelper.accessor('role', {
             header: 'Role',
-            cell: info => <UserRoleDropDown
+            cell: info => users.isLoading ? <TextSkeleton width={6} /> : <UserRoleDropDown
                 defaultRole={info.getValue()}
                 userId={info.row.original.id}
                 setRoleUpdate={(userId, role) => setRoleUpdates((oldMap) => {
@@ -80,16 +82,21 @@ export const UserTable: React.FC = () => {
         }),
         columnHelper.accessor('createdAt', {
             header: 'Created At',
-            cell: info => info.getValue().toISOString(),
+            cell: info => users.isLoading ? <TextSkeleton width={12} /> : info.getValue().toLocaleString(),
         }),
         columnHelper.accessor('updatedAt', {
             header: 'Updated At',
-            cell: info => info.getValue().toISOString(),
+            cell: info => users.isLoading ? <TextSkeleton width={12} /> : info.getValue().toLocaleString(),
         }),
-    ]), [])
+    ]), [users.isLoading])
+
+    const tableData = useMemo(
+        () => (users.isLoading ? Array(10).fill({}) : (users.data || [])),
+        [users.isLoading, users.data]
+    );
 
     const table = useReactTable({
-        data: users.data || [],
+        data: tableData,
         columns,
         pageCount: calcMaxPageIndex(pageSize, userCount.data || 0) + 1,
         state: {
@@ -175,16 +182,18 @@ export const UserTable: React.FC = () => {
                 {roleUpdates.size > 0 && (
                     <button
                         className={`px-2 rounded-lg text-white transition-colors ${updateUser.isLoading ? 'bg-blue-700 border cursor-wait' : 'bg-blue-500 hover:bg-blue-600'}`}
-                        onClick={() => {updateUser.mutate(
-                            [...roleUpdates.entries()].map(([userId, role]) => ({
-                                where: {
-                                    id: userId
-                                },
-                                data: {
-                                    role
-                                }
-                            }))
-                        )}}
+                        onClick={() => {
+                            updateUser.mutate(
+                                [...roleUpdates.entries()].map(([userId, role]) => ({
+                                    where: {
+                                        id: userId
+                                    },
+                                    data: {
+                                        role
+                                    }
+                                }))
+                            )
+                        }}
                         disabled={updateUser.isLoading}
                     >
                         {updateUser.isLoading ? <Spinner size={1} /> : <span className="text-base">Save</span>}
