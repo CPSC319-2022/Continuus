@@ -32,7 +32,7 @@ export const blogPostRouter = createTRPCRouter({
         include: {
           user: true,
           comments: {
-            orderBy: [{ createdAt: "desc" }],
+            orderBy: [{ createdAt: "asc" }],
             include: { user: true },
           },
         },
