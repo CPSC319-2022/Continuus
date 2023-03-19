@@ -11,11 +11,13 @@ const Profile: NextPage = () => {
   const router = useRouter();
   if (!router.isReady) {
       return (
-          <Layout>
-            <div className="items-center">
-                <Spinner size={6}/>
-            </div>
-          </Layout>
+          <>
+              <Layout>
+                <div className="items-center">
+                    <Spinner size={6}/>
+                </div>
+              </Layout>
+          </>
       );
   }
 
