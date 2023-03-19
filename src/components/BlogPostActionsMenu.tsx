@@ -2,7 +2,6 @@ import { MenuIcon } from "~/icons/Menu";
 import { UpdateBlogPostWidget } from "~/components/update-blog-post-widget/UpdateBlogPostWidget";
 import React from "react";
 import { DeleteBlogPostWidget } from "~/components/delete-blog-post-widget/DeleteBlogPostWidget";
-import { isAuthor } from "~/components/util";
 
 interface BlogPostActionsProps {
   id: string;

@@ -26,8 +26,7 @@ export const DeleteBlogPostWidget: React.FC<DeleteBlogPostWidgetProps> = ({ id }
       setSuccessful(true);
 
       const timeoutId = setTimeout(() => {
-        setModalOpen(false);
-        setSuccessful(false);
+        location.reload();
       }, 2000);
 
       return () => {
