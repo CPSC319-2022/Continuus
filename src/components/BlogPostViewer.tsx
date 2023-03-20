@@ -29,9 +29,7 @@ export const BlogPostViewer: React.FC = () => {
       ),
     [blogPosts]
   );
-
   const { ref, inView } = useInView();
-
   useEffect(() => {
     if (inView) {
       void (async () => {
@@ -39,7 +37,6 @@ export const BlogPostViewer: React.FC = () => {
       })();
     }
   }, [inView, fetchNextPage]);
-
   return (
     <div className="w-full md:w-1/2 ">
       <div className="mb-6 flex w-full justify-end">
@@ -56,8 +53,10 @@ export const BlogPostViewer: React.FC = () => {
         : posts?.map(
             ({
               id,
+              userId,
               title,
               updatedAt,
+              createdAt,
               content,
               comments,
               user: { name, image },
@@ -66,9 +65,11 @@ export const BlogPostViewer: React.FC = () => {
                 <div key={id} className="mb-6">
                   <BlogPostComponent
                     id={id}
+                    author={userId}
                     name={name as string}
                     title={title}
                     lastUpdated={updatedAt}
+                    createdAt={createdAt}
                     imageUrl={image as string}
                     content={content}
                     comments={(comments as Comment[]).length}
@@ -80,8 +81,11 @@ export const BlogPostViewer: React.FC = () => {
                   comments={comments as (Comment & { user: User })[]}
                   poster={name as string}
                   lastUpdated={updatedAt}
+                  createdAt={createdAt}
                   post={content}
                   posterAvatarUrl={image as string}
+                  content={content}
+                  author={userId}
                 />
               </>
             )

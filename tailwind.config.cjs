@@ -12,4 +12,12 @@ module.exports = {
     },
   },
   plugins: [require("daisyui"), require('@tailwindcss/typography')],
+  daisyui: {themes: [
+    {
+    light: {
+      ...require('daisyui/src/colors/themes')['[data-theme=light]'],
+      "info": "#9CA3AF"
+    },
+  }
+  ]}
 };

@@ -1,14 +1,20 @@
-import { MenuIcon } from "~/icons/Menu";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkSlug from "remark-slug";
 import { timeAgo } from "~/utils/time";
 import { ProfilePicture } from "./ProfilePicture";
+import { api } from "~/utils/api";
+import { BlogPostActionsMenu } from "~/components/BlogPostActionsMenu";
+import { useSession } from "next-auth/react";
+import React from "react";
+import { shouldSeeActions, isAuthor } from "~/components/util";
 
 interface BlogPostProps extends React.ComponentProps<"div"> {
   id: string;
   name: string;
+  author: string;
   lastUpdated: Date;
+  createdAt: Date;
   title: string;
   content: string;
   imageUrl: string;
@@ -17,14 +23,19 @@ interface BlogPostProps extends React.ComponentProps<"div"> {
 
 export const BlogPost: React.FC<BlogPostProps> = ({
   id,
+  author,
   name,
   lastUpdated,
+  createdAt,
   title,
   content,
   imageUrl,
   comments,
   ...props
 }) => {
+  const currUser = api.user.currentUser.useQuery();
+  const { status } = useSession();
+
   return (
     <div
       className="bg-base-150 card w-full rounded-md shadow-md shadow-slate-300"
@@ -38,27 +49,21 @@ export const BlogPost: React.FC<BlogPostProps> = ({
             </div>
             <div className="ml-3">
               <p className="text-lg font-bold">{name}</p>
-              <p className="text-sm text-slate-400">{timeAgo(lastUpdated)}</p>
+              <p className="text-sm text-slate-400">{`${timeAgo(createdAt)}${
+                createdAt.getTime() !== lastUpdated.getTime()
+                  ? ` (updated ${timeAgo(lastUpdated)})`
+                  : ""
+              }`}</p>
             </div>
           </div>
-          <div className="self-center">
-            <div className="dropdown-left dropdown rounded-md shadow-slate-300">
-              <button>
-                <MenuIcon />
-              </button>
-              <ul
-                tabIndex={0}
-                className="dropdown-content menu rounded-box w-52 bg-base-100 p-2 shadow"
-              >
-                <li>
-                  <a>Edit</a>
-                </li>
-                <li>
-                  <a>Delete</a>
-                </li>
-              </ul>
-            </div>
-          </div>
+          {shouldSeeActions(status, currUser.data, author) && (
+            <BlogPostActionsMenu
+              id={id}
+              title={title}
+              content={content}
+              isAuthor={isAuthor(currUser.data, author)}
+            />
+          )}
         </div>
         <p className="mb-3 text-xl font-bold">{title}</p>
         <div className="prose max-w-none ">
