@@ -13,7 +13,7 @@ import { shouldSeeActions, isAuthor } from "~/components/util";
 interface BlogPostProps extends React.ComponentProps<"div"> {
   id: string;
   name: string;
-  author: string;
+  authorId: string;
   lastUpdated: Date;
   createdAt: Date;
   title: string;
@@ -24,7 +24,7 @@ interface BlogPostProps extends React.ComponentProps<"div"> {
 
 export const BlogPost: React.FC<BlogPostProps> = ({
   id,
-  author,
+  authorId,
   name,
   lastUpdated,
   createdAt,
@@ -37,7 +37,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
   const currUser = api.user.currentUser.useQuery();
   const { status } = useSession();
 
-  console.log("Blog Post: " + id);
+  console.log("Blog Post: " + authorId);
 
   return (
     <div
@@ -48,7 +48,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
         <div className="mb-3 flex w-full justify-between">
           <div className="flex">
             <div className="avatar self-center">
-            <Link href={`/profile/${encodeURIComponent(id)}`}>
+            <Link href={`/profile/${encodeURIComponent(authorId)}`}>
               <ProfilePicture size={2.5} imgUrl={imageUrl} />
             </Link>
             </div>
@@ -61,12 +61,12 @@ export const BlogPost: React.FC<BlogPostProps> = ({
               }`}</p>
             </div>
           </div>
-          {shouldSeeActions(status, currUser.data, author) && (
+          {shouldSeeActions(status, currUser.data, authorId) && (
             <BlogPostActionsMenu
               id={id}
               title={title}
               content={content}
-              isAuthor={isAuthor(currUser.data, author)}
+              isAuthor={isAuthor(currUser.data, authorId)}
             />
           )}
         </div>

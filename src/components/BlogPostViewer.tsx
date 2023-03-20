@@ -40,6 +40,8 @@ export const BlogPostViewer: React.FC<BlogPostViewerProps> = ({
       },
       { getNextPageParam: (lastPage) => (lastPage.nextCursor ? { id: lastPage.nextCursor } : undefined) });
 
+    console.log(blogPosts);
+
   const posts = useMemo(
     () =>
       blogPosts?.pages.reduce(
@@ -84,7 +86,7 @@ export const BlogPostViewer: React.FC<BlogPostViewerProps> = ({
                 <div key={id} className="mb-6">
                   <BlogPostComponent
                     id={id}
-                    author={userId}
+                    authorId={userId}
                     name={name as string}
                     title={title}
                     lastUpdated={updatedAt}

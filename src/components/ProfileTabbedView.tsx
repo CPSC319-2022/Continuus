@@ -3,14 +3,20 @@ import {useState} from "react";
 import {api} from "~/utils/api";
 import {BlogPostViewer} from "./BlogPostViewer";
 import {useRouter} from "next/router";
-
+import {ProfileCard} from "./ProfileCard";
+import { Spinner } from "./Spinner";
 
 export const ProfileTabbedView: React.FC = () => {
     const [_, setForceRerender] = useState(false);
     const forceRerender = () => setForceRerender(!_);
     const [tabState, setTabState] = useState(0);
-    const { data: userData } = api.user.currentUser.useQuery();
-    console.log("ID: " + (userData?.id as string));
+
+    const router = useRouter();
+    const { id } = router.query;
+    //const { data: userData } = api.user.selectedUser.query(
+    //    {
+    //        text: id,
+    //    });
 
     const data = [
     {
@@ -27,7 +33,9 @@ export const ProfileTabbedView: React.FC = () => {
     
   return (
     <>
-      <div className="flex flex-col items-center w-1/2">
+      {router.isReady ?
+      <div className="flex flex-col items-center w-5/6">
+            <ProfileCard/>
             <Tabs onSelect={(i: number) => { setTabState(i); forceRerender() }} className='mt-3'>
                 <TabList className="flex flex-row items-center">
                     <Tab className="w-32 text-center p-4 cursor-pointer border-b-4 border-solid border-white hover:border-b-emerald-400 hover:font-bold transition-all" selectedClassName="border-b-4 border-solid border-b-emerald-400 font-bold">{data[0]?.label ?? ''}</Tab>
@@ -35,11 +43,13 @@ export const ProfileTabbedView: React.FC = () => {
                 </TabList>
                 <TabPanel>
                     <div className="mt-4 flex min-h-screen w-full flex-col content-center items-center px-2 md:px-0">
-                        <BlogPostViewer user={"clfdsmwqp006n0yi3hni8eyg0"}/>
+                        <BlogPostViewer user={id as string}/>
                     </div>
                 </TabPanel>
             </Tabs>
         </div>
+        :
+            <Spinner size={24} />}
      </>
 
         //     <Tabs value="html">
