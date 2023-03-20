@@ -25,6 +25,7 @@ export const blogPostRouter = createTRPCRouter({
     .input(BlogPostFindManySchema)
     .query(async ({ input, ctx }) => {
       const { take = 10, cursor } = input;
+      console.log("PRISMA: " + (input.where?.userId as string));
       const items = await ctx.prisma.blogPost.findMany({
         take: take + 1,
         cursor,
@@ -36,6 +37,9 @@ export const blogPostRouter = createTRPCRouter({
             include: { user: true },
           },
         },
+        where: {
+            userId: input.where?.userId,
+        }
       });
       let nextCursor;
       if (items.length > take) {

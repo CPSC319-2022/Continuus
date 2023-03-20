@@ -10,13 +10,13 @@ export const ProfileTabbedView: React.FC = () => {
     const forceRerender = () => setForceRerender(!_);
     const [tabState, setTabState] = useState(0);
     const { data: userData } = api.user.currentUser.useQuery();
-
     console.log("ID: " + (userData?.id as string));
+
     const data = [
     {
       label: "Blog Posts",
       value: "blog_posts",
-      desc: <BlogPostViewer userOption={true}/>,
+      desc: <BlogPostViewer user={"clfdsmwqp006n0yi3hni8eyg0"}/>,
     },
     {
       label: "Comments",
@@ -35,7 +35,7 @@ export const ProfileTabbedView: React.FC = () => {
                 </TabList>
                 <TabPanel>
                     <div className="mt-4 flex min-h-screen w-full flex-col content-center items-center px-2 md:px-0">
-                        <BlogPostViewer userOption={true}/>
+                        <BlogPostViewer user={"clfdsmwqp006n0yi3hni8eyg0"}/>
                     </div>
                 </TabPanel>
             </Tabs>
