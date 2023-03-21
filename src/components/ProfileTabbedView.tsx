@@ -20,7 +20,10 @@ export const ProfileTabbedView: React.FC = () => {
     const { data: userData } = api.user.selectedUser.useQuery({
         text: {id}.id as string,
     });
-    const nBlogPosts: number = api.blogPost.aggregate({
+    const { data: nBlogPosts } = api.blogPost.aggregate.useQuery({
+        userId: {id}.id as string
+    });
+    const { data: nComments } = api.comment.count.useQuery({
         userId: {id}.id as string
     });
 
@@ -43,9 +46,10 @@ export const ProfileTabbedView: React.FC = () => {
       <div className="flex flex-col w-full md:pr-12 md:ml-[15%] md:mr-[15%]">
           <ProfileCard 
               name={userData?.name as string}
-              dateJoined={userData?.createdAt as Date} 
+              dateJoined={userData?.createdAt} 
               imgUrl={userData?.image as string}
-              numBlogPosts={userData?.blogPosts}
+              numBlogPosts={nBlogPosts ?? 0}
+              numComments={nComments ?? 0}
           />
             <Tabs onSelect={(i: number) => { setTabState(i); forceRerender() }} className='mt-3'>
                 <TabList className="flex flex-row justify-start">

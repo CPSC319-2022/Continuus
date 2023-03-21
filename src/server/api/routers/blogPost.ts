@@ -1,5 +1,4 @@
 import {
-    BlogPostCountAggregateInputObjectSchema,
   BlogPostCreateOneSchema, BlogPostDeleteOneSchema,
   BlogPostFindManySchema, BlogPostUpdateOneSchema, BlogPostWhereInputObjectSchema
 } from "~/generated/schemas";
@@ -55,10 +54,7 @@ export const blogPostRouter = createTRPCRouter({
   aggregate: publicProcedure
       .input(BlogPostWhereInputObjectSchema)
       .query(async ({ input, ctx }) => {
-          const count = await ctx.prisma.blogPost.aggregate({
-              _count: {
-                  userId: true,
-              },
+          const count: number = await ctx.prisma.blogPost.count({
               where: {
                   userId: input.userId,
               },
