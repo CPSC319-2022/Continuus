@@ -13,16 +13,22 @@ export const ProfileTabbedView: React.FC = () => {
 
     const router = useRouter();
     const { id } = router.query;
-    //const { data: userData } = api.user.selectedUser.query(
-    //    {
-    //        text: id,
-    //    });
+    if(!router.isReady) {
+        return (<Spinner size={24} />);
+    }
+    const authorId: string = {id}.id as string;
+    const { data: userData } = api.user.selectedUser.useQuery({
+        text: {id}.id as string,
+    });
+    const nBlogPosts: number = api.blogPost.aggregate({
+        userId: {id}.id as string
+    });
 
     const data = [
     {
       label: "Blog Posts",
       value: "blog_posts",
-      desc: <BlogPostViewer user={"clfdsmwqp006n0yi3hni8eyg0"}/>,
+      desc: <BlogPostViewer user={id as string}/>,
     },
     {
       label: "Comments",
@@ -34,47 +40,25 @@ export const ProfileTabbedView: React.FC = () => {
   return (
     <>
       {router.isReady ?
-      <div className="flex flex-col items-center w-full md:pr-12 md:ml-[15%] md:mr-[15%]">
-            <ProfileCard/>
+      <div className="flex flex-col w-full md:pr-12 md:ml-[15%] md:mr-[15%]">
+          <ProfileCard 
+              name={userData?.name as string}
+              dateJoined={userData?.createdAt as Date} 
+              imgUrl={userData?.image as string}
+              numBlogPosts={userData?.blogPosts}
+          />
             <Tabs onSelect={(i: number) => { setTabState(i); forceRerender() }} className='mt-3'>
-                <TabList className="flex flex-row items-center">
+                <TabList className="flex flex-row justify-start">
                     <Tab className="w-32 text-center p-4 cursor-pointer border-b-4 border-solid border-white hover:border-b-emerald-400 hover:font-bold transition-all" selectedClassName="border-b-4 border-solid border-b-emerald-400 font-bold">{data[0]?.label ?? ''}</Tab>
                     <Tab className="w-32 text-center p-4 cursor-pointer border-b-4 border-solid border-white hover:border-b-emerald-400 hover:font-bold transition-all" selectedClassName="border-b-4 border-solid border-b-emerald-400 font-bold">{data[1]?.label ?? ''}</Tab>
                 </TabList>
                 <TabPanel>
-                    <BlogPostViewer user={id as string}/>
+                    {data[0]?.desc ?? <></>}
                 </TabPanel>
             </Tabs>
         </div>
         :
             <Spinner size={24} />}
      </>
-
-        //     <Tabs value="html">
-        //       <TabsHeader>
-        //         {data.map(({ label, value }) => (
-        //           <Tab 
-        //             key={value} 
-        //             value={value}
-        //             color='border-highlight-green'
-        //           >
-        //             {label}
-        //           </Tab>
-        //         ))}
-        //       </TabsHeader>
-        //       <TabsBody
-        //       >
-        //         {data.map(({ value, desc }) => (
-        //           <TabPanel key={value} value={value}>
-        //             <div className="mt-4 flex min-h-screen w-full flex-col content-center items-center px-2 md:px-0">
-        //               <div className="mb-6 flex w-full justify-end">
-        //                 {desc}
-        //               </div>
-        //             </div>
-        //           </TabPanel>
-        //         ))}
-        //       </TabsBody>
-        //     </Tabs>
-      ///     div>
   );
 }

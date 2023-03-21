@@ -1,6 +1,7 @@
 import {
+    BlogPostCountAggregateInputObjectSchema,
   BlogPostCreateOneSchema, BlogPostDeleteOneSchema,
-  BlogPostFindManySchema, BlogPostUpdateOneSchema
+  BlogPostFindManySchema, BlogPostUpdateOneSchema, BlogPostWhereInputObjectSchema
 } from "~/generated/schemas";
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
@@ -51,6 +52,19 @@ export const blogPostRouter = createTRPCRouter({
         nextCursor,
       };
     }),
+  aggregate: publicProcedure
+      .input(BlogPostWhereInputObjectSchema)
+      .query(async ({ input, ctx }) => {
+          const count = await ctx.prisma.blogPost.aggregate({
+              _count: {
+                  userId: true,
+              },
+              where: {
+                  userId: input.userId,
+              },
+          });
+        return count;
+  }),
   update: protectedProcedure.input(BlogPostUpdateOneSchema).mutation(async ({ ctx, input }) => {
       const user = await ctx.prisma.user.findUniqueOrThrow({
         where: {

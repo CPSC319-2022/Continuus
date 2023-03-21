@@ -72,10 +72,7 @@ export const CommentModal: React.FC<CommentModalProps> = ({
     setInput("");
   };
 
-  const handleProfileView = () => {
-    console.log("detect click");
-  };
-
+  // TODO: profile picture link
   return (
     <>
       <input type="checkbox" id={`modal-${id}`} className="modal-toggle" />
@@ -88,7 +85,6 @@ export const CommentModal: React.FC<CommentModalProps> = ({
             <div className="flex">
               <div className="avatar self-center">
                 <ProfilePicture size={2.5} imgUrl={posterAvatarUrl}
-                            onClick={handleProfileView}
                     />
               </div>
               <div className="ml-3">

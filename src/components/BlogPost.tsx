@@ -37,8 +37,6 @@ export const BlogPost: React.FC<BlogPostProps> = ({
   const currUser = api.user.currentUser.useQuery();
   const { status } = useSession();
 
-  console.log("Blog Post: " + authorId);
-
   return (
     <div
       className="bg-base-150 card w-full rounded-md shadow-md shadow-slate-300"

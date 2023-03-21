@@ -19,7 +19,6 @@ export const BlogPostViewer: React.FC<BlogPostViewerProps> = ({
   const { data: userData } = api.user.currentUser.useQuery();
   const [view, setView] = useState<string>("Recent");
 
-  console.log("Id: " + (user as string));
   const {
     data: blogPosts,
     fetchNextPage,
