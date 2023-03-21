@@ -34,7 +34,7 @@ export const ProfileTabbedView: React.FC = () => {
   return (
     <>
       {router.isReady ?
-      <div className="flex flex-col items-center w-5/6">
+      <div className="flex flex-col items-center w-full md:pr-12 md:ml-[15%] md:mr-[15%]">
             <ProfileCard/>
             <Tabs onSelect={(i: number) => { setTabState(i); forceRerender() }} className='mt-3'>
                 <TabList className="flex flex-row items-center">
@@ -42,9 +42,7 @@ export const ProfileTabbedView: React.FC = () => {
                     <Tab className="w-32 text-center p-4 cursor-pointer border-b-4 border-solid border-white hover:border-b-emerald-400 hover:font-bold transition-all" selectedClassName="border-b-4 border-solid border-b-emerald-400 font-bold">{data[1]?.label ?? ''}</Tab>
                 </TabList>
                 <TabPanel>
-                    <div className="mt-4 flex min-h-screen w-full flex-col content-center items-center px-2 md:px-0">
-                        <BlogPostViewer user={id as string}/>
-                    </div>
+                    <BlogPostViewer user={id as string}/>
                 </TabPanel>
             </Tabs>
         </div>
