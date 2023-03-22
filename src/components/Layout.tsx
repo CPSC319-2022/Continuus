@@ -1,6 +1,7 @@
 import Head from "next/head";
 import type { PropsWithChildren } from "react";
 import { Navbar } from "./Navbar";
+import { SearchModal } from "./SearchModal";
 import { Sidebar } from "./Sidebar";
 
 export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
@@ -16,6 +17,7 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
         <Sidebar />
       </nav>
       <main className="inline-flex w-full px-2 pb-24 md:pb-4 md:px-0 overflow-x-auto">
+        <SearchModal />
         {children}
       </main>
     </>
