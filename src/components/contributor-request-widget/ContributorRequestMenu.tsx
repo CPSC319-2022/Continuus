@@ -1,4 +1,6 @@
 import { type Dispatch, type SetStateAction, useEffect, useRef } from "react";
+import { CheckIcon } from "~/icons/Check";
+import { CloseIcon } from "~/icons/Close";
 import { api } from "~/utils/api";
 import { timeAgo } from "~/utils/time";
 import { ProfilePicture } from "../ProfilePicture";
@@ -66,10 +68,10 @@ export const ContributorRequestMenu: React.FC<ContributorRequestMenuProps> = ({
               </div>
               <div className="mr-1 flex self-center">
                 <p className="mx-1 rounded-md bg-highlight-green p-1 text-xs hover:cursor-pointer">
-                  Accept
+                  <CheckIcon />
                 </p>
                 <p className="mx-1 rounded-md bg-slate-200 p-1 text-xs hover:cursor-pointer">
-                  Reject
+                  <CloseIcon />
                 </p>
               </div>
             </div>
