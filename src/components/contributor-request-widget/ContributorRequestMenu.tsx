@@ -24,18 +24,18 @@ export const ContributorRequestMenu: React.FC<ContributorRequestMenuProps> = ({
         setIsOpen(false);
       }
     };
-    const handleEscapePreses = (event: KeyboardEvent) => {
+    const handleEscapePress = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setIsOpen(false);
       }
     };
     // Bind the event listener
     document.addEventListener("mousedown", handleClickOutside);
-    document.addEventListener("keydown", handleEscapePreses);
+    document.addEventListener("keydown", handleEscapePress);
     return () => {
       // Unbind the event listener on clean up
       document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("keydown", handleEscapePreses);
+      document.removeEventListener("keydown", handleEscapePress);
     };
   }, [ref, setIsOpen]);
 
