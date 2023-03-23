@@ -13,10 +13,7 @@ export const ContributorRequestMenu: React.FC<ContributorRequestMenuProps> = ({
   isOpen,
   setIsOpen,
 }) => {
-  const { data: users } = api.user.paginatedUsers.useQuery({
-    pageIndex: 0,
-    pageSize: 10,
-  });
+  const { data: users } = api.contributorRequest.getAll.useQuery({});
 
   const ref = useRef<HTMLDivElement>(null);
 
@@ -53,7 +50,7 @@ export const ContributorRequestMenu: React.FC<ContributorRequestMenuProps> = ({
           <hr />
         </div>
         {users && users.length ? (
-          users.map(({ id, name, createdAt, image }) => (
+          users.map(({ id, createdAt, user: { name, image } }) => (
             <div className="my-2 flex justify-between" key={id}>
               <div className="flex">
                 <ProfilePicture

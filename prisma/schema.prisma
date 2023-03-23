@@ -65,7 +65,7 @@ model User {
     createdAt          DateTime             @default(now()) @db.Timestamptz(3) // with a timezone
     // @updatedAt flag automatically updates this field
     updatedAt          DateTime             @updatedAt @db.Timestamptz(3) // with a timezone
-    ContributorRequest ContributorRequest[]
+    contributorRequest ContributorRequest[]
 }
 
 model VerificationToken {
