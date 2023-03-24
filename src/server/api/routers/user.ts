@@ -48,13 +48,40 @@ export const userRouter = createTRPCRouter({
 
       return await ctx.prisma.user.count();
     }),
-  update: protectedProcedure
+  batchUpdate: protectedProcedure
     .input(z.array(UserUpdateOneSchema))
     .mutation(async ({ ctx, input }) => {
       await assertAdminRole(ctx.prisma, ctx.session.user.id);
 
+      let triedRemovingLastAdmin = false;
+
+      // Sorting is needed to first update users to admin role before removing admin roles
+      input.sort((update) => update.data.role === "ADMIN" ? -1 : 1)
+
       for (const update of input) {
+        if (update.data.role && update.data.role !== "ADMIN") {
+          const adminCount = await ctx.prisma.user.count({
+            where: {
+              role: "ADMIN"
+            }
+          });
+
+          if (adminCount <= 1) {
+            const targetUser = await ctx.prisma.user.findUniqueOrThrow({
+              where: update.where
+            });
+
+            if (targetUser.role === "ADMIN") {
+              triedRemovingLastAdmin = true;
+              console.error("Batch Update: Can't remove the last admin");
+              continue;
+            }
+          }
+        }
+
         await ctx.prisma.user.update(update);
       }
+
+      return triedRemovingLastAdmin;
     }),
 });
