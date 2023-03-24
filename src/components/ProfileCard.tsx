@@ -29,17 +29,17 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({
                 <p className="mt-3 font-medium text-gray-400">joined <span className="font-light text-grey-500">{(dateJoined)? timeAgo(dateJoined) : ''}</span></p>
             </div>
 
-            <div className="px-64 grid grid-cols-3 text-center order-last md:order-first mt-20 md:mt-0">
-              <div>
-                <p className="font-bold text-gray-700 text-xl">{numBlogPosts}</p>
-                <p className="text-gray-400">Blog Posts</p>
-              </div>
-              <div>
-              </div>
-              <div>
-                <p className="font-bold text-gray-700 text-xl">{numComments}</p>
-                <p className="text-gray-400">Comments</p>
-              </div>
+            <div className="wx-1/2">
+                <div className="grid grid-cols-2 gap-10 text-center grid-padding-64">
+                <div>
+                    <p className="font-bold text-gray-700 text-xl">{numBlogPosts}</p>
+                    <p className="text-gray-400">Blog Posts</p>
+                </div>
+                <div>
+                    <p className="font-bold text-gray-700 text-xl">{numComments}</p>
+                    <p className="text-gray-400">Comments</p>
+                </div>
+                </div>
             </div>
         </div>);
 };
