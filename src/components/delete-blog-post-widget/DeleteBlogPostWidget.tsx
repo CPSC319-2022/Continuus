@@ -10,27 +10,17 @@ interface DeleteBlogPostWidgetProps {
 }
 
 export const DeleteBlogPostWidget: React.FC<DeleteBlogPostWidgetProps> = ({ id }) => {
-  const utils = api.useContext();
-
-  const deleteBlogPostMutation = api.blogPost.delete.useMutation({
-    onSuccess(data, variables, context) {
-      return utils.blogPost.get.invalidate();
-    },
-  });
-
+  const deleteBlogPostMutation = api.blogPost.delete.useMutation();
   const [isModalOpen, setModalOpen] = useState(false);
   const [isSuccessful, setSuccessful] = useState(false);
 
   useEffect(() => {
     if (deleteBlogPostMutation.isSuccess) {
       setSuccessful(true);
-
       const timeoutId = setTimeout(() => {
         location.reload();
       }, 2000);
-
       return () => {
-        setSuccessful(false);
         clearTimeout(timeoutId);
       };
     }
@@ -45,7 +35,6 @@ export const DeleteBlogPostWidget: React.FC<DeleteBlogPostWidgetProps> = ({ id }
         onRequestClose={() => {
           setModalOpen(false);
         }}
-        closeDisabled={deleteBlogPostMutation.isLoading || isSuccessful}
       >
         {deleteBlogPostMutation.isLoading ? (
           <div className="flex h-96 w-full items-center justify-center">
