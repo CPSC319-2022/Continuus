@@ -35,6 +35,7 @@ export const DeleteBlogPostWidget: React.FC<DeleteBlogPostWidgetProps> = ({ id }
         onRequestClose={() => {
           setModalOpen(false);
         }}
+        closeDisabled={deleteBlogPostMutation.isLoading || isSuccessful}
       >
         {deleteBlogPostMutation.isLoading ? (
           <div className="flex h-96 w-full items-center justify-center">
