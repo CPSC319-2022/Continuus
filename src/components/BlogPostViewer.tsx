@@ -8,7 +8,7 @@ import { BlogPost as BlogPostComponent } from "./BlogPost";
 
 type Post = BlogPost & { user: User; comments: (Comment & { user: User })[] };
 
-export interface BlogPostViewerProps extends React.ComponentProps<"div"> {
+export interface BlogPostViewerProps {
     user?: string
 }
 

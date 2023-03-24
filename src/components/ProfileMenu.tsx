@@ -25,12 +25,10 @@ export const ProfileMenu: React.FC = () => {
         {(() => {
           switch (status) {
             case "authenticated":
-               //const profilePath = currentUserPathToProfile(); 
               return [
-                  // TODO: link to profile page here
-                  <MenuItem className={menuItemClassName} key="profile">
+                <MenuItem className={menuItemClassName} key="profile">
                   Profile
-                  </MenuItem>,
+                </MenuItem>,
                 <MenuItem
                   className={menuItemClassName}
                   key="sign-out"
