@@ -14,6 +14,15 @@ export const ContributorRequestMenu: React.FC<ContributorRequestMenuProps> = ({
   setIsOpen,
 }) => {
   const { data: users } = api.contributorRequest.getAll.useQuery({});
+  const utils = api.useContext();
+
+  const deleteRequest = api.contributorRequest.delete.useMutation({
+    onSuccess: async () => {
+      await utils.contributorRequest.invalidate();
+    },
+  });
+
+  const updateUser = api.user.updateOne.useMutation();
 
   const ref = useRef<HTMLDivElement>(null);
 
@@ -39,6 +48,16 @@ export const ContributorRequestMenu: React.FC<ContributorRequestMenuProps> = ({
     };
   }, [ref, setIsOpen]);
 
+  const handleAcceptRequest = async (userId: string, requestId: string) => {
+    await updateUser.mutateAsync({
+      where: { id: userId },
+      data: { role: "CONTRIBUTOR" },
+    });
+    await deleteRequest.mutateAsync({
+      where: { id: requestId },
+    });
+  };
+
   return isOpen ? (
     <div
       ref={ref}
@@ -50,7 +69,7 @@ export const ContributorRequestMenu: React.FC<ContributorRequestMenuProps> = ({
           <hr />
         </div>
         {users && users.length ? (
-          users.map(({ id, createdAt, user: { name, image } }) => (
+          users.map(({ id, createdAt, user: { id: userId, name, image } }) => (
             <div className="my-2 flex justify-between" key={id}>
               <div className="flex">
                 <ProfilePicture
@@ -64,12 +83,18 @@ export const ContributorRequestMenu: React.FC<ContributorRequestMenuProps> = ({
                 </div>
               </div>
               <div className="mr-1 flex self-center">
-                <p className="mx-1 rounded-md bg-highlight-green p-1 text-xs hover:cursor-pointer">
+                <div
+                  className="mx-1 rounded-md bg-highlight-green p-1 hover:cursor-pointer hover:shadow-md"
+                  onClick={() => void handleAcceptRequest(userId, id)}
+                >
                   <CheckIcon />
-                </p>
-                <p className="mx-1 rounded-md bg-slate-200 p-1 text-xs hover:cursor-pointer">
+                </div>
+                <div
+                  className="mx-1 rounded-md bg-slate-200 p-1 hover:cursor-pointer hover:shadow-md"
+                  onClick={() => deleteRequest.mutate({ where: { id } })}
+                >
                   <CloseIcon />
-                </p>
+                </div>
               </div>
             </div>
           ))
