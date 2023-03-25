@@ -1,10 +1,10 @@
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import {useState} from "react";
 import {api} from "~/utils/api";
-import {BlogPostViewer} from "./BlogPostViewer";
 import {useRouter} from "next/router";
 import {ProfileCard} from "./ProfileCard";
 import { Spinner } from "./Spinner";
+import {BlogPostViewer} from "./BlogPostViewer";
 
 export const ProfileTabbedView: React.FC = () => {
     const [_, setForceRerender] = useState(false);
@@ -16,18 +16,16 @@ export const ProfileTabbedView: React.FC = () => {
     if(!router.isReady) {
         return (<Spinner size={24} />);
     }
-    const authorId: string = {id}.id as string;
     const { data: userData } = api.user.selectedUser.useQuery({
         text: {id}.id as string,
     });
-    const { data: nBlogPosts } = api.blogPost.aggregate.useQuery({
-        userId: {id}.id as string
-    });
-    const { data: nComments } = api.comment.count.useQuery({
-        userId: {id}.id as string
-    });
+    if (!userData) {
+        return(
+            <Spinner size={24}/>
+        );
+    }
 
-    const data = [
+    const headers = [
     {
       label: "Blog Posts",
       value: "blog_posts",
@@ -47,17 +45,15 @@ export const ProfileTabbedView: React.FC = () => {
           <ProfileCard 
               name={userData?.name as string}
               dateJoined={userData?.createdAt} 
-              imgUrl={userData?.image as string}
-              numBlogPosts={nBlogPosts ?? 0}
-              numComments={nComments ?? 0}
+              user={userData}
           />
             <Tabs onSelect={(i: number) => { setTabState(i); forceRerender() }} className='mt-3'>
                 <TabList className="flex flex-row justify-start">
-                    <Tab className="w-32 text-center p-4 cursor-pointer border-b-4 border-solid border-white hover:border-b-emerald-400 hover:font-bold transition-all" selectedClassName="border-b-4 border-solid border-b-emerald-400 font-bold">{data[0]?.label ?? ''}</Tab>
-                    <Tab className="w-32 text-center p-4 cursor-pointer border-b-4 border-solid border-white hover:border-b-emerald-400 hover:font-bold transition-all" selectedClassName="border-b-4 border-solid border-b-emerald-400 font-bold">{data[1]?.label ?? ''}</Tab>
+                    <Tab className="w-32 text-center p-4 cursor-pointer border-b-4 border-solid border-white hover:border-b-emerald-400 hover:font-bold transition-all" selectedClassName="border-b-4 border-solid border-b-emerald-400 font-bold">{headers[0]?.label ?? ''}</Tab>
+                    <Tab className="w-32 text-center p-4 cursor-pointer border-b-4 border-solid border-white hover:border-b-emerald-400 hover:font-bold transition-all" selectedClassName="border-b-4 border-solid border-b-emerald-400 font-bold">{headers[1]?.label ?? ''}</Tab>
                 </TabList>
                 <TabPanel>
-                    {data[0]?.desc ?? <></>}
+                    {headers[0]?.desc ?? <></>}
                 </TabPanel>
             </Tabs>
         </div>

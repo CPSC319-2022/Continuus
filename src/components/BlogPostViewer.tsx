@@ -16,7 +16,6 @@ export const BlogPostViewer: React.FC<BlogPostViewerProps> = ({
     user
   }) => {
 
-  const { data: userData } = api.user.currentUser.useQuery();
   const [view, setView] = useState<string>("Recent");
 
   const {
@@ -79,33 +78,31 @@ export const BlogPostViewer: React.FC<BlogPostViewerProps> = ({
               createdAt,
               content,
               comments,
-              user: { name, image },
+              user,
             }) => (
               <>
                 <div key={id} className="mb-6">
                   <BlogPostComponent
                     id={id}
                     authorId={userId}
-                    name={name as string}
                     title={title}
                     lastUpdated={updatedAt}
                     createdAt={createdAt}
-                    imageUrl={image as string}
                     content={content}
                     comments={(comments as Comment[]).length}
+                    userMetadata={user}
                   />
                 </div>
                 <CommentModal
                   id={id}
                   title={title}
+                  poster={user.name as string}
                   comments={comments as (Comment & { user: User })[]}
-                  poster={name as string}
                   lastUpdated={updatedAt}
                   createdAt={createdAt}
                   post={content}
-                  posterAvatarUrl={image as string}
                   content={content}
-                  author={userId}
+                  userMetadata={user}
                 />
               </>
             )

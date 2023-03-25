@@ -1,7 +1,6 @@
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkSlug from "remark-slug";
-import Link from "next/link";
 import { timeAgo } from "~/utils/time";
 import { ProfilePicture } from "./ProfilePicture";
 import { api } from "~/utils/api";
@@ -9,29 +8,29 @@ import { BlogPostActionsMenu } from "~/components/BlogPostActionsMenu";
 import { useSession } from "next-auth/react";
 import React from "react";
 import { shouldSeeActions, isAuthor } from "~/components/util";
+import {User} from "next-auth";
+import {ProfileName} from "./ProfileName";
 
 interface BlogPostProps extends React.ComponentProps<"div"> {
   id: string;
-  name: string;
   authorId: string;
   lastUpdated: Date;
   createdAt: Date;
   title: string;
   content: string;
-  imageUrl: string;
   comments: number;
+  userMetadata: User;
 }
 
 export const BlogPost: React.FC<BlogPostProps> = ({
   id,
   authorId,
-  name,
   lastUpdated,
   createdAt,
   title,
   content,
-  imageUrl,
   comments,
+  userMetadata,
   ...props
 }) => {
   const currUser = api.user.currentUser.useQuery();
@@ -46,11 +45,10 @@ export const BlogPost: React.FC<BlogPostProps> = ({
         <div className="mb-3 flex w-full justify-between">
           <div className="flex">
             <div className="avatar self-center">
-                # TODO: update
-                <ProfilePicture size={2.5} imgUrl={imageUrl} user={currUser.data} />
+                <ProfilePicture size={2.5} user={userMetadata} />
             </div>
             <div className="ml-3">
-              <p className="text-lg font-bold">{name}</p>
+              <ProfileName user={userMetadata}/>
               <p className="text-sm text-slate-400">{`${timeAgo(createdAt)}${
                 createdAt.getTime() !== lastUpdated.getTime()
                   ? ` (updated ${timeAgo(lastUpdated)})`

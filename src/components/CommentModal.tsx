@@ -20,10 +20,9 @@ export interface CommentModalProps {
   lastUpdated: Date;
   createdAt: Date;
   post: string;
-  posterAvatarUrl: string;
   comments: CommentEntry[];
   content: string;
-  author: string;
+  userMetadata: User;
 }
 
 export const CommentModal: React.FC<CommentModalProps> = ({
@@ -33,10 +32,9 @@ export const CommentModal: React.FC<CommentModalProps> = ({
   lastUpdated,
   createdAt,
   post,
-  posterAvatarUrl,
   comments,
-  author,
   content,
+  userMetadata,
 }) => {
   const [input, setInput] = useState<string>("");
 
@@ -72,7 +70,6 @@ export const CommentModal: React.FC<CommentModalProps> = ({
     setInput("");
   };
 
-  // TODO: profile picture link
   return (
     <>
       <input type="checkbox" id={`modal-${id}`} className="modal-toggle" />
@@ -84,7 +81,7 @@ export const CommentModal: React.FC<CommentModalProps> = ({
           <div className="mb-3 flex w-full justify-between">
             <div className="flex">
               <div className="avatar self-center">
-                <ProfilePicture size={2.5} imgUrl={posterAvatarUrl}
+                <ProfilePicture size={2.5} user={userMetadata}
                     />
               </div>
               <div className="ml-3">
@@ -97,12 +94,12 @@ export const CommentModal: React.FC<CommentModalProps> = ({
               </div>
             </div>
             {
-              shouldSeeActions(status, currUser.data, author) && (
+              shouldSeeActions(status, currUser.data, userMetadata.id) && (
               <BlogPostActionsMenu
                 id={id}
                 title={title}
                 content={content}
-                isAuthor={isAuthor(currUser.data, author)}
+                isAuthor={isAuthor(currUser.data, userMetadata.id)}
               />
             )}
           </div>
@@ -123,14 +120,13 @@ export const CommentModal: React.FC<CommentModalProps> = ({
                 id: commentId,
                 content: comment,
                 createdAt: dateAdded,
-                user: { name, image },
+                user,
               }) => (
                 <Comment
                   key={`${commentId}`}
-                  commenterName={name as string}
-                  commenterAvatarUrl={image as string}
                   dateAdded={dateAdded}
                   comment={comment}
+                  commenterProfile={user}
                 />
               )
             )}

@@ -13,7 +13,6 @@ export const ProfileMenu: React.FC = () => {
     const router = useRouter();
     const currUser = api.user.currentUser.useQuery();
     const profile: string = userPathToProfile(currUser.data?.id || '');
-    console.log("Profile Menu: " + profile);
 
     return (
       <Menu

@@ -1,42 +1,60 @@
+import {User} from "next-auth";
+import {api} from "~/utils/api";
 import {timeAgo} from "~/utils/time";
 import {ProfilePicture} from "./ProfilePicture";
+import {Spinner} from "./Spinner";
 
-interface ProfileCardProps extends React.ComponentProps<"div"> {
-    name: string,
+interface ProfileCardProps {
     dateJoined?: Date,
-    imgUrl?: string,
-    numBlogPosts: number,
-    numComments: number,
+    user: User,
 }
 
 export const ProfileCard: React.FC<ProfileCardProps> = ({
-    name,
     dateJoined,
-    imgUrl,
-    numBlogPosts,
-    numComments,
+    user,
 }) => {
+    const { data: nBlogPosts } = api.blogPost.count.useQuery({
+        userId: user.id
+    });
+    const { data: nComments } = api.comment.count.useQuery({
+        userId: user.id
+    });
+
+    let isLoading = false;
+    if (nComments == undefined || nBlogPosts == undefined) { 
+        isLoading = true;
+    }
+
     return(
         <div className="p-8 bg-white mt-24">
             <div className="relative">
                 <div className="w-36 h-36 mx-auto rounded-full shadow-md absolute inset-x-0 top-0 -mt-24 flex items-center justify-center">
-                    <ProfilePicture size={40} imgUrl={imgUrl} />
+                    {(isLoading) ? 
+                        <div className="rounded-full"
+                            style={{ width: `${10}rem`}}>
+                            <Spinner size={10}/> 
+                        </div> :
+                        <ProfilePicture size={40} user={user}/>}
                 </div>
             </div>
 
             <div className="mt-20 text-center pb-8">
-                <h1 className="text-4xl font-bold text-gray-700">{name}</h1>
+                <h1 className="text-4xl font-bold text-gray-700">{user.name}</h1>
                 <p className="mt-3 text-gray-400">joined <span className="text-grey-400">{(dateJoined)? timeAgo(dateJoined) : ''}</span></p>
             </div>
 
             <div className="wx-1/2">
                 <div className="grid grid-cols-2 gap-10 text-center grid-padding-64">
                 <div>
-                    <p className="font-bold text-gray-700 text-xl">{numBlogPosts}</p>
+                    {(isLoading) ? 
+                        <Spinner size={2}/> : 
+                        <p className="font-bold text-gray-700 text-xl">{nBlogPosts}</p>}
                     <p className="text-gray-400">Blog Posts</p>
                 </div>
                 <div>
-                    <p className="font-bold text-gray-700 text-xl">{numComments}</p>
+                    {(isLoading) ?
+                        <Spinner size={2}/> : 
+                        <p className="font-bold text-gray-700 text-xl">{nComments}</p>}
                     <p className="text-gray-400">Comments</p>
                 </div>
                 </div>

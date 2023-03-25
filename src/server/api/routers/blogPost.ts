@@ -51,7 +51,7 @@ export const blogPostRouter = createTRPCRouter({
         nextCursor,
       };
     }),
-  aggregate: publicProcedure
+  count: publicProcedure
       .input(BlogPostWhereInputObjectSchema)
       .query(async ({ input, ctx }) => {
           const count: number = await ctx.prisma.blogPost.count({
