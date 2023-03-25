@@ -47,7 +47,9 @@ export const ProfileTabbedView: React.FC = () => {
       <div className="flex flex-col w-full md:pr-12 md:ml-[15%] md:mr-[15%]">
           <ProfileCard 
               dateJoined={userData?.createdAt} 
-              user={userData}
+              name={userData.name as string}
+              imgUrl={userData.image}
+              userId={userData.id}
           />
             <Tabs onSelect={(i: number) => { setTabState(i); forceRerender() }} className='mt-3'>
                 <TabList className="flex flex-row justify-start">

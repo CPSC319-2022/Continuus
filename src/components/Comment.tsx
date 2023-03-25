@@ -1,4 +1,3 @@
-import {User} from "next-auth";
 import { timeAgo } from "~/utils/time";
 import {ProfileName} from "./ProfileName";
 import { ProfilePicture } from "./ProfilePicture";
@@ -6,13 +5,17 @@ import { ProfilePicture } from "./ProfilePicture";
 export interface CommentProps {
   dateAdded: Date;
   comment: string;
-  commenterProfile: User;
+  name?: string | null;
+  userId: string;
+  imgUrl?: string | null;
 }
 
 export const Comment: React.FC<CommentProps> = ({
   dateAdded,
   comment,
-  commenterProfile,
+  name,
+  userId,
+  imgUrl
 }) => {
   return (
     <>
@@ -22,10 +25,10 @@ export const Comment: React.FC<CommentProps> = ({
       <div>
         <div className="flex">
           <div className="avatar self-center">
-            <ProfilePicture size={2.5} user={commenterProfile} />
+            <ProfilePicture size={2.5} userId={userId} imgUrl={imgUrl} />
           </div>
           <div className="ml-3">
-            <ProfileName user={commenterProfile}/>
+            <ProfileName name={name || ""} userId={userId}/>
             <p className="text-sm text-slate-400">{timeAgo(dateAdded)}</p>
           </div>
         </div>

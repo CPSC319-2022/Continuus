@@ -90,7 +90,8 @@ export const BlogPostViewer: React.FC<BlogPostViewerProps> = ({
                     createdAt={createdAt}
                     content={content}
                     comments={(comments as Comment[]).length}
-                    userMetadata={user}
+                    authorName={user.name as string}
+                    imgUrl={user.image}
                   />
                 </div>
                 <CommentModal
@@ -102,7 +103,8 @@ export const BlogPostViewer: React.FC<BlogPostViewerProps> = ({
                   createdAt={createdAt}
                   post={content}
                   content={content}
-                  userMetadata={user}
+                  authorId={user.id}
+                  imgUrl={user.image}
                 />
               </>
             )

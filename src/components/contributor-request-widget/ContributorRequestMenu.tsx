@@ -69,23 +69,24 @@ export const ContributorRequestMenu: React.FC<ContributorRequestMenuProps> = ({
           <hr />
         </div>
         {users && users.length ? (
-          users.map(({ id, createdAt, user }) => (
+          users.map(({ id, createdAt, user: { id: userId, name, image }}) => (
             <div className="my-2 flex justify-between" key={id}>
               <div className="flex">
                 <ProfilePicture
                   className="self-center"
-                  user={user}
                   size={2}
+                  imgUrl={image}
+                  userId={userId}
                 />
                 <div className="mx-2">
-                  <p>{user.name}</p>
+                  <p>{name}</p>
                   <p className="text-xs">{timeAgo(createdAt)}</p>
                 </div>
               </div>
               <div className="mr-1 flex self-center">
                 <div
                   className="mx-1 rounded-md bg-highlight-green p-1 hover:cursor-pointer hover:shadow-md"
-                  onClick={() => void handleAcceptRequest(user.id, id)}
+                  onClick={() => void handleAcceptRequest(userId, id)}
                 >
                   <CheckIcon />
                 </div>

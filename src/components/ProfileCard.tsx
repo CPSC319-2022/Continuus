@@ -6,18 +6,22 @@ import {Spinner} from "./Spinner";
 
 interface ProfileCardProps {
     dateJoined?: Date,
-    user: User,
+    name: string
+    imgUrl?: string | null,
+    userId: string,
 }
 
 export const ProfileCard: React.FC<ProfileCardProps> = ({
     dateJoined,
-    user,
+    name,
+    imgUrl,
+    userId,
 }) => {
     const { data: nBlogPosts } = api.blogPost.count.useQuery({
-        userId: user.id
+        userId: userId 
     });
     const { data: nComments } = api.comment.count.useQuery({
-        userId: user.id
+        userId: userId
     });
 
     let isLoading = false;
@@ -34,12 +38,12 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({
                             style={{ width: `${10}rem`}}>
                             <Spinner size={10}/> 
                         </div> :
-                        <ProfilePicture size={40} user={user}/>}
+                        <ProfilePicture size={40} imgUrl={imgUrl} userId={userId}/>}
                 </div>
             </div>
 
             <div className="mt-20 text-center pb-8">
-                <h1 className="text-4xl font-bold text-gray-700">{user.name}</h1>
+                <h1 className="text-4xl font-bold text-gray-700">{name}</h1>
                 <p className="mt-3 text-gray-400">joined <span className="text-grey-400">{(dateJoined)? timeAgo(dateJoined) : ''}</span></p>
             </div>
 

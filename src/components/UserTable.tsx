@@ -62,7 +62,7 @@ export const UserTable: React.FC = () => {
         }),
         columnHelper.display({
             header: 'Picture',
-            cell: info => users.isLoading ? <ImageSkeleton size={3}/> : <ProfilePicture size={3} user={info.cell.getValue() as User}/>,
+            cell: info => users.isLoading ? <ImageSkeleton size={3}/> : <ProfilePicture size={3} imgUrl={(info.cell.getValue() as User).image} userId={(info.cell.getValue() as User).id}/>,
         }),
         columnHelper.accessor('email', {
             header: 'E-Mail',

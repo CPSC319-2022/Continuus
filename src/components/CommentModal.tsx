@@ -22,7 +22,8 @@ export interface CommentModalProps {
   post: string;
   comments: CommentEntry[];
   content: string;
-  userMetadata: User;
+  authorId: string;
+  imgUrl?: string | null;
 }
 
 export const CommentModal: React.FC<CommentModalProps> = ({
@@ -34,7 +35,8 @@ export const CommentModal: React.FC<CommentModalProps> = ({
   post,
   comments,
   content,
-  userMetadata,
+  authorId,
+  imgUrl,
 }) => {
   const [input, setInput] = useState<string>("");
 
@@ -81,7 +83,7 @@ export const CommentModal: React.FC<CommentModalProps> = ({
           <div className="mb-3 flex w-full justify-between">
             <div className="flex">
               <div className="avatar self-center">
-                <ProfilePicture size={2.5} user={userMetadata}
+                <ProfilePicture size={2.5} userId={authorId} imgUrl={imgUrl}
                     />
               </div>
               <div className="ml-3">
@@ -94,12 +96,12 @@ export const CommentModal: React.FC<CommentModalProps> = ({
               </div>
             </div>
             {
-              shouldSeeActions(status, currUser.data, userMetadata.id) && (
+              shouldSeeActions(status, currUser.data, authorId) && (
               <BlogPostActionsMenu
                 id={id}
                 title={title}
                 content={content}
-                isAuthor={isAuthor(currUser.data, userMetadata.id)}
+                isAuthor={isAuthor(currUser.data, authorId)}
               />
             )}
           </div>
@@ -120,13 +122,15 @@ export const CommentModal: React.FC<CommentModalProps> = ({
                 id: commentId,
                 content: comment,
                 createdAt: dateAdded,
-                user,
+                user: { name: authorName, id: commenterId, image},
               }) => (
                 <Comment
                   key={`${commentId}`}
                   dateAdded={dateAdded}
                   comment={comment}
-                  commenterProfile={user}
+                  name={authorName}
+                  userId={commenterId}
+                  imgUrl={image}
                 />
               )
             )}
