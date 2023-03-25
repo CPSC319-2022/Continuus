@@ -46,9 +46,8 @@ export const BlogPost: React.FC<BlogPostProps> = ({
         <div className="mb-3 flex w-full justify-between">
           <div className="flex">
             <div className="avatar self-center">
-            <Link href={`/profile/${encodeURIComponent(authorId)}`}>
-              <ProfilePicture size={2.5} imgUrl={imageUrl} />
-            </Link>
+                # TODO: update
+                <ProfilePicture size={2.5} imgUrl={imageUrl} user={currUser.data} />
             </div>
             <div className="ml-3">
               <p className="text-lg font-bold">{name}</p>
