@@ -25,8 +25,8 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({
             </div>
 
             <div className="mt-20 text-center pb-8">
-                <h1 className="text-4xl font-medium text-gray-700">{name}</h1>
-                <p className="mt-3 font-medium text-gray-400">joined <span className="font-light text-grey-500">{(dateJoined)? timeAgo(dateJoined) : ''}</span></p>
+                <h1 className="text-4xl font-bold text-gray-700">{name}</h1>
+                <p className="mt-3 text-gray-400">joined <span className="text-grey-400">{(dateJoined)? timeAgo(dateJoined) : ''}</span></p>
             </div>
 
             <div className="wx-1/2">
