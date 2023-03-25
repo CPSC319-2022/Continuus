@@ -5,6 +5,7 @@ import {useRouter} from "next/router";
 import {ProfileCard} from "./ProfileCard";
 import { Spinner } from "./Spinner";
 import {BlogPostViewer} from "./BlogPostViewer";
+import {Layout} from "./Layout";
 
 export const ProfileTabbedView: React.FC = () => {
     const [_, setForceRerender] = useState(false);
@@ -14,14 +15,16 @@ export const ProfileTabbedView: React.FC = () => {
     const router = useRouter();
     const { id } = router.query;
     if(!router.isReady) {
-        return (<Spinner size={24} />);
+        return (<Spinner size={2} />);
     }
     const { data: userData } = api.user.selectedUser.useQuery({
         text: {id}.id as string,
     });
     if (!userData) {
         return(
-            <Spinner size={24}/>
+            <Layout>
+                <Spinner size={2}/>
+            </Layout>
         );
     }
 

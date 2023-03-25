@@ -25,7 +25,7 @@ export const ProfilePicture: React.FC<ProfilePictureProps> = ({ size, user, ...p
             <Link href={linkTo}>
                 <img src={imgUrl} alt="avatar"
                 className={`inline-block aspect-square rounded-[50%] ${className ?? ""}`}
-                style={{ width: `${size}rem`, height: `${size}rem` }}
+                style={{ width: `${size}rem` }}
                 {...restProps}
                 />
             </Link>
