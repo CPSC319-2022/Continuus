@@ -43,7 +43,6 @@ export const ProfileTabbedView: React.FC = () => {
       {router.isReady ?
       <div className="flex flex-col w-full md:pr-12 md:ml-[15%] md:mr-[15%]">
           <ProfileCard 
-              name={userData?.name as string}
               dateJoined={userData?.createdAt} 
               user={userData}
           />

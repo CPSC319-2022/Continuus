@@ -2,16 +2,18 @@ import {User} from "next-auth";
 import Link from "next/link";
 import {userPathToProfile} from "~/utils/profile";
 
-/**
- * @prop size: Width/Height of the Profile Picture in REM 
- * @returns 
- */
-interface ProfilePictureProps {
-    size: number;
-    user: User | null | undefined;
+interface ProfilePictureProps extends React.ComponentProps<"img"> {
+  size: number;
+  user: User | null | undefined;
 }
+/**
+ * @prop size: Width/Height of the Profile Picture in REM
+ * @returns
+ */
 
-export const ProfilePicture: React.FC<ProfilePictureProps> = ({ size, user }) => {
+export const ProfilePicture: React.FC<ProfilePictureProps> = ({ size, user, ...props }) => {
+    const { className, ...restProps } = props;
+
     const linkTo: string = userPathToProfile(user?.id || '');
     let imgUrl = "https://i.stack.imgur.com/34AD2.jpg";
     if (user && user.image) {
@@ -21,7 +23,11 @@ export const ProfilePicture: React.FC<ProfilePictureProps> = ({ size, user }) =>
     return (
         <>
             <Link href={linkTo}>
-                <img src={imgUrl} alt="avatar" className="aspect-square rounded-full inline-block" style={{ width: `${size}rem` }} />
+                <img src={imgUrl} alt="avatar"
+                className={`inline-block aspect-square rounded-[50%] ${className ?? ""}`}
+                style={{ width: `${size}rem`, height: `${size}rem` }}
+                {...restProps}
+                />
             </Link>
         </>
     )

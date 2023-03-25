@@ -60,9 +60,9 @@ export const UserTable: React.FC = () => {
             header: 'Name',
             cell: info => users.isLoading ? <TextSkeleton width={8} /> : info.getValue(),
         }),
-        columnHelper.accessor('image', {
+        columnHelper.display({
             header: 'Picture',
-            cell: info => users.isLoading ? <ImageSkeleton size={3} /> : <ProfilePicture size={3} imgUrl={info.getValue()} />,
+            cell: info => users.isLoading ? <ImageSkeleton size={3}/> : <ProfilePicture size={3} user={info.cell.getValue() as User}/>,
         }),
         columnHelper.accessor('email', {
             header: 'E-Mail',
