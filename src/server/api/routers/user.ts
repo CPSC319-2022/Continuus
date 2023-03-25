@@ -1,12 +1,87 @@
-import { createTRPCRouter, publicProcedure } from "../trpc";
+import { type PrismaClient } from '@prisma/client';
+import { z } from "zod";
+import { UserUpdateOneSchema } from '~/generated/schemas';
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
+
+const getCurrentUser = async (prisma: PrismaClient, userId?: string) => {
+  return (
+    userId && (await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+    })) || null
+  );
+}
+
+const assertAdminRole = async (prisma: PrismaClient, userId?: string) => {
+  const currUser = await getCurrentUser(prisma, userId);
+
+  if (!!!currUser || currUser.role !== "ADMIN") {
+    throw new Error("UNAUTHORIZED");
+  }
+}
 
 export const userRouter = createTRPCRouter({
-  currentUser: publicProcedure
-  .query(async ({ ctx }) => {
-    return (ctx.session?.user && await ctx.prisma.user.findUnique({
-        where: {
-            id: ctx.session.user.id
+  currentUser: publicProcedure.query(async ({ ctx }) => {
+    return await getCurrentUser(ctx.prisma, ctx.session?.user?.id);
+  }),
+  paginatedUsers: protectedProcedure
+    .input(z
+      .object({
+        pageIndex: z.number(),
+        pageSize: z.number(),
+      }))
+    .query(async ({ ctx, input }) => {
+      await assertAdminRole(ctx.prisma, ctx.session.user.id);
+
+      return await ctx.prisma.user.findMany({
+        skip: input.pageIndex * input.pageSize,
+        take: input.pageSize,
+        orderBy: {
+          createdAt: 'asc'
+        },
+      });
+    }),
+  count: protectedProcedure
+    .query(async ({ ctx }) => {
+      await assertAdminRole(ctx.prisma, ctx.session.user.id);
+
+      return await ctx.prisma.user.count();
+    }),
+  batchUpdate: protectedProcedure
+    .input(z.array(UserUpdateOneSchema))
+    .mutation(async ({ ctx, input }) => {
+      await assertAdminRole(ctx.prisma, ctx.session.user.id);
+
+      let triedRemovingLastAdmin = false;
+
+      // Sorting is needed to first update users to admin role before removing admin roles
+      input.sort((update) => update.data.role === "ADMIN" ? -1 : 1)
+
+      for (const update of input) {
+        if (update.data.role && update.data.role !== "ADMIN") {
+          const adminCount = await ctx.prisma.user.count({
+            where: {
+              role: "ADMIN"
+            }
+          });
+
+          if (adminCount <= 1) {
+            const targetUser = await ctx.prisma.user.findUniqueOrThrow({
+              where: update.where
+            });
+
+            if (targetUser.role === "ADMIN") {
+              triedRemovingLastAdmin = true;
+              console.error("Batch Update: Can't remove the last admin");
+              continue;
+            }
+          }
         }
-    })) || null
-  })
+
+        await ctx.prisma.user.update(update);
+      }
+
+      return triedRemovingLastAdmin;
+    }),
 });
