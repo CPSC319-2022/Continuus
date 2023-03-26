@@ -96,11 +96,11 @@ export const userRouter = createTRPCRouter({
     .input(
       z
         .object({
-          text: z.string(),
+          userId: z.string(),
         })
     )
     .query(async ({ ctx, input }) => {
-        return await getCurrentUser(ctx.prisma, input.text);
+        return await getCurrentUser(ctx.prisma, input.userId);
     }),
   updateOne: protectedProcedure
     .input(UserUpdateOneSchema)

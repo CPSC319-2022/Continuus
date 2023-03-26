@@ -10,7 +10,7 @@ const Profile: NextPage = () => {
   const router = useRouter();
   const id = router.query.id as string;
   const { data: userData, isLoading: isUserDataLoading } = api.user.selectedUser.useQuery({
-      text: id,
+      userId: id,
   });
 
   return (
