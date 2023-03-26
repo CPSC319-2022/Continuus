@@ -54,9 +54,7 @@ export const blogPostRouter = createTRPCRouter({
       .input(BlogPostWhereInputObjectSchema)
       .query(async ({ input, ctx }) => {
           const count: number = await ctx.prisma.blogPost.count({
-              where: {
-                  userId: input.userId,
-              },
+              where: input
           });
         return count;
   }),

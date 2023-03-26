@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { api } from "~/utils/api";
+import {userPathToProfile} from "~/utils/profile";
 
 interface NavItemFields {
   title: string;
@@ -15,12 +16,11 @@ interface NavItemFields {
 export const Sidebar: React.FC = () => {
   const [navItems, setNavItems] = useState<NavItemFields[]>([]);
 
-  const { data: userData } = api.user.currentUser.useQuery();
+  const { data: userData, isLoading: isUserLoading } = api.user.currentUser.useQuery();
   const { pathname } = useRouter();
-  const profilePath = encodeURIComponent(userData?.id as string);
 
-  const navigationItems: NavItemFields[] = [
-      {
+  const navigationItems: NavItemFields[] = useMemo(() =>
+      [{
         title: "Blog Feed",
         path: "/",
         authenticated: false,
@@ -28,7 +28,7 @@ export const Sidebar: React.FC = () => {
       },
       {
         title: "Profile",
-        path: "/profile/" + profilePath,
+        path: (isUserLoading) ? pathname : userPathToProfile(userData?.id),
         authenticated: true,
         adminOnly: false,
       },
@@ -37,8 +37,7 @@ export const Sidebar: React.FC = () => {
         path: "/admin",
         authenticated: true,
         adminOnly: true,
-      },
-    ];
+      }], [pathname, isUserLoading, userData]);
 
   useEffect(() => {
     setNavItems(
@@ -48,7 +47,7 @@ export const Sidebar: React.FC = () => {
         return true;
       })
     );
-  }, [userData]);
+  }, [navigationItems, userData]);
 
   return (
     <div className="w-full flex flex-row h-full border-t border-t-gray-200 border-solid md:border-none md:h-auto md:flex-col md:p-6">

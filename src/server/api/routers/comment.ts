@@ -12,9 +12,7 @@ export const commentRouter = createTRPCRouter({
     .input(CommentWhereInputObjectSchema)
     .query(async ({ ctx, input }) => {
         return await ctx.prisma.comment.count({
-            where: {
-                userId: input.userId,
-            }
+            where: input
         });
     }),
 });

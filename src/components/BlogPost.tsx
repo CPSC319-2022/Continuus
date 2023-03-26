@@ -8,8 +8,8 @@ import { BlogPostActionsMenu } from "~/components/BlogPostActionsMenu";
 import { useSession } from "next-auth/react";
 import React from "react";
 import { shouldSeeActions, isAuthor } from "~/components/util";
-import {User} from "next-auth";
 import {ProfileName} from "./ProfileName";
+import {userPathToProfile} from "~/utils/profile";
 
 interface BlogPostProps extends React.ComponentProps<"div"> {
   id: string;
@@ -47,7 +47,10 @@ export const BlogPost: React.FC<BlogPostProps> = ({
         <div className="mb-3 flex w-full justify-between">
           <div className="flex">
             <div className="avatar self-center">
-                <ProfilePicture size={2.5} imgUrl={imgUrl} userId={authorId} />
+                <ProfilePicture 
+                    size={2.5} 
+                    imgUrl={imgUrl} 
+                    redirectLink={userPathToProfile(authorId)} />
             </div>
             <div className="ml-3">
               <ProfileName name={authorName} userId={authorId}/>

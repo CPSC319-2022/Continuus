@@ -1,26 +1,30 @@
 import {User} from "next-auth";
 import Link from "next/link";
+import {useEffect, useState} from "react";
 import {userPathToProfile} from "~/utils/profile";
 
 interface ProfilePictureProps extends React.ComponentProps<"img"> {
   size: number;
   imgUrl?: string | null;
-  userId?: string;
+  redirectLink?: string
 }
 /**
- * @prop size: Width/Height of the Profile Picture in REM
- * @returns
+ * @prop size:          Width/Height of the Profile Picture in REM
+ * @prop imgUrl:        the link to the image to render (optional)
+ * @prop redirectLink:  the link to redirect to when clicking the ProfilePicture
+ *
+ * @returns a profile picture rendered in a circle. Renders a default image if imgUrl isn't specified and has no redirect ink if redirectLink isn't specified
  */
 
-export const ProfilePicture: React.FC<ProfilePictureProps> = ({ size, imgUrl, userId, ...props }) => {
+export const ProfilePicture: React.FC<ProfilePictureProps> = ({ size, imgUrl, redirectLink, ...props }) => {
     const { className, ...restProps } = props;
+    const [imageUrl, setImageUrl] = useState<string>("https://i.stack.imgur.com/34AD2.jpg");
 
-    const linkTo: string = userPathToProfile(userId || '');
-    let imageUrl = "https://i.stack.imgur.com/34AD2.jpg";
-
-    if (imgUrl) {
-        imageUrl = imgUrl;
-    }
+    useEffect(() => {
+        if (imgUrl) {
+            setImageUrl(imgUrl);
+        }
+    }, [imgUrl]);
 
     const img = <img 
                     src={imageUrl} 
@@ -31,8 +35,8 @@ export const ProfilePicture: React.FC<ProfilePictureProps> = ({ size, imgUrl, us
 />;
 
     return (
-        <> {(userId) ?
-            <Link href={linkTo}>{img}</Link> :
+        <> {(redirectLink) ?
+            <Link href={redirectLink}>{img}</Link> :
             img}
         </>
     )

@@ -1,3 +1,4 @@
+import {userPathToProfile} from "~/utils/profile";
 import { timeAgo } from "~/utils/time";
 import {ProfileName} from "./ProfileName";
 import { ProfilePicture } from "./ProfilePicture";
@@ -25,7 +26,9 @@ export const Comment: React.FC<CommentProps> = ({
       <div>
         <div className="flex">
           <div className="avatar self-center">
-            <ProfilePicture size={2.5} userId={userId} imgUrl={imgUrl} />
+              <ProfilePicture size={2.5}
+                  redirectLink={userPathToProfile(userId)}
+                  imgUrl={imgUrl} />
           </div>
           <div className="ml-3">
             <ProfileName name={name || ""} userId={userId}/>

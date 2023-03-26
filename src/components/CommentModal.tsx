@@ -10,6 +10,7 @@ import { BlogPostActionsMenu } from "~/components/BlogPostActionsMenu";
 import { api } from "~/utils/api";
 import { useSession } from "next-auth/react";
 import { shouldSeeActions, isAuthor } from "~/components/util";
+import {userPathToProfile} from "~/utils/profile";
 
 type CommentEntry = CommentType & { user: User };
 
@@ -48,7 +49,8 @@ export const CommentModal: React.FC<CommentModalProps> = ({
 
   const createCommentMutation = api.comment.create.useMutation({
     onSuccess() {
-      return utils.blogPost.get.invalidate();
+        return Promise.all([utils.blogPost.get.invalidate(),
+                            utils.comment.count.invalidate()]);
     },
   });
 
@@ -83,8 +85,11 @@ export const CommentModal: React.FC<CommentModalProps> = ({
           <div className="mb-3 flex w-full justify-between">
             <div className="flex">
               <div className="avatar self-center">
-                <ProfilePicture size={2.5} userId={authorId} imgUrl={imgUrl}
-                    />
+                  <ProfilePicture 
+                      size={2.5}
+                      redirectLink={userPathToProfile(authorId)} 
+                      imgUrl={imgUrl}
+                  />
               </div>
               <div className="ml-3">
                 <p className="text-lg font-bold">{poster}</p>

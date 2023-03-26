@@ -2,6 +2,7 @@ import { type Dispatch, type SetStateAction, useEffect, useRef } from "react";
 import { CheckIcon } from "~/icons/Check";
 import { CloseIcon } from "~/icons/Close";
 import { api } from "~/utils/api";
+import {userPathToProfile} from "~/utils/profile";
 import { timeAgo } from "~/utils/time";
 import { ProfilePicture } from "../ProfilePicture";
 
@@ -76,7 +77,7 @@ export const ContributorRequestMenu: React.FC<ContributorRequestMenuProps> = ({
                   className="self-center"
                   size={2}
                   imgUrl={image}
-                  userId={userId}
+                  redirectLink={userPathToProfile(userId)}
                 />
                 <div className="mx-2">
                   <p>{name}</p>
