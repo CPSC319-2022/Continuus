@@ -36,9 +36,7 @@ export const blogPostRouter = createTRPCRouter({
             include: { user: true },
           },
         },
-        where: {
-            userId: input.where?.userId,
-        }
+        where: input.where,
       });
       let nextCursor;
       if (items.length > take) {
