@@ -1,4 +1,3 @@
-import {User} from "next-auth";
 import Link from "next/link";
 import {userPathToProfile} from "~/utils/profile";
 

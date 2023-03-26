@@ -1,7 +1,5 @@
-import {User} from "next-auth";
 import Link from "next/link";
 import {useEffect, useState} from "react";
-import {userPathToProfile} from "~/utils/profile";
 
 interface ProfilePictureProps extends React.ComponentProps<"img"> {
   size: number;

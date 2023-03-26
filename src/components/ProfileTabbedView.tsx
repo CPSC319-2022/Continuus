@@ -5,11 +5,8 @@ import {useRouter} from "next/router";
 import {ProfileCard} from "./ProfileCard";
 import { Spinner } from "./Spinner";
 import {BlogPostViewer} from "./BlogPostViewer";
-import {Layout} from "./Layout";
 
 export const ProfileTabbedView: React.FC = () => {
-    const [_, setForceRerender] = useState(false);
-    const forceRerender = () => setForceRerender(!_);
     const [tabState, setTabState] = useState(0);
 
     const router = useRouter();
