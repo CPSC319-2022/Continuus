@@ -51,7 +51,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
               <p className="text-lg font-bold">{name}</p>
               <p className="text-sm text-slate-400">{`${timeAgo(createdAt)}${
                 createdAt.getTime() !== lastUpdated.getTime()
-                  ? ` (updated ${timeAgo(lastUpdated)})`
+                  ? ` (updateddddd ${timeAgo(lastUpdated)})`
                   : ""
               }`}</p>
             </div>
