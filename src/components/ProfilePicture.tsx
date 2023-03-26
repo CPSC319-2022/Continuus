@@ -32,7 +32,7 @@ export const ProfilePicture: React.FC<ProfilePictureProps> = ({ size, imgUrl, us
 
     return (
         <> {(userId) ?
-            <Link href={linkTo}> img </Link> :
+            <Link href={linkTo}>{img}</Link> :
             img}
         </>
     )
