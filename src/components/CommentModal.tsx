@@ -136,6 +136,7 @@ export const CommentModal: React.FC<CommentModalProps> = ({
                   name={authorName}
                   userId={commenterId}
                   imgUrl={image}
+                  commentId={commentId}
                 />
               )
             )}
