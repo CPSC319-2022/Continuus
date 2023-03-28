@@ -72,6 +72,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
 
   return (
     <ReactModal
+      closeTimeoutMS={100}
       isOpen={isOpen}
       overlayClassName="fixed inset-0 z-20 bg-black/60"
       className="absolute top-1/2 left-1/2 z-40 h-[40rem] w-11/12 -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-md border-slate-500 bg-white md:w-1/2"

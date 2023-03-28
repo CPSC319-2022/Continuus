@@ -1,11 +1,11 @@
-import { Comment } from "./Comment";
+import { Comment } from "../Comment";
 import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkSlug from "remark-slug";
 import type { Comment as CommentType, User } from "@prisma/client";
 import { timeAgo } from "~/utils/time";
-import { ProfilePicture } from "./ProfilePicture";
+import { ProfilePicture } from "../ProfilePicture";
 import { BlogPostActionsMenu } from "~/components/BlogPostActionsMenu";
 import { api } from "~/utils/api";
 import { useSession } from "next-auth/react";
@@ -29,7 +29,7 @@ export interface CommentModalProps {
   author: string;
 }
 
-export const CommentModalNew: React.FC = () => {
+export const CommentModalSearch: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState<string>("");
 
@@ -93,9 +93,13 @@ export const CommentModalNew: React.FC = () => {
     <>
       {postx && (
         <ReactModal
+          closeTimeoutMS={100}
           isOpen={isOpen}
-          overlayClassName="fixed inset-0 z-20 bg-black/60"
+          overlayClassName="fixed inset-0 z-20 bg-black/30"
           className="absolute top-1/2 left-1/2 z-40 max-h-[95vh] w-11/12 max-w-5xl -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-md border-slate-500 bg-white p-5 md:w-1/2"
+          shouldCloseOnEsc
+          shouldCloseOnOverlayClick
+          onRequestClose={() => setIsOpen(false)}
         >
           <div className="mb-3 flex w-full justify-between">
             <div className="flex">
@@ -128,8 +132,8 @@ export const CommentModalNew: React.FC = () => {
               {postx.content}
             </ReactMarkdown>
           </div>
-          <div className="self-end">
-            <p className="btn-link text-highlight-green no-underline hover:no-underline">
+          <div className="flex w-full justify-end">
+            <p className="float-right text-highlight-green no-underline hover:no-underline">
               {postx.comments.length} Comments
             </p>
           </div>

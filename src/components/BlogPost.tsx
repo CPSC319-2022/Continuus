@@ -8,6 +8,8 @@ import { BlogPostActionsMenu } from "~/components/BlogPostActionsMenu";
 import { useSession } from "next-auth/react";
 import React, { SetStateAction, Dispatch } from "react";
 import { shouldSeeActions, isAuthor } from "~/components/util";
+import { useAppDispatch } from "~/redux/hooks";
+import { setSelectedPost } from "~/redux/slices/posts";
 
 interface BlogPostProps extends React.ComponentProps<"div"> {
   id: string;
@@ -19,7 +21,6 @@ interface BlogPostProps extends React.ComponentProps<"div"> {
   content: string;
   imageUrl: string;
   comments: number;
-  setSelectedPostId: Dispatch<SetStateAction<string>>;
 }
 
 export const BlogPost: React.FC<BlogPostProps> = ({
@@ -32,11 +33,11 @@ export const BlogPost: React.FC<BlogPostProps> = ({
   content,
   imageUrl,
   comments,
-  setSelectedPostId,
   ...props
 }) => {
   const currUser = api.user.currentUser.useQuery();
   const { status } = useSession();
+  const dispatch = useAppDispatch();
 
   return (
     <div
@@ -74,13 +75,12 @@ export const BlogPost: React.FC<BlogPostProps> = ({
           </ReactMarkdown>
         </div>
         <div className="self-end ">
-          <label
-            htmlFor={`modal-${id}`}
+          <p
             className="btn-link text-highlight-green no-underline hover:cursor-pointer"
-            onClick={() => setSelectedPostId(id)}
+            onClick={() => dispatch(setSelectedPost(id))}
           >
             {comments} Comments
-          </label>
+          </p>
         </div>
       </div>
     </div>

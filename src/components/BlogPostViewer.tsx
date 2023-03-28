@@ -2,7 +2,6 @@ import type { BlogPost, User, Comment } from "@prisma/client";
 import { useState, useMemo, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { api } from "~/utils/api";
-import { CommentModal } from "./CommentModal";
 import { Spinner } from "./Spinner";
 import { BlogPost as BlogPostComponent } from "./BlogPost";
 
@@ -10,7 +9,6 @@ type Post = BlogPost & { user: User; comments: (Comment & { user: User })[] };
 
 export const BlogPostViewer: React.FC = () => {
   const [view, setView] = useState<string>("Recent");
-  const [selectedPostId, setSelectedPostId] = useState("");
   const {
     data: blogPosts,
     fetchNextPage,
@@ -76,24 +74,9 @@ export const BlogPostViewer: React.FC = () => {
                     createdAt={createdAt}
                     imageUrl={image as string}
                     content={content}
-                    setSelectedPostId={setSelectedPostId}
                     comments={(comments as Comment[]).length}
                   />
                 </div>
-                {id === selectedPostId && (
-                  <CommentModal
-                    id={id}
-                    title={title}
-                    comments={comments as (Comment & { user: User })[]}
-                    poster={name as string}
-                    lastUpdated={updatedAt}
-                    createdAt={createdAt}
-                    post={content}
-                    posterAvatarUrl={image as string}
-                    content={content}
-                    author={userId}
-                  />
-                )}
               </>
             )
           )}
