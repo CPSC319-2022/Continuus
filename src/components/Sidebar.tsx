@@ -17,10 +17,11 @@ export const Sidebar: React.FC = () => {
   const [navItems, setNavItems] = useState<NavItemFields[]>([]);
 
   const { data: userData, isLoading: isUserLoading } = api.user.currentUser.useQuery();
-  const { pathname } = useRouter();
+  const { asPath } = useRouter();
 
-  const navigationItems: NavItemFields[] = useMemo(() =>
-      [{
+  const navigationItems: NavItemFields[] = useMemo(
+    () => [
+      {
         title: "Blog Feed",
         path: "/",
         authenticated: false,
@@ -28,7 +29,7 @@ export const Sidebar: React.FC = () => {
       },
       {
         title: "Profile",
-        path: (isUserLoading) ? pathname : userPathToProfile(userData?.id),
+        path: isUserLoading ? asPath : userPathToProfile(userData?.id),
         authenticated: true,
         adminOnly: false,
       },
@@ -37,7 +38,10 @@ export const Sidebar: React.FC = () => {
         path: "/admin",
         authenticated: true,
         adminOnly: true,
-      }], [pathname, isUserLoading, userData]);
+      },
+    ],
+    [asPath, isUserLoading, userData]
+  );
 
   useEffect(() => {
     setNavItems(
@@ -50,31 +54,32 @@ export const Sidebar: React.FC = () => {
   }, [navigationItems, userData]);
 
   return (
-    <div className="w-full flex flex-row h-full border-t border-t-gray-200 border-solid md:border-none md:h-auto md:flex-col md:p-6">
+    <div className="flex h-full w-full flex-row border-t border-solid border-t-gray-200 md:h-auto md:flex-col md:border-none md:p-6">
       {navItems.map(({ title, path }) => (
         <Link
           href={path}
           key={path}
           className={`
-          ${path === pathname ? 'border-highlight-green' : 'border-transparent'} 
-          border-b-4 
-          border-solid 
-          flex
+          ${path === asPath ? "border-highlight-green" : "border-transparent"} 
+          flex 
+          h-full 
           flex-1
-          h-full
+          cursor-pointer
           items-center
           justify-center
-          cursor-pointer
+          border-b-4
+          border-solid
           hover:bg-slate-200
-          md:pl-2
-          md:justify-start
+          md:my-2
           md:h-12
           md:flex-auto
+          md:justify-start
           md:rounded-r-md 
-          md:my-2 
           md:border-l-4 
-          md:border-b-0
-          `}>
+          md:border-b-0 
+          md:pl-2
+          `}
+        >
           {title}
         </Link>
       ))}
