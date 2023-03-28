@@ -12,8 +12,8 @@ terraform {
   }
 }
 provider "google" {
-  project = "<gcp_project_id>"
-  region  = "<regione_name>"
-  zone    = "<zone_name>"
+  project = "automatic-bot-376307"
+  region  = "northamerica-northeast2"
+  zone    = "northamerica-northeast2-a"
 }
 
