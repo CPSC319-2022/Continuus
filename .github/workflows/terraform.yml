@@ -31,7 +31,7 @@ jobs:
         id: init
         run: terraform init
         env:
-          export GOOGLE_APPLICATION_CREDENTIALS = ${{ secrets.GCP_CREDENTIALS }}
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
           
       - name: Terraform Validate
         id: validate
