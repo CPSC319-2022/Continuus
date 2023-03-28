@@ -24,7 +24,6 @@ export const SearchModal: React.FC<SearchModalProps> = ({
   const [debouncedVal, setDebouncedVal] = useState("");
   const [searchVal, setSearchVal] = useState("");
   const dispatch = useAppDispatch();
-  const ref = useRef<HTMLDivElement>(null);
 
   const posts = api.blogPost.search.useQuery({
     where: {
@@ -44,20 +43,6 @@ export const SearchModal: React.FC<SearchModalProps> = ({
       clearTimeout(handler);
     };
   }, [searchVal]);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-    // Bind the event listener
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      // Unbind the event listener on clean up
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [ref, setIsOpen]);
 
   const highlighter = useCallback(
     (str: string) => {
@@ -89,9 +74,12 @@ export const SearchModal: React.FC<SearchModalProps> = ({
     <ReactModal
       isOpen={isOpen}
       overlayClassName="fixed inset-0 z-20 bg-black/60"
-      className="absolute top-1/2 left-1/2 z-40 h-[40rem] w-11/12 -translate-x-1/2 -translate-y-1/2 overflow-y-scroll rounded-md border-slate-500 bg-white md:w-1/2"
+      className="absolute top-1/2 left-1/2 z-40 h-[40rem] w-11/12 -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-md border-slate-500 bg-white md:w-1/2"
+      shouldCloseOnEsc
+      shouldCloseOnOverlayClick
+      onRequestClose={() => setIsOpen(false)}
     >
-      <div className="p-3" ref={ref}>
+      <div className="p-3">
         <input
           type="text"
           placeholder="Search for a blog post or user..."
@@ -103,12 +91,10 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           posts.data?.map(
             ({
               id,
-              userId,
               title,
               updatedAt,
               createdAt,
               content,
-              comments,
               user: { name, image },
             }) => (
               <div key={id} className="my-2">
@@ -116,21 +102,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                   htmlFor={`modal-${id}`}
                   className="flex hover:cursor-pointer"
                   onClick={() => {
-                    dispatch(
-                      setSelectedPost({
-                        id,
-                        title,
-                        poster: name as string,
-                        lastUpdated: updatedAt,
-                        createdAt,
-                        post: content,
-                        posterAvatarUrl: image as string,
-                        comments,
-                        content,
-                        author: name as string,
-                      })
-                    );
-                    setTimeout(() => setIsOpen(false), 1);
+                    dispatch(setSelectedPost(id));
                   }}
                 >
                   <ProfilePicture
@@ -153,10 +125,12 @@ export const SearchModal: React.FC<SearchModalProps> = ({
             )
           )
         ) : (
-          <div className="flex h-[35rem] justify-center align-middle">
+          <div className="flex h-[35rem] flex-col justify-center align-middle">
             <p className="self-center">
-              Search for something! Type @ at the beginning to search for a
-              user.
+              Start typing to search for a blog post!{" "}
+            </p>
+            <p className="self-center">
+              Type @ at the beginning to search for a user.
             </p>
           </div>
         )}

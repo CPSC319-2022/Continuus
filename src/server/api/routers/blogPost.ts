@@ -2,6 +2,7 @@ import {
   BlogPostCreateOneSchema,
   BlogPostDeleteOneSchema,
   BlogPostFindManySchema,
+  BlogPostFindUniqueSchema,
   BlogPostUpdateOneSchema,
 } from "~/generated/schemas";
 
@@ -48,6 +49,20 @@ export const blogPostRouter = createTRPCRouter({
         items,
         nextCursor,
       };
+    }),
+  getOne: publicProcedure
+    .input(BlogPostFindUniqueSchema)
+    .query(async ({ input, ctx }) => {
+      return ctx.prisma.blogPost.findUnique({
+        ...input,
+        include: {
+          user: true,
+          comments: {
+            orderBy: [{ createdAt: "asc" }],
+            include: { user: true },
+          },
+        },
+      });
     }),
   update: protectedProcedure
     .input(BlogPostUpdateOneSchema)

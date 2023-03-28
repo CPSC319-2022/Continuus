@@ -1,7 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import { type CommentModalProps } from "~/components/CommentModal";
 
-const initialState: { selectedPost: CommentModalProps | null } = {
+const initialState: { selectedPost: string | null } = {
   selectedPost: null,
 };
 
@@ -9,7 +8,7 @@ const postsSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
-    setSelectedPost(state, action: PayloadAction<CommentModalProps | null>) {
+    setSelectedPost(state, action: PayloadAction<string | null>) {
       state.selectedPost = action.payload;
     },
   },
