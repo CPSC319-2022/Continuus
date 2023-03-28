@@ -111,12 +111,12 @@ exports[`Snapshot: CreateBlogPostWidget > Authorized & Create Blog Post modal is
       <div
         aria-label="Blog Post Input"
         aria-modal="true"
-        class="ReactModal__Content bg-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 rounded-md md:w-1/2 z-40"
+        class="ReactModal__Content absolute top-1/2 left-1/2 z-40 w-11/12 -translate-x-1/2 -translate-y-1/2 rounded-md bg-white md:w-1/2"
         role="dialog"
         tabindex="-1"
       >
         <div
-          class="w-full h-12 flex flex-row justify-between items-center border-b border-b-gray-200 pl-4 pr-4"
+          class="flex h-12 w-full flex-row items-center justify-between border-b border-b-gray-200 pl-4 pr-4"
         >
           <div
             class="font-semibold"
@@ -125,7 +125,7 @@ exports[`Snapshot: CreateBlogPostWidget > Authorized & Create Blog Post modal is
              Blog Post
           </div>
           <button
-            class="rounded-full after:content-['\\\\2715'] hover:text-emerald-400 transition-colors"
+            class="rounded-full transition-colors after:content-['\\\\2715'] hover:text-emerald-400"
           />
         </div>
         <form
@@ -181,6 +181,12 @@ exports[`Snapshot: CreateBlogPostWidget > Authorized & Mutation is done 1`] = `
     style="position: absolute; opacity: 0;"
     tabindex="0"
   />
+  <div
+    class="ReactModalPortal"
+  />
+  <div
+    class="ReactModalPortal"
+  />
   <div>
     <div
       aria-label="Create Blog Post Button"
@@ -283,12 +289,12 @@ exports[`Snapshot: CreateBlogPostWidget > Authorized & Mutation is done 1`] = `
       <div
         aria-label="Blog Post Input"
         aria-modal="true"
-        class="ReactModal__Content bg-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 rounded-md md:w-1/2 z-40"
+        class="ReactModal__Content absolute top-1/2 left-1/2 z-40 w-11/12 -translate-x-1/2 -translate-y-1/2 rounded-md bg-white md:w-1/2"
         role="dialog"
         tabindex="-1"
       >
         <div
-          class="w-full h-12 flex flex-row justify-between items-center border-b border-b-gray-200 pl-4 pr-4"
+          class="flex h-12 w-full flex-row items-center justify-between border-b border-b-gray-200 pl-4 pr-4"
         >
           <div
             class="font-semibold"
@@ -342,6 +348,9 @@ exports[`Snapshot: CreateBlogPostWidget > Authorized & Mutation is loading 1`] =
     style="position: absolute; opacity: 0;"
     tabindex="0"
   />
+  <div
+    class="ReactModalPortal"
+  />
   <div>
     <div
       aria-label="Create Blog Post Button"
@@ -444,12 +453,12 @@ exports[`Snapshot: CreateBlogPostWidget > Authorized & Mutation is loading 1`] =
       <div
         aria-label="Blog Post Input"
         aria-modal="true"
-        class="ReactModal__Content bg-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 rounded-md md:w-1/2 z-40"
+        class="ReactModal__Content absolute top-1/2 left-1/2 z-40 w-11/12 -translate-x-1/2 -translate-y-1/2 rounded-md bg-white md:w-1/2"
         role="dialog"
         tabindex="-1"
       >
         <div
-          class="w-full h-12 flex flex-row justify-between items-center border-b border-b-gray-200 pl-4 pr-4"
+          class="flex h-12 w-full flex-row items-center justify-between border-b border-b-gray-200 pl-4 pr-4"
         >
           <div
             class="font-semibold"
