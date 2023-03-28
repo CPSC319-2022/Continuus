@@ -80,7 +80,7 @@ export const CommentModal: React.FC = () => {
           closeTimeoutMS={100}
           isOpen={isOpen}
           overlayClassName="fixed inset-0 z-20 bg-black/30"
-          className="absolute top-1/2 left-1/2 z-40 max-h-[95vh] w-11/12 max-w-5xl -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-md border-slate-500 bg-white p-5 outline-none md:w-1/2"
+          className="absolute top-1/2 left-1/2 z-40 max-h-[95vh] w-11/12 max-w-5xl -translate-x-1/2 -translate-y-1/2 overflow-y-auto overflow-x-hidden rounded-md border-slate-500 bg-white p-5 outline-none md:w-1/2"
           shouldCloseOnEsc
           shouldCloseOnOverlayClick
           onRequestClose={() => setIsOpen(false)}

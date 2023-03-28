@@ -30,7 +30,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
     where: {
       OR: [
         { title: { contains: debouncedPostsVal, mode: "insensitive" } },
-        { content: { contains: debouncedPostsVal, mode: "insensitive" } },
+        // { content: { contains: debouncedPostsVal, mode: "insensitive" } },
       ],
     },
   });
