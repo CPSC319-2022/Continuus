@@ -1,18 +1,22 @@
+import {userPathToProfile} from "~/utils/profile";
 import { timeAgo } from "~/utils/time";
+import {ProfileName} from "./ProfileName";
 import { ProfilePicture } from "./ProfilePicture";
 
 export interface CommentProps {
-  commenterName: string;
-  commenterAvatarUrl: string;
   dateAdded: Date;
   comment: string;
+  name?: string | null;
+  userId: string;
+  imgUrl?: string | null;
 }
 
 export const Comment: React.FC<CommentProps> = ({
-  commenterName,
-  commenterAvatarUrl,
   dateAdded,
   comment,
+  name,
+  userId,
+  imgUrl
 }) => {
   return (
     <>
@@ -22,10 +26,12 @@ export const Comment: React.FC<CommentProps> = ({
       <div>
         <div className="flex">
           <div className="avatar self-center">
-            <ProfilePicture size={2.5} imgUrl={commenterAvatarUrl} />
+              <ProfilePicture size={2.5}
+                  redirectLink={userPathToProfile(userId)}
+                  imgUrl={imgUrl} />
           </div>
           <div className="ml-3">
-            <p className="text-lg font-bold">{commenterName}</p>
+            <ProfileName name={name || ""} userId={userId}/>
             <p className="text-sm text-slate-400">{timeAgo(dateAdded)}</p>
           </div>
         </div>

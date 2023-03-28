@@ -3,14 +3,15 @@ import {
   type SetStateAction,
   useCallback,
   useEffect,
-  useRef,
   useState,
 } from "react";
 import { api } from "~/utils/api";
 import { ProfilePicture } from "../ProfilePicture";
 import ReactModal from "react-modal";
 import { setSelectedPost } from "~/redux/slices/posts";
+import { userPathToProfile } from "~/utils/profile";
 import { useAppDispatch } from "~/redux/hooks";
+import Link from "next/link";
 
 interface SearchModalProps {
   isOpen: boolean;
@@ -30,7 +31,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
     where: {
       OR: [
         { title: { contains: debouncedPostsVal, mode: "insensitive" } },
-        // { content: { contains: debouncedPostsVal, mode: "insensitive" } },
+        { content: { contains: debouncedPostsVal, mode: "insensitive" } },
       ],
     },
   });
@@ -138,17 +139,20 @@ export const SearchModal: React.FC<SearchModalProps> = ({
         {debouncedUsersVal &&
           users.data &&
           users.data.map(({ id, name, image }) => (
-            <div
+            <Link
               key={id}
               className="my-2 flex rounded-md p-3 hover:cursor-pointer hover:bg-slate-200"
+              href={userPathToProfile(id)}
+              onClick={() => setIsOpen(false)}
             >
               <ProfilePicture imgUrl={image} size={2} className="self-center" />
+
               <div className="ml-3 flex">
                 <p className="self-center">
                   {highlighter(name as string, debouncedUsersVal)}
                 </p>
               </div>
-            </div>
+            </Link>
           ))}
         {!debouncedPostsVal && !debouncedUsersVal && (
           <div className="flex h-[35rem] flex-col justify-center align-middle">

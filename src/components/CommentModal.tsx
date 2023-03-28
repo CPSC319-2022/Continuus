@@ -12,6 +12,7 @@ import { shouldSeeActions, isAuthor } from "~/components/util";
 import ReactModal from "react-modal";
 import { useAppDispatch, useAppSelector } from "~/redux/hooks";
 import { setSelectedPost } from "~/redux/slices/posts";
+import { userPathToProfile } from "~/utils/profile";
 
 export const CommentModal: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -48,8 +49,11 @@ export const CommentModal: React.FC = () => {
   const { status } = useSession();
 
   const createCommentMutation = api.comment.create.useMutation({
-    onSuccess: async () => {
-      await utils.blogPost.getOne.invalidate();
+    onSuccess() {
+      return Promise.all([
+        utils.blogPost.getOne.invalidate(),
+        utils.comment.count.invalidate(),
+      ]);
     },
   });
 
@@ -88,7 +92,11 @@ export const CommentModal: React.FC = () => {
           <div className="mb-3 flex w-full justify-between">
             <div className="flex">
               <div className="avatar self-center">
-                <ProfilePicture size={2.5} imgUrl={postx.user.image} />
+                <ProfilePicture
+                  size={2.5}
+                  imgUrl={postx.user.image}
+                  redirectLink={userPathToProfile(postx.userId)}
+                />
               </div>
               <div className="ml-3">
                 <p className="text-lg font-bold">{postx.user.name}</p>
@@ -127,14 +135,15 @@ export const CommentModal: React.FC = () => {
                 id: commentId,
                 content: comment,
                 createdAt: dateAdded,
-                user: { name, image },
+                user: { name: authorName, id: commenterId, image },
               }) => (
                 <Comment
                   key={`${commentId}`}
-                  commenterName={name as string}
-                  commenterAvatarUrl={image as string}
                   dateAdded={dateAdded}
                   comment={comment}
+                  name={authorName}
+                  userId={commenterId}
+                  imgUrl={image}
                 />
               )
             )}
