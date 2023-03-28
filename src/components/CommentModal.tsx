@@ -10,6 +10,7 @@ import { BlogPostActionsMenu } from "~/components/BlogPostActionsMenu";
 import { api } from "~/utils/api";
 import { useSession } from "next-auth/react";
 import { shouldSeeActions, isAuthor } from "~/components/util";
+import {userPathToProfile} from "~/utils/profile";
 
 type CommentEntry = CommentType & { user: User };
 
@@ -20,10 +21,10 @@ export interface CommentModalProps {
   lastUpdated: Date;
   createdAt: Date;
   post: string;
-  posterAvatarUrl: string;
   comments: CommentEntry[];
   content: string;
-  author: string;
+  authorId: string;
+  imgUrl?: string | null;
 }
 
 export const CommentModal: React.FC<CommentModalProps> = ({
@@ -33,10 +34,10 @@ export const CommentModal: React.FC<CommentModalProps> = ({
   lastUpdated,
   createdAt,
   post,
-  posterAvatarUrl,
   comments,
-  author,
   content,
+  authorId,
+  imgUrl,
 }) => {
   const [input, setInput] = useState<string>("");
 
@@ -48,7 +49,8 @@ export const CommentModal: React.FC<CommentModalProps> = ({
 
   const createCommentMutation = api.comment.create.useMutation({
     onSuccess() {
-      return utils.blogPost.get.invalidate();
+        return Promise.all([utils.blogPost.get.invalidate(),
+                            utils.comment.count.invalidate()]);
     },
   });
 
@@ -83,7 +85,11 @@ export const CommentModal: React.FC<CommentModalProps> = ({
           <div className="mb-3 flex w-full justify-between">
             <div className="flex">
               <div className="avatar self-center">
-                <ProfilePicture size={2.5} imgUrl={posterAvatarUrl} />
+                  <ProfilePicture 
+                      size={2.5}
+                      redirectLink={userPathToProfile(authorId)} 
+                      imgUrl={imgUrl}
+                  />
               </div>
               <div className="ml-3">
                 <p className="text-lg font-bold">{poster}</p>
@@ -95,12 +101,12 @@ export const CommentModal: React.FC<CommentModalProps> = ({
               </div>
             </div>
             {
-              shouldSeeActions(status, currUser.data, author) && (
+              shouldSeeActions(status, currUser.data, authorId) && (
               <BlogPostActionsMenu
                 id={id}
                 title={title}
                 content={content}
-                isAuthor={isAuthor(currUser.data, author)}
+                isAuthor={isAuthor(currUser.data, authorId)}
               />
             )}
           </div>
@@ -121,14 +127,15 @@ export const CommentModal: React.FC<CommentModalProps> = ({
                 id: commentId,
                 content: comment,
                 createdAt: dateAdded,
-                user: { name, image },
+                user: { name: authorName, id: commenterId, image},
               }) => (
                 <Comment
                   key={`${commentId}`}
-                  commenterName={name as string}
-                  commenterAvatarUrl={image as string}
                   dateAdded={dateAdded}
                   comment={comment}
+                  name={authorName}
+                  userId={commenterId}
+                  imgUrl={image}
                 />
               )
             )}

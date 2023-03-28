@@ -92,7 +92,16 @@ export const userRouter = createTRPCRouter({
 
       return triedRemovingLastAdmin;
     }),
-
+  selectedUser: publicProcedure
+    .input(
+      z
+        .object({
+          userId: z.string(),
+        })
+    )
+    .query(async ({ ctx, input }) => {
+        return await getCurrentUser(ctx.prisma, input.userId);
+    }),
   updateOne: protectedProcedure
     .input(UserUpdateOneSchema)
     .mutation(async ({ ctx, input }) => {

@@ -11,7 +11,8 @@ export const CreateBlogPostWidget: React.FC = () => {
 
   const createBlogPostMutation = api.blogPost.create.useMutation({
     onSuccess() {
-      return utils.blogPost.get.invalidate();
+        return Promise.all([utils.blogPost.get.invalidate(), 
+                           utils.blogPost.count.invalidate()]);
     },
   });
   const currUser = api.user.currentUser.useQuery();

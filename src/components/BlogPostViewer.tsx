@@ -8,18 +8,35 @@ import { BlogPost as BlogPostComponent } from "./BlogPost";
 
 type Post = BlogPost & { user: User; comments: (Comment & { user: User })[] };
 
-export const BlogPostViewer: React.FC = () => {
+export interface BlogPostViewerProps {
+    user?: string
+}
+
+export const BlogPostViewer: React.FC<BlogPostViewerProps> = ({
+    user
+  }) => {
+
   const [view, setView] = useState<string>("Recent");
+
   const {
     data: blogPosts,
     fetchNextPage,
     hasNextPage,
-  } = api.blogPost.get.useInfiniteQuery(
-    {
-      take: 20,
-    },
-    { getNextPageParam: (lastPage) => (lastPage.nextCursor ? { id: lastPage.nextCursor } : undefined) }
-  );
+  } = (user) ? 
+      api.blogPost.get.useInfiniteQuery(
+        {
+            take: 20,
+            where: {
+                userId: user, 
+            }
+        },
+        { getNextPageParam: (lastPage) => (lastPage.nextCursor ? { id: lastPage.nextCursor } : undefined) })
+   : 
+      api.blogPost.get.useInfiniteQuery(
+      {
+          take:20,
+      },
+      { getNextPageParam: (lastPage) => (lastPage.nextCursor ? { id: lastPage.nextCursor } : undefined) });
 
   const posts = useMemo(
     () =>
@@ -38,7 +55,7 @@ export const BlogPostViewer: React.FC = () => {
     }
   }, [inView, fetchNextPage]);
   return (
-    <div className="w-full md:w-1/2 ">
+    <div className="w-full ">
       <div className="mb-6 flex w-full justify-end">
         <select
           className="h-8 w-64 max-w-xs border-b-2 bg-white"
@@ -59,33 +76,33 @@ export const BlogPostViewer: React.FC = () => {
               createdAt,
               content,
               comments,
-              user: { name, image },
+              user,
             }) => (
               <>
                 <div key={id} className="mb-6">
                   <BlogPostComponent
                     id={id}
-                    author={userId}
-                    name={name as string}
+                    authorId={userId}
                     title={title}
                     lastUpdated={updatedAt}
                     createdAt={createdAt}
-                    imageUrl={image as string}
                     content={content}
                     comments={(comments as Comment[]).length}
+                    authorName={user.name as string}
+                    imgUrl={user.image}
                   />
                 </div>
                 <CommentModal
                   id={id}
                   title={title}
+                  poster={user.name as string}
                   comments={comments as (Comment & { user: User })[]}
-                  poster={name as string}
                   lastUpdated={updatedAt}
                   createdAt={createdAt}
                   post={content}
-                  posterAvatarUrl={image as string}
                   content={content}
-                  author={userId}
+                  authorId={user.id}
+                  imgUrl={user.image}
                 />
               </>
             )

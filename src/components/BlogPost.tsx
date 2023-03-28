@@ -8,29 +8,31 @@ import { BlogPostActionsMenu } from "~/components/BlogPostActionsMenu";
 import { useSession } from "next-auth/react";
 import React from "react";
 import { shouldSeeActions, isAuthor } from "~/components/util";
+import {ProfileName} from "./ProfileName";
+import {userPathToProfile} from "~/utils/profile";
 
 interface BlogPostProps extends React.ComponentProps<"div"> {
   id: string;
-  name: string;
-  author: string;
+  authorId: string;
   lastUpdated: Date;
   createdAt: Date;
   title: string;
   content: string;
-  imageUrl: string;
   comments: number;
+  authorName: string;
+  imgUrl?: string | null
 }
 
 export const BlogPost: React.FC<BlogPostProps> = ({
   id,
-  author,
-  name,
+  authorId,
   lastUpdated,
   createdAt,
   title,
   content,
-  imageUrl,
   comments,
+  authorName,
+  imgUrl,
   ...props
 }) => {
   const currUser = api.user.currentUser.useQuery();
@@ -45,10 +47,13 @@ export const BlogPost: React.FC<BlogPostProps> = ({
         <div className="mb-3 flex w-full justify-between">
           <div className="flex">
             <div className="avatar self-center">
-              <ProfilePicture size={2.5} imgUrl={imageUrl} />
+                <ProfilePicture 
+                    size={2.5} 
+                    imgUrl={imgUrl} 
+                    redirectLink={userPathToProfile(authorId)} />
             </div>
             <div className="ml-3">
-              <p className="text-lg font-bold">{name}</p>
+              <ProfileName name={authorName} userId={authorId}/>
               <p className="text-sm text-slate-400">{`${timeAgo(createdAt)}${
                 createdAt.getTime() !== lastUpdated.getTime()
                   ? ` (updated ${timeAgo(lastUpdated)})`
@@ -56,12 +61,12 @@ export const BlogPost: React.FC<BlogPostProps> = ({
               }`}</p>
             </div>
           </div>
-          {shouldSeeActions(status, currUser.data, author) && (
+          {shouldSeeActions(status, currUser.data, authorId) && (
             <BlogPostActionsMenu
               id={id}
               title={title}
               content={content}
-              isAuthor={isAuthor(currUser.data, author)}
+              isAuthor={isAuthor(currUser.data, authorId)}
             />
           )}
         </div>

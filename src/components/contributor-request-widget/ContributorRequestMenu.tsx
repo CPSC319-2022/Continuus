@@ -2,6 +2,7 @@ import { type Dispatch, type SetStateAction, useEffect, useRef } from "react";
 import { CheckIcon } from "~/icons/Check";
 import { CloseIcon } from "~/icons/Close";
 import { api } from "~/utils/api";
+import {userPathToProfile} from "~/utils/profile";
 import { timeAgo } from "~/utils/time";
 import { ProfilePicture } from "../ProfilePicture";
 
@@ -69,13 +70,14 @@ export const ContributorRequestMenu: React.FC<ContributorRequestMenuProps> = ({
           <hr />
         </div>
         {users && users.length ? (
-          users.map(({ id, createdAt, user: { id: userId, name, image } }) => (
+          users.map(({ id, createdAt, user: { id: userId, name, image }}) => (
             <div className="my-2 flex justify-between" key={id}>
               <div className="flex">
                 <ProfilePicture
                   className="self-center"
-                  imgUrl={image}
                   size={2}
+                  imgUrl={image}
+                  redirectLink={userPathToProfile(userId)}
                 />
                 <div className="mx-2">
                   <p>{name}</p>

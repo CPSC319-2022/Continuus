@@ -8,6 +8,7 @@ import { Spinner } from "./Spinner";
 import { TextSkeleton } from "./TextSkeleton";
 import { UserRoleDropDown } from "./UserRoleDropDown";
 import Modal from 'react-modal';
+import {userPathToProfile} from "~/utils/profile";
 
 const columnHelper = createColumnHelper<User>()
 { process.env.NODE_ENV !== 'test' && Modal.setAppElement("#__next") }
@@ -60,9 +61,9 @@ export const UserTable: React.FC = () => {
             header: 'Name',
             cell: info => users.isLoading ? <TextSkeleton width={8} /> : info.getValue(),
         }),
-        columnHelper.accessor('image', {
+        columnHelper.display({
             header: 'Picture',
-            cell: info => users.isLoading ? <ImageSkeleton size={3} /> : <ProfilePicture size={3} imgUrl={info.getValue()} />,
+            cell: info => users.isLoading ? <ImageSkeleton size={3}/> : <ProfilePicture size={3} imgUrl={info.row.original.image} redirectLink={userPathToProfile(info.row.original.id)}/>,
         }),
         columnHelper.accessor('email', {
             header: 'E-Mail',

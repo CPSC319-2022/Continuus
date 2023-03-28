@@ -3,7 +3,7 @@ module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     fontFamily: {
-      sans: ["Work Sans"],
+      sans: ["Atkinson Hyperlegible"],
     },
     extend: {
       colors: {

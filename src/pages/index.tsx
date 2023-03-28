@@ -7,8 +7,8 @@ import { BlogPostViewer } from "~/components/BlogPostViewer";
 const Home: NextPage = () => {
   return (
     <Layout>
-      <div className="mt-4 flex min-h-screen w-full flex-col content-center items-center px-2 md:px-0">
-        <BlogPostViewer />
+      <div className="mt-4 flex min-h-screen w-full flex-col content-center items-center px-2 md:px-0 md:ml-[15%] md:mr-[15%]">
+        <BlogPostViewer/>
         <CreateBlogPostWidget />
       </div>
     </Layout>
