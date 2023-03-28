@@ -90,6 +90,9 @@ export const SearchModal: React.FC<SearchModalProps> = ({
     if (debouncedUsersVal && users.data?.length) {
       return false;
     }
+    if (!debouncedPostsVal && !debouncedUsersVal) {
+      return false;
+    }
     return true;
   };
 

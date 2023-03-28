@@ -64,13 +64,13 @@ export const ContributorRequestMenu: React.FC<ContributorRequestMenuProps> = ({
       ref={ref}
       className="absolute right-5 top-10 max-h-[30rem] min-w-[18rem] rounded-md bg-white p-3 shadow-lg"
     >
-      <div className="scrollbar-hide max-h-[28rem] overflow-scroll overflow-x-hidden">
+      <div className="scrollbar-hide max-h-[28rem] overflow-auto overflow-x-hidden">
         <div className="sticky top-0 bg-white">
           <p className="text-lg">Contributor Requests</p>
           <hr />
         </div>
         {users && users.length ? (
-          users.map(({ id, createdAt, user: { id: userId, name, image }}) => (
+          users.map(({ id, createdAt, user: { id: userId, name, image } }) => (
             <div className="my-2 flex justify-between" key={id}>
               <div className="flex">
                 <ProfilePicture
