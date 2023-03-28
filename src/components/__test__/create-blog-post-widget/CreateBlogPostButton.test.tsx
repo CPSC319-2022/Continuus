@@ -47,7 +47,13 @@ describe("Snapshot: CreateBlogPostButton", () => {
         await user.hover(actualButton)
         expect(createBlogPostButton).toMatchSnapshot();
     });
-    
+})
+
+describe("User Actions on CreateBlogPostButton", () => {
+    beforeEach(() => {
+        cleanup()
+    })
+
     it("Clicking Authorized Button", async () => {
         const user = userEvent.setup()
         const onClick = vi.fn(() => {})
