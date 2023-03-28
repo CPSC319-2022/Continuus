@@ -2,7 +2,7 @@ import type { PropsWithChildren } from 'react';
 import React from 'react';
 import Modal from 'react-modal';
 
-{process.env.NODE_ENV !== 'test' && Modal.setAppElement("#__next")}
+{process.env.NODE_ENV !== 'test' ? Modal.setAppElement("#__next") : Modal.setAppElement("body")}
 
 export const BlogPostInputModal: React.FC<PropsWithChildren<{
     action: string,

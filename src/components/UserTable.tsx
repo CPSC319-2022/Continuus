@@ -11,7 +11,7 @@ import Modal from 'react-modal';
 import {userPathToProfile} from "~/utils/profile";
 
 const columnHelper = createColumnHelper<User>()
-{ process.env.NODE_ENV !== 'test' && Modal.setAppElement("#__next") }
+{process.env.NODE_ENV !== 'test' ? Modal.setAppElement("#__next") : Modal.setAppElement("body")}
 
 const calcMaxPageIndex = (pageSize: number, userCount: number) => Math.ceil(userCount / pageSize) - 1;
 

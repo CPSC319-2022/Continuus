@@ -23,6 +23,7 @@ export const CreateBlogPostForm: React.FC<{
                         content,
                     });
                 }}
+                aria-label="Create Blog Post Form"
             >
                 <div className="border-b border-b-gray-200 pl-4 pr-4 py-6 flex flex-row items-start">
                     <CurrUserProfilePicture size={2.5} />
