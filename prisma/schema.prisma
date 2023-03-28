@@ -52,19 +52,20 @@ model Session {
 }
 
 model User {
-    id            String     @id @default(cuid())
-    name          String?
-    email         String?    @unique
-    emailVerified DateTime?
-    image         String?
-    role          Role       @default(READER)
-    accounts      Account[]
-    sessions      Session[]
-    blogPosts     BlogPost[]
-    comments      Comment[]
-    createdAt     DateTime   @default(now()) @db.Timestamptz(3) // with a timezone
+    id                 String               @id @default(cuid())
+    name               String?
+    email              String?              @unique
+    emailVerified      DateTime?
+    image              String?
+    role               Role                 @default(READER)
+    accounts           Account[]
+    sessions           Session[]
+    blogPosts          BlogPost[]
+    comments           Comment[]
+    createdAt          DateTime             @default(now()) @db.Timestamptz(3) // with a timezone
     // @updatedAt flag automatically updates this field
-    updatedAt     DateTime   @updatedAt @db.Timestamptz(3) // with a timezone
+    updatedAt          DateTime             @updatedAt @db.Timestamptz(3) // with a timezone
+    contributorRequest ContributorRequest[]
 }
 
 model VerificationToken {
@@ -97,6 +98,13 @@ model Comment {
     blogPost   BlogPost @relation(fields: [blogPostId], references: [id], onDelete: Cascade)
     createdAt  DateTime @default(now()) @db.Timestamptz(3) // with a timezone
     updatedAt  DateTime @updatedAt @db.Timestamptz(3) // with a timezone
+}
+
+model ContributorRequest {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now()) @db.Timestamptz(3)
+    userId    String
+    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 enum Role {
