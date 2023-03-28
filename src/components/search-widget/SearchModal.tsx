@@ -45,6 +45,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
   useEffect(() => {
     const handler = setTimeout(() => {
       if (searchVal.length > 0 && searchVal[0] === "@") {
+        setDebouncedPostsVal("");
         setDebouncedUsersVal(searchVal.slice(1));
       } else if (searchVal.length === 0) {
         setDebouncedPostsVal("");
@@ -53,7 +54,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
         setDebouncedUsersVal("");
         setDebouncedPostsVal(searchVal);
       }
-    }, 250);
+    }, 300);
     return () => {
       clearTimeout(handler);
     };
@@ -78,6 +79,19 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           )
       : str;
   }, []);
+
+  const hasNoResults = () => {
+    if (posts.isLoading || users.isLoading) {
+      return false;
+    }
+    if (debouncedPostsVal && posts.data?.length) {
+      return false;
+    }
+    if (debouncedUsersVal && users.data?.length) {
+      return false;
+    }
+    return true;
+  };
 
   return (
     <ReactModal
@@ -162,6 +176,11 @@ export const SearchModal: React.FC<SearchModalProps> = ({
             <p className="self-center">
               Type @ at the beginning to search for a user.
             </p>
+          </div>
+        )}
+        {hasNoResults() && (
+          <div className="flex h-[35rem] flex-col justify-center align-middle">
+            <p className="self-center">No results found</p>
           </div>
         )}
       </div>
