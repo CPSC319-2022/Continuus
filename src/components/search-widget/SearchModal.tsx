@@ -131,7 +131,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                       author: name as string,
                     })
                   );
-                  setTimeout(() => setIsOpen(false), 5);
+                  setTimeout(() => setIsOpen(false), 1);
                 }}
               >
                 <ProfilePicture
