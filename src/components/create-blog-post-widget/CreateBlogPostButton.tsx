@@ -10,6 +10,7 @@ export const CreateBlogPostButton: React.FC<{ onClick?: () => void, unauthorized
     return (
         <>
             <div
+                aria-label="Create Blog Post Button"
                 className="
                     fixed
                     bottom-24
