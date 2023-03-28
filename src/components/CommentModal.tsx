@@ -1,54 +1,54 @@
 import { Comment } from "./Comment";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkSlug from "remark-slug";
-import type { Comment as CommentType, User } from "@prisma/client";
 import { timeAgo } from "~/utils/time";
 import { ProfilePicture } from "./ProfilePicture";
 import { BlogPostActionsMenu } from "~/components/BlogPostActionsMenu";
 import { api } from "~/utils/api";
 import { useSession } from "next-auth/react";
 import { shouldSeeActions, isAuthor } from "~/components/util";
+import ReactModal from "react-modal";
+import { useAppDispatch, useAppSelector } from "~/redux/hooks";
+import { setSelectedPost } from "~/redux/slices/posts";
 
-type CommentEntry = CommentType & { user: User };
-
-export interface CommentModalProps {
-  id: string;
-  title: string;
-  poster: string;
-  lastUpdated: Date;
-  createdAt: Date;
-  post: string;
-  posterAvatarUrl: string;
-  comments: CommentEntry[];
-  content: string;
-  author: string;
-}
-
-export const CommentModal: React.FC<CommentModalProps> = ({
-  id,
-  title,
-  poster,
-  lastUpdated,
-  createdAt,
-  post,
-  posterAvatarUrl,
-  comments,
-  author,
-  content,
-}) => {
+export const CommentModal: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState<string>("");
+
+  const {
+    posts: { selectedPost },
+  } = useAppSelector((state) => state);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (selectedPost) {
+      setIsOpen(true);
+    } else {
+      setIsOpen(false);
+    }
+  }, [selectedPost]);
+
+  useEffect(() => {
+    if (!isOpen) {
+      dispatch(setSelectedPost(null));
+    }
+  }, [isOpen, dispatch]);
 
   const utils = api.useContext();
 
   const currUser = api.user.currentUser.useQuery();
 
+  const { data: postx } = api.blogPost.getOne.useQuery({
+    where: { id: selectedPost ?? "" },
+  });
+
   const { status } = useSession();
 
   const createCommentMutation = api.comment.create.useMutation({
     onSuccess: async () => {
-      await utils.blogPost.get.invalidate();
       await utils.blogPost.getOne.invalidate();
     },
   });
@@ -65,7 +65,7 @@ export const CommentModal: React.FC<CommentModalProps> = ({
     createCommentMutation.mutate({
       data: {
         userId: currUser?.data?.id ?? "",
-        blogPostId: id,
+        blogPostId: postx?.id ?? "",
         content: input,
       },
     });
@@ -75,48 +75,54 @@ export const CommentModal: React.FC<CommentModalProps> = ({
 
   return (
     <>
-      <input type="checkbox" id={`modal-${id}`} className="modal-toggle" />
-      <label htmlFor={`modal-${id}`} className="modal z-10 cursor-pointer">
-        <label
-          className="card-body modal-box relative m-[-10px] w-11/12 max-w-5xl rounded-md"
-          htmlFor=""
+      {postx && (
+        <ReactModal
+          closeTimeoutMS={100}
+          isOpen={isOpen}
+          overlayClassName="fixed inset-0 z-20 bg-black/30"
+          className="absolute top-1/2 left-1/2 z-40 max-h-[95vh] w-11/12 max-w-5xl -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-md border-slate-500 bg-white p-5 outline-none md:w-1/2"
+          shouldCloseOnEsc
+          shouldCloseOnOverlayClick
+          onRequestClose={() => setIsOpen(false)}
         >
           <div className="mb-3 flex w-full justify-between">
             <div className="flex">
               <div className="avatar self-center">
-                <ProfilePicture size={2.5} imgUrl={posterAvatarUrl} />
+                <ProfilePicture size={2.5} imgUrl={postx.user.image} />
               </div>
               <div className="ml-3">
-                <p className="text-lg font-bold">{poster}</p>
-                <p className="text-sm text-slate-400">{`${timeAgo(createdAt)}${
-                  createdAt.getTime() !== lastUpdated.getTime()
-                    ? ` (updated ${timeAgo(lastUpdated)})`
+                <p className="text-lg font-bold">{postx.user.name}</p>
+                <p className="text-sm text-slate-400">{`${timeAgo(
+                  postx.createdAt
+                )}${
+                  postx.createdAt.getTime() !== postx.updatedAt.getTime()
+                    ? ` (updated ${timeAgo(postx.updatedAt)})`
                     : ""
                 }`}</p>
               </div>
             </div>
-            {shouldSeeActions(status, currUser.data, author) && (
+            {shouldSeeActions(status, currUser.data, postx.userId) && (
               <BlogPostActionsMenu
-                id={id}
-                title={title}
-                content={content}
-                isAuthor={isAuthor(currUser.data, author)}
+                id={postx.id}
+                title={postx.title}
+                content={postx.content}
+                isAuthor={isAuthor(currUser.data, postx.userId)}
               />
             )}
           </div>
-          <p className="mb-3 text-xl font-bold">{title}</p>
+          <p className="mb-3 text-xl font-bold">{postx.title}</p>
           <div className="prose max-w-none ">
             <ReactMarkdown remarkPlugins={[remarkGfm, remarkSlug]}>
-              {content}
+              {postx.content}
             </ReactMarkdown>
           </div>
-          <div className="self-end">
-            <p className="btn-link text-highlight-green no-underline hover:no-underline">
-              {comments.length} Comments
+          <div className="flex w-full justify-end">
+            <p className="float-right text-highlight-green no-underline hover:no-underline">
+              {postx.comments.length} Comments
             </p>
           </div>
           <div>
-            {comments.map(
+            {postx.comments.map(
               ({
                 id: commentId,
                 content: comment,
@@ -163,16 +169,16 @@ export const CommentModal: React.FC<CommentModalProps> = ({
               >
                 Post
               </button>
-              <label
-                className={`mt-[0.5rem] h-10 rounded-sm border-[2px] border-slate-200 bg-white px-5 pt-[0.38rem] text-center text-black hover:cursor-pointer`}
-                htmlFor={`modal-${id}`}
+              <button
+                className={`mt-[0.5rem] h-10 rounded-sm border-2 border-slate-200 bg-white px-5 text-center text-black hover:cursor-pointer`}
+                onClick={() => dispatch(setSelectedPost(null))}
               >
                 Cancel
-              </label>
+              </button>
             </div>
           </div>
-        </label>
-      </label>
+        </ReactModal>
+      )}
     </>
   );
 };

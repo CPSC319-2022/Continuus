@@ -3,7 +3,7 @@ import { Layout } from "../components/Layout";
 
 import { CreateBlogPostWidget } from "~/components/create-blog-post-widget";
 import { BlogPostViewer } from "~/components/BlogPostViewer";
-import { CommentModalSearch } from "~/components/search-widget/CommentModalSearch";
+import { CommentModal } from "~/components/CommentModal";
 
 const Home: NextPage = () => {
   return (
@@ -11,7 +11,7 @@ const Home: NextPage = () => {
       <div className="mt-4 flex min-h-screen w-full flex-col content-center items-center px-2 md:px-0">
         <BlogPostViewer />
         <CreateBlogPostWidget />
-        <CommentModalSearch />
+        <CommentModal />
       </div>
     </Layout>
   );
