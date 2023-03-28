@@ -21,61 +21,69 @@ export const SearchModal: React.FC<SearchModalProps> = ({
   isOpen,
   setIsOpen,
 }) => {
-  const [debouncedVal, setDebouncedVal] = useState("");
+  const [debouncedPostsVal, setDebouncedPostsVal] = useState("");
+  const [debouncedUsersVal, setDebouncedUsersVal] = useState("");
   const [searchVal, setSearchVal] = useState("");
   const dispatch = useAppDispatch();
 
   const posts = api.blogPost.search.useQuery({
     where: {
       OR: [
-        { title: { contains: debouncedVal, mode: "insensitive" } },
-        { content: { contains: debouncedVal, mode: "insensitive" } },
+        { title: { contains: debouncedPostsVal, mode: "insensitive" } },
+        { content: { contains: debouncedPostsVal, mode: "insensitive" } },
       ],
+    },
+  });
+
+  const users = api.user.searchUsers.useQuery({
+    where: {
+      name: { contains: debouncedUsersVal, mode: "insensitive" },
     },
   });
 
   useEffect(() => {
     const handler = setTimeout(() => {
-      console.log(searchVal);
-      setDebouncedVal(searchVal);
-    }, 200);
+      if (searchVal.length > 0 && searchVal[0] === "@") {
+        setDebouncedUsersVal(searchVal.slice(1));
+      } else if (searchVal.length === 0) {
+        setDebouncedPostsVal("");
+        setDebouncedUsersVal("");
+      } else {
+        setDebouncedUsersVal("");
+        setDebouncedPostsVal(searchVal);
+      }
+    }, 250);
     return () => {
       clearTimeout(handler);
     };
   }, [searchVal]);
 
-  const highlighter = useCallback(
-    (str: string) => {
-      return debouncedVal
-        ? str
-            .replaceAll(
-              new RegExp(
-                debouncedVal.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"),
-                "gi"
-              ),
-              (substring) => `@@${substring}@@`
+  const highlighter = useCallback((str: string, val: string) => {
+    return val
+      ? str
+          .replaceAll(
+            new RegExp(val.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "gi"),
+            (substring) => `@@${substring}@@`
+          )
+          .split("@@")
+          .map((str, i) =>
+            i % 2 === 0 ? (
+              str
+            ) : (
+              <mark key={i} className="bg-sky-200 dark:bg-amber-200">
+                {str}
+              </mark>
             )
-            .split("@@")
-            .map((str, i) =>
-              i % 2 === 0 ? (
-                str
-              ) : (
-                <mark key={i} className="bg-sky-200 dark:bg-amber-200">
-                  {str}
-                </mark>
-              )
-            )
-        : str;
-    },
-    [debouncedVal]
-  );
+          )
+      : str;
+  }, []);
 
   return (
     <ReactModal
       closeTimeoutMS={100}
       isOpen={isOpen}
       overlayClassName="fixed inset-0 z-20 bg-black/60"
-      className="absolute top-1/2 left-1/2 z-40 h-[40rem] w-11/12 -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-md border-slate-500 bg-white md:w-1/2"
+      className="absolute top-1/2 left-1/2 z-40 h-[40rem] w-11/12 -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-md border-slate-500 bg-white outline-none md:w-1/2"
       shouldCloseOnEsc
       shouldCloseOnOverlayClick
       onRequestClose={() => setIsOpen(false)}
@@ -88,8 +96,9 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           onChange={(e) => setSearchVal(e.target.value)}
           className={`input-bordered sticky mb-1 w-full rounded-sm border-[1px] p-2`}
         />
-        {debouncedVal ? (
-          posts.data?.map(
+        {debouncedPostsVal &&
+          posts.data &&
+          posts.data.map(
             ({
               id,
               title,
@@ -98,34 +107,50 @@ export const SearchModal: React.FC<SearchModalProps> = ({
               content,
               user: { name, image },
             }) => (
-              <div key={id} className="my-2">
-                <label
-                  htmlFor={`modal-${id}`}
-                  className="flex hover:cursor-pointer"
-                  onClick={() => {
-                    dispatch(setSelectedPost(id));
-                  }}
-                >
-                  <ProfilePicture
-                    imgUrl={image}
-                    size={2}
-                    className="self-center"
-                  />
-                  <div className="ml-3">
-                    <p className="font-bold">{highlighter(title)}</p>
-                    <p className="text-xs">
-                      {highlighter(
-                        content.length > 200
-                          ? `${content.slice(0, 199)}...`
-                          : content
-                      )}
-                    </p>
-                  </div>
-                </label>
+              <div
+                key={id}
+                className="my-2 flex rounded-md p-3 hover:cursor-pointer hover:bg-slate-200"
+                onClick={() => {
+                  dispatch(setSelectedPost(id));
+                }}
+              >
+                <ProfilePicture
+                  imgUrl={image}
+                  size={2}
+                  className="self-center"
+                />
+                <div className="ml-3">
+                  <p className="font-bold">
+                    {highlighter(title, debouncedPostsVal)}
+                  </p>
+                  <p className="text-xs">
+                    {highlighter(
+                      content.length > 200
+                        ? `${content.slice(0, 199)}...`
+                        : content,
+                      debouncedPostsVal
+                    )}
+                  </p>
+                </div>
               </div>
             )
-          )
-        ) : (
+          )}
+        {debouncedUsersVal &&
+          users.data &&
+          users.data.map(({ id, name, image }) => (
+            <div
+              key={id}
+              className="my-2 flex rounded-md p-3 hover:cursor-pointer hover:bg-slate-200"
+            >
+              <ProfilePicture imgUrl={image} size={2} className="self-center" />
+              <div className="ml-3 flex">
+                <p className="self-center">
+                  {highlighter(name as string, debouncedUsersVal)}
+                </p>
+              </div>
+            </div>
+          ))}
+        {!debouncedPostsVal && !debouncedUsersVal && (
           <div className="flex h-[35rem] flex-col justify-center align-middle">
             <p className="self-center">
               Start typing to search for a blog post!{" "}
