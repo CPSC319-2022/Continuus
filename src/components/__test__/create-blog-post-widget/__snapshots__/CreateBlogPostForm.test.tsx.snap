@@ -1,54 +1,37 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Snapshot: CreateBlogPostForm > Empty Form Snapshot 1`] = `
-{
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-}
+<form
+  aria-label="Create Blog Post Form"
+>
+  <div
+    class="border-b border-b-gray-200 pl-4 pr-4 py-6 flex flex-row items-start"
+  >
+    <img
+      alt="avatar"
+      class="aspect-square rounded-full"
+      src="https://i.stack.imgur.com/34AD2.jpg"
+      style="width: 2.5rem;"
+    />
+    <div
+      class="flex flex-col w-full ml-2"
+    >
+      <input
+        class="w-full bg-gray-100 rounded-md p-2 mb-4"
+        placeholder="Write title here"
+        type="text"
+        value=""
+      />
+      <textarea
+        class="w-full resize-none bg-gray-100 rounded-md h-96 p-2"
+        placeholder="Write your blog post here"
+      />
+    </div>
+  </div>
+  <input
+    class="relative left-full -translate-x-full px-6 py-2 rounded-md bg-emerald-400 my-2 -ml-4 hover:text-white transition-colors cursor-pointer"
+    type="submit"
+    value="Create"
+  />
+</form>
 `;

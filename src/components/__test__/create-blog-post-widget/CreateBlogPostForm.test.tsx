@@ -22,7 +22,7 @@ describe("Snapshot: CreateBlogPostForm", () => {
 
     it("Empty Form Snapshot", () => {
         render(<CreateBlogPostForm onSubmit={() => {}}/>);
-        const form = within(screen.getByRole("form"));
+        const form = screen.getByRole("form");
         expect(form).toMatchSnapshot();
     });
 })
