@@ -1,18 +1,16 @@
 import {
-  Dispatch,
-  SetStateAction,
+  type Dispatch,
+  type SetStateAction,
   useCallback,
   useEffect,
   useRef,
   useState,
 } from "react";
-import type { User, Comment } from "@prisma/client";
 import { api } from "~/utils/api";
 import { ProfilePicture } from "../ProfilePicture";
-import { CommentModal } from "../CommentModal";
 import ReactModal from "react-modal";
 import { setSelectedPost } from "~/redux/slices/posts";
-import { useAppDispatch, useAppSelector } from "~/redux/hooks";
+import { useAppDispatch } from "~/redux/hooks";
 
 interface SearchModalProps {
   isOpen: boolean;
@@ -41,7 +39,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
     const handler = setTimeout(() => {
       console.log(searchVal);
       setDebouncedVal(searchVal);
-    }, 500);
+    }, 200);
     return () => {
       clearTimeout(handler);
     };
@@ -96,62 +94,71 @@ export const SearchModal: React.FC<SearchModalProps> = ({
       <div className="p-3" ref={ref}>
         <input
           type="text"
-          placeholder="Search for a blog post..."
+          placeholder="Search for a blog post or user..."
           value={searchVal}
           onChange={(e) => setSearchVal(e.target.value)}
           className={`input-bordered sticky mb-1 w-full rounded-sm border-[1px] p-2`}
         />
-        {posts.data?.map(
-          ({
-            id,
-            userId,
-            title,
-            updatedAt,
-            createdAt,
-            content,
-            comments,
-            user: { name, image },
-          }) => (
-            <div key={id} className="my-2">
-              <label
-                htmlFor={`modal-${id}`}
-                className="flex hover:cursor-pointer"
-                onClick={() => {
-                  dispatch(
-                    setSelectedPost({
-                      id,
-                      title,
-                      poster: name as string,
-                      lastUpdated: updatedAt,
-                      createdAt,
-                      post: content,
-                      posterAvatarUrl: image as string,
-                      comments,
-                      content,
-                      author: name as string,
-                    })
-                  );
-                  setTimeout(() => setIsOpen(false), 1);
-                }}
-              >
-                <ProfilePicture
-                  imgUrl={image}
-                  size={2}
-                  className="self-center"
-                />
-                <div className="ml-3">
-                  <p className="font-bold">{highlighter(title)}</p>
-                  <p className="text-xs">
-                    {highlighter(
-                      content.length > 200
-                        ? `${content.slice(0, 199)}...`
-                        : content
-                    )}
-                  </p>
-                </div>
-              </label>
-            </div>
+        {debouncedVal ? (
+          posts.data?.map(
+            ({
+              id,
+              userId,
+              title,
+              updatedAt,
+              createdAt,
+              content,
+              comments,
+              user: { name, image },
+            }) => (
+              <div key={id} className="my-2">
+                <label
+                  htmlFor={`modal-${id}`}
+                  className="flex hover:cursor-pointer"
+                  onClick={() => {
+                    dispatch(
+                      setSelectedPost({
+                        id,
+                        title,
+                        poster: name as string,
+                        lastUpdated: updatedAt,
+                        createdAt,
+                        post: content,
+                        posterAvatarUrl: image as string,
+                        comments,
+                        content,
+                        author: name as string,
+                      })
+                    );
+                    setTimeout(() => setIsOpen(false), 1);
+                  }}
+                >
+                  <ProfilePicture
+                    imgUrl={image}
+                    size={2}
+                    className="self-center"
+                  />
+                  <div className="ml-3">
+                    <p className="font-bold">{highlighter(title)}</p>
+                    <p className="text-xs">
+                      {highlighter(
+                        content.length > 200
+                          ? `${content.slice(0, 199)}...`
+                          : content
+                      )}
+                    </p>
+                  </div>
+                </label>
+              </div>
+            )
           )
+        ) : (
+          <div className="flex h-[35rem] justify-center align-middle">
+            <p className="self-center">
+              Search for something! Type @ at the beginning to search for a
+              user.
+            </p>
+          </div>
         )}
       </div>
     </ReactModal>

@@ -1,7 +1,5 @@
 import Head from "next/head";
 import type { PropsWithChildren } from "react";
-import { Provider } from "react-redux";
-import { store } from "~/redux/store";
 import { Navbar } from "./Navbar";
 import { Sidebar } from "./Sidebar";
 
