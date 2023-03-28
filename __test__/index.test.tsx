@@ -36,4 +36,8 @@ describe("Sample test suite", () => {
   it("should render the component", () => {
     expect(true).toBeTruthy();
   });
+
+  //it("a failing test", () => {
+  //    expect(false).toBeTruthy();
+  //});
 });
