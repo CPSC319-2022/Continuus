@@ -94,8 +94,7 @@ export const CommentModal: React.FC<CommentModalProps> = ({
                 }`}</p>
               </div>
             </div>
-            {
-              shouldSeeActions(status, currUser.data, author) && (
+            {shouldSeeActions(status, currUser.data, author) && (
               <BlogPostActionsMenu
                 id={id}
                 title={title}

@@ -10,9 +10,7 @@ export const Navbar: React.FC = () => {
       <div className="flex items-center gap-2">
         <RequestAccessButton />
         <ContributorRequestWidget />
-        <label htmlFor="search-modal" className="btn-link hover:cursor-pointer">
-          <SearchIcon className="mr-3" />
-        </label>
+        <SearchIcon />
         <ProfileMenu />
       </div>
     </div>

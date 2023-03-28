@@ -6,7 +6,7 @@ import { ProfilePicture } from "./ProfilePicture";
 import { api } from "~/utils/api";
 import { BlogPostActionsMenu } from "~/components/BlogPostActionsMenu";
 import { useSession } from "next-auth/react";
-import React from "react";
+import React, { SetStateAction, Dispatch } from "react";
 import { shouldSeeActions, isAuthor } from "~/components/util";
 
 interface BlogPostProps extends React.ComponentProps<"div"> {
@@ -19,6 +19,7 @@ interface BlogPostProps extends React.ComponentProps<"div"> {
   content: string;
   imageUrl: string;
   comments: number;
+  setSelectedPostId: Dispatch<SetStateAction<string>>;
 }
 
 export const BlogPost: React.FC<BlogPostProps> = ({
@@ -31,6 +32,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
   content,
   imageUrl,
   comments,
+  setSelectedPostId,
   ...props
 }) => {
   const currUser = api.user.currentUser.useQuery();
@@ -75,6 +77,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
           <label
             htmlFor={`modal-${id}`}
             className="btn-link text-highlight-green no-underline hover:cursor-pointer"
+            onClick={() => setSelectedPostId(id)}
           >
             {comments} Comments
           </label>

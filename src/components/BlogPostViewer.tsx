@@ -10,6 +10,7 @@ type Post = BlogPost & { user: User; comments: (Comment & { user: User })[] };
 
 export const BlogPostViewer: React.FC = () => {
   const [view, setView] = useState<string>("Recent");
+  const [selectedPostId, setSelectedPostId] = useState("");
   const {
     data: blogPosts,
     fetchNextPage,
@@ -18,7 +19,10 @@ export const BlogPostViewer: React.FC = () => {
     {
       take: 20,
     },
-    { getNextPageParam: (lastPage) => (lastPage.nextCursor ? { id: lastPage.nextCursor } : undefined) }
+    {
+      getNextPageParam: (lastPage) =>
+        lastPage.nextCursor ? { id: lastPage.nextCursor } : undefined,
+    }
   );
 
   const posts = useMemo(
@@ -72,21 +76,24 @@ export const BlogPostViewer: React.FC = () => {
                     createdAt={createdAt}
                     imageUrl={image as string}
                     content={content}
+                    setSelectedPostId={setSelectedPostId}
                     comments={(comments as Comment[]).length}
                   />
                 </div>
-                <CommentModal
-                  id={id}
-                  title={title}
-                  comments={comments as (Comment & { user: User })[]}
-                  poster={name as string}
-                  lastUpdated={updatedAt}
-                  createdAt={createdAt}
-                  post={content}
-                  posterAvatarUrl={image as string}
-                  content={content}
-                  author={userId}
-                />
+                {id === selectedPostId && (
+                  <CommentModal
+                    id={id}
+                    title={title}
+                    comments={comments as (Comment & { user: User })[]}
+                    poster={name as string}
+                    lastUpdated={updatedAt}
+                    createdAt={createdAt}
+                    post={content}
+                    posterAvatarUrl={image as string}
+                    content={content}
+                    author={userId}
+                  />
+                )}
               </>
             )
           )}
