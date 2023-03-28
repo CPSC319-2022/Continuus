@@ -1,12 +1,12 @@
 terraform {
   backend "gcs" {
-    bucket  = "artifacts.automatic-bot-376307.appspot.com"
-    prefix  = "state"
-  }  
-  required_version = ">= 0.13"  
-  required_providers { 
+    bucket = "artifacts.automatic-bot-376307.appspot.com"
+    prefix = "state"
+  }
+  required_version = ">= 0.13"
+  required_providers {
     google = {
-      source = "hashicorp/google"
+      source  = "hashicorp/google"
       version = "4.56.0"
     }
   }
