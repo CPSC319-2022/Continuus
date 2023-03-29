@@ -104,7 +104,7 @@ export const CommentModal: React.FC<CommentModalProps> = ({
               />
             )}
           </div>
-          <p className="mb-3 text-xl font-bold">{title}</p>
+          <p className="mb-2 text-3xl font-bold">{title}</p>
           <div className="prose max-w-none ">
             <ReactMarkdown remarkPlugins={[remarkGfm, remarkSlug]}>
               {post}

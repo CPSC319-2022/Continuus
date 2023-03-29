@@ -38,7 +38,7 @@ export const BlogPostViewer: React.FC = () => {
     }
   }, [inView, fetchNextPage]);
   return (
-    <div className="w-full md:w-1/2 ">
+    <div className="w-full md:w-1/2">
       <div className="mb-6 flex w-full justify-end">
         <select
           className="h-8 w-64 max-w-xs border-b-2 bg-white"
@@ -62,7 +62,7 @@ export const BlogPostViewer: React.FC = () => {
               user: { name, image },
             }) => (
               <>
-                <div key={id} className="mb-6">
+                <div key={id} className="mb-6 border rounded-md">
                   <BlogPostComponent
                     id={id}
                     author={userId}

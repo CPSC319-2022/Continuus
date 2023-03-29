@@ -55,6 +55,7 @@ export const Sidebar: React.FC = () => {
           key={path}
           className={`
           ${path === pathname ? 'border-highlight-green' : 'border-transparent'} 
+          ${path === pathname ? 'font-bold' : 'font-normal'}
           border-b-4 
           border-solid 
           flex
@@ -64,13 +65,15 @@ export const Sidebar: React.FC = () => {
           justify-center
           cursor-pointer
           hover:bg-slate-200
-          md:pl-2
+          hover:font-bold
+          hover:border-highlight-green
+          md:pl-4
           md:justify-start
           md:h-12
           md:flex-auto
-          md:rounded-r-md 
-          md:my-2 
-          md:border-l-4 
+          md:rounded
+          md:my-2
+          md:border-l-4
           md:border-b-0
           `}>
           {title}

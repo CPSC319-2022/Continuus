@@ -19,7 +19,7 @@ export const BlogPostActionsMenu: React.FC<BlogPostActionsProps> = ({id, title, 
         </button>
         <ul
           tabIndex={0}
-          className="dropdown-content menu rounded-box w-52 bg-base-100 p-2 shadow"
+          className="dropdown-content menu rounded-md w-52 bg-base-100 p-2 shadow"
         >
           <li>
             {
