@@ -144,6 +144,7 @@ export const CommentModal: React.FC = () => {
                   name={authorName}
                   userId={commenterId}
                   imgUrl={image}
+                  commentId={commentId}
                 />
               )
             )}
