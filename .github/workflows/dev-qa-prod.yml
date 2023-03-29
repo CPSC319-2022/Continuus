@@ -148,6 +148,5 @@ jobs:
     - name: 'Start Google Cloud Build trigger'
       run: |
         export CLOUDSDK_CORE_DISABLE_PROMPTS=1
-        chmod +x ./scripts/wait-for-build
         gcloud artifacts docker images delete northamerica-northeast2-docker.pkg.dev/automatic-bot-376307/continuus/${{ steps.vars.outputs.sha_short }}-test --delete-tags
 
