@@ -2,24 +2,44 @@ import type { BlogPost, User, Comment } from "@prisma/client";
 import { useState, useMemo, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { api } from "~/utils/api";
-import { CommentModal } from "./CommentModal";
 import { Spinner } from "./Spinner";
 import { BlogPost as BlogPostComponent } from "./BlogPost";
 
 type Post = BlogPost & { user: User; comments: (Comment & { user: User })[] };
 
-export const BlogPostViewer: React.FC = () => {
+export interface BlogPostViewerProps {
+  user?: string;
+}
+
+export const BlogPostViewer: React.FC<BlogPostViewerProps> = ({ user }) => {
   const [view, setView] = useState<string>("Recent");
+
   const {
     data: blogPosts,
     fetchNextPage,
     hasNextPage,
-  } = api.blogPost.get.useInfiniteQuery(
-    {
-      take: 20,
-    },
-    { getNextPageParam: (lastPage) => (lastPage.nextCursor ? { id: lastPage.nextCursor } : undefined) }
-  );
+  } = user
+    ? api.blogPost.get.useInfiniteQuery(
+        {
+          take: 20,
+          where: {
+            userId: user,
+          },
+        },
+        {
+          getNextPageParam: (lastPage) =>
+            lastPage.nextCursor ? { id: lastPage.nextCursor } : undefined,
+        }
+      )
+    : api.blogPost.get.useInfiniteQuery(
+        {
+          take: 20,
+        },
+        {
+          getNextPageParam: (lastPage) =>
+            lastPage.nextCursor ? { id: lastPage.nextCursor } : undefined,
+        }
+      );
 
   const posts = useMemo(
     () =>
@@ -59,7 +79,7 @@ export const BlogPostViewer: React.FC = () => {
               createdAt,
               content,
               comments,
-              user: { name, image },
+              user,
             }) => (
               <>
                 <div key={id} className="mb-6 border rounded-md">
@@ -77,17 +97,16 @@ export const BlogPostViewer: React.FC = () => {
                 </div>
                 <CommentModal
                   id={id}
+                  authorId={userId}
                   title={title}
-                  comments={comments as (Comment & { user: User })[]}
-                  poster={name as string}
                   lastUpdated={updatedAt}
                   createdAt={createdAt}
-                  post={content}
-                  posterAvatarUrl={image as string}
                   content={content}
-                  author={userId}
+                  comments={(comments as Comment[]).length}
+                  authorName={user.name as string}
+                  imgUrl={user.image}
                 />
-              </>
+              </div>
             )
           )}
       {hasNextPage && (

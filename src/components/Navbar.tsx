@@ -1,4 +1,6 @@
 import { SearchIcon } from "~/icons/Search";
+import { ContributorRequestWidget } from "./contributor-request-widget/ContributorRequestWidget";
+import { RequestAccessButton } from "./contributor-request-widget/RequestAccessButton";
 import { ProfileMenu } from "./ProfileMenu";
 
 export const Navbar: React.FC = () => {
