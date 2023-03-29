@@ -27,7 +27,7 @@ export const ProfileTabbedView: React.FC<ProfileTabbedViewProps> = ({
     {
       label: "Comments",
       value: "comments",
-      desc: "Comment Placeholder",
+      desc: <ProfileCommentsView />
     },
   ];
 
@@ -61,6 +61,7 @@ export const ProfileTabbedView: React.FC<ProfileTabbedViewProps> = ({
             </Tab>
           </TabList>
           <TabPanel>{headers[0]?.desc ?? <></>}</TabPanel>
+          <TabPanel>{headers[1]?.desc ?? <></>}</TabPanel>
         </Tabs>
       </div>
     </div>
