@@ -2,41 +2,44 @@ import type { BlogPost, User, Comment } from "@prisma/client";
 import { useState, useMemo, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { api } from "~/utils/api";
-import { CommentModal } from "./CommentModal";
 import { Spinner } from "./Spinner";
 import { BlogPost as BlogPostComponent } from "./BlogPost";
 
 type Post = BlogPost & { user: User; comments: (Comment & { user: User })[] };
 
 export interface BlogPostViewerProps {
-    user?: string
+  user?: string;
 }
 
-export const BlogPostViewer: React.FC<BlogPostViewerProps> = ({
-    user
-  }) => {
-
+export const BlogPostViewer: React.FC<BlogPostViewerProps> = ({ user }) => {
   const [view, setView] = useState<string>("Recent");
 
   const {
     data: blogPosts,
     fetchNextPage,
     hasNextPage,
-  } = (user) ? 
-      api.blogPost.get.useInfiniteQuery(
+  } = user
+    ? api.blogPost.get.useInfiniteQuery(
         {
-            take: 20,
-            where: {
-                userId: user, 
-            }
+          take: 20,
+          where: {
+            userId: user,
+          },
         },
-        { getNextPageParam: (lastPage) => (lastPage.nextCursor ? { id: lastPage.nextCursor } : undefined) })
-   : 
-      api.blogPost.get.useInfiniteQuery(
-      {
-          take:20,
-      },
-      { getNextPageParam: (lastPage) => (lastPage.nextCursor ? { id: lastPage.nextCursor } : undefined) });
+        {
+          getNextPageParam: (lastPage) =>
+            lastPage.nextCursor ? { id: lastPage.nextCursor } : undefined,
+        }
+      )
+    : api.blogPost.get.useInfiniteQuery(
+        {
+          take: 20,
+        },
+        {
+          getNextPageParam: (lastPage) =>
+            lastPage.nextCursor ? { id: lastPage.nextCursor } : undefined,
+        }
+      );
 
   const posts = useMemo(
     () =>
@@ -78,33 +81,19 @@ export const BlogPostViewer: React.FC<BlogPostViewerProps> = ({
               comments,
               user,
             }) => (
-              <>
-                <div key={id} className="mb-6">
-                  <BlogPostComponent
-                    id={id}
-                    authorId={userId}
-                    title={title}
-                    lastUpdated={updatedAt}
-                    createdAt={createdAt}
-                    content={content}
-                    comments={(comments as Comment[]).length}
-                    authorName={user.name as string}
-                    imgUrl={user.image}
-                  />
-                </div>
-                <CommentModal
+              <div key={id} className="mb-6">
+                <BlogPostComponent
                   id={id}
+                  authorId={userId}
                   title={title}
-                  poster={user.name as string}
-                  comments={comments as (Comment & { user: User })[]}
                   lastUpdated={updatedAt}
                   createdAt={createdAt}
-                  post={content}
                   content={content}
-                  authorId={user.id}
+                  comments={(comments as Comment[]).length}
+                  authorName={user.name as string}
                   imgUrl={user.image}
                 />
-              </>
+              </div>
             )
           )}
       {hasNextPage && (

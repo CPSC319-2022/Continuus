@@ -9,13 +9,13 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
       <Head>
         <title>Continuus Blog Application</title>
       </Head>
-      <header className="sticky top-0 w-full h-12 bg-white box-border z-10">
+      <header className="sticky top-0 z-10 box-border h-12 w-full bg-white">
         <Navbar />
       </header>
-      <nav className="fixed w-full bg-white top-full z-10 h-24 -translate-y-full md:bg-transparent md:h-auto md:translate-y-0 md:top-12 left-0 md:inline-block md:align-top md:w-[15%]">
+      <nav className="fixed top-full left-0 z-10 h-24 w-full -translate-y-full bg-white md:top-12 md:inline-block md:h-auto md:w-[15%] md:translate-y-0 md:bg-transparent md:align-top">
         <Sidebar />
       </nav>
-      <main className="inline-flex w-full px-2 pb-24 md:pb-4 md:px-0 overflow-x-auto">
+      <main className="inline-flex w-full overflow-x-auto px-2 pb-24 md:px-0 md:pb-4">
         {children}
       </main>
     </>

@@ -1,6 +1,10 @@
 import {
-  BlogPostCreateOneSchema, BlogPostDeleteOneSchema,
-  BlogPostFindManySchema, BlogPostUpdateOneSchema, BlogPostWhereInputObjectSchema
+  BlogPostCreateOneSchema,
+  BlogPostDeleteOneSchema,
+  BlogPostFindManySchema,
+  BlogPostFindUniqueSchema,
+  BlogPostUpdateOneSchema,
+  BlogPostWhereInputObjectSchema,
 } from "~/generated/schemas";
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
@@ -11,7 +15,7 @@ export const blogPostRouter = createTRPCRouter({
     .mutation(async ({ ctx, input }) => {
       const user = await ctx.prisma.user.findUniqueOrThrow({
         where: {
-          id: ctx.session.user.id
+          id: ctx.session.user.id,
         },
       });
 
@@ -48,53 +52,90 @@ export const blogPostRouter = createTRPCRouter({
         nextCursor,
       };
     }),
+  getOne: publicProcedure
+    .input(BlogPostFindUniqueSchema)
+    .query(async ({ input, ctx }) => {
+      return ctx.prisma.blogPost.findUnique({
+        ...input,
+        include: {
+          user: true,
+          comments: {
+            orderBy: [{ createdAt: "asc" }],
+            include: { user: true },
+          },
+        },
+      });
+    }),
   count: publicProcedure
-      .input(BlogPostWhereInputObjectSchema)
-      .query(async ({ input, ctx }) => {
-          const count: number = await ctx.prisma.blogPost.count({
-              where: input
-          });
-        return count;
-  }),
-  update: protectedProcedure.input(BlogPostUpdateOneSchema).mutation(async ({ ctx, input }) => {
+    .input(BlogPostWhereInputObjectSchema)
+    .query(async ({ input, ctx }) => {
+      const count: number = await ctx.prisma.blogPost.count({
+        where: input,
+      });
+      return count;
+    }),
+  update: protectedProcedure
+    .input(BlogPostUpdateOneSchema)
+    .mutation(async ({ ctx, input }) => {
       const user = await ctx.prisma.user.findUniqueOrThrow({
         where: {
-          id: ctx.session.user.id
-        }
+          id: ctx.session.user.id,
+        },
       });
 
       const blogPost = await ctx.prisma.blogPost.findUniqueOrThrow({
         where: {
-          id: input.where.id
-        }
+          id: input.where.id,
+        },
       });
 
       if (!["CONTRIBUTOR", "ADMIN"].includes(user.role)) {
-        throw new Error("Your account role is not permitted to update blog posts");
+        throw new Error(
+          "Your account role is not permitted to update blog posts"
+        );
       }
       if (user.id !== blogPost.userId) {
         throw new Error("You are forbidden to update another user's blog post");
       }
 
       return await ctx.prisma.blogPost.update(input);
-    }
-  ),
-  delete: protectedProcedure.input(BlogPostDeleteOneSchema).mutation(async ({ ctx, input }) => {
-    const user = await ctx.prisma.user.findUniqueOrThrow({
-      where: {
-        id: ctx.session.user.id
+    }),
+  delete: protectedProcedure
+    .input(BlogPostDeleteOneSchema)
+    .mutation(async ({ ctx, input }) => {
+      const user = await ctx.prisma.user.findUniqueOrThrow({
+        where: {
+          id: ctx.session.user.id,
+        },
+      });
+      const blogPost = await ctx.prisma.blogPost.findUniqueOrThrow({
+        where: {
+          id: input.where.id,
+        },
+      });
+      if (user.role !== "ADMIN") {
+        if (user.id !== blogPost.userId) {
+          throw new Error(
+            "You are forbidden to delete another user's blog post"
+          );
+        }
       }
-    });
-    const blogPost = await ctx.prisma.blogPost.findUniqueOrThrow({
-      where: {
-        id: input.where.id
-      }
-    });
-    if (user.role !== "ADMIN") {
-      if (user.id !== blogPost.userId) {
-        throw new Error("You are forbidden to delete another user's blog post");
-      }
-    }
-    return await ctx.prisma.blogPost.delete(input)
-  }),
+      return await ctx.prisma.blogPost.delete(input);
+    }),
+  search: publicProcedure
+    .input(BlogPostFindManySchema)
+    .query(async ({ ctx, input }) => {
+      return ctx.prisma.blogPost.findMany({
+        take: 20,
+        where: input.where,
+        orderBy: [{ createdAt: "desc" }],
+        include: {
+          user: true,
+          comments: {
+            orderBy: [{ createdAt: "asc" }],
+            include: { user: true },
+          },
+        },
+      });
+    }),
 });

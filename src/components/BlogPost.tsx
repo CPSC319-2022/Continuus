@@ -6,10 +6,11 @@ import { ProfilePicture } from "./ProfilePicture";
 import { api } from "~/utils/api";
 import { BlogPostActionsMenu } from "~/components/BlogPostActionsMenu";
 import { useSession } from "next-auth/react";
-import React from "react";
 import { shouldSeeActions, isAuthor } from "~/components/util";
-import {ProfileName} from "./ProfileName";
-import {userPathToProfile} from "~/utils/profile";
+import { ProfileName } from "./ProfileName";
+import { userPathToProfile } from "~/utils/profile";
+import { useAppDispatch } from "~/redux/hooks";
+import { setSelectedPost } from "~/redux/slices/posts";
 
 interface BlogPostProps extends React.ComponentProps<"div"> {
   id: string;
@@ -20,7 +21,7 @@ interface BlogPostProps extends React.ComponentProps<"div"> {
   content: string;
   comments: number;
   authorName: string;
-  imgUrl?: string | null
+  imgUrl?: string | null;
 }
 
 export const BlogPost: React.FC<BlogPostProps> = ({
@@ -37,6 +38,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
 }) => {
   const currUser = api.user.currentUser.useQuery();
   const { status } = useSession();
+  const dispatch = useAppDispatch();
 
   return (
     <div
@@ -47,13 +49,14 @@ export const BlogPost: React.FC<BlogPostProps> = ({
         <div className="mb-3 flex w-full justify-between">
           <div className="flex">
             <div className="avatar self-center">
-                <ProfilePicture 
-                    size={2.5} 
-                    imgUrl={imgUrl} 
-                    redirectLink={userPathToProfile(authorId)} />
+              <ProfilePicture
+                size={2.5}
+                imgUrl={imgUrl}
+                redirectLink={userPathToProfile(authorId)}
+              />
             </div>
             <div className="ml-3">
-              <ProfileName name={authorName} userId={authorId}/>
+              <ProfileName name={authorName} userId={authorId} />
               <p className="text-sm text-slate-400">{`${timeAgo(createdAt)}${
                 createdAt.getTime() !== lastUpdated.getTime()
                   ? ` (updated ${timeAgo(lastUpdated)})`
@@ -77,12 +80,12 @@ export const BlogPost: React.FC<BlogPostProps> = ({
           </ReactMarkdown>
         </div>
         <div className="self-end ">
-          <label
-            htmlFor={`modal-${id}`}
+          <p
             className="btn-link text-highlight-green no-underline hover:cursor-pointer"
+            onClick={() => dispatch(setSelectedPost(id))}
           >
             {comments} Comments
-          </label>
+          </p>
         </div>
       </div>
     </div>

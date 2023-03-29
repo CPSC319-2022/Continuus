@@ -1,6 +1,6 @@
 import { type PrismaClient } from "@prisma/client";
 import { z } from "zod";
-import { UserUpdateOneSchema } from "~/generated/schemas";
+import { UserFindManySchema, UserUpdateOneSchema } from "~/generated/schemas";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 const getCurrentUser = async (prisma: PrismaClient, userId?: string) => {
@@ -33,6 +33,11 @@ export const userRouter = createTRPCRouter({
   currentUser: publicProcedure.query(async ({ ctx }) => {
     return await getCurrentUser(ctx.prisma, ctx.session?.user?.id);
   }),
+  searchUsers: publicProcedure
+    .input(UserFindManySchema)
+    .query(async ({ ctx, input }) => {
+      return ctx.prisma.user.findMany(input);
+    }),
   paginatedUsers: protectedProcedure
     .input(
       z.object({
