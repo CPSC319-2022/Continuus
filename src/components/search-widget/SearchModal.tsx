@@ -18,6 +18,7 @@ interface SearchModalProps {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 
+// a search modal
 export const SearchModal: React.FC<SearchModalProps> = ({
   isOpen,
   setIsOpen,
