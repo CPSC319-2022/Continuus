@@ -135,6 +135,7 @@ export const CommentModal: React.FC = () => {
                 id: commentId,
                 content: comment,
                 createdAt: dateAdded,
+                updatedAt: dateUpdated,
                 user: { name: authorName, id: commenterId, image },
               }) => (
                 <Comment
@@ -145,6 +146,7 @@ export const CommentModal: React.FC = () => {
                   userId={commenterId}
                   imgUrl={image}
                   commentId={commentId}
+                  dateUpdated={dateUpdated}
                 />
               )
             )}
