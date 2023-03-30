@@ -118,11 +118,40 @@ git push -u origin dev
 
 
 
+
 ## CI-CD Setup
+
+
+## Google OAuth Setup (for cloud)
+- Follow the instructions in **[Setting Up OAuth 2.0](https://support.google.com/cloud/answer/6158849)**
+  1. We will create 3 credentials, one for each environment
+  2. Repeat steps 3-6 for each environment ('dev', 'qa', 'prod')
+  3. For the "Application Type", choose "Web application"
+  4. Add a URI to "Authorized JavaScript origins" (you can take the deployed URI from the CI-CD pipeline's deploy stage):
+       - deployed URI
+       - e.g. 
+         - `https://dev-hmcu4gyu5a-pd.a.run.app`
+         - OR
+         - `https://qa-hmcu4gyu5a-pd.a.run.app`
+         - OR
+         - `https://prod-hmcu4gyu5a-pd.a.run.app`
+  5. Add a URI to "Authorized redirect URIs":
+       - `${deployed URI}/api/auth/callback/google`
+       - e.g.
+         - `https://dev-hmcu4gyu5a-pd.a.run.app/api/auth/callback/google`
+         - OR
+         - `https://qa-hmcu4gyu5a-pd.a.run.app/api/auth/callback/google`
+         - OR
+         - `https://prod-hmcu4gyu5a-pd.a.run.app/api/auth/callback/google`
+  6. **Save the Client ID and the Client secret somewhere safe *for each environment*, we will use these during the blog application setup**
+
 
 TODOS:
 
-[ ] [CI-CD Setup] setup steps for github actions
-[ ] [CI-CD Setup] setup steps for secret manager
-[ ] [CI-CD Setup] setup steps for slack integration
-[ ] [CI-CD Setup] setup steps for cloud build
+[CI-CD Setup] setup steps for github actions
+
+[CI-CD Setup] setup steps for secret manager
+
+[CI-CD Setup] setup steps for slack integration
+
+[CI-CD Setup] setup steps for cloud build
