@@ -77,15 +77,17 @@ export const CreateBlogPostWidget: React.FC = () => {
           </div>
         ) : (
           <CreateBlogPostForm
-            onSubmit={(fieldValues) =>
-              createBlogPostMutation.mutate({
-                data: {
-                  title: fieldValues.title,
-                  content: fieldValues.content,
-                  userId: userId,
-                },
-              })
-            }
+            onSubmit={(fieldValues) => {
+              if (fieldValues.title && fieldValues.content) {
+                createBlogPostMutation.mutate({
+                  data: {
+                    title: fieldValues.title,
+                    content: fieldValues.content,
+                    userId: userId,
+                  },
+                });
+              }
+            }}
           />
         )}
       </BlogPostInputModal>
