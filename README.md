@@ -58,3 +58,12 @@ npx prisma migrate dev
 ### 6. Run
 
 Use `npm run dev` to start a dev server running in your local
+
+
+# Deployment Guide
+
+## GitHub Setup
+
+## CI-CD Setup
+
+## Cloud Database Setup
