@@ -1,5 +1,6 @@
 import {
-  CommentCreateOneSchema, CommentDeleteOneSchema, CommentFindUniqueSchema,
+  CommentCreateOneSchema, CommentFindManySchema, CommentFindUniqueSchema,
+  CommentDeleteOneSchema,
   CommentUpdateOneSchema,
   CommentWhereInputObjectSchema
 } from "~/generated/schemas";
@@ -48,6 +49,30 @@ export const commentRouter = createTRPCRouter({
         id: input.where.id
       }
     })
+  }),
+  get: publicProcedure
+  .input(CommentFindManySchema)
+  .query(async ({ input, ctx }) => {
+      const { take = 10, cursor } = input;
+      const items = await ctx.prisma.comment.findMany({
+          take: take + 1,
+          cursor,
+          orderBy: [{ createdAt: "desc" }],
+          include: {
+              user: true,
+              blogPost: true,
+          },
+          where: input.where,
+    });
+    let nextCursor;
+    if (items.length > take) {
+        const nextItem = items.pop();
+        nextCursor = nextItem?.id;
+    }
+    return {
+        items,
+        nextCursor,
+    };
   }),
   delete: protectedProcedure
     .input(CommentDeleteOneSchema)
