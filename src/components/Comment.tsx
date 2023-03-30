@@ -197,7 +197,9 @@ export const Comment: React.FC<CommentProps> = ({
               </button>
             </div>
           ) : (
-            <p className="mt-4 w-full">{comment}</p>
+            <div className="break-words">
+              <p className="mt-4 w-full">{comment}</p>
+            </div>
           )}
         </div>
       }
