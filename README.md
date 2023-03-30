@@ -143,14 +143,14 @@ git push -u origin dev
          - `https://qa-hmcu4gyu5a-pd.a.run.app/api/auth/callback/google`
          - OR
          - `https://prod-hmcu4gyu5a-pd.a.run.app/api/auth/callback/google`
-  6. **Save the Client ID and the Client secret somewhere safe *for each environment*, we will use these during the blog application setup**
+  6. **Save the Client ID and the Client secret somewhere safe *for each environment*, we will use these during the secret manager setup**
 
 
 TODOS:
 
 [CI-CD Setup] setup steps for github actions
 
-[CI-CD Setup] setup steps for secret manager
+[CI-CD Setup] setup steps for secret manager (for this step, please let me know (Altay) so that I can add steps here)
 
 [CI-CD Setup] setup steps for slack integration
 
