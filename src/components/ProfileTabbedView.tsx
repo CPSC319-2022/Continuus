@@ -2,7 +2,7 @@ import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import { useState } from "react";
 import { ProfileCard } from "./ProfileCard";
 import { BlogPostViewer } from "./BlogPostViewer";
-import { ProfileCommentViewer } from "./ProfileCommentView";
+import { ProfileCommentViewer } from "./ProfileCommentViewer";
 
 interface ProfileTabbedViewProps {
   userId: string;
