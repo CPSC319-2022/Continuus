@@ -1,30 +1,60 @@
-# Create T3 App
+# Local Installation Guide
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
 
-## What's next? How do I make an app with this?
+## Google OAuth Setup 
+- Follow the instructions in **[Setting Up OAuth 2.0](https://support.google.com/cloud/answer/6158849)**
+  1. For the "Application Type", choose "Web application"
+  2. Add a URI to "Authorized JavaScript origins":
+       - `http://localhost`
+  3. Add a URI to "Authorized redirect URIs":
+       - `http://localhost:3000/api/auth/callback/google`
+  4. **Save the Client ID and the Client secret somewhere safe, we will use these during the blog application setup** 
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+## Blog Application Setup
+### 1. Clone the repo
+- Clone the repository using:
+```
+git clone git@github.com:CPSC319-2022/Continuus.git
+```
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+### 2. Install Node/npm
+1. Go to: https://nodejs.org/en/ 
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+2. Download the LTS version
 
-## Learn More
+3. Follow the setup instructions
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+4. Run `npm --version`
+   - If you don’t get the version number (the error message is something like “what’s npm?”), then try restarting your terminals, try checking the PATH environment variable and try restarting your system
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+### 3. Install dependencies
+- You can install dependencies using (run in the project root folder):
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+```
+npm install
+```
 
-## How do I deploy this?
+### 4. Setting up the environment
+1. Copy-paste the .env.example and rename to .env
+2. Set the variables in the .env to appropriate values
+    - DATABASE_URL: Use the default value, if needed you can update this depending on your Postgres setup (next section)
+    - NEXTAUTH_URL: If you are developing locally, leave this as default
+    - GOOGLE_CLIENT_ID & GOOGLE_CLIENT_SECRET: Set these to the client id and client secret you have saved from the Google OAuth Setup section
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+### 5. Setting up Prisma
 
-Dockerfile used from here: https://create.t3.gg/en/deployment/docker
+1. Install Postgres Database locally
+   1. IMPORTANT: Set your username to postgres and password to password for .env-example to work. Follow [How to Run and Setup a Local PostgreSQL Database | Prisma](https://www.prisma.io/dataguide/postgresql/setting-up-a-local-postgresql-database)
+   2. Open the psql terminal
+   3. Run the command CREATE DATABASE continuus;
+
+2. Run 
+```
+npx prisma migrate dev
+```
+   - This will update the database using the schema
+   - And also generate the Prisma Client
+
+### 6. Run
+
+Use `npm run dev` to start a dev server running in your local
