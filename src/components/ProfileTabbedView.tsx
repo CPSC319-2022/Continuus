@@ -2,6 +2,7 @@ import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import { useState } from "react";
 import { ProfileCard } from "./ProfileCard";
 import { BlogPostViewer } from "./BlogPostViewer";
+import { ProfileCommentViewer } from "./ProfileCommentView";
 
 interface ProfileTabbedViewProps {
   userId: string;
@@ -27,7 +28,7 @@ export const ProfileTabbedView: React.FC<ProfileTabbedViewProps> = ({
     {
       label: "Comments",
       value: "comments",
-      desc: <ProfileCommentsView />
+      desc: <ProfileCommentViewer userId={userId}/>
     },
   ];
 
