@@ -1,6 +1,6 @@
 import {
-    BlogPostFindManySchema,
   CommentCreateOneSchema, CommentFindManySchema, CommentFindUniqueSchema,
+  CommentDeleteOneSchema,
   CommentUpdateOneSchema,
   CommentWhereInputObjectSchema
 } from "~/generated/schemas";
@@ -74,4 +74,26 @@ export const commentRouter = createTRPCRouter({
         nextCursor,
     };
   }),
+  delete: protectedProcedure
+    .input(CommentDeleteOneSchema)
+    .mutation(async ({ ctx, input }) => {
+      const user = await ctx.prisma.user.findUniqueOrThrow({
+        where: {
+          id: ctx.session.user.id,
+        },
+      });
+      const comment = await ctx.prisma.comment.findUniqueOrThrow({
+        where: {
+          id: input.where.id,
+        },
+      });
+      if (user.role !== "ADMIN") {
+        if (user.id !== comment.userId) {
+          throw new Error(
+            "You are forbidden to delete another user's comment"
+          );
+        }
+      }
+      return await ctx.prisma.comment.delete(input);
+    }),
 });
