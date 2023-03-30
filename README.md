@@ -122,7 +122,10 @@ git push -u origin dev
 
 TODOS:
 
-[ ] [CI-CD Setup] setup steps for github actions
-[ ] [CI-CD Setup] setup steps for secret manager
-[ ] [CI-CD Setup] setup steps for slack integration
-[ ] [CI-CD Setup] setup steps for cloud build
+[CI-CD Setup] setup steps for github actions
+
+[CI-CD Setup] setup steps for secret manager
+
+[CI-CD Setup] setup steps for slack integration
+
+[CI-CD Setup] setup steps for cloud build
