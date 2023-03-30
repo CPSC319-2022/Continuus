@@ -3,6 +3,7 @@ import {Spinner} from "./Spinner";
 import { Comment } from "./Comment";
 import {useInView} from "react-intersection-observer";
 import {useEffect} from "react";
+import { setSelectedPost } from "~/redux/slices/posts";
 
 interface ProfileCommentViewerProps {
     userId: string;
@@ -42,9 +43,10 @@ export const ProfileCommentViewer: React.FC<ProfileCommentViewerProps> = ({
         {status === 'loading' ? <Spinner size={2}/>
         : commentsQueryResults?.pages.map((page) => 
                                           page.items.map((comment) =>
-                     <div key={`${comment.id}`}>
-                        <div className="card-body m-[-15px]">
-                            <p>{comment.blogPost.title}</p>
+                     <div className="m-6 p-6 border rounded-md shadow-md" key={`${comment.id}`}>
+                        <div className="mb-2 flex border-b">
+                            <div className="mb-2">Commented on</div>
+                            <div className="mb-2 ml-1 font-bold">{comment.blogPost.title}</div>
                         </div>
                         <Comment
                             key={`${comment.id}`}

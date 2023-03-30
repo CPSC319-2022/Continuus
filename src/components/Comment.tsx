@@ -80,7 +80,7 @@ export const Comment: React.FC<CommentProps> = ({
 
   return (
     <>
-      <div className="m-3 bg-slate-100 p-3">
+      <div>
         <div className="flex">
           <div className="avatar self-center">
             <ProfilePicture
