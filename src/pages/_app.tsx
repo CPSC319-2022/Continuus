@@ -6,7 +6,7 @@ import { api } from "../utils/api";
 
 import "../styles/globals.css";
 import { Provider } from "react-redux";
-import { store } from "~/redux/store";
+import { setupStore } from "~/redux/store";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -14,7 +14,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <SessionProvider session={session}>
-      <Provider store={store}>
+      <Provider store={setupStore()}>
         <Component {...pageProps} />
       </Provider>
     </SessionProvider>
