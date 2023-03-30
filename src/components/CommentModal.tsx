@@ -66,15 +66,17 @@ export const CommentModal: React.FC = () => {
   };
 
   const handlePostButtonClick = () => {
-    createCommentMutation.mutate({
-      data: {
-        userId: currUser?.data?.id ?? "",
-        blogPostId: postx?.id ?? "",
-        content: input,
-      },
-    });
+    if (input) {
+      createCommentMutation.mutate({
+        data: {
+          userId: currUser?.data?.id ?? "",
+          blogPostId: postx?.id ?? "",
+          content: input,
+        },
+      });
 
-    setInput("");
+      setInput("");
+    }
   };
 
   return (
