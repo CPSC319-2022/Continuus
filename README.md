@@ -46,7 +46,7 @@ npm install
 1. Install Postgres Database locally
    1. IMPORTANT: Set your username to postgres and password to password for .env-example to work. Follow [How to Run and Setup a Local PostgreSQL Database | Prisma](https://www.prisma.io/dataguide/postgresql/setting-up-a-local-postgresql-database)
    2. Open the psql terminal
-   3. Run the command `CREATE DATABASE continuus`;
+   3. Run the command `CREATE DATABASE continuus;`
 
 2. Run 
 ```
@@ -63,6 +63,41 @@ Use `npm run dev` to start a dev server running in your local
 # Deployment Guide
 
 ## GitHub Setup
+
+- You have 2 options, choose **only one** of these options; forking the repo, or creating a new repo
+  - Forking a repo is easier
+  - You may want to create a new repo; if you have changes in your local, it's easier to create a new repo
+
+### Forking the repo
+
+1. Go to `https://github.com/CPSC319-2022/Continuus`
+2. Click on the "Fork" button
+3. Enter the repository name as you wish
+4. **Deselect** the "Copy the `dev` branch only" option
+5. Press "Create fork" button
+6. The repo you created will have the 'dev', 'qa' and 'prod' branches by default.
+
+### Creating a new repo
+
+1. If you have not cloned the repository previously
+   - Clone the repository using:
+        ```
+        git clone git@github.com:CPSC319-2022/Continuus.git
+        ```
+1. [Create a new repository in GitHub](https://github.com/new)
+   1. **Deselect** 'Add a README file' option
+   2. Do **NOT** add .gitignore
+   3. Do **NOT** add a licence
+2. Set the remote origin url using:
+```
+git remote set-url origin [github ssh address]
+```
+1. Then set the main branch as dev and push
+```
+git branch -M dev
+git push -u origin dev
+```
+1. The repo will **NOT** have the 'qa' and 'prod' branches by default, so feel free to create them now or later.
 
 ## CI-CD Setup
 
