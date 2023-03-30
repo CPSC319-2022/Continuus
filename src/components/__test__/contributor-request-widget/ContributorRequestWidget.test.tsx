@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { cleanup, render } from "@testing-library/react";
+import { renderWithProviders } from "../utils";
 
 vi.mock("next-auth/react", () => ({
   useSession: () => ({
@@ -98,7 +99,7 @@ describe("Contributor Request Menu: Snapshot", () => {
     const { ContributorRequestWidget } = await import(
       "~/components/contributor-request-widget/ContributorRequestWidget"
     );
-    const body = render(<ContributorRequestWidget />).baseElement;
+    const body = renderWithProviders(<ContributorRequestWidget />).baseElement;
     expect(body).toMatchSnapshot();
   });
 
@@ -107,7 +108,7 @@ describe("Contributor Request Menu: Snapshot", () => {
     const { ContributorRequestWidget } = await import(
       "~/components/contributor-request-widget/ContributorRequestWidget"
     );
-    const body = render(<ContributorRequestWidget />).baseElement;
+    const body = renderWithProviders(<ContributorRequestWidget />).baseElement;
     expect(body).toMatchSnapshot();
   });
 });

@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { cleanup, render, screen } from "@testing-library/react";
 import { CommentProps } from "~/components/Comment";
+import { renderWithProviders } from "./utils";
 
 const mockCommentProps: CommentProps = {
   dateAdded: new Date(),
@@ -83,7 +84,9 @@ describe("Snapshot: Comment", () => {
   it("render comment", async () => {
     setup(initialMock);
     const { Comment } = await import("~/components/Comment");
-    const body = render(<Comment {...mockCommentProps} />).baseElement;
+    const body = renderWithProviders(
+      <Comment {...mockCommentProps} />
+    ).baseElement;
     expect(body).toMatchSnapshot();
   });
 
@@ -99,7 +102,9 @@ describe("Snapshot: Comment", () => {
       },
     });
     const { Comment } = await import("~/components/Comment");
-    const body = render(<Comment {...mockCommentProps} />).baseElement;
+    const body = renderWithProviders(
+      <Comment {...mockCommentProps} />
+    ).baseElement;
     expect(body).toMatchSnapshot();
   });
 
@@ -115,7 +120,9 @@ describe("Snapshot: Comment", () => {
       },
     });
     const { Comment } = await import("~/components/Comment");
-    const body = render(<Comment {...mockCommentProps} />).baseElement;
+    const body = renderWithProviders(
+      <Comment {...mockCommentProps} />
+    ).baseElement;
     expect(body).toMatchSnapshot();
   });
 });
