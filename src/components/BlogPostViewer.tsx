@@ -49,7 +49,6 @@ export const BlogPostViewer: React.FC<BlogPostViewerProps> = ({ user }) => {
       ),
     [blogPosts]
   );
-
   const { ref, inView } = useInView();
   useEffect(() => {
     if (inView) {
