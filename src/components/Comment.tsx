@@ -36,12 +36,16 @@ export const Comment: React.FC<CommentProps> = ({
   const currUser = api.user.currentUser.useQuery();
 
   const updateCommentMutation = api.comment.update.useMutation({
-    onSuccess(data, variables, context) {
-      return utils.comment.invalidate();
+    onSuccess: async (data, variables, context) => {
+      await utils.comment.invalidate();
     },
   });
 
-  const deleteCommentMutation = api.comment.delete.useMutation();
+  const deleteCommentMutation = api.comment.delete.useMutation({
+    onSuccess: async () => {
+      await utils.blogPost.getOne.invalidate();
+    },
+  });
 
   useEffect(() => {
     if (updateCommentMutation.isSuccess)
@@ -197,7 +201,9 @@ export const Comment: React.FC<CommentProps> = ({
               </button>
             </div>
           ) : (
-            <p className="mt-4 w-full">{comment}</p>
+            <div className="break-words">
+              <p className="mt-4 w-full">{comment}</p>
+            </div>
           )}
         </div>
       }

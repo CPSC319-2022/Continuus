@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useAppDispatch } from "~/redux/hooks";
+import { setSelectedPost } from "~/redux/slices/posts";
 
 interface ProfilePictureProps extends React.ComponentProps<"img"> {
   size: number;
@@ -24,6 +26,7 @@ export const ProfilePicture: React.FC<ProfilePictureProps> = ({
   const [imageUrl, setImageUrl] = useState<string>(
     "https://i.stack.imgur.com/34AD2.jpg"
   );
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (imgUrl) {
@@ -37,6 +40,7 @@ export const ProfilePicture: React.FC<ProfilePictureProps> = ({
       alt="avatar"
       className={`inline-block aspect-square rounded-[50%] ${className ?? ""}`}
       style={{ width: `${size}rem` }}
+      onClick={() => dispatch(setSelectedPost(null))}
       {...restProps}
     />
   );
