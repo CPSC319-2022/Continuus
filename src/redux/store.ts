@@ -1,8 +1,12 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { reducer } from "./slices/index";
-
-export const store = configureStore({ reducer });
-// Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>;
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch;
+import { configureStore, type PreloadedState } from "@reduxjs/toolkit";
+import { reducer } from "./slices";
+// Create the root reducer independently to obtain the RootState type
+export function setupStore(preloadedState?: PreloadedState<RootState>) {
+  return configureStore({
+    reducer,
+    preloadedState,
+  });
+}
+export type RootState = ReturnType<typeof reducer>;
+export type AppStore = ReturnType<typeof setupStore>;
+export type AppDispatch = AppStore["dispatch"];

@@ -7,17 +7,20 @@ import { Spinner } from "../Spinner";
 import { FiCheck } from "react-icons/fi";
 
 export const CreateBlogPostWidget: React.FC = () => {
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [isSuccessful, setSuccessful] = useState(false);
+
   const utils = api.useContext();
 
   const createBlogPostMutation = api.blogPost.create.useMutation({
     onSuccess() {
-        return Promise.all([utils.blogPost.get.invalidate(), 
-                           utils.blogPost.count.invalidate()]);
+      return Promise.all([
+        utils.blogPost.get.invalidate(),
+        utils.blogPost.count.invalidate(),
+      ]);
     },
   });
   const currUser = api.user.currentUser.useQuery();
-  const [isModalOpen, setModalOpen] = useState(false);
-  const [isSuccessful, setSuccessful] = useState(false);
 
   useEffect(() => {
     if (createBlogPostMutation.isSuccess) {
@@ -79,7 +82,7 @@ export const CreateBlogPostWidget: React.FC = () => {
                 data: {
                   title: fieldValues.title,
                   content: fieldValues.content,
-                  userId: userId
+                  userId: userId,
                 },
               })
             }

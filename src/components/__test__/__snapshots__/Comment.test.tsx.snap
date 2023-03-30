@@ -1,0 +1,121 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Snapshot: Comment > render comment 1`] = `
+<body>
+  <div>
+    <div
+      class="m-3 rounded-md bg-slate-100 p-4"
+    >
+      <div
+        class="flex"
+      >
+        <div
+          class="avatar self-center"
+        >
+           
+          <a
+            href="/profile/test-user-id"
+          >
+            <img
+              alt="avatar"
+              class="inline-block aspect-square rounded-[50%] "
+              src="https://i.stack.imgur.com/34AD2.jpg"
+              style="width: 2.5rem;"
+            />
+          </a>
+        </div>
+        <div
+          class="ml-3"
+        >
+          <a
+            href="/profile/test-user-id"
+          >
+            <p
+              class="text-lg font-bold"
+            >
+              Test User
+            </p>
+          </a>
+          <p
+            class="text-sm text-slate-400"
+          >
+            0 seconds ago
+          </p>
+        </div>
+      </div>
+      <div
+        class="break-words"
+      >
+        <p
+          class="mt-4 w-full"
+        >
+          Hello world
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Snapshot: Comment > render comment deleted 1`] = `
+<body>
+  <div />
+</body>
+`;
+
+exports[`Snapshot: Comment > render comment updated 1`] = `
+<body>
+  <div>
+    <div
+      class="m-3 rounded-md bg-slate-100 p-4"
+    >
+      <div
+        class="flex"
+      >
+        <div
+          class="avatar self-center"
+        >
+           
+          <a
+            href="/profile/test-user-id"
+          >
+            <img
+              alt="avatar"
+              class="inline-block aspect-square rounded-[50%] "
+              src="https://i.stack.imgur.com/34AD2.jpg"
+              style="width: 2.5rem;"
+            />
+          </a>
+        </div>
+        <div
+          class="ml-3"
+        >
+          <a
+            href="/profile/test-user-id"
+          >
+            <p
+              class="text-lg font-bold"
+            >
+              Test User
+            </p>
+          </a>
+          <p
+            class="text-sm text-slate-400"
+          >
+            0 seconds ago
+          </p>
+        </div>
+      </div>
+      <div
+        class="break-words"
+      >
+        <p
+          class="mt-4 w-full"
+        >
+          Hello world
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+`;
