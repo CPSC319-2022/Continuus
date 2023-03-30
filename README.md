@@ -46,7 +46,7 @@ npm install
 1. Install Postgres Database locally
    1. IMPORTANT: Set your username to postgres and password to password for .env-example to work. Follow [How to Run and Setup a Local PostgreSQL Database | Prisma](https://www.prisma.io/dataguide/postgresql/setting-up-a-local-postgresql-database)
    2. Open the psql terminal
-   3. Run the command CREATE DATABASE continuus;
+   3. Run the command `CREATE DATABASE continuus`;
 
 2. Run 
 ```
