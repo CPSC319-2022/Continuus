@@ -4,6 +4,7 @@ import { Comment } from "./Comment";
 import {useInView} from "react-intersection-observer";
 import {useEffect} from "react";
 import { setSelectedPost } from "~/redux/slices/posts";
+import {useAppDispatch} from "~/redux/hooks";
 
 interface ProfileCommentViewerProps {
     userId: string;
@@ -39,6 +40,9 @@ export const ProfileCommentViewer: React.FC<ProfileCommentViewerProps> = ({
         }
       }, [inView, fetchNextPage]);
 
+
+    const dispatch = useAppDispatch();
+
     return (<>
         {status === 'loading' ? <Spinner size={2}/>
         : commentsQueryResults?.pages.map((page) => 
@@ -46,7 +50,8 @@ export const ProfileCommentViewer: React.FC<ProfileCommentViewerProps> = ({
                      <div className="m-6 p-6 border rounded-md shadow-md" key={`${comment.id}`}>
                         <div className="mb-2 flex border-b">
                             <div className="mb-2">Commented on</div>
-                            <div className="mb-2 ml-1 font-bold">{comment.blogPost.title}</div>
+                            <div className="mb-2 ml-1 font-bold cursor-pointer" 
+                                 onClick={() => dispatch(setSelectedPost(comment.blogPost.id))}>{comment.blogPost.title}</div>
                         </div>
                         <Comment
                             key={`${comment.id}`}
