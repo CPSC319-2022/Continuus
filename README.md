@@ -99,6 +99,30 @@ git push -u origin dev
 ```
 1. The repo will **NOT** have the 'qa' and 'prod' branches by default, so feel free to create them now or later.
 
-## CI-CD Setup
 
 ## Cloud Database Setup
+
+### Creating a Postgres DB Instance on Google Cloud
+
+1. Follow instructions [**here**](https://cloud.google.com/sql/docs/postgres/create-instance#create-2nd-gen) to create a Postgres instance on Google Cloud
+   - Store the password for the postgres user somewhere safe
+   - Don't need to "configure a password policy for the instance"
+   - Database version should be `PostgeSQL 14`
+   - Make sure to note down the region you selected, you will need it during the CI-CD Setup
+   - You do **not** need to customize your instance (choose the free/default option)
+2. Follow instructions [**here**](https://cloud.google.com/sql/docs/postgres/create-manage-databases#create) to create a database
+   - Create 3 databases:
+     - `dev`
+     - `prod`
+     - `qa`
+
+
+
+## CI-CD Setup
+
+TODOS:
+
+[ ] [CI-CD Setup] setup steps for github actions
+[ ] [CI-CD Setup] setup steps for secret manager
+[ ] [CI-CD Setup] setup steps for slack integration
+[ ] [CI-CD Setup] setup steps for cloud build
