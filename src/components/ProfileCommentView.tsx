@@ -61,6 +61,7 @@ export const ProfileCommentViewer: React.FC<ProfileCommentViewerProps> = ({
                             userId={comment.userId}
                             imgUrl={comment.user.image}
                             commentId={comment.id}
+                            dateUpdated={comment.updatedAt}
                         />
                     </div>
             ))}

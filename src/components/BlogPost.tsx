@@ -11,6 +11,7 @@ import { ProfileName } from "./ProfileName";
 import { userPathToProfile } from "~/utils/profile";
 import { useAppDispatch } from "~/redux/hooks";
 import { setSelectedPost } from "~/redux/slices/posts";
+import {useRouter} from "next/router";
 
 interface BlogPostProps extends React.ComponentProps<"div"> {
   id: string;
@@ -39,6 +40,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
   const currUser = api.user.currentUser.useQuery();
   const { status } = useSession();
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   return (
     <div
@@ -56,7 +58,7 @@ export const BlogPost: React.FC<BlogPostProps> = ({
               />
             </div>
             <div className="ml-3">
-              <ProfileName name={authorName} userId={authorId} />
+                <ProfileName name={authorName} userId={authorId} />
               <p className="text-sm text-slate-400">{`${timeAgo(createdAt)}${
                 createdAt.getTime() !== lastUpdated.getTime()
                   ? ` (updated ${timeAgo(lastUpdated)})`

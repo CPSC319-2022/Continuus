@@ -13,6 +13,7 @@ import ReactModal from "react-modal";
 import { useAppDispatch, useAppSelector } from "~/redux/hooks";
 import { setSelectedPost } from "~/redux/slices/posts";
 import { userPathToProfile } from "~/utils/profile";
+import {useRouter} from "next/router";
 
 export const CommentModal: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,6 +24,14 @@ export const CommentModal: React.FC = () => {
   } = useAppSelector((state) => state);
 
   const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  // If we're navigating away from this page, make sure we close the Modal
+  useEffect(() => {
+    router.events.on('routeChangeStart', (url, { shallow }) => {
+        setIsOpen(false);
+    });
+  }, [router]);
 
   useEffect(() => {
     if (selectedPost) {
