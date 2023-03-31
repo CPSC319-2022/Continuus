@@ -83,14 +83,16 @@ export const Comment: React.FC<CommentProps> = ({
   };
 
   const handleCommentUpdate = () => {
-    updateCommentMutation.mutate({
-      where: {
-        id: commentId,
-      },
-      data: {
-        content: editInput,
-      },
-    });
+    if (editInput) {
+      updateCommentMutation.mutate({
+        where: {
+          id: commentId,
+        },
+        data: {
+          content: editInput,
+        },
+      });
+    }
   };
 
   const handleCommentDelete = () => {
@@ -202,7 +204,9 @@ export const Comment: React.FC<CommentProps> = ({
                   className="border-2 border-slate-500"
                 />
                 <button
-                  className="ml-2 rounded bg-gray-300 py-0.5 px-2 text-gray-800 hover:bg-gray-400"
+                  className={`ml-2 rounded bg-gray-300 py-0.5 px-2 text-gray-800 ${
+                    editInput ? "hover:bg-gray-400" : "cursor-not-allowed"
+                  }`}
                   onClick={() => handleCommentUpdate()}
                 >
                   Save
