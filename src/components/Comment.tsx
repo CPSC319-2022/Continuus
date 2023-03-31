@@ -36,18 +36,20 @@ export const Comment: React.FC<CommentProps> = ({
   const currUser = api.user.currentUser.useQuery();
 
   const updateCommentMutation = api.comment.update.useMutation({
-    onSuccess: async (data, variables, context) => {
-      await utils.comment.invalidate();
-      await utils.blogPost.getOne.invalidate();
-      await utils.blogPost.get.invalidate()
-    },
+    onSuccess: () =>
+      Promise.all([
+        utils.comment.invalidate(),
+        utils.blogPost.getOne.invalidate(),
+        utils.blogPost.get.invalidate(),
+      ]),
   });
 
   const deleteCommentMutation = api.comment.delete.useMutation({
-    onSuccess: async () => {
-      await utils.blogPost.get.invalidate()
-      await utils.blogPost.getOne.invalidate();
-    },
+    onSuccess: () =>
+      Promise.all([
+        utils.blogPost.getOne.invalidate(),
+        utils.blogPost.get.invalidate(),
+      ]),
   });
 
   useEffect(() => {
