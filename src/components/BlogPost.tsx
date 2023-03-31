@@ -11,8 +11,6 @@ import { ProfileName } from "./ProfileName";
 import { userPathToProfile } from "~/utils/profile";
 import { useAppDispatch } from "~/redux/hooks";
 import { setSelectedPost } from "~/redux/slices/posts";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { dark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 interface BlogPostProps extends React.ComponentProps<"div"> {
   id: string;
