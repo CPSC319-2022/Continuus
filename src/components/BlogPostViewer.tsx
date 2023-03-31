@@ -1,5 +1,5 @@
 import type { BlogPost, User, Comment } from "@prisma/client";
-import { useState, useMemo, useEffect } from "react";
+import { useMemo, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { api } from "~/utils/api";
 import { Spinner } from "./Spinner";
@@ -12,8 +12,6 @@ export interface BlogPostViewerProps {
 }
 
 export const BlogPostViewer: React.FC<BlogPostViewerProps> = ({ user }) => {
-  const [view, setView] = useState<string>("Recent");
-
   const {
     data: blogPosts,
     fetchNextPage,
@@ -59,15 +57,6 @@ export const BlogPostViewer: React.FC<BlogPostViewerProps> = ({ user }) => {
   }, [inView, fetchNextPage]);
   return (
     <div className="w-full ">
-      <div className="mb-6 flex w-full justify-end">
-        <select
-          className="h-8 w-64 max-w-xs border-b-2 bg-white"
-          onChange={(e) => setView(e.target.value)}
-        >
-          <option>Recent</option>
-          <option>Popular</option>
-        </select>
-      </div>
       {posts?.length === 0
         ? "Nothing to see here"
         : posts?.map(
