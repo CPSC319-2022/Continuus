@@ -1,24 +1,28 @@
 # Local Installation Guide
 
+## Google OAuth Setup
 
-## Google OAuth Setup 
 - Follow the instructions in **[Setting Up OAuth 2.0](https://support.google.com/cloud/answer/6158849)**
   1. For the "Application Type", choose "Web application"
   2. Add a URI to "Authorized JavaScript origins":
-       - `http://localhost`
+     - `http://localhost`
   3. Add a URI to "Authorized redirect URIs":
-       - `http://localhost:3000/api/auth/callback/google`
-  4. **Save the Client ID and the Client secret somewhere safe, we will use these during the blog application setup** 
+     - `http://localhost:3000/api/auth/callback/google`
+  4. **Save the Client ID and the Client secret somewhere safe, we will use these during the blog application setup**
 
 ## Blog Application Setup
+
 ### 1. Clone the repo
+
 - Clone the repository using:
+
 ```
 git clone git@github.com:CPSC319-2022/Continuus.git
 ```
 
 ### 2. Install Node/npm
-1. Go to: https://nodejs.org/en/ 
+
+1. Go to: https://nodejs.org/en/
 
 2. Download the LTS version
 
@@ -28,6 +32,7 @@ git clone git@github.com:CPSC319-2022/Continuus.git
    - If you don’t get the version number (the error message is something like “what’s npm?”), then try restarting your terminals, try checking the PATH environment variable and try restarting your system
 
 ### 3. Install dependencies
+
 - You can install dependencies using (run in the project root folder):
 
 ```
@@ -35,30 +40,33 @@ npm install
 ```
 
 ### 4. Setting up the environment
+
 1. Copy-paste the .env.example and rename to .env
 2. Set the variables in the .env to appropriate values
-    - DATABASE_URL: Use the default value, if needed you can update this depending on your Postgres setup (next section)
-    - NEXTAUTH_URL: If you are developing locally, leave this as default
-    - GOOGLE_CLIENT_ID & GOOGLE_CLIENT_SECRET: Set these to the client id and client secret you have saved from the Google OAuth Setup section
+   - DATABASE_URL: Use the default value, if needed you can update this depending on your Postgres setup (next section)
+   - NEXTAUTH_URL: If you are developing locally, leave this as default
+   - GOOGLE_CLIENT_ID & GOOGLE_CLIENT_SECRET: Set these to the client id and client secret you have saved from the Google OAuth Setup section
 
 ### 5. Setting up Prisma
 
 1. Install Postgres Database locally
+
    1. IMPORTANT: Set your username to postgres and password to password for .env-example to work. Follow [How to Run and Setup a Local PostgreSQL Database | Prisma](https://www.prisma.io/dataguide/postgresql/setting-up-a-local-postgresql-database)
    2. Open the psql terminal
    3. Run the command `CREATE DATABASE continuus;`
 
-2. Run 
+2. Run
+
 ```
 npx prisma migrate dev
 ```
-   - This will update the database using the schema
-   - And also generate the Prisma Client
+
+- This will update the database using the schema
+- And also generate the Prisma Client
 
 ### 6. Run
 
 Use `npm run dev` to start a dev server running in your local
-
 
 # Deployment Guide
 
@@ -81,24 +89,27 @@ Use `npm run dev` to start a dev server running in your local
 
 1. If you have not cloned the repository previously
    - Clone the repository using:
-        ```
-        git clone git@github.com:CPSC319-2022/Continuus.git
-        ```
+     ```
+     git clone git@github.com:CPSC319-2022/Continuus.git
+     ```
 1. [Create a new repository in GitHub](https://github.com/new)
    1. **Deselect** 'Add a README file' option
    2. Do **NOT** add .gitignore
    3. Do **NOT** add a licence
-2. Set the remote origin url using:
+1. Set the remote origin url using:
+
 ```
 git remote set-url origin [github ssh address]
 ```
+
 1. Then set the main branch as dev and push
+
 ```
 git branch -M dev
 git push -u origin dev
 ```
-1. The repo will **NOT** have the 'qa' and 'prod' branches by default, so feel free to create them now or later.
 
+1. The repo will **NOT** have the 'qa' and 'prod' branches by default, so feel free to create them now or later.
 
 ## Cloud Database Setup
 
@@ -116,42 +127,40 @@ git push -u origin dev
      - `prod`
      - `qa`
 
-
-
-
 ## CI-CD Setup
+
 - The repository comes with configuration files for Github Actions and Google Cloud Platform. Github Actions coordinates build, test and deployment triggers for Google Cloud Build, while Google Cloud Build builds the containers and deploys the product.
 - The Github Actions configuration files are found in .github/workflows/. The status for the stages defined in these yml files are shown in the Github Actions pipeline view
-    - The `dev-qa-prod.yml` coordinates building, testing and deployment with Google Cloud Build. It will run the pipeline for all commits to these branches
-    - The `feature-workflow.yml` coordinates building and testing with Google Cloud Build. It will run the pipeline for opened pull requests to `dev`, `qa` and `prod`
+  - The `dev-qa-prod.yml` coordinates building, testing and deployment with Google Cloud Build. It will run the pipeline for all commits to these branches
+  - The `feature-workflow.yml` coordinates building and testing with Google Cloud Build. It will run the pipeline for opened pull requests to `dev`, `qa` and `prod`
 - The Google Cloud Build configuration files are found in cloudbuild/.
-    - For the Google Cloud triggers to work correctly, Google Cloud Build must be set up for the Github repository.
-    - Ensure that the Github repository is connected to Google Cloud Build. Follow the instructions in **[Connect to a Github repository]**(https://cloud.google.com/build/docs/automating-builds/github/connect-repo-github?generation=1st-gen) to connect it.
-    - Add a trigger for each yaml in the cloudbuild. Set up each trigger to run on the event of "Manual invocation" on branch name "\*" and configured with a Cloud Build configuration file pointing to be one of the yamls in the cloudbuild folder
+  - For the Google Cloud triggers to work correctly, Google Cloud Build must be set up for the Github repository.
+  - Ensure that the Github repository is connected to Google Cloud Build. Follow the instructions in **[Connect to a Github repository]**(https://cloud.google.com/build/docs/automating-builds/github/connect-repo-github?generation=1st-gen) to connect it.
+  - Add a trigger for each yaml in the cloudbuild. Set up each trigger to run on the event of "Manual invocation" on branch name "\*" and configured with a Cloud Build configuration file pointing to be one of the yamls in the cloudbuild folder
 
 ## Google OAuth Setup (for cloud)
+
 - Follow the instructions in **[Setting Up OAuth 2.0](https://support.google.com/cloud/answer/6158849)**
   1. We will create 3 credentials, one for each environment
   2. Repeat steps 3-6 for each environment ('dev', 'qa', 'prod')
   3. For the "Application Type", choose "Web application"
   4. Add a URI to "Authorized JavaScript origins" (you can take the deployed URI from the CI-CD pipeline's deploy stage):
-       - deployed URI
-       - e.g. 
-         - `https://dev-hmcu4gyu5a-pd.a.run.app`
-         - OR
-         - `https://qa-hmcu4gyu5a-pd.a.run.app`
-         - OR
-         - `https://prod-hmcu4gyu5a-pd.a.run.app`
+     - deployed URI
+     - e.g.
+       - `https://dev-hmcu4gyu5a-pd.a.run.app`
+       - OR
+       - `https://qa-hmcu4gyu5a-pd.a.run.app`
+       - OR
+       - `https://prod-hmcu4gyu5a-pd.a.run.app`
   5. Add a URI to "Authorized redirect URIs":
-       - `${deployed URI}/api/auth/callback/google`
-       - e.g.
-         - `https://dev-hmcu4gyu5a-pd.a.run.app/api/auth/callback/google`
-         - OR
-         - `https://qa-hmcu4gyu5a-pd.a.run.app/api/auth/callback/google`
-         - OR
-         - `https://prod-hmcu4gyu5a-pd.a.run.app/api/auth/callback/google`
-  6. **Save the Client ID and the Client secret somewhere safe *for each environment*, we will use these during the secret manager setup**
-
+     - `${deployed URI}/api/auth/callback/google`
+     - e.g.
+       - `https://dev-hmcu4gyu5a-pd.a.run.app/api/auth/callback/google`
+       - OR
+       - `https://qa-hmcu4gyu5a-pd.a.run.app/api/auth/callback/google`
+       - OR
+       - `https://prod-hmcu4gyu5a-pd.a.run.app/api/auth/callback/google`
+  6. **Save the Client ID and the Client secret somewhere safe _for each environment_, we will use these during the secret manager setup**
 
 TODOS:
 
@@ -159,6 +168,35 @@ TODOS:
 
 [CI-CD Setup] setup steps for secret manager (for this step, please let me know (Altay) so that I can add steps here)
 
-[CI-CD Setup] setup steps for slack integration
+## Setup steps for slack integration
+
+### Prereqisites
+
+1. Google cloud project is setup.
+2. Billing is enabled.
+
+### Steps
+
+1. Enable the Cloud Functions and Pub/Sub APIs
+   - You can enable using [this link](https://console.cloud.google.com/flows/enableapi?apiid=cloudfunctions,pubsub).
+2. Setup Incoming Webhook for Slack
+   - Follow the steps [here](https://api.slack.com/messaging/webhooks). The webhook url will be useful in later steps.
+3. Create a Cloud Storage Bucket for staging the cloud function.
+   - Using the cloud shell terminal in the Google cloud console. Ensure that the terminal session is for the correct gcp project. (You should see the project id in the terminal).
+   - Tip for choosing a bucket name is to use `[PROJECT-ID]_cloudbuild`
+   - Run `gsutil mb gs://[BUCKET_NAME]`
+4. In the cloud shell terminal,
+   - create a directory called slackbot and run `cd slackbot`.
+   - create a two files app.js and package.json with the command `touch app.js package.json`.
+   - Using vim or any equivalent text editor, copy and paste the respective contents of the files from [this gist](https://gist.github.com/algo-1/0c490cd7ea018205fced4da07d496537) and follow the following steps;
+     - Run `npm install` to install the dependencies.
+     - On line 4 of app.js, change the `SLACK_WEBHOOK_URL` to the url of your webhook created in step 2.
+     - On line 61 change the `repoName` to the name of your repository.
+     - Finally, on line 105, modify the url to match that of your repository
+5. Deploy the Cloud Function
+   - Run the command below from the `slackbot/` directory, passing in the name of the bucket created in step 3 for `[BUCKET_NAME]`;
+   ```bash
+   gcloud functions deploy subscribe --stage-bucket [BUCKET_NAME] --runtime=nodejs18 --trigger-topic cloud-builds
+   ```
 
 [CI-CD Setup] setup steps for cloud build
