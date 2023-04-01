@@ -1,9 +1,11 @@
-import NextAuth, { type NextAuthOptions } from "next-auth";
+import NextAuth, { Awaitable, type NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
 import { env } from "../../../env/server.mjs";
 import { prisma } from "../../../server/db";
+import { Role } from '@prisma/client';
+import { AdapterUser } from 'next-auth/adapters.js';
 
 export const authOptions: NextAuthOptions = {
   // Include user.id on session
@@ -16,7 +18,18 @@ export const authOptions: NextAuthOptions = {
     },
   },
   // Configure one or more authentication providers
-  adapter: PrismaAdapter(prisma),
+  adapter: (() => {
+    const prismaAdapter =  PrismaAdapter(prisma);
+
+    return {
+      ...prismaAdapter,
+      createUser: async (user) => {
+        const userCount = await prisma.user.count();
+
+        return prisma.user.create({ data: {...user, role: userCount === 0 ? Role.ADMIN : Role.READER }}) as Awaitable<AdapterUser>
+      }
+    }
+  })(),
   providers: [
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID,

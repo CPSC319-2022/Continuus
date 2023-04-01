@@ -7,16 +7,20 @@ import { Spinner } from "../Spinner";
 import { FiCheck } from "react-icons/fi";
 
 export const CreateBlogPostWidget: React.FC = () => {
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [isSuccessful, setSuccessful] = useState(false);
+
   const utils = api.useContext();
 
   const createBlogPostMutation = api.blogPost.create.useMutation({
     onSuccess() {
-      return utils.blogPost.get.invalidate();
+      return Promise.all([
+        utils.blogPost.get.invalidate(),
+        utils.blogPost.count.invalidate(),
+      ]);
     },
   });
   const currUser = api.user.currentUser.useQuery();
-  const [isModalOpen, setModalOpen] = useState(false);
-  const [isSuccessful, setSuccessful] = useState(false);
 
   useEffect(() => {
     if (createBlogPostMutation.isSuccess) {
@@ -73,15 +77,17 @@ export const CreateBlogPostWidget: React.FC = () => {
           </div>
         ) : (
           <CreateBlogPostForm
-            onSubmit={(fieldValues) =>
-              createBlogPostMutation.mutate({
-                data: {
-                  title: fieldValues.title,
-                  content: fieldValues.content,
-                  userId: userId
-                },
-              })
-            }
+            onSubmit={(fieldValues) => {
+              if (fieldValues.title && fieldValues.content) {
+                createBlogPostMutation.mutate({
+                  data: {
+                    title: fieldValues.title,
+                    content: fieldValues.content,
+                    userId: userId,
+                  },
+                });
+              }
+            }}
           />
         )}
       </BlogPostInputModal>

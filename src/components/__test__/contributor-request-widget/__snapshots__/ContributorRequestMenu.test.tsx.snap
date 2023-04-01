@@ -1,0 +1,200 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Contributor Request Menu: Snapshot > render menu closed 1`] = `
+<body>
+  <div />
+</body>
+`;
+
+exports[`Contributor Request Menu: Snapshot > render menu open with 2 requests 1`] = `
+<body>
+  <div>
+    <div
+      class="absolute right-5 top-10 max-h-[30rem] min-w-[18rem] rounded-md bg-white p-3 shadow-lg"
+    >
+      <div
+        class="scrollbar-hide max-h-[28rem] overflow-auto overflow-x-hidden"
+      >
+        <div
+          class="sticky top-0 bg-white"
+        >
+          <p
+            class="text-lg"
+          >
+            Contributor Requests
+          </p>
+          <hr />
+        </div>
+        <div
+          class="my-2 flex justify-between"
+        >
+          <div
+            class="flex"
+          >
+             
+            <a
+              href="/profile/user-id-1"
+            >
+              <img
+                alt="avatar"
+                class="inline-block aspect-square rounded-[50%] self-center"
+                src="image"
+                style="width: 2rem;"
+              />
+            </a>
+            <div
+              class="mx-2"
+            >
+              <p>
+                test user 1
+              </p>
+              <p
+                class="text-xs"
+              >
+                0 seconds ago
+              </p>
+            </div>
+          </div>
+          <div
+            class="mr-1 flex self-center"
+          >
+            <div
+              class="mx-1 rounded-md bg-highlight-green p-1 hover:cursor-pointer hover:shadow-md"
+            >
+              <div>
+                <svg
+                  height="20"
+                  viewBox="0 96 960 960"
+                  width="20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M395 771 226 601l50-50 119 118 289-288 50 51-339 339Z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div
+              class="mx-1 rounded-md bg-slate-200 p-1 hover:cursor-pointer hover:shadow-md"
+            >
+              <div>
+                <svg
+                  height="20"
+                  viewBox="0 96 960 960"
+                  width="20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="m291 816-51-51 189-189-189-189 51-51 189 189 189-189 51 51-189 189 189 189-51 51-189-189-189 189Z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="my-2 flex justify-between"
+        >
+          <div
+            class="flex"
+          >
+             
+            <a
+              href="/profile/user-id-2"
+            >
+              <img
+                alt="avatar"
+                class="inline-block aspect-square rounded-[50%] self-center"
+                src="image"
+                style="width: 2rem;"
+              />
+            </a>
+            <div
+              class="mx-2"
+            >
+              <p>
+                test user 2
+              </p>
+              <p
+                class="text-xs"
+              >
+                0 seconds ago
+              </p>
+            </div>
+          </div>
+          <div
+            class="mr-1 flex self-center"
+          >
+            <div
+              class="mx-1 rounded-md bg-highlight-green p-1 hover:cursor-pointer hover:shadow-md"
+            >
+              <div>
+                <svg
+                  height="20"
+                  viewBox="0 96 960 960"
+                  width="20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M395 771 226 601l50-50 119 118 289-288 50 51-339 339Z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div
+              class="mx-1 rounded-md bg-slate-200 p-1 hover:cursor-pointer hover:shadow-md"
+            >
+              <div>
+                <svg
+                  height="20"
+                  viewBox="0 96 960 960"
+                  width="20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="m291 816-51-51 189-189-189-189 51-51 189 189 189-189 51 51-189 189 189 189-51 51-189-189-189 189Z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Contributor Request Menu: Snapshot > render menu open with no requests 1`] = `
+<body>
+  <div>
+    <div
+      class="absolute right-5 top-10 max-h-[30rem] min-w-[18rem] rounded-md bg-white p-3 shadow-lg"
+    >
+      <div
+        class="scrollbar-hide max-h-[28rem] overflow-auto overflow-x-hidden"
+      >
+        <div
+          class="sticky top-0 bg-white"
+        >
+          <p
+            class="text-lg"
+          >
+            Contributor Requests
+          </p>
+          <hr />
+        </div>
+        <div
+          class="flex w-full justify-center"
+        >
+          <p
+            class="my-5 text-sm italic text-slate-500"
+          >
+            No contributor requests
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;

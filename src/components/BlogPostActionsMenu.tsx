@@ -2,7 +2,6 @@ import { MenuIcon } from "~/icons/Menu";
 import { UpdateBlogPostWidget } from "~/components/update-blog-post-widget/UpdateBlogPostWidget";
 import React from "react";
 import { DeleteBlogPostWidget } from "~/components/delete-blog-post-widget/DeleteBlogPostWidget";
-import { isAuthor } from "~/components/util";
 
 interface BlogPostActionsProps {
   id: string;
@@ -22,11 +21,13 @@ export const BlogPostActionsMenu: React.FC<BlogPostActionsProps> = ({id, title, 
           tabIndex={0}
           className="dropdown-content menu rounded-box w-52 bg-base-100 p-2 shadow"
         >
-          <li>
-            {
-              isAuthor && <UpdateBlogPostWidget id={id} title={title} content={content}/>
-            }
-          </li>
+          {
+            isAuthor &&
+              <li>
+                  <UpdateBlogPostWidget id={id} title={title} content={content} />
+              </li>
+          }
+
           <li>
             <DeleteBlogPostWidget id={id} />
           </li>

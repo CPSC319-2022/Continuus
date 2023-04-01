@@ -1,0 +1,27 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Request Access button: Snapshot > render as admin 1`] = `
+<body>
+  <div />
+</body>
+`;
+
+exports[`Request Access button: Snapshot > render as contributor 1`] = `
+<body>
+  <div />
+</body>
+`;
+
+exports[`Request Access button: Snapshot > render as reader 1`] = `
+<body>
+  <div>
+    <div>
+      <p
+        class="rounded-md bg-slate-300 py-1 px-2 text-xs hover:cursor-not-allowed"
+      >
+        Contributor Request Pending
+      </p>
+    </div>
+  </div>
+</body>
+`;
