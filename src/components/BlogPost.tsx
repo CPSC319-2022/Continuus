@@ -73,10 +73,41 @@ export const BlogPost: React.FC<BlogPostProps> = ({
             />
           )}
         </div>
-        <p className="mb-3 text-xl font-bold">{title}</p>
+        <p
+          className="mb-3 w-fit text-xl font-bold hover:cursor-pointer"
+          onClick={() => dispatch(setSelectedPost(id))}
+        >
+          {title}
+        </p>
         <div className="prose max-w-none ">
-          <ReactMarkdown remarkPlugins={[remarkGfm, remarkSlug]}>
-            {content.length > 500 ? `${content.slice(0, 499)}...` : content}
+          <ReactMarkdown
+            components={{
+              a: ({ node, ...props }) => {
+                if (
+                  props.children &&
+                  props.children.length === 1 &&
+                  props.children[0] === "$setSelectedPost$"
+                ) {
+                  return (
+                    <a
+                      className="font-semibold no-underline hover:cursor-pointer"
+                      onClick={() => dispatch(setSelectedPost(id))}
+                    >
+                      Read more
+                    </a>
+                  );
+                }
+                return <a {...props} />;
+              },
+            }}
+            remarkPlugins={[remarkGfm, remarkSlug]}
+          >
+            {content.length > 500
+              ? `${content.slice(
+                  0,
+                  499
+                )}... [$setSelectedPost$](javascript:void(0);)`
+              : content}
           </ReactMarkdown>
         </div>
         <div className="self-end ">

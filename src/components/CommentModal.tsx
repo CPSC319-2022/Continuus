@@ -61,7 +61,7 @@ export const CommentModal: React.FC = () => {
   const createCommentMutation = api.comment.create.useMutation({
     onSuccess() {
       return Promise.all([
-        utils.blogPost.getOne.invalidate(),
+        utils.blogPost.invalidate(),
         utils.comment.count.invalidate(),
       ]);
     },

@@ -36,15 +36,20 @@ export const Comment: React.FC<CommentProps> = ({
   const currUser = api.user.currentUser.useQuery();
 
   const updateCommentMutation = api.comment.update.useMutation({
-    onSuccess: async (data, variables, context) => {
-      await utils.comment.invalidate();
-    },
+    onSuccess: () =>
+      Promise.all([
+        utils.comment.invalidate(),
+        utils.blogPost.getOne.invalidate(),
+        utils.blogPost.get.invalidate(),
+      ]),
   });
 
   const deleteCommentMutation = api.comment.delete.useMutation({
-    onSuccess: async () => {
-      await utils.blogPost.getOne.invalidate();
-    },
+    onSuccess: () =>
+      Promise.all([
+        utils.blogPost.getOne.invalidate(),
+        utils.blogPost.get.invalidate(),
+      ]),
   });
 
   useEffect(() => {
@@ -192,8 +197,8 @@ export const Comment: React.FC<CommentProps> = ({
               )}
             </div>
             {updateCommentMutation.isLoading ? (
-              <div className="flex h-96 w-full items-center justify-center">
-                <Spinner size={12} />
+              <div className="flex w-full items-center justify-center">
+                <Spinner size={2} />
               </div>
             ) : isEditing ? (
               <div className="mt-3 p-2">
