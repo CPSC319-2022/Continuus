@@ -127,6 +127,7 @@ git push -u origin dev
 - The Google Cloud Build configuration files are found in cloudbuild/.
     - For the Google Cloud triggers to work correctly, Google Cloud Build must be set up for the Github repository.
     - Ensure that the Github repository is connected to Google Cloud Build. Follow the instructions in **[Connect to a Github repository]**(https://cloud.google.com/build/docs/automating-builds/github/connect-repo-github?generation=1st-gen) to connect it.
+    - Add a trigger for each yaml in the cloudbuild. Set up each trigger to run on the event of "Manual invocation" on branch name "\*" and configured with a Cloud Build configuration file pointing to be one of the yamls in the cloudbuild folder
 
 ## Google OAuth Setup (for cloud)
 - Follow the instructions in **[Setting Up OAuth 2.0](https://support.google.com/cloud/answer/6158849)**
