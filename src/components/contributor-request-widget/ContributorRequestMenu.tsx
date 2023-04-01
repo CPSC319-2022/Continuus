@@ -102,7 +102,7 @@ export const ContributorRequestMenu: React.FC<ContributorRequestMenuProps> = ({
           ))
         ) : (
           <div className="flex w-full justify-center">
-            <p className="my-5 text-sm italic text-slate-500">
+            <p className="my-5 text-sm italic text-gray-400">
               No contributor requests
             </p>
           </div>

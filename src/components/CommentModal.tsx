@@ -95,15 +95,15 @@ export const CommentModal: React.FC = () => {
         <ReactModal
           closeTimeoutMS={100}
           isOpen={isOpen}
-          overlayClassName="fixed inset-0 z-20 bg-black/30"
-          className="absolute top-1/2 left-1/2 z-40 max-h-[95vh] w-11/12 max-w-5xl -translate-x-1/2 -translate-y-1/2 overflow-y-auto overflow-x-hidden rounded-md border-slate-500 bg-white p-5 outline-none md:w-1/2"
+          overlayClassName="fixed inset-0 z-20 bg-black/75"
+          className="absolute top-1/2 left-1/2 z-40 max-h-[95vh] w-11/12 max-w-5xl -translate-x-1/2 -translate-y-1/2 overflow-y-auto overflow-x-hidden rounded-md border bg-white p-8 outline-none md:w-1/2"
           shouldCloseOnEsc
           shouldCloseOnOverlayClick
           onRequestClose={() => setIsOpen(false)}
         >
           {post.data ? (
             <>
-              <div className="mb-3 flex w-full justify-between">
+              <div className="mb-4 flex w-full justify-between">
                 <div className="flex">
                   <div className="avatar self-center">
                     <ProfilePicture
@@ -114,7 +114,7 @@ export const CommentModal: React.FC = () => {
                   </div>
                   <div className="ml-3">
                     <p className="text-lg font-bold">{post.data.user.name}</p>
-                    <p className="text-sm text-slate-400">{`${timeAgo(
+                    <p className="text-sm text-gray-400">{`${timeAgo(
                       post.data.createdAt
                     )}${
                       post.data.createdAt.getTime() !==
@@ -133,14 +133,14 @@ export const CommentModal: React.FC = () => {
                   />
                 )}
               </div>
-              <p className="mb-3 text-xl font-bold">{post.data.title}</p>
-              <div className="prose max-w-none ">
+              <p className="mb-3 text-2xl font-bold">{post.data.title}</p>
+              <div className="prose max-w-none mb-3">
                 <ReactMarkdown remarkPlugins={[remarkGfm, remarkSlug]}>
                   {post.data.content}
                 </ReactMarkdown>
               </div>
-              <div className="flex w-full justify-end">
-                <p className="float-right text-highlight-green no-underline hover:no-underline">
+              <div className="flex w-full justify-end border-b">
+                <p className="float-right text-highlight-green no-underline hover:no-underline mb-3">
                   {post.data.comments.length} Comments
                 </p>
               </div>
@@ -166,43 +166,41 @@ export const CommentModal: React.FC = () => {
                   )
                 )}
               </div>
-              <div className="m-[2rem] mx-0 mb-0">
-                <div
-                  className={`${userId ? "" : "tooltip tooltip-info"} w-full`}
-                  data-tip="Sign in to comment"
-                >
-                  <input
-                    type="text"
-                    placeholder="Write a new comment"
-                    value={input}
-                    onChange={handleCommentChange}
-                    readOnly={currUser?.data?.id ? false : true}
-                    disabled={currUser ? false : true}
-                    className={`${
-                      userId ? "" : "input-disabled cursor-not-allowed"
-                    }input-bordered mb-1 w-full rounded-sm border-[1px] p-2`}
-                  />
-                </div>
+              <div
+                className={`${userId ? "" : "tooltip tooltip-info"} w-full`}
+                data-tip="Sign in to comment"
+              >
+                <input
+                  type="text"
+                  placeholder="Write a new comment"
+                  value={input}
+                  onChange={handleCommentChange}
+                  readOnly={currUser?.data?.id ? false : true}
+                  disabled={currUser ? false : true}
+                  className={`${
+                    userId ? "" : "input-disabled cursor-not-allowed"
+                  }input-bordered mb-2 w-full rounded-md border p-2`}
+                />
+              </div>
 
-                <div className="mb-[-10px] flex justify-end gap-2">
-                  <button
-                    className={`${
-                      !userId || !input
-                        ? "input-disabled cursor-not-allowed bg-gray-400 text-black"
-                        : " border-highlight-green bg-highlight-green "
-                    } mt-[0.5rem] h-10 rounded-sm px-5`}
-                    onClick={handlePostButtonClick}
-                    disabled={!userId || !input ? true : false}
-                  >
-                    Post
-                  </button>
-                  <button
-                    className={`mt-[0.5rem] h-10 rounded-sm border-2 border-slate-200 bg-white px-5 text-center text-black hover:cursor-pointer`}
-                    onClick={() => dispatch(setSelectedPost(null))}
-                  >
-                    Cancel
-                  </button>
-                </div>
+              <div className="flex justify-end gap-2">
+                <button
+                  className={`${
+                    !userId || !input
+                      ? "input-disabled cursor-not-allowed bg-gray-200 text-black"
+                      : "border-highlight-green bg-highlight-green hover:bg-gray-700 hover:text-highlight-green"
+                  } mt-[0.5rem] h-10 rounded-md w-32`}
+                  onClick={handlePostButtonClick}
+                  disabled={!userId || !input ? true : false}
+                >
+                  Post
+                </button>
+                <button
+                  className={`mt-[0.5rem] h-10 rounded-md border bg-white w-32 text-center text-black hover:cursor-pointer hover:text-white hover:bg-highlight-red`}
+                  onClick={() => dispatch(setSelectedPost(null))}
+                >
+                  Cancel
+                </button>
               </div>
             </>
           ) : (

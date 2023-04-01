@@ -15,7 +15,7 @@ export const ProfileName: React.FC<ProfileNameProps> = ({ name, userId }) => {
       href={userPathToProfile(userId)}
       onClick={() => dispatch(setSelectedPost(null))}
     >
-      <p className="text-lg font-bold">{name}</p>
+      <p className="text-lg font-bold hover:underline">{name}</p>
     </Link>
   );
 };

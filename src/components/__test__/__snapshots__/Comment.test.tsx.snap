@@ -37,7 +37,7 @@ exports[`Snapshot: Comment > render comment 1`] = `
             </p>
           </a>
           <p
-            class="text-sm text-slate-400"
+            class="text-sm text-gray-400"
           >
             0 seconds ago
           </p>

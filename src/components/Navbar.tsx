@@ -6,14 +6,18 @@ import Link from "next/link";
 
 export const Navbar: React.FC = () => {
   return (
-    <div className="flex h-full justify-between border-b border-b-gray-200 p-2">
+    <div className="flex h-full justify-between border-b border-b-gray-200 p-6">
       <Link href="/" className="self-center text-xl font-bold">
         Continuus
       </Link>
-      <div className="flex items-center gap-2">
-        <RequestAccessButton />
-        <ContributorRequestWidget />
-        <SearchIcon />
+      <div className="flex items-center gap-6">
+        <RequestAccessButton/>
+        <div className="hover:fill-highlight-green transition-all">
+          <ContributorRequestWidget/>
+        </div>
+        <div className="hover:fill-highlight-green transition-all">
+          <SearchIcon/>
+        </div>
         <ProfileMenu />
       </div>
     </div>

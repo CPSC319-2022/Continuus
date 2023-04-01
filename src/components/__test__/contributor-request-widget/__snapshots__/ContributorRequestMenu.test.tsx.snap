@@ -188,7 +188,7 @@ exports[`Contributor Request Menu: Snapshot > render menu open with no requests 
           class="flex w-full justify-center"
         >
           <p
-            class="my-5 text-sm italic text-slate-500"
+            class="my-5 text-sm italic text-gray-400"
           >
             No contributor requests
           </p>

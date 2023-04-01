@@ -131,7 +131,7 @@ export const Comment: React.FC<CommentProps> = ({
         </div>
       ) : (
         !isDeleted && (
-          <div className="m-3 rounded-md bg-slate-100 p-4">
+          <div className="m-3 rounded-md border-b p-4">
             <div className="flex">
               <div className="avatar self-center">
                 <ProfilePicture
@@ -142,7 +142,7 @@ export const Comment: React.FC<CommentProps> = ({
               </div>
               <div className="ml-3">
                 <ProfileName name={name || ""} userId={userId} />
-                <p className="text-sm text-slate-400">
+                <p className="text-sm tex-gray-400">
                   {timeAgo(dateAdded)}
                   {dateAdded.getTime() !== dateUpdated.getTime()
                     ? ` (updated ${timeAgo(dateUpdated)})`
