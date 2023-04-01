@@ -120,7 +120,13 @@ git push -u origin dev
 
 
 ## CI-CD Setup
-
+- The repository comes with configuration files for Github Actions and Google Cloud Platform. Github Actions coordinates build, test and deployment triggers for Google Cloud Build, while Google Cloud Build builds the containers and deploys the product.
+- The Github Actions configuration files are found in .github/workflows/. The status for the stages defined in these yml files are shown in the Github Actions pipeline view
+    - The `dev-qa-prod.yml` coordinates building, testing and deployment with Google Cloud Build. It will run the pipeline for all commits to these branches
+    - The `feature-workflow.yml` coordinates building and testing with Google Cloud Build. It will run the pipeline for opened pull requests to `dev`, `qa` and `prod`
+- The Google Cloud Build configuration files are found in cloudbuild/.
+    - For the Google Cloud triggers to work correctly, Google Cloud Build must be set up for the Github repository.
+    - Ensure that the Github repository is connected to Google Cloud Build. Follow the instructions in **[Connect to a Github repository]**(https://cloud.google.com/build/docs/automating-builds/github/connect-repo-github?generation=1st-gen) to connect it.
 
 ## Google OAuth Setup (for cloud)
 - Follow the instructions in **[Setting Up OAuth 2.0](https://support.google.com/cloud/answer/6158849)**
