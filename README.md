@@ -165,9 +165,7 @@ git push -u origin dev
 ## Google Cloud Platform Setup
 
 ### IAM
-A service account will be needed to 
-
-- Create a service account with the following roles:
+A service account will be needed to perform specific actions in GCP services. For the services we are using (Cloud Build, Cloud Run, Artifact Registry, Cloud SQL, and Cloud Logging), a service account will need to be created with the following roles:
   - Artifact Registry Administrator
   - Artifact Registry Service Agent
   - Artifact Registry Test
