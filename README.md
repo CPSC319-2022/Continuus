@@ -162,9 +162,104 @@ git push -u origin dev
        - `https://prod-hmcu4gyu5a-pd.a.run.app/api/auth/callback/google`
   6. **Save the Client ID and the Client secret somewhere safe _for each environment_, we will use these during the secret manager setup**
 
-TODOS:
+## Google Cloud Platform Setup
 
-[CI-CD Setup] setup steps for github actions
+### IAM
+A service account will be needed to 
+
+- Create a service account with the following roles:
+  - Artifact Registry Administrator
+  - Artifact Registry Service Agent
+  - Artifact Registry Test
+  - Artifact Registry Writer
+  - Cloud Build Editor
+  - Cloud Run Admin
+  - Cloud Run Service Agent
+  - Cloud Run Service Role
+  - Cloud SQL Client
+  - Editor
+  - Logs View Accessor
+  - Logs Writer
+  - Secrets Manager Secret Accessor
+  - Storage Object Viewer
+
+### Cloud Build
+Cloud Build is a GCP service that lets us perform specific build actions for different stages in our pipeline. See [CI-CD Setup](#ci-cd-setup) for the workflows we are using. We have connected Cloud Build and our GitHub repository using the [Google Cloud Build GitHub Marketplace App](https://github.com/marketplace/google-cloud-build). 
+
+A Cloud Build Trigger lets us define a sequence of instructions that can be run to help us perform all the actions required to build, test, and deploy our application to Cloud Run. A trigger will need to be created for each step in the pipeline (see [here](https://cloud.google.com/build/docs/automating-builds/create-manage-triggers) for how to create a trigger). We created 4 triggers: 
+- `build`
+  - Creates 2 Docker containers: one for deployment and one for testing
+  - Testing container
+    - Runs `npm install` to install all dependencies (required for running unit tests)
+    - Pushes container to Artifact Registry
+  - Deployment container
+    - Builds our application from the source code (runs `npm run build`)
+    - Pushes the build container to Artifact Registry
+    - *Note: this trigger will fail if an error occurs in `npm run build` (eg. linting errors)*
+- `feature-build`
+  - Same as the `build` trigger except does not create/push a container to Artifact Registry for deployment because builds in this stage will not be deployed to an environment
+- `test`
+  - Pulls the Test container created in the `build` stage of the pipeline
+  - Runs unit tests with `npm run test`
+  - *Note: this trigger will fail if any unit tests are not passing*
+- `deploy`
+  - Pulls the Deployment container created in the `build` stage of the pipeline
+  - Deploys application to Cloud Run
+
+### Cloud Run
+Cloud Run is the runtime environment we are using for our application deployments. There is very little configuration needed for this part of the pipeline as Cloud Build is capable of creating and deploying the applications directly from a build trigger. We are currently deploying applications to 3 environments: `dev`, `qa`, and `prod`. Our GitHub branch names are used to generate the URLs to which the applications will be deployed. Here are the list of active deployments we have in Cloud Run:
+
+- https://dev-hmcu4gyu5a-pd.a.run.app/
+- https://qa-hmcu4gyu5a-pd.a.run.app/
+- https://prod-hmcu4gyu5a-pd.a.run.app/
+
+
+## GitHub Actions Setup
+GitHub actions is what we are using as our Web UI to display information about the current status of builds. Actions lets us declare a sequence of jobs in a `.yml` file that allow us to kick off the triggers in our Cloud Build pipeline. 
+
+### Requirements:
+- Google Cloud Platform account
+- GCP Cloud Build triggers set up for each build step
+- [`wait-for-build`](#wait-for-build) script present in the `/scripts` directory
+
+### Secrets
+In order to get GitHub Actions working, a few repository secrets need to be specified. An account with proper authorization in the [Continuus repository](https://github.com/CPSC319-2022/Continuus/settings/secrets/actions) is required to complete this step. 
+
+Navigate to the [Actions secrets and variables](https://github.com/CPSC319-2022/Continuus/settings/secrets/actions) page in the repository and enter the following **repository secrets**:
+
+- `GCP_BUILD_BUILD_ID`
+  - Description: Google Cloud Build trigger ID for the `build` stage of the pipeline
+  - Where to find: GCP Console > Cloud Build > Triggers > `build` trigger 
+  - Parameter: uuid in the URL of the trigger
+- `GCP_BUILD_DEPLOY_ID`
+  - Same as above for `build` trigger
+- `GCP_FEATURE_BUILD_ID`
+  - Same as above for `feature-build` trigger
+- `GCP_BUILD_TEST_ID`
+  - Same as above for `test` trigger
+- `GCP_CREDENTIALS`
+  - Description: GCP credentials file in JSON format for a service account with sufficient permissions (see [IAM](#iam))
+  - Where to find: https://developers.google.com/workspace/guides/create-credentials#create_credentials_for_a_service_account
+
+### workflows.yml files
+A workflow.yml file lets us define the jobs for our GH Actions. Additional workflows can be added to the `.github/workflows` folder in the repository and triggered on any GitHub action (eg. on pull request, push, etc)
+
+The Continuus repository currently has 2 workflows:
+- `dev-qa-prod.yml`
+  - Initiates `build`, `test`, and `deploy` triggers in Cloud Build (in that order)
+- `feature-workflow.yml`
+  - Initiates `feature-build` and `test` triggers in Cloud Build
+
+### `wait-for-build`
+The [`wait-for-build`](./scripts/wait-for-build) monitors the status of a Cloud Build trigger and **blocks** the GitHub Actions pipeline from progressing if the current trigger has not yet completed. The script polls for the status of the GCP Cloud Build trigger every 10 seconds. If the trigger is in progress, it will continue to poll. 
+
+If the build failed, an `exit 1` will be sent to the GitHub Actions runner and the pipeline will fail. If the build times out (takes more than 15 minutes), the build will fail with an `exit 1` as well. 
+
+This script will also print out logs of a failed build, and also provides a link to the GCP log for the Cloud Build trigger. An example of the output of the `wait-for-build` script can be found [here](https://github.com/CPSC319-2022/Continuus/actions/runs/4590165175/jobs/8105619362).  
+
+Each job in the workflow must call this script if it is using a trigger from Cloud Build. The script takes in 2 parameters: the Cloud Build trigger ID and the branch name of the current branch. An example of a call to `wait-for-build` in a GitHub Actions workflow file can be found [here](https://github.com/CPSC319-2022/Continuus/blob/dev/.github/workflows/dev-qa-prod.yml#L29-L33).  
+
+TODOS:
 
 [CI-CD Setup] setup steps for secret manager (for this step, please let me know (Altay) so that I can add steps here)
 
