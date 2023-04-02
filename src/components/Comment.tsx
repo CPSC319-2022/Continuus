@@ -134,7 +134,7 @@ export const Comment: React.FC<CommentProps> = ({
         </div>
       ) : (
         !isDeleted && (
-          <div className="m-3 rounded-md border-b p-4">
+          <div className="relative m-3 rounded-md border-b p-4">
             <div className="flex">
               <div className="avatar self-center hover:scale-110 transition-all">
                 <ProfilePicture
@@ -153,7 +153,7 @@ export const Comment: React.FC<CommentProps> = ({
                 </p>
               </div>
               {shouldSeeCommentActions() && (
-              <div className="absolute right-16 self-center mt-[-12px]">
+              <div className="absolute right-4 self-center mt-[-12px]">
                 <div className="dropdown-left dropdown rounded-md">
                   <button className="hover:scale-125 transition-all">
                     <MenuIcon/>
