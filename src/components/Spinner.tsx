@@ -5,8 +5,8 @@
 export const Spinner: React.FC<{ size?: number }> = ({ size = 1 }) => {    
     return (
         <div
-            className="inline-block animate-spin rounded-full border-solid border-current border-r-transparent align-[-0.125em] text-highlight-green motion-reduce:animate-[spin_1.5s_linear_infinite]"
-            style={{ width: `${size}rem`, height: `${size}rem`, borderWidth: `${size/12}rem` }}
+            className="inline-block animate-spin rounded-full border-solid border-current border-r-transparent text-highlight-green motion-reduce:animate-[spin_1.5s_linear_infinite]"
+            style={{ width: `${11/12 * size}rem`, height: `${11/12 * size}rem`, borderWidth: `${size/12}rem`, verticalAlign: `-${size - 1.16}rem` }}
             role="status"
         >
             <span
