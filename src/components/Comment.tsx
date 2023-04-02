@@ -7,6 +7,7 @@ import { api } from "~/utils/api";
 import { useSession } from "next-auth/react";
 import { isAuthed, isAuthor } from "~/components/util";
 import { Spinner } from "~/components/Spinner";
+import { MenuIcon } from "~/icons/Menu";
 
 export interface CommentProps {
   dateAdded: Date;
@@ -111,29 +112,31 @@ export const Comment: React.FC<CommentProps> = ({
   return (
     <>
       {isDeletePending ? (
-        <div className="m-3 rounded-md bg-slate-100 p-4">
-          <h1>Are you sure you want to delete this comment?</h1>
+        <div className="mb-4">
           <button
-            className="ml-2 mt-3 rounded bg-red-600 py-0.5 px-2 text-white hover:bg-red-800"
-            onClick={() => handleCommentDelete()}
-          >
-            Delete
-          </button>
-          <button
-            className="ml-2 mt-3 rounded bg-gray-300 py-0.5 px-2 text-gray-800 hover:bg-gray-400"
+            className="absolute right-12 rounded-full transition-colors after:content-['\2715'] hover:text-highlight-red hover:scale-125 transition-all"
             onClick={(event) => {
               event.preventDefault();
               setIsDeletePending(false);
-            }}
-          >
-            Cancel
+            }}>
           </button>
+          <div className="flex h-20 w-full items-center justify-center">
+            <div className="text-lg">Are you sure you want to delete this comment?</div>
+          </div>
+          <div className="flex justify-end border-b pb-3">
+            <button
+              className={"h-10 rounded-md border bg-highlight-red w-32 text-center text-white hover:cursor-pointer hover:bg-gray-700 transition-all"}
+              onClick={() => handleCommentDelete()}
+            >
+              Delete
+            </button>
+          </div>
         </div>
       ) : (
         !isDeleted && (
           <div className="m-3 rounded-md border-b p-4">
             <div className="flex">
-              <div className="avatar self-center">
+              <div className="avatar self-center hover:scale-110 transition-all">
                 <ProfilePicture
                   size={2.5}
                   redirectLink={userPathToProfile(userId)}
@@ -150,50 +153,30 @@ export const Comment: React.FC<CommentProps> = ({
                 </p>
               </div>
               {shouldSeeCommentActions() && (
-                <div className="ml-auto">
-                  <button
-                    className="rounded-xl bg-green-600 p-1.5 text-white transition-all duration-300 hover:rounded-3xl hover:bg-green-800"
-                    onClick={() => {
-                      setIsEditing(true);
-                    }}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                      />
-                    </svg>
+              <div className="absolute right-16 self-center mt-[-12px]">
+                <div className="dropdown-left dropdown rounded-md">
+                  <button className="hover:scale-125 transition-all">
+                    <MenuIcon/>
                   </button>
-                  <button
-                    className="ml-3 mr-2 rounded-xl bg-red-700 p-1.5 text-white transition-all duration-300 hover:rounded-3xl hover:bg-red-900"
-                    onClick={() => setIsDeletePending(true)}
+                  <ul
+                    tabIndex={0}
+                    className="dropdown-content menu rounded-md w-52 bg-white shadow border mt-8 mr-[-16px]"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="currentColor"
-                      className="bi bi-trash h-5 w-5"
-                      viewBox="0 0 16 16"
+                    <li
+                      className="p-3 text-start hover:cursor-pointer hover:bg-gray-100 transition-all"
+                      onClick={() => setIsEditing(true)}
                     >
-                      <path
-                        d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
-                        fill="white"
-                      ></path>
-                      <path
-                        fill-rule="evenodd"
-                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
-                        fill="white"
-                      ></path>
-                    </svg>
-                  </button>
+                      Edit
+                    </li>
+                    <li
+                      className="p-3 text-start hover:cursor-pointer hover:bg-gray-100 transition-all"
+                      onClick={() => setIsDeletePending(true)}
+                    >
+                        Delete
+                    </li>
+                  </ul>
                 </div>
+              </div>
               )}
             </div>
             {updateCommentMutation.isLoading ? (
@@ -204,24 +187,30 @@ export const Comment: React.FC<CommentProps> = ({
               <div className="mt-3 p-2">
                 <input
                   type="text"
+                  placeholder="Can't be empty!"
                   value={editInput}
                   onChange={handleInputChange}
-                  className="border-2 border-slate-500"
+                  className="input-bordered mb-3 w-full rounded-md border p-3"
                 />
-                <button
-                  className={`ml-2 rounded bg-gray-300 py-0.5 px-2 text-gray-800 ${
-                    editInput ? "hover:bg-gray-400" : "cursor-not-allowed"
-                  }`}
-                  onClick={() => handleCommentUpdate()}
-                >
-                  Save
-                </button>
-                <button
-                  className="ml-2 rounded bg-gray-300 py-0.5 px-2 text-gray-800 hover:bg-gray-400"
-                  onClick={(event) => handleUpdateCancel(event)}
-                >
-                  Cancel
-                </button>
+                <div className="flex justify-end gap-2">
+                  <button
+                    className={`h-10 rounded-md w-32 ${
+                      !editInput 
+                        ? "input-disabled cursor-not-allowed bg-gray-200 text-black"
+                        : "border-highlight-green bg-highlight-green hover:bg-gray-700 hover:text-highlight-green transition-all"
+                    }`}
+                    onClick={() => handleCommentUpdate()}
+                    disabled={!editInput ? true : false}
+                  >
+                    Save
+                  </button>
+                  <button
+                    className="h-10 rounded-md border bg-white w-32 text-center text-black hover:cursor-pointer hover:text-white hover:bg-highlight-red transition-all"
+                    onClick={(event) => handleUpdateCancel(event)}
+                  >
+                    Cancel
+                  </button>
+                </div>
               </div>
             ) : (
               <div className="break-words">

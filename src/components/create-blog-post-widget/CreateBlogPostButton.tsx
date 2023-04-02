@@ -67,7 +67,7 @@ export const CreateBlogPostButton: React.FC<{ onClick?: () => void, unauthorized
                         `}
                                 ref={tooltipRef}
                             >
-                                <p className="text-center md:text-right">You do not have authorization to create posts</p>
+                                <p className="p-3 text-center md:text-left">You do not have authorization to create posts</p>
                             </div>
                         </div>
                         <button

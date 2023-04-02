@@ -5,6 +5,7 @@ import remarkGfm from "remark-gfm";
 import remarkSlug from "remark-slug";
 import { timeAgo } from "~/utils/time";
 import { ProfilePicture } from "./ProfilePicture";
+import { ProfileName } from "./ProfileName";
 import { BlogPostActionsMenu } from "~/components/BlogPostActionsMenu";
 import { api } from "~/utils/api";
 import { useSession } from "next-auth/react";
@@ -105,7 +106,7 @@ export const CommentModal: React.FC = () => {
             <>
               <div className="mb-4 flex w-full justify-between">
                 <div className="flex">
-                  <div className="avatar self-center">
+                  <div className="avatar self-center hover:scale-110 transition-all">
                     <ProfilePicture
                       size={2.5}
                       imgUrl={post.data.user.image}
@@ -113,7 +114,9 @@ export const CommentModal: React.FC = () => {
                     />
                   </div>
                   <div className="ml-3">
-                    <p className="text-lg font-bold">{post.data.user.name}</p>
+                    <ProfileName
+                      name={post.data.user.name} userId={post.data.userId}
+                    />
                     <p className="text-sm text-gray-400">{`${timeAgo(
                       post.data.createdAt
                     )}${
@@ -139,7 +142,7 @@ export const CommentModal: React.FC = () => {
                   {post.data.content}
                 </ReactMarkdown>
               </div>
-              <div className="flex w-full justify-end border-b">
+              <div className="flex w-full justify-end border-b mb-3">
                 <p className="float-right text-highlight-green no-underline hover:no-underline mb-3">
                   {post.data.comments.length} Comments
                 </p>
@@ -179,24 +182,23 @@ export const CommentModal: React.FC = () => {
                   disabled={currUser ? false : true}
                   className={`${
                     userId ? "" : "input-disabled cursor-not-allowed"
-                  }input-bordered mb-2 w-full rounded-md border p-2`}
+                  }input-bordered mb-3 w-full rounded-md border p-3`}
                 />
               </div>
-
               <div className="flex justify-end gap-2">
                 <button
                   className={`${
                     !userId || !input
                       ? "input-disabled cursor-not-allowed bg-gray-200 text-black"
-                      : "border-highlight-green bg-highlight-green hover:bg-gray-700 hover:text-highlight-green"
-                  } mt-[0.5rem] h-10 rounded-md w-32`}
+                      : "border-highlight-green bg-highlight-green hover:bg-gray-700 hover:text-highlight-green transition-all"
+                  } h-10 rounded-md w-32`}
                   onClick={handlePostButtonClick}
                   disabled={!userId || !input ? true : false}
                 >
                   Post
                 </button>
                 <button
-                  className={`mt-[0.5rem] h-10 rounded-md border bg-white w-32 text-center text-black hover:cursor-pointer hover:text-white hover:bg-highlight-red`}
+                  className={`h-10 rounded-md border bg-white w-32 text-center text-black hover:cursor-pointer hover:text-white hover:bg-highlight-red transition-all`}
                   onClick={() => dispatch(setSelectedPost(null))}
                 >
                   Cancel

@@ -8,7 +8,10 @@ interface ProfileNameProps {
   userId: string;
 }
 
-export const ProfileName: React.FC<ProfileNameProps> = ({ name, userId }) => {
+export const ProfileName: React.FC<ProfileNameProps> = ({
+  name,
+  userId,
+ }) => {
   const dispatch = useAppDispatch();
   return (
     <Link

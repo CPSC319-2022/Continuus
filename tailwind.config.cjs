@@ -5,6 +5,9 @@ module.exports = {
     fontFamily: {
       sans: ["Atkinson Hyperlegible"],
     },
+    screens: {
+      'md': '900px',
+    },
     extend: {
       colors: {
         "highlight-green": "#31efb8",
