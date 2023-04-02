@@ -3,8 +3,15 @@ import { ContributorRequestWidget } from "./contributor-request-widget/Contribut
 import { RequestAccessButton } from "./contributor-request-widget/RequestAccessButton";
 import { ProfileMenu } from "./ProfileMenu";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+import { Spinner } from "./Spinner";
+import { FiLogIn } from "react-icons/fi";
+import { useRouter } from "next/router";
 
 export const Navbar: React.FC = () => {
+  const { status } = useSession();
+  const router = useRouter();
+
   return (
     <div className="flex h-full justify-between border-b border-b-gray-200 p-2">
       <Link href="/" className="self-center text-xl font-bold">
@@ -14,7 +21,24 @@ export const Navbar: React.FC = () => {
         <RequestAccessButton />
         <ContributorRequestWidget />
         <SearchIcon />
-        <ProfileMenu />
+        {
+          status === "loading" ?
+            <Spinner size={2} />
+            :
+            (
+              status === "authenticated" ?
+                <ProfileMenu />
+                :
+                <button className="rounded-full w-8 h-8" onClick={() => router.push({
+                  pathname: "/auth/signinup",
+                  query: {
+                    redirect: router.asPath
+                  }
+                })}>
+                  <FiLogIn className="w-8 h-8" />
+                </button>
+            )
+        }
       </div>
     </div>
   );
