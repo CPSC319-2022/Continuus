@@ -2,6 +2,8 @@ import { type PrismaClient } from "@prisma/client";
 import { z } from "zod";
 import { UserFindManySchema, UserUpdateOneSchema } from "~/generated/schemas";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
+import { TRPCError } from "@trpc/server";
+import { hash } from "argon2";
 
 const getCurrentUser = async (prisma: PrismaClient, userId?: string) => {
   return (
@@ -105,7 +107,7 @@ export const userRouter = createTRPCRouter({
         })
     )
     .query(async ({ ctx, input }) => {
-        return await getCurrentUser(ctx.prisma, input.userId);
+      return await getCurrentUser(ctx.prisma, input.userId);
     }),
   updateOne: protectedProcedure
     .input(UserUpdateOneSchema)
@@ -113,4 +115,38 @@ export const userRouter = createTRPCRouter({
       await assertAdminRole(ctx.prisma, ctx.session.user.id);
       return ctx.prisma.user.update(input);
     }),
+  signup: publicProcedure
+    .input(z.object({
+      name: z.string().min(2).max(32),
+      email: z.string().email(),
+      password: z.string().min(4).max(12),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const exists = await ctx.prisma.user.findFirst({
+        where: {
+          email: input.email
+        }
+      });
+
+      if (exists) {
+        throw new TRPCError({
+          code: "CONFLICT",
+          message: JSON.stringify([{
+            message: "That e-mail is already in use"
+          }]),
+        });
+      }
+
+      const hashedPassword = await hash(input.password);
+
+      const createdUser = await ctx.prisma.user.create({
+        data: {
+          name: input.name,
+          email: input.email,
+          password: hashedPassword,
+        },
+      });
+
+      return createdUser;
+    })
 });
