@@ -115,6 +115,8 @@ git push -u origin dev
 
 ### Creating a Postgres DB Instance on Google Cloud
 
+**Important: Cloud SQL service does NOT have a free tier. Therefore this service can cost a lot, take some time to find the best configuration for your expectations**
+
 1. Follow instructions [**here**](https://cloud.google.com/sql/docs/postgres/create-instance#create-2nd-gen) to create a Postgres instance on Google Cloud
    - Store the password for the postgres user somewhere safe
    - Don't need to "configure a password policy for the instance"
