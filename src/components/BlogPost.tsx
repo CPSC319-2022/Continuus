@@ -6,35 +6,39 @@ import { ProfilePicture } from "./ProfilePicture";
 import { api } from "~/utils/api";
 import { BlogPostActionsMenu } from "~/components/BlogPostActionsMenu";
 import { useSession } from "next-auth/react";
-import React from "react";
 import { shouldSeeActions, isAuthor } from "~/components/util";
+import { ProfileName } from "./ProfileName";
+import { userPathToProfile } from "~/utils/profile";
+import { useAppDispatch } from "~/redux/hooks";
+import { setSelectedPost } from "~/redux/slices/posts";
 
 interface BlogPostProps extends React.ComponentProps<"div"> {
   id: string;
-  name: string;
-  author: string;
+  authorId: string;
   lastUpdated: Date;
   createdAt: Date;
   title: string;
   content: string;
-  imageUrl: string;
   comments: number;
+  authorName: string;
+  imgUrl?: string | null;
 }
 
 export const BlogPost: React.FC<BlogPostProps> = ({
   id,
-  author,
-  name,
+  authorId,
   lastUpdated,
   createdAt,
   title,
   content,
-  imageUrl,
   comments,
+  authorName,
+  imgUrl,
   ...props
 }) => {
   const currUser = api.user.currentUser.useQuery();
   const { status } = useSession();
+  const dispatch = useAppDispatch();
 
   return (
     <div
@@ -45,10 +49,14 @@ export const BlogPost: React.FC<BlogPostProps> = ({
         <div className="mb-3 flex w-full justify-between">
           <div className="flex">
             <div className="avatar self-center">
-              <ProfilePicture size={2.5} imgUrl={imageUrl} />
+              <ProfilePicture
+                size={2.5}
+                imgUrl={imgUrl}
+                redirectLink={userPathToProfile(authorId)}
+              />
             </div>
             <div className="ml-3">
-              <p className="text-lg font-bold">{name}</p>
+              <ProfileName name={authorName} userId={authorId} />
               <p className="text-sm text-slate-400">{`${timeAgo(createdAt)}${
                 createdAt.getTime() !== lastUpdated.getTime()
                   ? ` (updated ${timeAgo(lastUpdated)})`
@@ -56,28 +64,59 @@ export const BlogPost: React.FC<BlogPostProps> = ({
               }`}</p>
             </div>
           </div>
-          {shouldSeeActions(status, currUser.data, author) && (
+          {shouldSeeActions(status, currUser.data, authorId) && (
             <BlogPostActionsMenu
               id={id}
               title={title}
               content={content}
-              isAuthor={isAuthor(currUser.data, author)}
+              isAuthor={isAuthor(currUser.data, authorId)}
             />
           )}
         </div>
-        <p className="mb-3 text-xl font-bold">{title}</p>
+        <p
+          className="mb-3 w-fit text-xl font-bold hover:cursor-pointer"
+          onClick={() => dispatch(setSelectedPost(id))}
+        >
+          {title}
+        </p>
         <div className="prose max-w-none ">
-          <ReactMarkdown remarkPlugins={[remarkGfm, remarkSlug]}>
-            {content.length > 500 ? `${content.slice(0, 499)}...` : content}
+          <ReactMarkdown
+            components={{
+              a: ({ node, ...props }) => {
+                if (
+                  props.children &&
+                  props.children.length === 1 &&
+                  props.children[0] === "$setSelectedPost$"
+                ) {
+                  return (
+                    <a
+                      className="font-semibold no-underline hover:cursor-pointer"
+                      onClick={() => dispatch(setSelectedPost(id))}
+                    >
+                      Read more
+                    </a>
+                  );
+                }
+                return <a {...props} />;
+              },
+            }}
+            remarkPlugins={[remarkGfm, remarkSlug]}
+          >
+            {content.length > 500
+              ? `${content.slice(
+                  0,
+                  499
+                )}... [$setSelectedPost$](javascript:void(0);)`
+              : content}
           </ReactMarkdown>
         </div>
         <div className="self-end ">
-          <label
-            htmlFor={`modal-${id}`}
+          <p
             className="btn-link text-highlight-green no-underline hover:cursor-pointer"
+            onClick={() => dispatch(setSelectedPost(id))}
           >
             {comments} Comments
-          </label>
+          </p>
         </div>
       </div>
     </div>

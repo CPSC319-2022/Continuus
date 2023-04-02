@@ -1,6 +1,6 @@
 import type { User } from "@prisma/client";
 
-const isAuthed = (status: string) => {
+export const isAuthed = (status: string) => {
   if (status === "authenticated") {
     return true;
   } else if (status === "unauthenticated") {
