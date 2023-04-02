@@ -296,9 +296,9 @@ exports[`Snapshot: CreateBlogPostButton > Loading Button 1`] = `
                 "
 >
   <div
-    class="inline-block animate-spin rounded-full border-solid border-current border-r-transparent align-[-0.125em] text-highlight-green motion-reduce:animate-[spin_1.5s_linear_infinite]"
+    class="inline-block animate-spin rounded-full border-solid border-current border-r-transparent text-highlight-green motion-reduce:animate-[spin_1.5s_linear_infinite]"
     role="status"
-    style="width: 4rem; height: 4rem; border-width: 0.3333333333333333rem;"
+    style="width: 3.6666666666666665rem; height: 3.6666666666666665rem; border-width: 0.3333333333333333rem; vertical-align: -2.84rem;"
   >
     <span
       class="absolute -m-px h-px w-px overflow-hidden whitespace-nowrap border-0 p-0 [clip:rect(0,0,0,0)]"

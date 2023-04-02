@@ -181,9 +181,6 @@ exports[`Snapshot: CreateBlogPostWidget > Authorized & Mutation is loading 1`] =
     style="position: absolute; opacity: 0;"
     tabindex="0"
   />
-  <div
-    class="ReactModalPortal"
-  />
   <div>
     <div
       aria-label="Create Blog Post Button"
@@ -304,9 +301,9 @@ exports[`Snapshot: CreateBlogPostWidget > Authorized & Mutation is loading 1`] =
           class="flex h-96 w-full items-center justify-center"
         >
           <div
-            class="inline-block animate-spin rounded-full border-solid border-current border-r-transparent align-[-0.125em] text-highlight-green motion-reduce:animate-[spin_1.5s_linear_infinite]"
+            class="inline-block animate-spin rounded-full border-solid border-current border-r-transparent text-highlight-green motion-reduce:animate-[spin_1.5s_linear_infinite]"
             role="status"
-            style="width: 12rem; height: 12rem; border-width: 1rem;"
+            style="width: 11rem; height: 11rem; border-width: 1rem; vertical-align: -10.84rem;"
           >
             <span
               class="absolute -m-px h-px w-px overflow-hidden whitespace-nowrap border-0 p-0 [clip:rect(0,0,0,0)]"
@@ -441,9 +438,9 @@ exports[`Snapshot: CreateBlogPostWidget > Loading CreateBlogPostWidget 1`] = `
                 "
     >
       <div
-        class="inline-block animate-spin rounded-full border-solid border-current border-r-transparent align-[-0.125em] text-highlight-green motion-reduce:animate-[spin_1.5s_linear_infinite]"
+        class="inline-block animate-spin rounded-full border-solid border-current border-r-transparent text-highlight-green motion-reduce:animate-[spin_1.5s_linear_infinite]"
         role="status"
-        style="width: 4rem; height: 4rem; border-width: 0.3333333333333333rem;"
+        style="width: 3.6666666666666665rem; height: 3.6666666666666665rem; border-width: 0.3333333333333333rem; vertical-align: -2.84rem;"
       >
         <span
           class="absolute -m-px h-px w-px overflow-hidden whitespace-nowrap border-0 p-0 [clip:rect(0,0,0,0)]"
