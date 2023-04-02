@@ -10,7 +10,7 @@ export const SignInForm: React.FC = () => {
     <>
       <div className="p-4">
         <button
-          onClick={() => signIn("google", {
+          onClick={() => void signIn("google", {
             callbackUrl: router.query["redirect"] as string || "/"
           })}
           className="relative flex items-center justify-center border border-solid border-gray-400 rounded-md p-2 mx-auto hover:bg-gray-100 transition-colors"
@@ -32,7 +32,7 @@ export const SignInForm: React.FC = () => {
           "password": { value: string };
         };
 
-        signIn("credentials", {
+        void signIn("credentials", {
           email: target.email.value,
           password: target.password.value,
           callbackUrl: router.query["redirect"] as string || "/",

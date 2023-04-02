@@ -40,7 +40,7 @@ export const authOptions: NextAuthOptions = {
 
       return session;
     },
-    jwt: async ({ token, user }) => {
+    jwt: ({ token, user }) => {
       if (user) {
         token.id = user.id;
         token.email = user.email;
@@ -89,8 +89,8 @@ export const authOptions: NextAuthOptions = {
         }
 
         const user = await prisma.user.findFirst({
-          where: { 
-            email: parsedCreds.data.email 
+          where: {
+            email: parsedCreds.data.email
           },
         });
 
@@ -99,7 +99,7 @@ export const authOptions: NextAuthOptions = {
         }
 
         const isPasswordCorrect = await verify(user.password, parsedCreds.data.password);
-      
+
         if (!isPasswordCorrect) {
           return null;
         }
