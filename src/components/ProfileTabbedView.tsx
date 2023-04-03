@@ -41,6 +41,7 @@ export const ProfileTabbedView: React.FC<ProfileTabbedViewProps> = ({
         userId={userId}
       />
       <Tabs
+        className="md:w-1/3 md:min-w-[40rem] w-11/12 relative"
         onSelect={(i: number) => {
           setTabState(i);
         }}

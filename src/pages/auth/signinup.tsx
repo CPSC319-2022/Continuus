@@ -22,7 +22,7 @@ const SignInUp: NextPage = () => {
 
   return (
     <main className="h-screen overflow-hidden flex items-center justify-center">
-      <div className="md:w-1/4 md:min-w-[650px] w-5/6 border border-solid border shadow-md rounded-md">
+      <div className="md:w-1/4 md:min-w-[40rem] w-5/6 border border-solid border shadow-md rounded-md">
         <Tabs>
           <TabList className="flex flex-row justify-start">
             <Tab className={tabClassName} selectedClassName={selectedTabClassName}>Sign In</Tab>

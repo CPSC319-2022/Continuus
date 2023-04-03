@@ -47,7 +47,7 @@ export const ProfileCommentViewer: React.FC<ProfileCommentViewerProps> = ({
         {status === 'loading' ? <Spinner size={2}/>
         : commentsQueryResults?.pages.map((page) => 
                                           page.items.map((comment) =>
-                     <div className="w-screen md:w-1/2 md:min-w-[650px] mb-6 p-6 border rounded-md shadow-md" key={`${comment.id}`}>
+                     <div className="w-full mb-6 p-6 border rounded-md shadow-md" key={`${comment.id}`}>
                         <div className="mb-2 flex border-b">
                             <div className="mb-2">Commented on</div>
                             <div className="mb-2 ml-1 font-bold cursor-pointer" 
