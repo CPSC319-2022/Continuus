@@ -62,9 +62,9 @@ export const ContributorRequestMenu: React.FC<ContributorRequestMenuProps> = ({
   return isOpen ? (
     <div
       ref={ref}
-      className="absolute right-0 md:right-5 top-12 w-screen h-48 md:h-32 md:max-h-64 md:w-72 rounded-md bg-white p-3 shadow border"
+      className="absolute right-0 md:right-5 top-12 w-screen max-h-96 md:w-96 rounded-md bg-white p-3 shadow border"
     >
-      <div className="scrollbar-hide max-h-[28rem] overflow-auto overflow-x-hidden">
+      <div className="scrollbar-hide max-h-80 overflow-auto overflow-x-hidden">
         <div className="sticky top-0 bg-white">
           <p className="text-lg mb-2">Contributor Requests</p>
           <hr />
