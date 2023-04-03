@@ -1,0 +1,462 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Comment Modal: Snapshots > render comment modal logged in with selected post 1`] = `
+<body
+  aria-hidden="true"
+  class="ReactModal__Body--open"
+>
+  <div
+    data-react-modal-body-trap=""
+    style="position: absolute; opacity: 0;"
+    tabindex="0"
+  />
+  <div
+    class="ReactModalPortal"
+  />
+  <div />
+  <div
+    class="ReactModalPortal"
+  >
+    <div
+      class="ReactModal__Overlay fixed inset-0 z-20 bg-black/75"
+    >
+      <div
+        aria-modal="true"
+        class="ReactModal__Content absolute top-1/2 left-1/2 z-40 max-h-[75vh] w-11/12 max-w-5xl -translate-x-1/2 -translate-y-1/2 overflow-y-auto overflow-x-hidden rounded-md border bg-white p-8 outline-none md:w-1/2"
+        role="dialog"
+        tabindex="-1"
+      >
+        <div
+          class="mb-4 flex w-full justify-between"
+        >
+          <div
+            class="flex"
+          >
+            <div
+              class="avatar self-center hover:scale-110 transition-all"
+            >
+               
+              <a
+                href="/profile/user-1"
+              >
+                <img
+                  alt="avatar"
+                  class="inline-block aspect-square rounded-[50%] "
+                  src="imageUrl"
+                  style="width: 2.5rem;"
+                />
+              </a>
+            </div>
+            <div
+              class="ml-3"
+            >
+              <a
+                href="/profile/user-1"
+              >
+                <p
+                  class="text-lg font-bold hover:underline"
+                >
+                  test user
+                </p>
+              </a>
+              <p
+                class="text-sm text-gray-400"
+              >
+                0 seconds ago
+              </p>
+            </div>
+          </div>
+        </div>
+        <p
+          class="mb-3 text-2xl font-bold"
+        >
+          title
+        </p>
+        <div
+          class="prose max-w-none mb-3"
+        >
+          <p>
+            content
+          </p>
+        </div>
+        <div
+          class="flex w-full justify-end border-b mb-3"
+        >
+          <p
+            class="float-right text-highlight-green no-underline hover:no-underline mb-3"
+          >
+            2
+             Comments
+          </p>
+        </div>
+        <div>
+          <div
+            class="relative m-3 rounded-md border-b p-4"
+          >
+            <div
+              class="flex"
+            >
+              <div
+                class="avatar self-center transition-all hover:scale-110"
+              >
+                 
+                <a
+                  href="/profile/user-2"
+                >
+                  <img
+                    alt="avatar"
+                    class="inline-block aspect-square rounded-[50%] "
+                    src="image"
+                    style="width: 2.5rem;"
+                  />
+                </a>
+              </div>
+              <div
+                class="ml-3"
+              >
+                <a
+                  href="/profile/user-2"
+                >
+                  <p
+                    class="text-lg font-bold hover:underline"
+                  >
+                    test user 2
+                  </p>
+                </a>
+                <p
+                  class="tex-gray-400 text-sm"
+                >
+                  0 seconds ago
+                </p>
+              </div>
+            </div>
+            <div
+              class="break-words"
+            >
+              <p
+                class="mt-4 w-full"
+              >
+                test comment
+              </p>
+            </div>
+          </div>
+          <div
+            class="relative m-3 rounded-md border-b p-4"
+          >
+            <div
+              class="flex"
+            >
+              <div
+                class="avatar self-center transition-all hover:scale-110"
+              >
+                 
+                <a
+                  href="/profile/user-3"
+                >
+                  <img
+                    alt="avatar"
+                    class="inline-block aspect-square rounded-[50%] "
+                    src="image"
+                    style="width: 2.5rem;"
+                  />
+                </a>
+              </div>
+              <div
+                class="ml-3"
+              >
+                <a
+                  href="/profile/user-3"
+                >
+                  <p
+                    class="text-lg font-bold hover:underline"
+                  >
+                    test user 3
+                  </p>
+                </a>
+                <p
+                  class="tex-gray-400 text-sm"
+                >
+                  0 seconds ago
+                </p>
+              </div>
+            </div>
+            <div
+              class="break-words"
+            >
+              <p
+                class="mt-4 w-full"
+              >
+                test comment
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="tooltip tooltip-info w-full"
+          data-tip="Sign in to comment"
+        >
+          <input
+            class="input-disabled cursor-not-allowedinput-bordered mb-3 w-full rounded-md border p-3"
+            placeholder="Write a new comment"
+            readonly=""
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          class="flex justify-end gap-2"
+        >
+          <button
+            class="input-disabled cursor-not-allowed bg-gray-200 text-black h-10 rounded-md w-32"
+            disabled=""
+          >
+            Post
+          </button>
+          <button
+            class="h-10 rounded-md border bg-white w-32 text-center text-black hover:cursor-pointer hover:text-white hover:bg-highlight-red transition-all"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    data-react-modal-body-trap=""
+    style="position: absolute; opacity: 0;"
+    tabindex="0"
+  />
+</body>
+`;
+
+exports[`Comment Modal: Snapshots > render comment modal not logged in no selected post 1`] = `
+<body>
+  <div />
+</body>
+`;
+
+exports[`Comment Modal: Snapshots > render comment modal not logged in with selected post 1`] = `
+<body
+  aria-hidden="true"
+  class="ReactModal__Body--open"
+>
+  <div
+    data-react-modal-body-trap=""
+    style="position: absolute; opacity: 0;"
+    tabindex="0"
+  />
+  <div />
+  <div
+    class="ReactModalPortal"
+  >
+    <div
+      class="ReactModal__Overlay fixed inset-0 z-20 bg-black/75"
+    >
+      <div
+        aria-modal="true"
+        class="ReactModal__Content absolute top-1/2 left-1/2 z-40 max-h-[75vh] w-11/12 max-w-5xl -translate-x-1/2 -translate-y-1/2 overflow-y-auto overflow-x-hidden rounded-md border bg-white p-8 outline-none md:w-1/2"
+        role="dialog"
+        tabindex="-1"
+      >
+        <div
+          class="mb-4 flex w-full justify-between"
+        >
+          <div
+            class="flex"
+          >
+            <div
+              class="avatar self-center hover:scale-110 transition-all"
+            >
+               
+              <a
+                href="/profile/user-1"
+              >
+                <img
+                  alt="avatar"
+                  class="inline-block aspect-square rounded-[50%] "
+                  src="imageUrl"
+                  style="width: 2.5rem;"
+                />
+              </a>
+            </div>
+            <div
+              class="ml-3"
+            >
+              <a
+                href="/profile/user-1"
+              >
+                <p
+                  class="text-lg font-bold hover:underline"
+                >
+                  test user
+                </p>
+              </a>
+              <p
+                class="text-sm text-gray-400"
+              >
+                0 seconds ago
+              </p>
+            </div>
+          </div>
+        </div>
+        <p
+          class="mb-3 text-2xl font-bold"
+        >
+          title
+        </p>
+        <div
+          class="prose max-w-none mb-3"
+        >
+          <p>
+            content
+          </p>
+        </div>
+        <div
+          class="flex w-full justify-end border-b mb-3"
+        >
+          <p
+            class="float-right text-highlight-green no-underline hover:no-underline mb-3"
+          >
+            2
+             Comments
+          </p>
+        </div>
+        <div>
+          <div
+            class="relative m-3 rounded-md border-b p-4"
+          >
+            <div
+              class="flex"
+            >
+              <div
+                class="avatar self-center transition-all hover:scale-110"
+              >
+                 
+                <a
+                  href="/profile/user-2"
+                >
+                  <img
+                    alt="avatar"
+                    class="inline-block aspect-square rounded-[50%] "
+                    src="image"
+                    style="width: 2.5rem;"
+                  />
+                </a>
+              </div>
+              <div
+                class="ml-3"
+              >
+                <a
+                  href="/profile/user-2"
+                >
+                  <p
+                    class="text-lg font-bold hover:underline"
+                  >
+                    test user 2
+                  </p>
+                </a>
+                <p
+                  class="tex-gray-400 text-sm"
+                >
+                  0 seconds ago
+                </p>
+              </div>
+            </div>
+            <div
+              class="break-words"
+            >
+              <p
+                class="mt-4 w-full"
+              >
+                test comment
+              </p>
+            </div>
+          </div>
+          <div
+            class="relative m-3 rounded-md border-b p-4"
+          >
+            <div
+              class="flex"
+            >
+              <div
+                class="avatar self-center transition-all hover:scale-110"
+              >
+                 
+                <a
+                  href="/profile/user-3"
+                >
+                  <img
+                    alt="avatar"
+                    class="inline-block aspect-square rounded-[50%] "
+                    src="image"
+                    style="width: 2.5rem;"
+                  />
+                </a>
+              </div>
+              <div
+                class="ml-3"
+              >
+                <a
+                  href="/profile/user-3"
+                >
+                  <p
+                    class="text-lg font-bold hover:underline"
+                  >
+                    test user 3
+                  </p>
+                </a>
+                <p
+                  class="tex-gray-400 text-sm"
+                >
+                  0 seconds ago
+                </p>
+              </div>
+            </div>
+            <div
+              class="break-words"
+            >
+              <p
+                class="mt-4 w-full"
+              >
+                test comment
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="tooltip tooltip-info w-full"
+          data-tip="Sign in to comment"
+        >
+          <input
+            class="input-disabled cursor-not-allowedinput-bordered mb-3 w-full rounded-md border p-3"
+            placeholder="Write a new comment"
+            readonly=""
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          class="flex justify-end gap-2"
+        >
+          <button
+            class="input-disabled cursor-not-allowed bg-gray-200 text-black h-10 rounded-md w-32"
+            disabled=""
+          >
+            Post
+          </button>
+          <button
+            class="h-10 rounded-md border bg-white w-32 text-center text-black hover:cursor-pointer hover:text-white hover:bg-highlight-red transition-all"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    data-react-modal-body-trap=""
+    style="position: absolute; opacity: 0;"
+    tabindex="0"
+  />
+</body>
+`;

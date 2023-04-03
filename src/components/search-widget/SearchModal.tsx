@@ -106,8 +106,9 @@ export const SearchModal: React.FC<SearchModalProps> = ({
       shouldCloseOnOverlayClick
       onRequestClose={() => setIsOpen(false)}
     >
-      <div className="p-8">
+      <div className="p-8" data-testid="search-modal">
         <input
+          data-testid="search-input"
           type="text"
           placeholder="Search for a blog post or user..."
           value={searchVal}
@@ -126,8 +127,9 @@ export const SearchModal: React.FC<SearchModalProps> = ({
               user: { name, image },
             }) => (
               <div
+                data-testid="search-posts"
                 key={id}
-                className="my-2 flex rounded-md p-3 border-b hover:cursor-pointer hover:bg-gray-200 transition-all"
+                className="my-2 flex rounded-md border-b p-3 transition-all hover:cursor-pointer hover:bg-gray-200"
                 onClick={() => {
                   dispatch(setSelectedPost(id));
                 }}
@@ -157,12 +159,13 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           users.data &&
           users.data.map(({ id, name, image }) => (
             <Link
+              data-testid="search-users"
               key={id}
-              className="my-2 flex rounded-md p-3 border-b hover:cursor-pointer hover:bg-gray-200 transition-all"
+              className="my-2 flex rounded-md border-b p-3 transition-all hover:cursor-pointer hover:bg-gray-200"
               href={userPathToProfile(id)}
               onClick={() => setIsOpen(false)}
             >
-              <ProfilePicture imgUrl={image} size={2} className="self-center"/>
+              <ProfilePicture imgUrl={image} size={2} className="self-center" />
 
               <div className="ml-3 flex">
                 <p className="self-center">

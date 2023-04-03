@@ -1,0 +1,273 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Blog post viewer: Snapshot > render no blog posts 1`] = `
+<body>
+  <div>
+    <div
+      class="w-full self-center"
+    >
+      Nothing to see here
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Blog post viewer: Snapshot > render with blog posts 1`] = `
+<body>
+  <div>
+    <div
+      class="w-full self-center"
+    >
+      <div
+        class="mb-6"
+      >
+        <div
+          class="relative"
+        >
+          <div
+            class="card w-full rounded-md shadow-md border hover:cursor-pointer hover:border-highlight-green transition-all"
+          >
+            <div
+              class="card-body"
+            >
+              <div
+                class="mb-3 flex w-full justify-between"
+              >
+                <div
+                  class="flex"
+                >
+                  <div
+                    class="avatar self-center hover:scale-110 transition-all"
+                  >
+                     
+                    <a
+                      href="/profile/user-1"
+                    >
+                      <img
+                        alt="avatar"
+                        class="inline-block aspect-square rounded-[50%] "
+                        src="imageUrl"
+                        style="width: 2.5rem;"
+                      />
+                    </a>
+                  </div>
+                  <div
+                    class="ml-3"
+                  >
+                    <a
+                      href="/profile/user-1"
+                    >
+                      <p
+                        class="text-lg font-bold hover:underline"
+                      >
+                        test user
+                      </p>
+                    </a>
+                    <p
+                      class="text-sm text-gray-400"
+                    >
+                      0 seconds ago
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="mb-3 w-fit text-2xl font-bold"
+              >
+                title
+              </div>
+              <div
+                class="prose relative"
+              >
+                <p>
+                  content
+                </p>
+                <div />
+              </div>
+              <div
+                class="self-end"
+              >
+                <p
+                  class="text-highlight-green no-underline"
+                >
+                  1
+                   Comments
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="absolute right-10 top-12"
+          />
+        </div>
+      </div>
+      <div
+        class="mb-6"
+      >
+        <div
+          class="relative"
+        >
+          <div
+            class="card w-full rounded-md shadow-md border hover:cursor-pointer hover:border-highlight-green transition-all"
+          >
+            <div
+              class="card-body"
+            >
+              <div
+                class="mb-3 flex w-full justify-between"
+              >
+                <div
+                  class="flex"
+                >
+                  <div
+                    class="avatar self-center hover:scale-110 transition-all"
+                  >
+                     
+                    <a
+                      href="/profile/user-3"
+                    >
+                      <img
+                        alt="avatar"
+                        class="inline-block aspect-square rounded-[50%] "
+                        src="anotherImageUrl"
+                        style="width: 2.5rem;"
+                      />
+                    </a>
+                  </div>
+                  <div
+                    class="ml-3"
+                  >
+                    <a
+                      href="/profile/user-3"
+                    >
+                      <p
+                        class="text-lg font-bold hover:underline"
+                      >
+                        another test user
+                      </p>
+                    </a>
+                    <p
+                      class="text-sm text-gray-400"
+                    >
+                      0 seconds ago
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="mb-3 w-fit text-2xl font-bold"
+              >
+                another title
+              </div>
+              <div
+                class="prose relative"
+              >
+                <p>
+                  another content
+                </p>
+                <div />
+              </div>
+              <div
+                class="self-end"
+              >
+                <p
+                  class="text-highlight-green no-underline"
+                >
+                  1
+                   Comments
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="absolute right-10 top-12"
+          />
+        </div>
+      </div>
+      <div
+        class="mb-6"
+      >
+        <div
+          class="relative"
+        >
+          <div
+            class="card w-full rounded-md shadow-md border hover:cursor-pointer hover:border-highlight-green transition-all"
+          >
+            <div
+              class="card-body"
+            >
+              <div
+                class="mb-3 flex w-full justify-between"
+              >
+                <div
+                  class="flex"
+                >
+                  <div
+                    class="avatar self-center hover:scale-110 transition-all"
+                  >
+                     
+                    <a
+                      href="/profile/user-5"
+                    >
+                      <img
+                        alt="avatar"
+                        class="inline-block aspect-square rounded-[50%] "
+                        src="differentImageUrl"
+                        style="width: 2.5rem;"
+                      />
+                    </a>
+                  </div>
+                  <div
+                    class="ml-3"
+                  >
+                    <a
+                      href="/profile/user-5"
+                    >
+                      <p
+                        class="text-lg font-bold hover:underline"
+                      >
+                        different test user
+                      </p>
+                    </a>
+                    <p
+                      class="text-sm text-gray-400"
+                    >
+                      0 seconds ago
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="mb-3 w-fit text-2xl font-bold"
+              >
+                different title
+              </div>
+              <div
+                class="prose relative"
+              >
+                <p>
+                  different content
+                </p>
+                <div />
+              </div>
+              <div
+                class="self-end"
+              >
+                <p
+                  class="text-highlight-green no-underline"
+                >
+                  1
+                   Comments
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="absolute right-10 top-12"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
