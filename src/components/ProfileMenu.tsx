@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 import { CurrUserProfilePicture } from "./CurrUserProfilePicture";
 
 export const ProfileMenu: React.FC = () => {
-  const { status } = useSession();
   const menuItemClassName = "w-full px-4 py-3 cursor-pointer text-center hover:bg-gray-200 transition-all";
   const router = useRouter();
   const currUser = api.user.currentUser.useQuery();
