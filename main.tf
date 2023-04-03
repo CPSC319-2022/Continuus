@@ -5,12 +5,12 @@ resource "google_cloudbuild_trigger" "build-trigger" {
     name  = "Continuus"
     //Events section  
     pull_request {
-       branch = "dev"
-      }
+      branch = "dev"
+    }
   }
   ignored_files = [".gitignore"]
 
- //Configuration section
- // build config file
- filename = "cloudbuild/feature-build.yaml"
+  //Configuration section
+  // build config file
+  filename = "cloudbuild/feature-build.yaml"
 }
