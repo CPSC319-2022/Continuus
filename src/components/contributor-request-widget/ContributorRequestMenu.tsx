@@ -71,17 +71,17 @@ export const ContributorRequestMenu: React.FC<ContributorRequestMenuProps> = ({
         </div>
         {users && users.length ? (
           users.map(({ id, createdAt, user: { id: userId, name, image } }) => (
-            <div className="my-2 flex justify-between" key={id}>
+            <div className="py-2 flex justify-between border-b" key={id}>
               <div className="flex">
                 <ProfilePicture
-                  className="self-center"
+                  className="self-center mt-1"
                   size={2}
                   imgUrl={image}
                   redirectLink={userPathToProfile(userId)}
                 />
                 <div className="mx-2">
                   <p>{name}</p>
-                  <p className="text-xs">{timeAgo(createdAt)}</p>
+                  <p className="text-xs text-gray-400">{timeAgo(createdAt)}</p>
                 </div>
               </div>
               <div className="mr-1 flex self-center">

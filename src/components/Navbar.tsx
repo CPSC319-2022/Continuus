@@ -19,9 +19,7 @@ export const Navbar: React.FC = () => {
       </Link>
       <div className="flex items-center gap-6">
         <RequestAccessButton />
-        <div className="hover:fill-highlight-green transition-all">
-          <ContributorRequestWidget/>
-        </div>
+        <ContributorRequestWidget/>
         <div className="hover:fill-highlight-green transition-all">
           <SearchIcon/>
         </div>

@@ -56,7 +56,7 @@ export const BlogPostViewer: React.FC<BlogPostViewerProps> = ({ user }) => {
     }
   }, [inView, fetchNextPage]);
   return (
-    <div className="w-full self-center md:w-1/2 md:min-w-[650px]">
+    <div className="w-full self-center">
       {posts?.length === 0
         ? "Nothing to see here"
         : posts?.map(
