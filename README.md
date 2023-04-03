@@ -93,31 +93,31 @@ Use `npm run dev` to start a dev server running in your local
      ```
      git clone git@github.com:CPSC319-2022/Continuus.git
      ```
-1. [Create a new repository in GitHub](https://github.com/new)
+2. [Create a new repository in GitHub](https://github.com/new)
    1. **Deselect** 'Add a README file' option
    2. Do **NOT** add .gitignore
    3. Do **NOT** add a licence
-1. Set the remote origin url using:
+3. Set the remote origin url using:
 
 ```
 git remote set-url origin [github ssh address]
 ```
 
-1. Then set the main branch as dev and push
+4. Then set the main branch as dev and push
 
 ```
 git branch -M dev
 git push -u origin dev
 ```
 
-1. The repo will **NOT** have the 'qa' and 'prod' branches by default, so feel free to create them now or later.
+5. The repo will **NOT** have the 'qa' and 'prod' branches by default, so feel free to create them now or later.
 
 ## Cloud Database Setup
 
 ### Creating a Postgres DB Instance on Google Cloud
 
 
-$\color{red}{\textsf{Important: Cloud SQL service does NOT have a free tier. Therefore this service can cost (in $) a lot, take some time to find the best configuration for your expectations}}$
+$\color{red}{\textsf{Important: Cloud SQL service does NOT have a free tier. Therefore this service can cost (in dollars) a lot, take some time to find the best configuration for your expectations}}$
 
 
 1. Follow instructions [**here**](https://cloud.google.com/sql/docs/postgres/create-instance#create-2nd-gen) to create a Postgres instance on Google Cloud
