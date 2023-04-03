@@ -36,7 +36,6 @@ export const ProfileMenu: React.FC = () => {
       >
         Sign-Out
       </MenuItem>
-
     </Menu>
   );
 };
