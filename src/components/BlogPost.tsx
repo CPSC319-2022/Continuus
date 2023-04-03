@@ -66,7 +66,6 @@ export const BlogPost: React.FC<BlogPostProps> = ({
                 }`}</p>
               </div>
             </div>
-            
           </div>
           <div className="mb-3 w-fit text-2xl font-bold">
             {title}

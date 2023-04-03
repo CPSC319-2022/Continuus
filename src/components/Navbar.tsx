@@ -37,7 +37,7 @@ export const Navbar: React.FC = () => {
                     redirect: router.asPath
                   }
                 })}>
-                  <FiLogIn className="w-8 h-8" />
+                  <FiLogIn className="scale-125 hover:stroke-highlight-green transition-all" />
                 </button>
             )
         }

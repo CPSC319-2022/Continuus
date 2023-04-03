@@ -86,13 +86,13 @@ export const ContributorRequestMenu: React.FC<ContributorRequestMenuProps> = ({
               </div>
               <div className="mr-1 flex self-center">
                 <div
-                  className="mx-1 rounded-md bg-highlight-green p-1 hover:cursor-pointer hover:shadow-md"
+                  className="mx-2 scale-110 rounded-md bg-highlight-green p-1 hover:cursor-pointer hover:scale-125 hover:bg-gray-700 hover:fill-highlight-green transition-all"
                   onClick={() => void handleAcceptRequest(userId, id)}
                 >
                   <CheckIcon />
                 </div>
                 <div
-                  className="mx-1 rounded-md bg-slate-200 p-1 hover:cursor-pointer hover:shadow-md"
+                  className="mx-2 scale-110 rounded-md bg-gray-200 p-1 hover:cursor-pointer hover:scale-125 hover:bg-highlight-red hover:fill-white transition-all"
                   onClick={() => deleteRequest.mutate({ where: { id } })}
                 >
                   <CloseIcon />

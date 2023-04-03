@@ -42,7 +42,7 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({
             </div>
 
             <div className="wx-1/2">
-                <div className="grid grid-cols-2 gap-10 text-center grid-padding-64">
+                <div className="grid grid-cols-2 gap-48 text-center grid-padding-64">
                 <div>
                     {(nBlogPosts.isLoading) ? 
                         <Spinner size={2}/> : 
