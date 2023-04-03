@@ -66,7 +66,7 @@ exports[`Snapshot: CreateBlogPostWidget > Authorized & Create Blog Post modal is
                         "
         >
           <p
-            class="text-center md:text-right"
+            class="p-3 text-center md:text-left"
           >
             You do not have authorization to create posts
           </p>
@@ -74,16 +74,16 @@ exports[`Snapshot: CreateBlogPostWidget > Authorized & Create Blog Post modal is
       </div>
       <button
         class="
-                        bg-green-400 hover:after:bg-green-100 hover:before:bg-green-100 hover:after:rotate-90 hover:before:-rotate-90 cursor-pointer 
-                        aspect-square 
+                        bg-highlight-green hover:bg-gray-700 hover:scale-110 bg-highlight-green cursor-pointer transition-all 
+                        aspect-square
                         w-16 
                         rounded-full 
                         after:block 
                         before:block 
                         after:bg-white 
-                        before:bg-white 
+                        before:bg-white
                         after:absolute 
-                        before:absolute 
+                        before:absolute
                         after:top-1/2 
                         before:top-1/2 
                         after:left-1/2 
@@ -111,12 +111,12 @@ exports[`Snapshot: CreateBlogPostWidget > Authorized & Create Blog Post modal is
       <div
         aria-label="Blog Post Input"
         aria-modal="true"
-        class="ReactModal__Content absolute top-1/2 left-1/2 z-40 w-11/12 -translate-x-1/2 -translate-y-1/2 rounded-md bg-white md:w-1/2"
+        class="ReactModal__Content absolute top-1/2 left-1/2 z-40 w-11/12 -translate-x-1/2 -translate-y-1/2 rounded-md bg-white md:w-1/2 p-4"
         role="dialog"
         tabindex="-1"
       >
         <div
-          class="flex h-12 w-full flex-row items-center justify-between border-b border-b-gray-200 pl-4 pr-4"
+          class="flex pb-3 w-full flex-row items-center justify-between border-b border-b-gray-200 pl-4 pr-4"
         >
           <div
             class="font-semibold"
@@ -125,38 +125,32 @@ exports[`Snapshot: CreateBlogPostWidget > Authorized & Create Blog Post modal is
              Blog Post
           </div>
           <button
-            class="rounded-full transition-colors after:content-['\\\\2715'] hover:text-emerald-400"
+            class="rounded-full transition-colors after:content-['\\\\2715'] hover:text-highlight-red hover:scale-125 transition-all"
           />
         </div>
         <form
           aria-label="Create Blog Post Form"
         >
           <div
-            class="flex flex-row items-start border-b border-b-gray-200 py-6 pl-4 pr-4"
+            class="py-4 flex flex-row items-start"
           >
-            <img
-              alt="avatar"
-              class="aspect-square rounded-full"
-              src="c"
-              style="width: 2.5rem;"
-            />
             <div
-              class="ml-2 flex w-full flex-col"
+              class="flex flex-col w-full ml-2"
             >
               <input
-                class="mb-4 w-full rounded-md bg-gray-100 p-2"
+                class="w-full rounded-md p-2 mb-4 text-2xl font-bold"
                 placeholder="Write title here"
                 type="text"
                 value=""
               />
               <textarea
-                class="h-96 w-full resize-none rounded-md bg-gray-100 p-2"
+                class="w-full resize-none rounded-md h-96 p-2"
                 placeholder="Write your blog post here"
               />
             </div>
           </div>
           <input
-            class="relative left-full -translate-x-full rounded-md px-6 py-2 disabled cursor-not-allowed bg-gray-400  my-2 -ml-4 transition-colors"
+            class="relative left-full -translate-x-full h-10 rounded-md border w-32 text-center text-gray-700 disabled cursor-not-allowed bg-gray-200"
             type="submit"
             value="Create"
           />
@@ -241,7 +235,7 @@ exports[`Snapshot: CreateBlogPostWidget > Authorized & Mutation is loading 1`] =
                         "
         >
           <p
-            class="text-center md:text-right"
+            class="p-3 text-center md:text-left"
           >
             You do not have authorization to create posts
           </p>
@@ -249,16 +243,16 @@ exports[`Snapshot: CreateBlogPostWidget > Authorized & Mutation is loading 1`] =
       </div>
       <button
         class="
-                        bg-green-400 hover:after:bg-green-100 hover:before:bg-green-100 hover:after:rotate-90 hover:before:-rotate-90 cursor-pointer 
-                        aspect-square 
+                        bg-highlight-green hover:bg-gray-700 hover:scale-110 bg-highlight-green cursor-pointer transition-all 
+                        aspect-square
                         w-16 
                         rounded-full 
                         after:block 
                         before:block 
                         after:bg-white 
-                        before:bg-white 
+                        before:bg-white
                         after:absolute 
-                        before:absolute 
+                        before:absolute
                         after:top-1/2 
                         before:top-1/2 
                         after:left-1/2 
@@ -286,12 +280,12 @@ exports[`Snapshot: CreateBlogPostWidget > Authorized & Mutation is loading 1`] =
       <div
         aria-label="Blog Post Input"
         aria-modal="true"
-        class="ReactModal__Content absolute top-1/2 left-1/2 z-40 w-11/12 -translate-x-1/2 -translate-y-1/2 rounded-md bg-white md:w-1/2"
+        class="ReactModal__Content absolute top-1/2 left-1/2 z-40 w-11/12 -translate-x-1/2 -translate-y-1/2 rounded-md bg-white md:w-1/2 p-4"
         role="dialog"
         tabindex="-1"
       >
         <div
-          class="flex h-12 w-full flex-row items-center justify-between border-b border-b-gray-200 pl-4 pr-4"
+          class="flex pb-3 w-full flex-row items-center justify-between border-b border-b-gray-200 pl-4 pr-4"
         >
           <div
             class="font-semibold"
@@ -383,7 +377,7 @@ exports[`Snapshot: CreateBlogPostWidget > Authorized CreateBlogPostWidget 1`] = 
                         "
         >
           <p
-            class="text-center md:text-right"
+            class="p-3 text-center md:text-left"
           >
             You do not have authorization to create posts
           </p>
@@ -391,16 +385,16 @@ exports[`Snapshot: CreateBlogPostWidget > Authorized CreateBlogPostWidget 1`] = 
       </div>
       <button
         class="
-                        bg-green-400 hover:after:bg-green-100 hover:before:bg-green-100 hover:after:rotate-90 hover:before:-rotate-90 cursor-pointer 
-                        aspect-square 
+                        bg-highlight-green hover:bg-gray-700 hover:scale-110 bg-highlight-green cursor-pointer transition-all 
+                        aspect-square
                         w-16 
                         rounded-full 
                         after:block 
                         before:block 
                         after:bg-white 
-                        before:bg-white 
+                        before:bg-white
                         after:absolute 
-                        before:absolute 
+                        before:absolute
                         after:top-1/2 
                         before:top-1/2 
                         after:left-1/2 
@@ -513,7 +507,7 @@ exports[`Snapshot: CreateBlogPostWidget > Unauthorized Plain CreateBlogPostWidge
                         "
         >
           <p
-            class="text-center md:text-right"
+            class="p-3 text-center md:text-left"
           >
             You do not have authorization to create posts
           </p>
@@ -521,16 +515,16 @@ exports[`Snapshot: CreateBlogPostWidget > Unauthorized Plain CreateBlogPostWidge
       </div>
       <button
         class="
-                        bg-gray-400 cursor-not-allowed 
-                        aspect-square 
+                        bg-gray-200 cursor-not-allowed 
+                        aspect-square
                         w-16 
                         rounded-full 
                         after:block 
                         before:block 
                         after:bg-white 
-                        before:bg-white 
+                        before:bg-white
                         after:absolute 
-                        before:absolute 
+                        before:absolute
                         after:top-1/2 
                         before:top-1/2 
                         after:left-1/2 

@@ -56,7 +56,7 @@ export const BlogPostViewer: React.FC<BlogPostViewerProps> = ({ user }) => {
     }
   }, [inView, fetchNextPage]);
   return (
-    <div className="w-full ">
+    <div className="w-full self-center">
       {posts?.length === 0
         ? "Nothing to see here"
         : posts?.map(
@@ -79,7 +79,7 @@ export const BlogPostViewer: React.FC<BlogPostViewerProps> = ({ user }) => {
                   createdAt={createdAt}
                   content={content}
                   comments={(comments as Comment[]).length}
-                  authorName={user.name as string}
+                  authorName={user.name || ""}
                   imgUrl={user.image}
                 />
               </div>
