@@ -41,83 +41,65 @@ export const BlogPost: React.FC<BlogPostProps> = ({
   const dispatch = useAppDispatch();
 
   return (
-    <div
-      className="bg-base-150 card w-full rounded-md shadow-md shadow-slate-300"
-      {...props}
-    >
-      <div className="card-body m-[-15px]">
-        <div className="mb-3 flex w-full justify-between">
-          <div className="flex">
-            <div className="avatar self-center">
-              <ProfilePicture
-                size={2.5}
-                imgUrl={imgUrl}
-                redirectLink={userPathToProfile(authorId)}
-              />
-            </div>
-            <div className="ml-3">
-              <ProfileName name={authorName} userId={authorId} />
-              <p className="text-sm text-slate-400">{`${timeAgo(createdAt)}${
-                createdAt.getTime() !== lastUpdated.getTime()
-                  ? ` (updated ${timeAgo(lastUpdated)})`
-                  : ""
-              }`}</p>
+    <div className="relative">
+      <div
+        className="card w-full rounded-md shadow-md border hover:cursor-pointer hover:border-highlight-green transition-all"
+        onClick={() => dispatch(setSelectedPost(id))}
+        {...props}
+      >
+        <div className="card-body">
+          <div className="mb-3 flex w-full justify-between">
+            <div className="flex">
+              <div className="avatar self-center hover:scale-110 transition-all">
+                <ProfilePicture
+                  size={2.5}
+                  imgUrl={imgUrl}
+                  redirectLink={userPathToProfile(authorId)}
+                />
+              </div>
+              <div className="ml-3">
+                <ProfileName name={authorName} userId={authorId}/>
+                <p className="text-sm text-gray-400">{`${timeAgo(createdAt)}${
+                  createdAt.getTime() !== lastUpdated.getTime()
+                    ? ` (updated ${timeAgo(lastUpdated)})`
+                    : ""
+                }`}</p>
+              </div>
             </div>
           </div>
-          {shouldSeeActions(status, currUser.data, authorId) && (
-            <BlogPostActionsMenu
-              id={id}
-              title={title}
-              content={content}
-              isAuthor={isAuthor(currUser.data, authorId)}
-            />
-          )}
+          <div className="mb-3 w-fit text-2xl font-bold">
+            {title}
+          </div>
+          <div className="prose relative">
+            <ReactMarkdown>
+              {content.length > 500
+                ? `${content.slice(
+                    0,
+                    499
+                  )}`
+                : content}
+            </ReactMarkdown>
+          {content.length > 500
+            ? <div className="bg-gradient-to-b from-transparent to-white w-full h-24 absolute bottom-6"></div>
+            : <div></div>
+            }
+          </div>
+          <div className="self-end">
+            <p className="text-highlight-green no-underline">
+              {comments} Comments
+            </p>
+          </div>
         </div>
-        <p
-          className="mb-3 w-fit text-xl font-bold hover:cursor-pointer"
-          onClick={() => dispatch(setSelectedPost(id))}
-        >
-          {title}
-        </p>
-        <div className="prose max-w-none ">
-          <ReactMarkdown
-            components={{
-              a: ({ node, ...props }) => {
-                if (
-                  props.children &&
-                  props.children.length === 1 &&
-                  props.children[0] === "$setSelectedPost$"
-                ) {
-                  return (
-                    <a
-                      className="font-semibold no-underline hover:cursor-pointer"
-                      onClick={() => dispatch(setSelectedPost(id))}
-                    >
-                      Read more
-                    </a>
-                  );
-                }
-                return <a {...props} />;
-              },
-            }}
-            remarkPlugins={[remarkGfm, remarkSlug]}
-          >
-            {content.length > 500
-              ? `${content.slice(
-                  0,
-                  499
-                )}... [$setSelectedPost$](javascript:void(0);)`
-              : content}
-          </ReactMarkdown>
-        </div>
-        <div className="self-end ">
-          <p
-            className="btn-link text-highlight-green no-underline hover:cursor-pointer"
-            onClick={() => dispatch(setSelectedPost(id))}
-          >
-            {comments} Comments
-          </p>
-        </div>
+      </div>
+      <div className="absolute right-10 top-12">
+        {shouldSeeActions(status, currUser.data, authorId) && (
+                <BlogPostActionsMenu
+                  id={id}
+                  title={title}
+                  content={content}
+                  isAuthor={isAuthor(currUser.data, authorId)}
+                />
+              )}
       </div>
     </div>
   );

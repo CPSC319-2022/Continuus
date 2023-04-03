@@ -15,7 +15,7 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
       <nav className="fixed top-full left-0 z-10 h-24 w-full -translate-y-full bg-white md:top-12 md:inline-block md:h-auto md:w-[15%] md:translate-y-0 md:bg-transparent md:align-top">
         <Sidebar />
       </nav>
-      <main className="inline-flex w-full overflow-x-auto px-2 pb-24 md:px-0 md:pb-4">
+      <main className="inline-flex w-full overflow-x-auto justify-center">
         {children}
       </main>
     </>

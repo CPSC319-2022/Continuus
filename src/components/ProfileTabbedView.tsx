@@ -33,38 +33,36 @@ export const ProfileTabbedView: React.FC<ProfileTabbedViewProps> = ({
   ];
 
   return (
-    <div className="flex w-full flex-col justify-center align-middle">
-      <div className="w-full self-center md:w-1/2 md:min-w-[768px]">
-        <ProfileCard
-          dateJoined={createdAt}
-          name={name}
-          imgUrl={imgUrl}
-          userId={userId}
-        />
-        <Tabs
-          onSelect={(i: number) => {
-            setTabState(i);
-          }}
-          className="mt-3"
-        >
-          <TabList className="mb-3 flex flex-row justify-start">
-            <Tab
-              className="w-32 cursor-pointer border-b-4 border-solid border-white p-4 text-center transition-all hover:border-b-emerald-400 hover:font-bold"
-              selectedClassName="border-b-4 border-solid border-b-emerald-400 font-bold"
-            >
-              {headers[0]?.label ?? ""}
-            </Tab>
-            <Tab
-              className="w-32 cursor-pointer border-b-4 border-solid border-white p-4 text-center transition-all hover:border-b-emerald-400 hover:font-bold"
-              selectedClassName="border-b-4 border-solid border-b-emerald-400 font-bold"
-            >
-              {headers[1]?.label ?? ""}
-            </Tab>
-          </TabList>
-          <TabPanel>{headers[0]?.desc ?? <></>}</TabPanel>
-          <TabPanel>{headers[1]?.desc ?? <></>}</TabPanel>
-        </Tabs>
-      </div>
+    <div className="mt-4 flex min-h-screen w-full flex-col content-center items-center px-2 md:px-0">
+      <ProfileCard
+        dateJoined={createdAt}
+        name={name}
+        imgUrl={imgUrl}
+        userId={userId}
+      />
+      <Tabs
+        className="md:w-1/3 md:min-w-[40rem] w-11/12 relative"
+        onSelect={(i: number) => {
+          setTabState(i);
+        }}
+      >
+        <TabList className="mb-3 flex flex-row justify-start">
+          <Tab
+            className="w-32 cursor-pointer border-b-4 border-solid border-gray-200 p-4 text-center transition-all hover:border-b-highlight-green hover:font-bold"
+            selectedClassName="border-b-4 border-solid border-b-highlight-green font-bold"
+          >
+            {headers[0]?.label ?? ""}
+          </Tab>
+          <Tab
+            className="w-32 cursor-pointer border-b-4 border-solid border-gray-200 p-4 text-center transition-all hover:border-b-highlight-green hover:font-bold"
+            selectedClassName="border-b-4 border-solid border-b-highlight-green font-bold"
+          >
+            {headers[1]?.label ?? ""}
+          </Tab>
+        </TabList>
+        <TabPanel>{headers[0]?.desc ?? <></>}</TabPanel>
+        <TabPanel>{headers[1]?.desc ?? <></>}</TabPanel>
+      </Tabs>
     </div>
   );
 };

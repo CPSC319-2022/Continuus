@@ -39,14 +39,14 @@ export const SignInForm: React.FC = () => {
         })
       }}>
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow-md appearance-none border rounded-md w-full p-3 mb-4 leading-tight focus:outline-none focus:shadow-outline"
           name="email"
           type="email"
           placeholder="Email"
           required
         />
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow-md appearance-none border rounded-md w-full p-3 mb-4 leading-tight focus:outline-none focus:shadow-outline"
           name="password"
           type="password"
           placeholder="Password"
@@ -60,7 +60,7 @@ export const SignInForm: React.FC = () => {
           )
         }
         <button
-          className="bg-blue-500 hover:bg-blue-700 transition-colors text-white font-bold w-full py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          className="bg-highlight-green hover:bg-gray-700 hover:text-highlight-green transition-all text-gray-700 shadow-md border font-bold w-full py-2 px-4 rounded-md focus:outline-none focus:shadow-outline"
           type="submit"
         >
           Sign In

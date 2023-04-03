@@ -100,13 +100,13 @@ export const SearchModal: React.FC<SearchModalProps> = ({
     <ReactModal
       closeTimeoutMS={100}
       isOpen={isOpen}
-      overlayClassName="fixed inset-0 z-20 bg-black/60"
+      overlayClassName="fixed inset-0 z-20 bg-black/75"
       className="absolute top-1/2 left-1/2 z-40 h-[40rem] w-11/12 -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-md border-slate-500 bg-white outline-none md:w-1/2"
       shouldCloseOnEsc
       shouldCloseOnOverlayClick
       onRequestClose={() => setIsOpen(false)}
     >
-      <div className="p-3">
+      <div className="p-8">
         <input
           type="text"
           placeholder="Search for a blog post or user..."
@@ -127,7 +127,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
             }) => (
               <div
                 key={id}
-                className="my-2 flex rounded-md p-3 hover:cursor-pointer hover:bg-slate-200"
+                className="my-2 flex rounded-md p-3 border-b hover:cursor-pointer hover:bg-gray-200 transition-all"
                 onClick={() => {
                   dispatch(setSelectedPost(id));
                 }}
@@ -158,15 +158,15 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           users.data.map(({ id, name, image }) => (
             <Link
               key={id}
-              className="my-2 flex rounded-md p-3 hover:cursor-pointer hover:bg-slate-200"
+              className="my-2 flex rounded-md p-3 border-b hover:cursor-pointer hover:bg-gray-200 transition-all"
               href={userPathToProfile(id)}
               onClick={() => setIsOpen(false)}
             >
-              <ProfilePicture imgUrl={image} size={2} className="self-center" />
+              <ProfilePicture imgUrl={image} size={2} className="self-center"/>
 
               <div className="ml-3 flex">
                 <p className="self-center">
-                  {highlighter(name as string, debouncedUsersVal)}
+                  {highlighter(name || "", debouncedUsersVal)}
                 </p>
               </div>
             </Link>
