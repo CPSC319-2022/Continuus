@@ -46,6 +46,7 @@ npm install
    - DATABASE_URL: Use the default value, if needed you can update this depending on your Postgres setup (next section)
    - NEXTAUTH_URL: If you are developing locally, leave this as default
    - GOOGLE_CLIENT_ID & GOOGLE_CLIENT_SECRET: Set these to the client id and client secret you have saved from the Google OAuth Setup section
+   - NEXTAUTH_SECRET: Follow the instructions in the .env-example files to generate a secret for it
 
 ### 5. Setting up Prisma
 
@@ -166,6 +167,34 @@ $\color{red}{\textsf{Important: Cloud SQL service does NOT have a free tier. The
        - `https://prod-hmcu4gyu5a-pd.a.run.app/api/auth/callback/google`
   6. **Save the Client ID and the Client secret somewhere safe _for each environment_, we will use these during the secret manager setup**
 
+## Google Cloud Secret Manager Setup
+1. Go to the Secret Manager service (https://cloud.google.com/secret-manager)
+2. Create secrets for each of these (Names of secrets should be exact):
+  - `CLOUD_SQL_INSTANCE_NAME`: Take the instance name from Cloud SQL instance
+    - e.g.: `automatic-bot-376307:us-central1:postgres`
+  - `DB_USERNAME`: The DB Username (default name is `postgres`)
+  - `DB_PASSWORD`: The DB password (password of the db user, by default; you set this while setting up the instance)
+  - Per environment secrets
+    - The next set of secrets are created for each of the environments
+    - `dev-GOOGLE_CLIENT_ID`: This is the Google OAuth Client ID for the dev environment
+    - `dev-GOOGLE_CLIENT_SECRET`: This is the Google OAuth Client Secret for the dev environment
+    - `dev-NEXTAUTH_SECRET`: Generate this (don't write something that is easily crackable)
+    - `dev-NEXTAUTH_URL`: The deployment link for the dev environment
+      - e.g.: `https://dev-hmcu4gyu5a-pd.a.run.app`
+    - And now we create the same set for other 2 environments, follow the same instructions but use the associated environment's values instead of `dev` environment's values
+      - `prod-GOOGLE_CLIENT_ID`
+      - `prod-GOOGLE_CLIENT_SECRET`
+      - `prod-NEXTAUTH_SECRET`
+      - `prod-NEXTAUTH_URL`
+      - `qa-GOOGLE_CLIENT_ID`
+      - `qa-GOOGLE_CLIENT_SECRET`
+      - `qa-NEXTAUTH_SECRET`
+      - `qa-NEXTAUTH_URL`
+3. Give `Secret Manager Secret Accessor` role to the Cloud Build & Cloud Run service accounts
+   - This guide can be helpful: https://cloud.google.com/build/docs/securing-builds/use-secrets
+4. The application server will check if these secrets are set, and you can look at the logs at Cloud Run (or Cloud Build) to see if there are any errors.
+5. *NOTE: If you don't have values for these secrets at the moment, you can continue with the setup and create the secrets on-the-go
+
 ## Google Cloud Platform Setup
 
 ### IAM
@@ -261,10 +290,6 @@ This script will also print out logs of a failed build, and also provides a link
 
 Each job in the workflow must call this script if it is using a trigger from Cloud Build. The script takes in 2 parameters: the Cloud Build trigger ID and the branch name of the current branch. An example of a call to `wait-for-build` in a GitHub Actions workflow file can be found [here](https://github.com/CPSC319-2022/Continuus/blob/dev/.github/workflows/dev-qa-prod.yml#L29-L33).  
 
-TODOS:
-
-[CI-CD Setup] setup steps for secret manager (for this step, please let me know (Altay) so that I can add steps here)
-
 ## Setup steps for slack integration
 
 ### Prereqisites
@@ -295,5 +320,3 @@ TODOS:
    ```bash
    gcloud functions deploy subscribe --stage-bucket [BUCKET_NAME] --runtime=nodejs18 --trigger-topic cloud-builds
    ```
-
-[CI-CD Setup] setup steps for cloud build
