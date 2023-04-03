@@ -13,7 +13,7 @@ import ReactModal from "react-modal";
 import { useAppDispatch, useAppSelector } from "~/redux/hooks";
 import { setSelectedPost } from "~/redux/slices/posts";
 import { userPathToProfile } from "~/utils/profile";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 import { Spinner } from "./Spinner";
 
 export const CommentModal: React.FC = () => {
@@ -29,8 +29,8 @@ export const CommentModal: React.FC = () => {
 
   // If we're navigating away from this page, make sure we close the Modal
   useEffect(() => {
-    router.events.on('routeChangeStart', (url, { shallow }) => {
-        setIsOpen(false);
+    router.events.on("routeChangeStart", (url, { shallow }) => {
+      setIsOpen(false);
     });
   }, [router]);
 
@@ -61,7 +61,7 @@ export const CommentModal: React.FC = () => {
   const createCommentMutation = api.comment.create.useMutation({
     onSuccess() {
       return Promise.all([
-        utils.blogPost.getOne.invalidate(),
+        utils.blogPost.invalidate(),
         utils.comment.count.invalidate(),
       ]);
     },
@@ -76,15 +76,17 @@ export const CommentModal: React.FC = () => {
   };
 
   const handlePostButtonClick = () => {
-    createCommentMutation.mutate({
-      data: {
-        userId: currUser?.data?.id ?? "",
-        blogPostId: post?.data?.id ?? "",
-        content: input,
-      },
-    });
+    if (input) {
+      createCommentMutation.mutate({
+        data: {
+          userId: currUser?.data?.id ?? "",
+          blogPostId: post?.data?.id ?? "",
+          content: input,
+        },
+      });
 
-    setInput("");
+      setInput("");
+    }
   };
 
   return (
@@ -185,12 +187,12 @@ export const CommentModal: React.FC = () => {
                 <div className="mb-[-10px] flex justify-end gap-2">
                   <button
                     className={`${
-                      userId
-                        ? " border-highlight-green bg-highlight-green "
-                        : "input-disabled cursor-not-allowed bg-gray-400 text-black"
+                      !userId || !input
+                        ? "input-disabled cursor-not-allowed bg-gray-400 text-black"
+                        : " border-highlight-green bg-highlight-green "
                     } mt-[0.5rem] h-10 rounded-sm px-5`}
                     onClick={handlePostButtonClick}
-                    disabled={userId ? false : true}
+                    disabled={!userId || !input ? true : false}
                   >
                     Post
                   </button>
