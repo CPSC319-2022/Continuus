@@ -166,7 +166,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
 
               <div className="ml-3 flex">
                 <p className="self-center">
-                  {highlighter(name as string, debouncedUsersVal)}
+                  {highlighter(name, debouncedUsersVal)}
                 </p>
               </div>
             </Link>

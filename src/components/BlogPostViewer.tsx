@@ -79,7 +79,7 @@ export const BlogPostViewer: React.FC<BlogPostViewerProps> = ({ user }) => {
                   createdAt={createdAt}
                   content={content}
                   comments={(comments as Comment[]).length}
-                  authorName={user.name as string}
+                  authorName={user.name}
                   imgUrl={user.image}
                 />
               </div>
