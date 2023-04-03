@@ -122,9 +122,11 @@ export const userRouter = createTRPCRouter({
       password: z.string().min(4).max(12),
     }))
     .mutation(async ({ ctx, input }) => {
+      const lowerCaseInputEmail = input.email.toLowerCase();
+
       const exists = await ctx.prisma.user.findFirst({
         where: {
-          email: input.email
+          email: lowerCaseInputEmail
         }
       });
 
@@ -142,7 +144,7 @@ export const userRouter = createTRPCRouter({
       const createdUser = await ctx.prisma.user.create({
         data: {
           name: input.name,
-          email: input.email,
+          email: lowerCaseInputEmail,
           password: hashedPassword,
         },
       });

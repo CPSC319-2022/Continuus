@@ -90,7 +90,7 @@ export const authOptions: NextAuthOptions = {
 
         const user = await prisma.user.findFirst({
           where: {
-            email: parsedCreds.data.email
+            email: parsedCreds.data.email.toLowerCase()
           },
         });
 
