@@ -115,7 +115,7 @@ export const CommentModal: React.FC = () => {
                   </div>
                   <div className="ml-3">
                     <ProfileName
-                      name={post.data.user.name} userId={post.data.userId}
+                      name={post.data.user.name || ""} userId={post.data.userId}
                     />
                     <p className="text-sm text-gray-400">{`${timeAgo(
                       post.data.createdAt

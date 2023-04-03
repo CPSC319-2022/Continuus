@@ -186,6 +186,7 @@ export const Comment: React.FC<CommentProps> = ({
             ) : isEditing ? (
               <div className="mt-3 p-2">
                 <input
+                  autoFocus
                   type="text"
                   placeholder="Can't be empty!"
                   value={editInput}
