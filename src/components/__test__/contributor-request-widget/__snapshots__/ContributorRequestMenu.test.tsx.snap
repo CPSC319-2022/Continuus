@@ -10,23 +10,23 @@ exports[`Contributor Request Menu: Snapshot > render menu open with 2 requests 1
 <body>
   <div>
     <div
-      class="absolute right-5 top-10 max-h-[30rem] min-w-[18rem] rounded-md bg-white p-3 shadow-lg"
+      class="absolute right-0 md:right-5 top-12 w-full max-h-96 md:w-96 rounded-md bg-white p-3 shadow border"
     >
       <div
-        class="scrollbar-hide max-h-[28rem] overflow-auto overflow-x-hidden"
+        class="scrollbar-hide max-h-80 overflow-auto overflow-x-hidden"
       >
         <div
           class="sticky top-0 bg-white"
         >
           <p
-            class="text-lg"
+            class="text-lg mb-2"
           >
             Contributor Requests
           </p>
           <hr />
         </div>
         <div
-          class="my-2 flex justify-between"
+          class="py-2 flex justify-between border-b"
         >
           <div
             class="flex"
@@ -37,7 +37,7 @@ exports[`Contributor Request Menu: Snapshot > render menu open with 2 requests 1
             >
               <img
                 alt="avatar"
-                class="inline-block aspect-square rounded-[50%] self-center"
+                class="inline-block aspect-square rounded-[50%] self-center mt-1"
                 src="image"
                 style="width: 2rem;"
               />
@@ -49,7 +49,7 @@ exports[`Contributor Request Menu: Snapshot > render menu open with 2 requests 1
                 test user 1
               </p>
               <p
-                class="text-xs"
+                class="text-xs text-gray-400"
               >
                 0 seconds ago
               </p>
@@ -59,7 +59,7 @@ exports[`Contributor Request Menu: Snapshot > render menu open with 2 requests 1
             class="mr-1 flex self-center"
           >
             <div
-              class="mx-1 rounded-md bg-highlight-green p-1 hover:cursor-pointer hover:shadow-md"
+              class="mx-2 scale-110 rounded-md bg-highlight-green p-1 hover:cursor-pointer hover:scale-125 hover:bg-gray-700 hover:fill-highlight-green transition-all"
             >
               <div>
                 <svg
@@ -75,7 +75,7 @@ exports[`Contributor Request Menu: Snapshot > render menu open with 2 requests 1
               </div>
             </div>
             <div
-              class="mx-1 rounded-md bg-slate-200 p-1 hover:cursor-pointer hover:shadow-md"
+              class="mx-2 scale-110 rounded-md bg-gray-200 p-1 hover:cursor-pointer hover:scale-125 hover:bg-highlight-red hover:fill-white transition-all"
             >
               <div>
                 <svg
@@ -93,7 +93,7 @@ exports[`Contributor Request Menu: Snapshot > render menu open with 2 requests 1
           </div>
         </div>
         <div
-          class="my-2 flex justify-between"
+          class="py-2 flex justify-between border-b"
         >
           <div
             class="flex"
@@ -104,7 +104,7 @@ exports[`Contributor Request Menu: Snapshot > render menu open with 2 requests 1
             >
               <img
                 alt="avatar"
-                class="inline-block aspect-square rounded-[50%] self-center"
+                class="inline-block aspect-square rounded-[50%] self-center mt-1"
                 src="image"
                 style="width: 2rem;"
               />
@@ -116,7 +116,7 @@ exports[`Contributor Request Menu: Snapshot > render menu open with 2 requests 1
                 test user 2
               </p>
               <p
-                class="text-xs"
+                class="text-xs text-gray-400"
               >
                 0 seconds ago
               </p>
@@ -126,7 +126,7 @@ exports[`Contributor Request Menu: Snapshot > render menu open with 2 requests 1
             class="mr-1 flex self-center"
           >
             <div
-              class="mx-1 rounded-md bg-highlight-green p-1 hover:cursor-pointer hover:shadow-md"
+              class="mx-2 scale-110 rounded-md bg-highlight-green p-1 hover:cursor-pointer hover:scale-125 hover:bg-gray-700 hover:fill-highlight-green transition-all"
             >
               <div>
                 <svg
@@ -142,7 +142,7 @@ exports[`Contributor Request Menu: Snapshot > render menu open with 2 requests 1
               </div>
             </div>
             <div
-              class="mx-1 rounded-md bg-slate-200 p-1 hover:cursor-pointer hover:shadow-md"
+              class="mx-2 scale-110 rounded-md bg-gray-200 p-1 hover:cursor-pointer hover:scale-125 hover:bg-highlight-red hover:fill-white transition-all"
             >
               <div>
                 <svg
@@ -169,16 +169,16 @@ exports[`Contributor Request Menu: Snapshot > render menu open with no requests 
 <body>
   <div>
     <div
-      class="absolute right-5 top-10 max-h-[30rem] min-w-[18rem] rounded-md bg-white p-3 shadow-lg"
+      class="absolute right-0 md:right-5 top-12 w-full max-h-96 md:w-96 rounded-md bg-white p-3 shadow border"
     >
       <div
-        class="scrollbar-hide max-h-[28rem] overflow-auto overflow-x-hidden"
+        class="scrollbar-hide max-h-80 overflow-auto overflow-x-hidden"
       >
         <div
           class="sticky top-0 bg-white"
         >
           <p
-            class="text-lg"
+            class="text-lg mb-2"
           >
             Contributor Requests
           </p>
