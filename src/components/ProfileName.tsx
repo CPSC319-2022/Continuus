@@ -8,14 +8,17 @@ interface ProfileNameProps {
   userId: string;
 }
 
-export const ProfileName: React.FC<ProfileNameProps> = ({ name, userId }) => {
+export const ProfileName: React.FC<ProfileNameProps> = ({
+  name,
+  userId,
+ }) => {
   const dispatch = useAppDispatch();
   return (
     <Link
       href={userPathToProfile(userId)}
       onClick={() => dispatch(setSelectedPost(null))}
     >
-      <p className="text-lg font-bold">{name}</p>
+      <p className="text-lg font-bold hover:underline">{name}</p>
     </Link>
   );
 };

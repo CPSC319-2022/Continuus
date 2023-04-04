@@ -4,13 +4,13 @@ exports[`Snapshot: Comment > render comment 1`] = `
 <body>
   <div>
     <div
-      class="m-3 rounded-md bg-slate-100 p-4"
+      class="relative m-3 rounded-md border-b p-4"
     >
       <div
         class="flex"
       >
         <div
-          class="avatar self-center"
+          class="avatar self-center hover:scale-110 transition-all"
         >
            
           <a
@@ -31,13 +31,13 @@ exports[`Snapshot: Comment > render comment 1`] = `
             href="/profile/test-user-id"
           >
             <p
-              class="text-lg font-bold"
+              class="text-lg font-bold hover:underline"
             >
               Test User
             </p>
           </a>
           <p
-            class="text-sm text-slate-400"
+            class="text-sm tex-gray-400"
           >
             0 seconds ago
           </p>
@@ -67,13 +67,13 @@ exports[`Snapshot: Comment > render comment updated 1`] = `
 <body>
   <div>
     <div
-      class="m-3 rounded-md bg-slate-100 p-4"
+      class="relative m-3 rounded-md border-b p-4"
     >
       <div
         class="flex"
       >
         <div
-          class="avatar self-center"
+          class="avatar self-center hover:scale-110 transition-all"
         >
            
           <a
@@ -94,13 +94,13 @@ exports[`Snapshot: Comment > render comment updated 1`] = `
             href="/profile/test-user-id"
           >
             <p
-              class="text-lg font-bold"
+              class="text-lg font-bold hover:underline"
             >
               Test User
             </p>
           </a>
           <p
-            class="text-sm text-slate-400"
+            class="text-sm tex-gray-400"
           >
             0 seconds ago
           </p>
