@@ -22,6 +22,10 @@ vi.mock("next-auth/react", () => ({
 }));
 
 const setup = () => {
+  vi.doMock("~/utils/time", () => ({
+    timeAgo: () => "1 second ago",
+  }));
+
   vi.doMock("~/utils/api", () => ({
     api: {
       user: {
@@ -138,8 +142,8 @@ describe("Profile tabbed view: Snapshot", () => {
     const commentTab = screen.getByTestId("tab-comment-viewer");
     await userEvent.click(commentTab);
     await waitFor(() => {
-      expect(screen.getByTestId("comment-viewer")).toBeTruthy()
-    })
+      expect(screen.getByTestId("comment-viewer")).toBeTruthy();
+    });
     expect(body.baseElement).toMatchSnapshot();
   });
 });

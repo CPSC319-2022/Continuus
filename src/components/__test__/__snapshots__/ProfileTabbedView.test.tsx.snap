@@ -329,7 +329,7 @@ exports[`Profile tabbed view: Snapshot > should render profile tabbed view in bl
             <span
               class="text-grey-400"
             >
-              0 seconds ago
+              1 second ago
             </span>
           </p>
         </div>
@@ -457,7 +457,7 @@ exports[`Profile tabbed view: Snapshot > should render profile tabbed view in bl
                           <p
                             class="text-sm text-gray-400"
                           >
-                            0 seconds ago
+                            1 second ago
                           </p>
                         </div>
                       </div>
@@ -540,7 +540,7 @@ exports[`Profile tabbed view: Snapshot > should render profile tabbed view in bl
                           <p
                             class="text-sm text-gray-400"
                           >
-                            0 seconds ago
+                            1 second ago
                           </p>
                         </div>
                       </div>
@@ -623,7 +623,7 @@ exports[`Profile tabbed view: Snapshot > should render profile tabbed view in bl
                           <p
                             class="text-sm text-gray-400"
                           >
-                            0 seconds ago
+                            1 second ago
                           </p>
                         </div>
                       </div>
@@ -711,7 +711,7 @@ exports[`Profile tabbed view: Snapshot > should render profile tabbed view in co
             <span
               class="text-grey-400"
             >
-              0 seconds ago
+              1 second ago
             </span>
           </p>
         </div>
@@ -850,7 +850,7 @@ exports[`Profile tabbed view: Snapshot > should render profile tabbed view in co
                     <p
                       class="text-gray-400 text-sm"
                     >
-                      0 seconds ago
+                      1 second ago
                     </p>
                   </div>
                 </div>
@@ -918,7 +918,7 @@ exports[`Profile tabbed view: Snapshot > should render profile tabbed view in co
                     <p
                       class="text-gray-400 text-sm"
                     >
-                      0 seconds ago
+                      1 second ago
                     </p>
                   </div>
                 </div>
