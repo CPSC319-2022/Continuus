@@ -5,7 +5,7 @@ resource "google_cloudbuild_trigger" "build-trigger" {
     name  = "Continuus"
     //Events section  
     push {
-      branch = ".*"
+      branch = "arun_terraform_test"
     }
   }
   ignored_files = [".gitignore"]
