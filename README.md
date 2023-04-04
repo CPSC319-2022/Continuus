@@ -112,6 +112,24 @@ git push -u origin dev
 
 5. The repo will **NOT** have the 'qa' and 'prod' branches by default, so feel free to create them now or later.
 
+### Setting up branch protoction rules
+
+We designed the CI/CD pipeline around a development workflow that uses branch rules to stop regression. This setup is optional, but recommended strongly
+
+1. Follow the [GitHub guideline](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/managing-a-branch-protection-rule#creating-a-branch-protection-rule) to create branch rules, with branch name patterns:
+   1. `**/**`
+      - Applies to all feature branches
+      - Allow force pushes for everyone
+      - Allow deletions
+   2. `dev`, `qa` and `prod`
+      - Create a new rule for each of these branches
+      - Require a pull request before merging & Require approvals of at least 1 person (depending on your team size)
+      - Require status checks to pass before merging & Require branches to be up to date before merging
+        - Add the Google Cloud Build status checks as required, if you don't have them listed here, come back to this step later when you have the CI/CD setup finished
+      - Require conversation resolution before merging
+      - Do not allow bypassing the above settings
+
+
 ## Cloud Database Setup
 
 ### Creating a Postgres DB Instance on Google Cloud
