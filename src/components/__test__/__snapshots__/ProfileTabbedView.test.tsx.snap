@@ -795,138 +795,142 @@ exports[`Profile tabbed view: Snapshot > should render profile tabbed view in co
           role="tabpanel"
         >
           <div
-            class="w-full mb-6 p-6 border rounded-md shadow-md"
+            data-testid="comment-viewer"
           >
             <div
-              class="mb-2 flex border-b"
+              class="w-full mb-6 p-6 border rounded-md shadow-md"
             >
               <div
-                class="mb-2"
-              >
-                Commented on
-              </div>
-              <div
-                class="mb-2 ml-1 font-bold cursor-pointer"
-              >
-                test blog post
-              </div>
-            </div>
-            <div
-              class="relative m-3 rounded-md border-b p-4"
-            >
-              <div
-                class="flex"
+                class="mb-2 flex border-b"
               >
                 <div
-                  class="avatar self-center transition-all hover:scale-110"
+                  class="mb-2"
                 >
-                   
-                  <a
-                    href="/"
-                  >
-                    <img
-                      alt="avatar"
-                      class="inline-block aspect-square rounded-[50%] "
-                      src="image"
-                      style="width: 2.5rem;"
-                    />
-                  </a>
+                  Commented on
                 </div>
                 <div
-                  class="ml-3"
+                  class="mb-2 ml-1 font-bold cursor-pointer"
                 >
-                  <a
-                    href="/"
+                  test blog post
+                </div>
+              </div>
+              <div
+                class="relative m-3 rounded-md border-b p-4"
+              >
+                <div
+                  class="flex"
+                >
+                  <div
+                    class="avatar self-center transition-all hover:scale-110"
                   >
-                    <p
-                      class="text-lg font-bold hover:underline"
+                     
+                    <a
+                      href="/"
                     >
-                      test user 2
-                    </p>
-                  </a>
-                  <p
-                    class="tex-gray-400 text-sm"
+                      <img
+                        alt="avatar"
+                        class="inline-block aspect-square rounded-[50%] "
+                        src="image"
+                        style="width: 2.5rem;"
+                      />
+                    </a>
+                  </div>
+                  <div
+                    class="ml-3"
                   >
-                    0 seconds ago
+                    <a
+                      href="/"
+                    >
+                      <p
+                        class="text-lg font-bold hover:underline"
+                      >
+                        test user 2
+                      </p>
+                    </a>
+                    <p
+                      class="tex-gray-400 text-sm"
+                    >
+                      0 seconds ago
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="break-words"
+                >
+                  <p
+                    class="mt-4 w-full"
+                  >
+                    test comment
                   </p>
                 </div>
               </div>
-              <div
-                class="break-words"
-              >
-                <p
-                  class="mt-4 w-full"
-                >
-                  test comment
-                </p>
-              </div>
-            </div>
-          </div>
-          <div
-            class="w-full mb-6 p-6 border rounded-md shadow-md"
-          >
-            <div
-              class="mb-2 flex border-b"
-            >
-              <div
-                class="mb-2"
-              >
-                Commented on
-              </div>
-              <div
-                class="mb-2 ml-1 font-bold cursor-pointer"
-              >
-                test blog post
-              </div>
             </div>
             <div
-              class="relative m-3 rounded-md border-b p-4"
+              class="w-full mb-6 p-6 border rounded-md shadow-md"
             >
               <div
-                class="flex"
+                class="mb-2 flex border-b"
               >
                 <div
-                  class="avatar self-center transition-all hover:scale-110"
+                  class="mb-2"
                 >
-                   
-                  <a
-                    href="/"
-                  >
-                    <img
-                      alt="avatar"
-                      class="inline-block aspect-square rounded-[50%] "
-                      src="image"
-                      style="width: 2.5rem;"
-                    />
-                  </a>
+                  Commented on
                 </div>
                 <div
-                  class="ml-3"
+                  class="mb-2 ml-1 font-bold cursor-pointer"
                 >
-                  <a
-                    href="/"
+                  test blog post
+                </div>
+              </div>
+              <div
+                class="relative m-3 rounded-md border-b p-4"
+              >
+                <div
+                  class="flex"
+                >
+                  <div
+                    class="avatar self-center transition-all hover:scale-110"
                   >
-                    <p
-                      class="text-lg font-bold hover:underline"
+                     
+                    <a
+                      href="/"
                     >
-                      test user 3
-                    </p>
-                  </a>
-                  <p
-                    class="tex-gray-400 text-sm"
+                      <img
+                        alt="avatar"
+                        class="inline-block aspect-square rounded-[50%] "
+                        src="image"
+                        style="width: 2.5rem;"
+                      />
+                    </a>
+                  </div>
+                  <div
+                    class="ml-3"
                   >
-                    0 seconds ago
+                    <a
+                      href="/"
+                    >
+                      <p
+                        class="text-lg font-bold hover:underline"
+                      >
+                        test user 3
+                      </p>
+                    </a>
+                    <p
+                      class="tex-gray-400 text-sm"
+                    >
+                      0 seconds ago
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="break-words"
+                >
+                  <p
+                    class="mt-4 w-full"
+                  >
+                    test comment
                   </p>
                 </div>
-              </div>
-              <div
-                class="break-words"
-              >
-                <p
-                  class="mt-4 w-full"
-                >
-                  test comment
-                </p>
               </div>
             </div>
           </div>

@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import { renderWithProviders } from "./utils";
 import userEvent from "@testing-library/user-event";
 import { adminUser, blogPosts } from "./BlogPostViewer.test";
@@ -137,6 +137,9 @@ describe("Profile tabbed view: Snapshot", () => {
     const body = renderWithProviders(<ProfileTabbedView {...props} />);
     const commentTab = screen.getByTestId("tab-comment-viewer");
     await userEvent.click(commentTab);
+    await waitFor(() => {
+      expect(screen.getByTestId("comment-viewer")).toBeTruthy()
+    })
     expect(body.baseElement).toMatchSnapshot();
   });
 });

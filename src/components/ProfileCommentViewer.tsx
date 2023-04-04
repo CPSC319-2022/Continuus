@@ -43,7 +43,7 @@ export const ProfileCommentViewer: React.FC<ProfileCommentViewerProps> = ({
 
     const dispatch = useAppDispatch();
 
-    return (<>
+    return (<div data-testid="comment-viewer">
         {status === 'loading' ? <Spinner size={2}/>
         : commentsQueryResults?.pages.map((page) => 
                                           page.items.map((comment) =>
@@ -70,6 +70,6 @@ export const ProfileCommentViewer: React.FC<ProfileCommentViewerProps> = ({
                 <Spinner size={2}/>
             </div>
         )}
-        </>
+        </div>
     );
 };
