@@ -5,9 +5,11 @@ import userEvent from "@testing-library/user-event";
 import { adminUser, blogPosts } from "./BlogPostViewer.test";
 import { mockComments } from "./CommentModal.test";
 
+const someDate = new Date();
+
 const props = {
   userId: "test-id",
-  createdAt: new Date(),
+  createdAt: someDate,
   name: "test user",
   imgUrl: "image",
 };
@@ -84,8 +86,8 @@ const setup = () => {
               id: "comment-1",
               blogPostId: "post-1",
               content: "test comment",
-              createdAt: new Date(),
-              updatedAt: new Date(),
+              createdAt: someDate,
+              updatedAt: someDate,
               user: {
                 name: "test user 2",
                 id: "user-2",
