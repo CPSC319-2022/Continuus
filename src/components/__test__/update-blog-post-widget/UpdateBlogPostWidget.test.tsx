@@ -1,10 +1,9 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { cleanup, render, screen, waitFor } from "@testing-library/react";
-import { CommentProps } from "~/components/Comment";
 import userEvent from "@testing-library/user-event";
 import { renderWithProviders } from "../utils";
 
-const setup = () => {
+const setup = (isSuccess: boolean) => {
   vi.mock("next-auth/react", () => ({
     useSession: () => ({
       data: {
@@ -20,7 +19,7 @@ const setup = () => {
         update: {
           useMutation: () => ({
             onSuccess: vi.fn(),
-            isSuccess: true,
+            isSuccess,
           }),
         },
       },
@@ -61,7 +60,7 @@ describe("Update Blog Post Widget: Snapshot", () => {
   });
 
   it("render widget", async () => {
-    setup();
+    setup(false);
     const { UpdateBlogPostWidget } = await import(
       "~/components/update-blog-post-widget/UpdateBlogPostWidget"
     );
@@ -71,8 +70,18 @@ describe("Update Blog Post Widget: Snapshot", () => {
     expect(body).toMatchSnapshot();
   });
 
-  it("render widget click button", async () => {
-    setup();
+  it("update not successful", async () => {
+    setup(false);
+    const { UpdateBlogPostWidget } = await import(
+      "~/components/update-blog-post-widget/UpdateBlogPostWidget"
+    );
+    const body = renderWithProviders(<UpdateBlogPostWidget {...props} />);
+    await userEvent.click(screen.getByTestId("update-blog-post-button"));
+    expect(body.baseElement).toMatchSnapshot();
+  });
+
+  it("update successful", async () => {
+    setup(true);
     const { UpdateBlogPostWidget } = await import(
       "~/components/update-blog-post-widget/UpdateBlogPostWidget"
     );

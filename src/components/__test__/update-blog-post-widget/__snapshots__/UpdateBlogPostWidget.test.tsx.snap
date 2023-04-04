@@ -17,7 +17,7 @@ exports[`Update Blog Post Widget: Snapshot > render widget 1`] = `
 </body>
 `;
 
-exports[`Update Blog Post Widget: Snapshot > render widget click button 1`] = `
+exports[`Update Blog Post Widget: Snapshot > update not successful 1`] = `
 <body
   class="ReactModal__Body--open"
 >
@@ -25,6 +25,92 @@ exports[`Update Blog Post Widget: Snapshot > render widget click button 1`] = `
     data-react-modal-body-trap=""
     style="position: absolute; opacity: 0;"
     tabindex="0"
+  />
+  <div>
+    <div
+      data-testid="update-blog-post-button"
+    >
+      <span>
+        Edit
+      </span>
+    </div>
+  </div>
+  <div
+    class="ReactModalPortal"
+  >
+    <div
+      class="ReactModal__Overlay fixed inset-0 z-20 bg-black/75"
+    >
+      <div
+        aria-label="Blog Post Input"
+        aria-modal="true"
+        class="ReactModal__Content absolute top-1/2 left-1/2 z-40 w-11/12 -translate-x-1/2 -translate-y-1/2 rounded-md bg-white md:w-1/2 p-4"
+        role="dialog"
+        tabindex="-1"
+      >
+        <div
+          class="flex pb-3 w-full flex-row items-center justify-between border-b border-b-gray-200 pl-4 pr-4"
+        >
+          <div
+            class="font-semibold"
+          >
+            Update
+             Blog Post
+          </div>
+          <button
+            class="rounded-full transition-colors after:content-['\\\\2715'] hover:text-highlight-red hover:scale-125 transition-all"
+          />
+        </div>
+        <form>
+          <div
+            class="flex flex-row items-start py-4"
+          >
+            <div
+              class="ml-2 flex w-full flex-col"
+            >
+              <input
+                class="mb-4 w-full rounded-md p-2 text-2xl font-bold"
+                placeholder="Write title here"
+                type="text"
+                value="Test"
+              />
+              <textarea
+                class="h-96 w-full resize-none rounded-md p-2"
+                placeholder="Write your blog post here"
+              >
+                test
+              </textarea>
+            </div>
+          </div>
+          <input
+            class="relative left-full h-10 w-32 -translate-x-full rounded-md border bg-highlight-green text-center text-gray-700 transition-all hover:cursor-pointer hover:bg-gray-700 hover:text-white"
+            data-testid="submit-update-post"
+            type="submit"
+            value="Update"
+          />
+        </form>
+      </div>
+    </div>
+  </div>
+  <div
+    data-react-modal-body-trap=""
+    style="position: absolute; opacity: 0;"
+    tabindex="0"
+  />
+</body>
+`;
+
+exports[`Update Blog Post Widget: Snapshot > update successful 1`] = `
+<body
+  class="ReactModal__Body--open"
+>
+  <div
+    data-react-modal-body-trap=""
+    style="position: absolute; opacity: 0;"
+    tabindex="0"
+  />
+  <div
+    class="ReactModalPortal"
   />
   <div>
     <div
