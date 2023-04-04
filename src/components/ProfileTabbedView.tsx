@@ -33,7 +33,7 @@ export const ProfileTabbedView: React.FC<ProfileTabbedViewProps> = ({
   ];
 
   return (
-    <div className="mt-4 flex min-h-screen w-full flex-col content-center items-center px-2 md:px-0">
+    <div className="mt-4 flex min-h-screen w-full flex-col content-center items-center pb-24 md:px-0">
       <ProfileCard
         dateJoined={createdAt}
         name={name}
@@ -48,13 +48,13 @@ export const ProfileTabbedView: React.FC<ProfileTabbedViewProps> = ({
       >
         <TabList className="mb-3 flex flex-row justify-start">
           <Tab
-            className="w-32 cursor-pointer border-b-4 border-solid border-gray-200 p-4 text-center transition-all hover:border-b-highlight-green hover:font-bold"
+            className="w-1/2 md:w-32 cursor-pointer border-b-4 border-solid border-gray-200 p-4 text-center transition-all hover:border-b-highlight-green hover:font-bold"
             selectedClassName="border-b-4 border-solid border-b-highlight-green font-bold"
           >
             {headers[0]?.label ?? ""}
           </Tab>
           <Tab
-            className="w-32 cursor-pointer border-b-4 border-solid border-gray-200 p-4 text-center transition-all hover:border-b-highlight-green hover:font-bold"
+            className="w-1/2 md:w-32 cursor-pointer border-b-4 border-solid border-gray-200 p-4 text-center transition-all hover:border-b-highlight-green hover:font-bold"
             selectedClassName="border-b-4 border-solid border-b-highlight-green font-bold"
           >
             {headers[1]?.label ?? ""}

@@ -21,7 +21,7 @@ export const ProfileMenu: React.FC = () => {
       align="end"
       aria-label="Profile"
       offsetY={2}
-      menuClassName="bg-white w-48 rounded-md border shadow-md"
+      menuClassName="bg-white w-screen md:w-48 rounded-md border shadow-md"
     >
       <MenuItem
         className={menuItemClassName}
@@ -36,7 +36,6 @@ export const ProfileMenu: React.FC = () => {
       >
         Sign-Out
       </MenuItem>
-
     </Menu>
   );
 };
