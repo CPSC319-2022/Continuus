@@ -11,9 +11,23 @@ terraform {
     }
   }
 }
+
 provider "google" {
   project = "automatic-bot-376307"
   region  = "northamerica-northeast2"
   zone    = "northamerica-northeast2-a"
 }
 
+resource "random_id" "bucket_prefix" {
+  byte_length = 8
+}
+
+resource "google_storage_bucket" "default" {
+  name          = "${random_id.bucket_prefix.hex}-bucket-tfstate"
+  force_destroy = false
+  location      = "NORTHAMERICA-NORTHEAST2"
+  storage_class = "STANDARD"
+  versioning {
+    enabled = true
+  }
+}
