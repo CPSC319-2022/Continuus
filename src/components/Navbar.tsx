@@ -13,14 +13,16 @@ export const Navbar: React.FC = () => {
   const router = useRouter();
 
   return (
-    <div className="flex h-full justify-between border-b border-b-gray-200 p-2">
+    <div className="flex h-full justify-between border-b border-b-gray-200 p-6">
       <Link href="/" className="self-center text-xl font-bold">
         Continuus
       </Link>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-6">
         <RequestAccessButton />
-        <ContributorRequestWidget />
-        <SearchIcon />
+        <ContributorRequestWidget/>
+        <div className="hover:fill-highlight-green transition-all">
+          <SearchIcon/>
+        </div>
         {
           status === "loading" ?
             <Spinner size={2} />
@@ -31,7 +33,7 @@ export const Navbar: React.FC = () => {
                 :
                 <Link href={`/auth/signinup?redirect=${router.asPath}`}>
                   <button className="rounded-full w-8 h-8">
-                    <FiLogIn className="w-8 h-8" />
+                  <FiLogIn className="scale-125 hover:stroke-highlight-green transition-all" />
                   </button>
                 </Link>
             )

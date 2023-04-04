@@ -6,7 +6,7 @@ import { CurrUserProfilePicture } from "./CurrUserProfilePicture";
 import Link from "next/link";
 
 export const ProfileMenu: React.FC = () => {
-  const menuItemClassName = "w-full px-4 py-2 cursor-pointer text-center hover:bg-gray-200";
+  const menuItemClassName = "w-full px-6 py-3 cursor-pointer text-left hover:bg-gray-200 transition-all";
   const currUser = api.user.currentUser.useQuery();
   const profile: string = userPathToProfile(currUser.data?.id || '');
 
@@ -20,7 +20,7 @@ export const ProfileMenu: React.FC = () => {
       align="end"
       aria-label="Profile"
       offsetY={2}
-      menuClassName="bg-white w-48 rounded-md border border-solid border-gray-400 py-2"
+      menuClassName="bg-white w-screen md:w-48 rounded-md border shadow-md"
     >
       <Link href={profile}>
         <MenuItem
@@ -37,7 +37,6 @@ export const ProfileMenu: React.FC = () => {
       >
         Sign-Out
       </MenuItem>
-
     </Menu>
   );
 };

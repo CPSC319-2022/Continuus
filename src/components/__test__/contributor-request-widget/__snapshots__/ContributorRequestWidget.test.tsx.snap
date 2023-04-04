@@ -5,7 +5,7 @@ exports[`Contributor Request Menu: Snapshot > render as admin 1`] = `
   <div>
     <div>
       <div
-        class="hover:cursor-pointer"
+        class="hover:cursor-pointer hover:fill-highlight-green transition-all"
       >
         <svg
           height="24"
