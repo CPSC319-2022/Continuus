@@ -83,7 +83,7 @@ jobs:
   cleanup:
     name: Cleanup Test Artifacts
     runs-on: ubuntu-latest
-    needs: [unit-test, integration-test, coverage-test]
+    needs: [unit-test, integration-test]
     steps:
     - uses: actions/checkout@v3
     - id: 'auth'
