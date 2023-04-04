@@ -42,11 +42,15 @@ jobs:
         if: github.event_name == 'pull_request'
         run: terraform plan -no-color -input=false
         continue-on-error: true
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.TF_GCP_CREDENTIALS }}
+
 
       - name: Update Pull Request
         uses: actions/github-script@v6
         if: github.event_name == 'pull_request'
         env:
+          GOOGLE_CREDENTIALS: ${{ secrets.TF_GCP_CREDENTIALS }}
           PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
