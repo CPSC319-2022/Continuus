@@ -202,7 +202,7 @@ describe("Snapshot: CreateBlogPostWidget", () => {
         expect(body).toMatchSnapshot();
     });
 
-    it.skip("Authorized & Mutation is done", async () => {
+    it("Authorized & Mutation is done", async () => {
       const blogPostCreateMutation = vi.fn(
         ({ onSuccess }: { onSuccess: () => void }) => {
           onSuccess();
@@ -216,6 +216,8 @@ describe("Snapshot: CreateBlogPostWidget", () => {
       const invalidateBlogPostCount = vi.fn();
       const invalidateBlogPostGet = vi.fn();
 
+      const date = new Date();
+
       setup({
         api: {
           user: {
@@ -228,8 +230,8 @@ describe("Snapshot: CreateBlogPostWidget", () => {
                   image: "c",
                   emailVerified: null,
                   role: "ADMIN",
-                  createdAt: new Date(),
-                  updatedAt: new Date(),
+                  createdAt: date,
+                  updatedAt: date,
                 },
                 isLoading: false,
               }),
