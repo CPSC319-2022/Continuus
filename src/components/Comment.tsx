@@ -149,7 +149,7 @@ export const Comment: React.FC<CommentProps> = ({
               </div>
               <div className="ml-3">
                 <ProfileName name={name || ""} userId={userId} />
-                <p className="tex-gray-400 text-sm">
+                <p className="text-gray-400 text-sm">
                   {timeAgo(dateAdded)}
                   {dateAdded.getTime() !== dateUpdated.getTime()
                     ? ` (updated ${timeAgo(dateUpdated)})`

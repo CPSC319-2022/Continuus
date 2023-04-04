@@ -848,7 +848,7 @@ exports[`Profile tabbed view: Snapshot > should render profile tabbed view in co
                       </p>
                     </a>
                     <p
-                      class="tex-gray-400 text-sm"
+                      class="text-gray-400 text-sm"
                     >
                       0 seconds ago
                     </p>
@@ -916,7 +916,7 @@ exports[`Profile tabbed view: Snapshot > should render profile tabbed view in co
                       </p>
                     </a>
                     <p
-                      class="tex-gray-400 text-sm"
+                      class="text-gray-400 text-sm"
                     >
                       0 seconds ago
                     </p>

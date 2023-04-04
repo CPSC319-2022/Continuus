@@ -69,7 +69,7 @@ exports[`Snapshot: Comment > editing comment 1`] = `
             </p>
           </a>
           <p
-            class="tex-gray-400 text-sm"
+            class="text-gray-400 text-sm"
           >
             0 seconds ago
           </p>
@@ -183,7 +183,7 @@ exports[`Snapshot: Comment > render comment 1`] = `
             </p>
           </a>
           <p
-            class="tex-gray-400 text-sm"
+            class="text-gray-400 text-sm"
           >
             0 seconds ago
           </p>
@@ -287,7 +287,7 @@ exports[`Snapshot: Comment > render comment updated 1`] = `
             </p>
           </a>
           <p
-            class="tex-gray-400 text-sm"
+            class="text-gray-400 text-sm"
           >
             0 seconds ago
           </p>
