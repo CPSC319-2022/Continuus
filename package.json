@@ -12,7 +12,7 @@
     "prisma-generate": "npx prisma migrate dev",
     "lint": "next lint",
     "start": "next start",
-    "test": "vitest run",
+    "test": "vitest run --coverage",
     "cov": "vitest run --coverage",
     "db-seed": "NODE_ENV=development prisma db seed",
     "debug": "NODE_OPTIONS='--inspect' next dev"
