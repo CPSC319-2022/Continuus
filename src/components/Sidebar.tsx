@@ -60,7 +60,8 @@ export const Sidebar: React.FC = () => {
           href={path}
           key={path}
           className={`
-          ${path === asPath ? "border-highlight-green" : "border-transparent"} 
+          ${path === asPath ? "border-highlight-green" : "border-gray-200"} 
+          ${path === asPath ? "font-bold" : "font-normal"} 
           flex 
           h-full 
           flex-1
@@ -69,15 +70,15 @@ export const Sidebar: React.FC = () => {
           justify-center
           border-b-4
           border-solid
-          hover:bg-slate-200
-          md:my-2
-          md:h-12
+          hover:font-bold
+          hover:border-highlight-green
+          md:h-14
           md:flex-auto
           md:justify-start
-          md:rounded-r-md 
           md:border-l-4 
           md:border-b-0 
-          md:pl-2
+          md:pl-4
+          transition-all
           `}
         >
           {title}
