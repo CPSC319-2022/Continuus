@@ -57,7 +57,7 @@ exports[`Snapshot: CreateBlogPostButton > Authorized Button 1`] = `
                         "
     >
       <p
-        class="text-center md:text-right"
+        class="p-3 text-center md:text-left"
       >
         You do not have authorization to create posts
       </p>
@@ -65,16 +65,16 @@ exports[`Snapshot: CreateBlogPostButton > Authorized Button 1`] = `
   </div>
   <button
     class="
-                        bg-green-400 hover:after:bg-green-100 hover:before:bg-green-100 hover:after:rotate-90 hover:before:-rotate-90 cursor-pointer 
-                        aspect-square 
+                        bg-highlight-green hover:bg-gray-700 hover:scale-110 bg-highlight-green cursor-pointer transition-all 
+                        aspect-square
                         w-16 
                         rounded-full 
                         after:block 
                         before:block 
                         after:bg-white 
-                        before:bg-white 
+                        before:bg-white
                         after:absolute 
-                        before:absolute 
+                        before:absolute
                         after:top-1/2 
                         before:top-1/2 
                         after:left-1/2 
@@ -151,7 +151,7 @@ exports[`Snapshot: CreateBlogPostButton > Hovering Authorized Button 1`] = `
                         "
     >
       <p
-        class="text-center md:text-right"
+        class="p-3 text-center md:text-left"
       >
         You do not have authorization to create posts
       </p>
@@ -159,16 +159,16 @@ exports[`Snapshot: CreateBlogPostButton > Hovering Authorized Button 1`] = `
   </div>
   <button
     class="
-                        bg-green-400 hover:after:bg-green-100 hover:before:bg-green-100 hover:after:rotate-90 hover:before:-rotate-90 cursor-pointer 
-                        aspect-square 
+                        bg-highlight-green hover:bg-gray-700 hover:scale-110 bg-highlight-green cursor-pointer transition-all 
+                        aspect-square
                         w-16 
                         rounded-full 
                         after:block 
                         before:block 
                         after:bg-white 
-                        before:bg-white 
+                        before:bg-white
                         after:absolute 
-                        before:absolute 
+                        before:absolute
                         after:top-1/2 
                         before:top-1/2 
                         after:left-1/2 
@@ -245,7 +245,7 @@ exports[`Snapshot: CreateBlogPostButton > Hovering Unauthorized Button 1`] = `
                         "
     >
       <p
-        class="text-center md:text-right"
+        class="p-3 text-center md:text-left"
       >
         You do not have authorization to create posts
       </p>
@@ -253,16 +253,16 @@ exports[`Snapshot: CreateBlogPostButton > Hovering Unauthorized Button 1`] = `
   </div>
   <button
     class="
-                        bg-gray-400 cursor-not-allowed 
-                        aspect-square 
+                        bg-gray-200 cursor-not-allowed 
+                        aspect-square
                         w-16 
                         rounded-full 
                         after:block 
                         before:block 
                         after:bg-white 
-                        before:bg-white 
+                        before:bg-white
                         after:absolute 
-                        before:absolute 
+                        before:absolute
                         after:top-1/2 
                         before:top-1/2 
                         after:left-1/2 
@@ -365,7 +365,7 @@ exports[`Snapshot: CreateBlogPostButton > Unauthorized Button 1`] = `
                         "
       >
         <p
-          class="text-center md:text-right"
+          class="p-3 text-center md:text-left"
         >
           You do not have authorization to create posts
         </p>
@@ -373,16 +373,16 @@ exports[`Snapshot: CreateBlogPostButton > Unauthorized Button 1`] = `
     </div>
     <button
       class="
-                        bg-gray-400 cursor-not-allowed 
-                        aspect-square 
+                        bg-gray-200 cursor-not-allowed 
+                        aspect-square
                         w-16 
                         rounded-full 
                         after:block 
                         before:block 
                         after:bg-white 
-                        before:bg-white 
+                        before:bg-white
                         after:absolute 
-                        before:absolute 
+                        before:absolute
                         after:top-1/2 
                         before:top-1/2 
                         after:left-1/2 
