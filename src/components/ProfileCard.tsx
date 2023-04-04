@@ -24,7 +24,7 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({
     });
 
     return(
-        <div className="p-8 bg-white mt-24">
+        <div className="p-8 mt-24">
             <div className="relative">
                 <div className="w-36 h-36 mx-auto rounded-full shadow-md absolute inset-x-0 top-0 -mt-24 flex items-center justify-center">
                     {(nBlogPosts.isLoading || nComments.isLoading) ? 
@@ -37,12 +37,12 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({
             </div>
 
             <div className="mt-20 text-center pb-8">
-                <h1 className="text-4xl font-bold text-gray-700">{name}</h1>
+                <h1 className="text-4xl font-bold">{name}</h1>
                 <p className="mt-3 text-gray-400">joined <span className="text-grey-400">{(dateJoined)? timeAgo(dateJoined) : ''}</span></p>
             </div>
 
             <div className="wx-1/2">
-                <div className="grid grid-cols-2 gap-10 text-center grid-padding-64">
+                <div className="grid grid-cols-2 gap-48 text-center grid-padding-64">
                 <div>
                     {(nBlogPosts.isLoading) ? 
                         <Spinner size={2}/> : 

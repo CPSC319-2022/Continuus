@@ -23,18 +23,17 @@ export const CreateBlogPostForm: React.FC<{
       }}
       aria-label="Create Blog Post Form"
     >
-      <div className="flex flex-row items-start border-b border-b-gray-200 py-6 pl-4 pr-4">
-        <CurrUserProfilePicture size={2.5} />
-        <div className="ml-2 flex w-full flex-col">
+      <div className="py-4 flex flex-row items-start">
+        <div className="flex flex-col w-full ml-2">
           <input
-            className="mb-4 w-full rounded-md bg-gray-100 p-2"
+            className="w-full rounded-md p-2 mb-4 text-2xl font-bold"
             placeholder="Write title here"
             type="text"
             value={title}
             onChange={(event) => setTitle(event.target.value)}
           />
           <textarea
-            className="h-96 w-full resize-none rounded-md bg-gray-100 p-2"
+            className="w-full resize-none rounded-md h-96 p-2"
             placeholder="Write your blog post here"
             value={content}
             onChange={(event) => setContent(event.target.value)}
@@ -44,11 +43,11 @@ export const CreateBlogPostForm: React.FC<{
       <input
         type="submit"
         value="Create"
-        className={`relative left-full -translate-x-full rounded-md px-6 py-2 ${
+        className={`relative left-full -translate-x-full h-10 rounded-md border w-32 text-center text-gray-700 ${
           title && content
-            ? "cursor-pointer bg-emerald-400 hover:text-white"
-            : "disabled cursor-not-allowed bg-gray-400"
-        }  my-2 -ml-4 transition-colors`}
+            ? "bg-highlight-green hover:cursor-pointer hover:bg-gray-700 hover:text-white transition-all"
+            : "disabled cursor-not-allowed bg-gray-200"
+        }`}
       />
     </form>
   );

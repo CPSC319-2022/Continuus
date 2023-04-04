@@ -1,10 +1,10 @@
 import { useRef, useState } from "react";
 import { Spinner } from "../Spinner";
 
-export const CreateBlogPostButton: React.FC<{ onClick?: () => void, unauthorized?: boolean, loading?: boolean }> = ({ onClick, unauthorized, loading }) => {
+export const CreateBlogPostButton: React.FC<{ onClick?: () => void, unauthorized?: boolean, loading?: boolean}> = ({ onClick, unauthorized, loading }) => {
     const [hovered, setHovered] = useState(false);
-    const disabledRoleClassNames = "bg-gray-400 cursor-not-allowed";
-    const enabledRoleClassNames = "bg-green-400 hover:after:bg-green-100 hover:before:bg-green-100 hover:after:rotate-90 hover:before:-rotate-90 cursor-pointer";
+    const disabledRoleClassNames = "bg-gray-200 cursor-not-allowed";
+    const enabledRoleClassNames = "bg-highlight-green hover:bg-gray-700 hover:scale-110 bg-highlight-green cursor-pointer transition-all";
     const tooltipRef = useRef<HTMLDivElement>(null);
 
     return (
@@ -67,7 +67,7 @@ export const CreateBlogPostButton: React.FC<{ onClick?: () => void, unauthorized
                         `}
                                 ref={tooltipRef}
                             >
-                                <p className="text-center md:text-right">You do not have authorization to create posts</p>
+                                <p className="p-3 text-center md:text-left">You do not have authorization to create posts</p>
                             </div>
                         </div>
                         <button
@@ -76,15 +76,15 @@ export const CreateBlogPostButton: React.FC<{ onClick?: () => void, unauthorized
                             onClick={() => !unauthorized && onClick?.()}
                             className={`
                         ${!unauthorized ? enabledRoleClassNames : disabledRoleClassNames} 
-                        aspect-square 
+                        aspect-square
                         w-16 
                         rounded-full 
                         after:block 
                         before:block 
                         after:bg-white 
-                        before:bg-white 
+                        before:bg-white
                         after:absolute 
-                        before:absolute 
+                        before:absolute
                         after:top-1/2 
                         before:top-1/2 
                         after:left-1/2 
