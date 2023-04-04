@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Delete blog post widget: Snapshot > delete successful 1`] = `
+exports[`Delete blog post widget: Snapshot > delete confirmation 1`] = `
 <body
   class="ReactModal__Body--open"
 >
@@ -59,6 +59,82 @@ exports[`Delete blog post widget: Snapshot > delete successful 1`] = `
         <form>
           <input
             class="relative left-full -translate-x-full h-10 rounded-md border bg-highlight-red w-32 text-center text-white hover:cursor-pointer hover:bg-gray-700 transition-all"
+            data-testid="submit-delete"
+            type="submit"
+            value="Delete"
+          />
+        </form>
+      </div>
+    </div>
+  </div>
+  <div
+    data-react-modal-body-trap=""
+    style="position: absolute; opacity: 0;"
+    tabindex="0"
+  />
+</body>
+`;
+
+exports[`Delete blog post widget: Snapshot > execute delete 1`] = `
+<body
+  class="ReactModal__Body--open"
+>
+  <div
+    data-react-modal-body-trap=""
+    style="position: absolute; opacity: 0;"
+    tabindex="0"
+  />
+  <div
+    class="ReactModalPortal"
+  />
+  <div>
+    <div
+      data-testid="delete-blog-post-button"
+    >
+      <span>
+        Delete
+      </span>
+    </div>
+  </div>
+  <div
+    class="ReactModalPortal"
+  >
+    <div
+      class="ReactModal__Overlay ReactModal__Overlay--after-open fixed inset-0 z-20 bg-black/75"
+    >
+      <div
+        aria-label="Blog Post Input"
+        aria-modal="true"
+        class="ReactModal__Content ReactModal__Content--after-open absolute top-1/2 left-1/2 z-40 w-11/12 -translate-x-1/2 -translate-y-1/2 rounded-md bg-white md:w-1/2 p-4"
+        role="dialog"
+        tabindex="-1"
+      >
+        <div
+          class="flex pb-3 w-full flex-row items-center justify-between border-b border-b-gray-200 pl-4 pr-4"
+        >
+          <div
+            class="font-semibold"
+          >
+            Delete
+             Blog Post
+          </div>
+          <button
+            class="rounded-full transition-colors after:content-['\\\\2715'] hover:text-highlight-red hover:scale-125 transition-all"
+          />
+        </div>
+        <div
+          class="flex h-24 w-full items-center justify-center"
+        >
+          <div
+            class="text-lg"
+          >
+            Are you sure you want to delete this post?
+          </div>
+        </div>
+        <form>
+          <input
+            class="relative left-full -translate-x-full h-10 rounded-md border bg-highlight-red w-32 text-center text-white hover:cursor-pointer hover:bg-gray-700 transition-all"
+            data-testid="submit-delete"
             type="submit"
             value="Delete"
           />
@@ -130,6 +206,7 @@ exports[`Delete blog post widget: Snapshot > open widget 1`] = `
         <form>
           <input
             class="relative left-full -translate-x-full h-10 rounded-md border bg-highlight-red w-32 text-center text-white hover:cursor-pointer hover:bg-gray-700 transition-all"
+            data-testid="submit-delete"
             type="submit"
             value="Delete"
           />
