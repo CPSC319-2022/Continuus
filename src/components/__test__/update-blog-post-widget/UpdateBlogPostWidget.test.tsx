@@ -87,6 +87,8 @@ describe("Update Blog Post Widget: Snapshot", () => {
     );
     const body = renderWithProviders(<UpdateBlogPostWidget {...props} />);
     await userEvent.click(screen.getByTestId("update-blog-post-button"));
+    
+    await new Promise ((resolve) => setTimeout(() => resolve(true), 500));
     expect(body.baseElement).toMatchSnapshot();
   });
 });

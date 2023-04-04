@@ -17,6 +17,8 @@ import { userPathToProfile } from "~/utils/profile";
 import { useRouter } from "next/router";
 import { Spinner } from "./Spinner";
 
+{process.env.NODE_ENV !== 'test' ? ReactModal.setAppElement("#__next") : ReactModal.setAppElement("body")}
+
 export const CommentModal: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState<string>("");

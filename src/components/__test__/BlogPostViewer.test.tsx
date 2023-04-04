@@ -2,6 +2,10 @@ import { describe, it, expect, beforeEach, vi } from "vitest";
 import { cleanup } from "@testing-library/react";
 import { renderWithProviders } from "./utils";
 
+vi.mock("~/utils/time.ts", () => ({
+  timeAgo: () => "X seconds ago",
+}));
+
 export const blogPosts = {
   pages: [
     {

@@ -14,6 +14,10 @@ const mockCommentProps: CommentProps = {
   dateUpdated: new Date(),
 };
 
+vi.mock("~/utils/time.ts", () => ({
+  timeAgo: () => "X seconds ago",
+}));
+
 vi.mock("next-auth/react", () => ({
   useSession: () => ({
     data: {

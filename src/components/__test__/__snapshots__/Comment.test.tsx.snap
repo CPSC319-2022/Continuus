@@ -7,7 +7,7 @@ exports[`Snapshot: Comment > deleting comment 1`] = `
       class="mb-4"
     >
       <button
-        class="absolute right-12 rounded-full transition-colors transition-all after:content-['\\\\2715'] hover:scale-125 hover:text-highlight-red"
+        class="absolute right-12 rounded-full transition-all after:content-['\\\\2715'] hover:scale-125 hover:text-highlight-red"
       />
       <div
         class="flex h-20 w-full items-center justify-center"
@@ -71,7 +71,7 @@ exports[`Snapshot: Comment > editing comment 1`] = `
           <p
             class="text-gray-400 text-sm"
           >
-            0 seconds ago
+            X seconds ago
           </p>
         </div>
         <div
@@ -185,7 +185,7 @@ exports[`Snapshot: Comment > render comment 1`] = `
           <p
             class="text-gray-400 text-sm"
           >
-            0 seconds ago
+            X seconds ago
           </p>
         </div>
         <div
@@ -289,7 +289,7 @@ exports[`Snapshot: Comment > render comment updated 1`] = `
           <p
             class="text-gray-400 text-sm"
           >
-            0 seconds ago
+            X seconds ago
           </p>
         </div>
         <div

@@ -114,7 +114,7 @@ export const Comment: React.FC<CommentProps> = ({
       {isDeletePending ? (
         <div className="mb-4">
           <button
-            className="absolute right-12 rounded-full transition-colors transition-all after:content-['\2715'] hover:scale-125 hover:text-highlight-red"
+            className="absolute right-12 rounded-full transition-all after:content-['\2715'] hover:scale-125 hover:text-highlight-red"
             onClick={(event) => {
               event.preventDefault();
               setIsDeletePending(false);

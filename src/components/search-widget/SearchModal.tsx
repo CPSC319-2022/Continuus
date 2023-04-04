@@ -13,6 +13,8 @@ import { userPathToProfile } from "~/utils/profile";
 import { useAppDispatch } from "~/redux/hooks";
 import Link from "next/link";
 
+{process.env.NODE_ENV !== 'test' ? ReactModal.setAppElement("#__next") : ReactModal.setAppElement("body")}
+
 interface SearchModalProps {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;

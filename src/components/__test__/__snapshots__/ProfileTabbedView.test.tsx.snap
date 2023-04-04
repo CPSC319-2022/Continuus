@@ -66,7 +66,7 @@ exports[`Blog post viewer: Snapshot > render with blog posts 1`] = `
                     <p
                       class="text-sm text-gray-400"
                     >
-                      0 seconds ago
+                      X seconds ago
                     </p>
                   </div>
                 </div>
@@ -149,7 +149,7 @@ exports[`Blog post viewer: Snapshot > render with blog posts 1`] = `
                     <p
                       class="text-sm text-gray-400"
                     >
-                      0 seconds ago
+                      X seconds ago
                     </p>
                   </div>
                 </div>
@@ -232,7 +232,7 @@ exports[`Blog post viewer: Snapshot > render with blog posts 1`] = `
                     <p
                       class="text-sm text-gray-400"
                     >
-                      0 seconds ago
+                      X seconds ago
                     </p>
                   </div>
                 </div>

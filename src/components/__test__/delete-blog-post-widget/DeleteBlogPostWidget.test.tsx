@@ -73,6 +73,8 @@ describe("Delete blog post widget: Snapshot", () => {
         screen.getByText("Are you sure you want to delete this post?")
       ).toBeTruthy();
     });
+
+    await new Promise ((resolve) => setTimeout(() => resolve(true), 500));
     expect(body.baseElement).toMatchSnapshot();
   });
 

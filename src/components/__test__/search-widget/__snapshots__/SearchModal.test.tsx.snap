@@ -2,6 +2,7 @@
 
 exports[`Search: Snapshot > render with blog results 1`] = `
 <body
+  aria-hidden="true"
   class="ReactModal__Body--open"
 >
   <div
@@ -99,6 +100,7 @@ exports[`Search: Snapshot > render with blog results 1`] = `
 
 exports[`Search: Snapshot > render with no results 1`] = `
 <body
+  aria-hidden="true"
   class="ReactModal__Body--open"
 >
   <div
@@ -159,6 +161,7 @@ exports[`Search: Snapshot > render with no results 1`] = `
 
 exports[`Search: Snapshot > render with user results 1`] = `
 <body
+  aria-hidden="true"
   class="ReactModal__Body--open"
 >
   <div
