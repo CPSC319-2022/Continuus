@@ -4,7 +4,7 @@ resource "google_cloudbuild_trigger" "build-trigger" {
     owner = "CPSC319-2022"
     name  = "Continuus"
     //Events section  
-    pull_request {
+    push {
       branch = ".*"
     }
   }
