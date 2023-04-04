@@ -39,6 +39,9 @@ describe("Snapshot: CreateBlogPostWidget", () => {
             })
         }
     }) => {
+        vi.doMock("~/utils/time", () => ({
+            timeAgo: () => "0 seconds ago"
+        }))
         vi.doMock("~/utils/api", () => ({
             api: {
                 blogPost: {
@@ -102,96 +105,103 @@ describe("Snapshot: CreateBlogPostWidget", () => {
     });
 
     it("Authorized CreateBlogPostWidget", async () => {
-        setup({
-            api: {
-                user: {
-                    currentUser: {
-                        useQuery: () => ({
-                            data: { 
-                                id: "1", 
-                                email: "a", 
-                                name: "hi mom", 
-                                image: "c", 
-                                emailVerified: null, 
-                                role: "ADMIN", 
-                                createdAt: new Date(), 
-                                updatedAt: new Date()
-                            },
-                            isLoading: false
-                        })
-                    }
-                }
-            }
-        })
+      const date = new Date();
+      setup({
+        api: {
+          user: {
+            currentUser: {
+              useQuery: () => ({
+                data: {
+                  id: "1",
+                  email: "a",
+                  name: "hi mom",
+                  image: "c",
+                  emailVerified: null,
+                  role: "ADMIN",
+                  createdAt: date,
+                  updatedAt: date,
+                },
+                isLoading: false,
+              }),
+            },
+          },
+        },
+      });
 
-        const { CreateBlogPostWidget } = await import('~/components/create-blog-post-widget');
+      const { CreateBlogPostWidget } = await import(
+        "~/components/create-blog-post-widget"
+      );
 
-        const body = render(<CreateBlogPostWidget />).baseElement;
-        expect(body).toMatchSnapshot();
+      const body = render(<CreateBlogPostWidget />).baseElement;
+      expect(body).toMatchSnapshot();
     });
 
     it("Authorized & Create Blog Post modal is open", async () => {
-        setup({
-            api: {
-                user: {
-                    currentUser: {
-                        useQuery: () => ({
-                            data: { 
-                                id: "1", 
-                                email: "a", 
-                                name: "hi mom", 
-                                image: "c", 
-                                emailVerified: null, 
-                                role: "ADMIN", 
-                                createdAt: new Date(), 
-                                updatedAt: new Date()
-                            },
-                            isLoading: false
-                        })
-                    }
-                }
-            }
-        })
+      const date = new Date();
+      setup({
+        api: {
+          user: {
+            currentUser: {
+              useQuery: () => ({
+                data: {
+                  id: "1",
+                  email: "a",
+                  name: "hi mom",
+                  image: "c",
+                  emailVerified: null,
+                  role: "ADMIN",
+                  createdAt: date,
+                  updatedAt: date,
+                },
+                isLoading: false,
+              }),
+            },
+          },
+        },
+      });
 
-        const { CreateBlogPostWidget } = await import('~/components/create-blog-post-widget');
+      const { CreateBlogPostWidget } = await import(
+        "~/components/create-blog-post-widget"
+      );
 
-        const user = userEvent.setup()
-        const body = render(<CreateBlogPostWidget />).baseElement;
-        const actualButton = screen.getByRole("button");
-        await user.click(actualButton)
-        expect(body).toMatchSnapshot();
+      const user = userEvent.setup();
+      const body = render(<CreateBlogPostWidget />).baseElement;
+      const actualButton = screen.getByRole("button");
+      await user.click(actualButton);
+      expect(body).toMatchSnapshot();
     });
 
     it("Authorized & Mutation is loading", async () => {
+        const date = new Date();
         setup({
-            api: {
-                user: {
-                    currentUser: {
-                        useQuery: () => ({
-                            data: { 
-                                id: "1", 
-                                email: "a", 
-                                name: "hi mom", 
-                                image: "c", 
-                                emailVerified: null, 
-                                role: "ADMIN", 
-                                createdAt: new Date(), 
-                                updatedAt: new Date()
-                            },
-                            isLoading: false
-                        })
-                    }
-                },
-                blogPost: {
-                    create: {
-                        useMutation: () => ({
-                            isSuccess: false,
-                            isLoading: true,
-                        }),
-                    }
-                },
-            }
-        })
+          api: {
+            user: {
+              currentUser: {
+                useQuery: () => ({
+                  data: {
+                    id: "1",
+                    email: "a",
+                    name: "hi mom",
+                    image: "c",
+                    emailVerified: null,
+                    role: "ADMIN",
+                    createdAt: date,
+                    updatedAt: date,
+                  },
+                  isLoading: false,
+                }),
+              },
+            },
+            blogPost: {
+              create: {
+                useMutation: () => ({
+                  isSuccess: false,
+                  isLoading: true,
+                }),
+              },
+            },
+          },
+        });
 
         const { CreateBlogPostWidget } = await import('~/components/create-blog-post-widget');
 
