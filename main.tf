@@ -5,7 +5,7 @@ resource "google_cloudbuild_trigger" "build-trigger" {
     name  = "Continuus"
     //Events section  
     pull_request {
-      branch = "*"
+      branch = ".*"
     }
   }
   ignored_files = [".gitignore"]
