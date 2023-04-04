@@ -1,13 +1,4 @@
 resource "google_cloudbuild_trigger" "build-trigger" {
-  //Source section
-  github {
-    owner = "CPSC319-2022"
-    name  = "Continuus"
-    //Events section  
-    push {
-      branch = ".*"
-    }
-  }
   ignored_files = [".gitignore"]
 
   //Configuration section
