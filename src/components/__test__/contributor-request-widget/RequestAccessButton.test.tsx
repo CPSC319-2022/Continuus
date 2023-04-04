@@ -11,19 +11,21 @@ vi.mock("next-auth/react", () => ({
   }),
 }));
 
+const date = new Date();
+
 const admin = {
-  createdAt: new Date(),
+  createdAt: date,
   email: "email",
   id: "admin-id",
   image: "image",
   name: "admin",
   role: "ADMIN",
   contributorRequest: [],
-  updatedAt: new Date(),
+  updatedAt: date,
 };
 
 const reader = {
-  createdAt: new Date(),
+  createdAt: date,
   email: "email",
   id: "reader-id",
   image: "image",
@@ -32,7 +34,7 @@ const reader = {
   contributorRequest: [
     {
       id: "contribreq-id-1",
-      createdAt: new Date(),
+      createdAt: date,
       user: {
         id: "reader-id",
         name: "reader",
@@ -40,18 +42,18 @@ const reader = {
       },
     },
   ],
-  updatedAt: new Date(),
+  updatedAt: date,
 };
 
 const contributor = {
-  createdAt: new Date(),
+  createdAt: date,
   email: "email",
   id: "contributor-id",
   image: "image",
   name: "contributor",
   role: "CONTRIBUTOR",
   contributorRequest: [],
-  updatedAt: new Date(),
+  updatedAt: date,
 };
 
 describe("Request Access button: Snapshot", () => {

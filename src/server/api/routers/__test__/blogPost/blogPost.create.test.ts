@@ -4,6 +4,7 @@ import { describe, it, expect, beforeEach } from 'vitest'
 import { mockDeep, mockReset } from 'vitest-mock-extended'
 import { appRouter } from '../../../root';
 
+const date = new Date();
 
 describe("Creating Blog Post", () => {
     const prismaMock = mockDeep<PrismaClient>();
@@ -15,11 +16,11 @@ describe("Creating Blog Post", () => {
         password: null,
         emailVerified: null,
         image: null,
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        createdAt: date,
+        updatedAt: date,
     }
     const mockReaderSession: Session = {
-        expires: new Date().toISOString(),
+        expires: date.toISOString(),
         user: mockReaderUser
     }
     const mockContributorUser: User = {
@@ -30,11 +31,11 @@ describe("Creating Blog Post", () => {
         password: null,
         emailVerified: null,
         image: null,
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        createdAt: date,
+        updatedAt: date,
     }
     const mockContributorSession: Session = {
-        expires: new Date().toISOString(),
+        expires: date.toISOString(),
         user: mockContributorUser
     }
     const mockAdminUser: User = {
@@ -45,11 +46,11 @@ describe("Creating Blog Post", () => {
         password: null,
         emailVerified: null,
         image: null,
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        createdAt: date,
+        updatedAt: date,
     }
     const mockAdminSession: Session = {
-        expires: new Date().toISOString(),
+        expires: date.toISOString(),
         user: mockContributorUser
     }
 
@@ -87,8 +88,8 @@ describe("Creating Blog Post", () => {
             userId: "XXX",
             title: "Test Title",
             content: "Test Content",
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            createdAt: date,
+            updatedAt: date,
         }
         const caller = appRouter.createCaller({ session: mockContributorSession, prisma: prismaMock })
         prismaMock.user.findUniqueOrThrow.mockResolvedValue(mockContributorUser);
@@ -112,8 +113,8 @@ describe("Creating Blog Post", () => {
             userId: "XXX",
             title: "Test Title",
             content: "Test Content",
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            createdAt: date,
+            updatedAt: date,
         }
         const caller = appRouter.createCaller({ session: mockAdminSession, prisma: prismaMock })
         prismaMock.user.findUniqueOrThrow.mockResolvedValue(mockAdminUser);

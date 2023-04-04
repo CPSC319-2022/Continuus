@@ -3,14 +3,16 @@ import { describe, it, expect, beforeEach } from "vitest";
 import { mockDeep, mockReset } from "vitest-mock-extended";
 import { appRouter } from "~/server/api/root";
 
+const date = new Date();
+
 const generateBlogPostsWithCommentsAndUser = (count: number) => {
   return [...new Array(count)].map((_, i) => ({
     id: `_${i}_`,
     userId: `_user_${i}_`,
     title: `_title_${i}_`,
     content: `_content_${i}_`,
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    createdAt: date,
+    updatedAt: date,
     user: {
       id: `_user_${i}_`,
       name: null,
@@ -19,8 +21,8 @@ const generateBlogPostsWithCommentsAndUser = (count: number) => {
       emailVerified: null,
       image: null,
       role: 'CONTRIBUTOR',
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      createdAt: date,
+      updatedAt: date,
     },
     comments: [
       {
@@ -28,8 +30,8 @@ const generateBlogPostsWithCommentsAndUser = (count: number) => {
         userId: `_user_${i}_`,
         blogPostId: `_${i}_`,
         content: '__TEST COMMENT__',
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        createdAt: date,
+        updatedAt: date,
         user: {
           id: `_user_${i}_`,
           name: null,
@@ -38,8 +40,8 @@ const generateBlogPostsWithCommentsAndUser = (count: number) => {
           emailVerified: null,
           image: null,
           role: 'CONTRIBUTOR',
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          createdAt: date,
+          updatedAt: date,
         },
       }
     ]
