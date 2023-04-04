@@ -62,7 +62,7 @@ exports[`Comment Modal: Snapshots > render comment modal logged in with selected
               <p
                 class="text-sm text-gray-400"
               >
-                0 seconds ago
+                3 months ago
               </p>
             </div>
           </div>
@@ -126,7 +126,7 @@ exports[`Comment Modal: Snapshots > render comment modal logged in with selected
                 <p
                   class="text-gray-400 text-sm"
                 >
-                  0 seconds ago
+                  3 months ago
                 </p>
               </div>
             </div>
@@ -176,7 +176,7 @@ exports[`Comment Modal: Snapshots > render comment modal logged in with selected
                 <p
                   class="text-gray-400 text-sm"
                 >
-                  0 seconds ago
+                  3 months ago
                 </p>
               </div>
             </div>
@@ -294,7 +294,7 @@ exports[`Comment Modal: Snapshots > render comment modal not logged in with sele
               <p
                 class="text-sm text-gray-400"
               >
-                0 seconds ago
+                3 months ago
               </p>
             </div>
           </div>
@@ -358,7 +358,7 @@ exports[`Comment Modal: Snapshots > render comment modal not logged in with sele
                 <p
                   class="text-gray-400 text-sm"
                 >
-                  0 seconds ago
+                  3 months ago
                 </p>
               </div>
             </div>
@@ -408,7 +408,7 @@ exports[`Comment Modal: Snapshots > render comment modal not logged in with sele
                 <p
                   class="text-gray-400 text-sm"
                 >
-                  0 seconds ago
+                  3 months ago
                 </p>
               </div>
             </div>

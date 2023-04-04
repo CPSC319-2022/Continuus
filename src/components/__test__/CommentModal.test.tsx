@@ -4,13 +4,13 @@ import * as reduxHooks from "~/redux/hooks";
 import { renderWithProviders } from "./utils";
 
 const reader = {
-  createdAt: new Date(),
+  createdAt: new Date(2023, 0, 1),
   email: "email",
   id: "reader-id",
   image: "image",
   name: "reader",
   role: "READER",
-  updatedAt: new Date(),
+  updatedAt: new Date(2023, 0, 1),
 };
 
 export const mockComments = [
@@ -18,8 +18,8 @@ export const mockComments = [
     id: "comment-1",
     blogPostId: "post-1",
     content: "test comment",
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    createdAt: new Date(2023, 0, 1),
+    updatedAt: new Date(2023, 0, 1),
     user: {
       name: "test user 2",
       id: "user-2",
@@ -30,8 +30,8 @@ export const mockComments = [
     id: "comment-2",
     blogPostId: "post-1",
     content: "test comment 2",
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    createdAt: new Date(2023, 0, 1),
+    updatedAt: new Date(2023, 0, 1),
     user: {
       name: "test user 3",
       id: "user-3",
@@ -78,8 +78,8 @@ const setup = (user: any = null, post: any = null) => {
               id: "post-1",
               userId: "user-1",
               title: "title",
-              updatedAt: new Date(),
-              createdAt: new Date(),
+              updatedAt: new Date(2023, 0, 1),
+              createdAt: new Date(2023, 0, 1),
               content: "content",
               comments: mockComments,
               user: {
@@ -98,8 +98,8 @@ const setup = (user: any = null, post: any = null) => {
               id: "comment-1",
               blogPostId: "post-1",
               content: "test comment",
-              createdAt: new Date(),
-              updatedAt: new Date(),
+              createdAt: new Date(2023, 0, 1),
+              updatedAt: new Date(2023, 0, 1),
               user: {
                 name: "test user 2",
                 id: "user-2",
