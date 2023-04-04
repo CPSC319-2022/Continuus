@@ -4,9 +4,7 @@ resource "google_cloudbuild_trigger" "build-trigger" {
     owner = "CPSC319-2022"
     name  = "Continuus"
     //Events section  
-    push {
-      branch = "arun_terraform_test"
-    }
+    pull_request
   }
   ignored_files = [".gitignore"]
 
