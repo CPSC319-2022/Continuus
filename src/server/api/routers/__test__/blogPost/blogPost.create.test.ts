@@ -2,7 +2,7 @@ import type { PrismaClient, User } from '@prisma/client';
 import type { Session } from 'next-auth';
 import { describe, it, expect, beforeEach } from 'vitest'
 import { mockDeep, mockReset } from 'vitest-mock-extended'
-import { appRouter } from '../../root';
+import { appRouter } from '../../../root';
 
 
 describe("Creating Blog Post", () => {
@@ -12,8 +12,11 @@ describe("Creating Blog Post", () => {
         name: 'Reader User',
         role: 'READER',
         email: null,
+        password: null,
         emailVerified: null,
         image: null,
+        createdAt: new Date(),
+        updatedAt: new Date(),
     }
     const mockReaderSession: Session = {
         expires: new Date().toISOString(),
@@ -24,8 +27,11 @@ describe("Creating Blog Post", () => {
         name: 'Contributor User',
         role: 'CONTRIBUTOR',
         email: null,
+        password: null,
         emailVerified: null,
         image: null,
+        createdAt: new Date(),
+        updatedAt: new Date(),
     }
     const mockContributorSession: Session = {
         expires: new Date().toISOString(),
@@ -36,8 +42,11 @@ describe("Creating Blog Post", () => {
         name: 'Admin User',
         role: 'ADMIN',
         email: null,
+        password: null,
         emailVerified: null,
         image: null,
+        createdAt: new Date(),
+        updatedAt: new Date(),
     }
     const mockAdminSession: Session = {
         expires: new Date().toISOString(),
@@ -77,7 +86,9 @@ describe("Creating Blog Post", () => {
         const newBlogPostData = {
             userId: "XXX",
             title: "Test Title",
-            content: "Test Content"
+            content: "Test Content",
+            createdAt: new Date(),
+            updatedAt: new Date(),
         }
         const caller = appRouter.createCaller({ session: mockContributorSession, prisma: prismaMock })
         prismaMock.user.findUniqueOrThrow.mockResolvedValue(mockContributorUser);
@@ -100,7 +111,9 @@ describe("Creating Blog Post", () => {
         const newBlogPostData = {
             userId: "XXX",
             title: "Test Title",
-            content: "Test Content"
+            content: "Test Content",
+            createdAt: new Date(),
+            updatedAt: new Date(),
         }
         const caller = appRouter.createCaller({ session: mockAdminSession, prisma: prismaMock })
         prismaMock.user.findUniqueOrThrow.mockResolvedValue(mockAdminUser);

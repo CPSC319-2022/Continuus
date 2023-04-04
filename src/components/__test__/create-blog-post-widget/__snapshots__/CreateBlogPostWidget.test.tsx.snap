@@ -125,7 +125,7 @@ exports[`Snapshot: CreateBlogPostWidget > Authorized & Create Blog Post modal is
              Blog Post
           </div>
           <button
-            class="rounded-full transition-colors after:content-['\\\\2715'] hover:text-highlight-red hover:scale-125 transition-all"
+            class="rounded-full after:content-['\\\\2715'] hover:text-highlight-red hover:scale-125 transition-all"
           />
         </div>
         <form

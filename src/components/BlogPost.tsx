@@ -1,6 +1,4 @@
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
-import remarkGfm from "remark-gfm";
-import remarkSlug from "remark-slug";
 import { timeAgo } from "~/utils/time";
 import { ProfilePicture } from "./ProfilePicture";
 import { api } from "~/utils/api";

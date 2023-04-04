@@ -16,13 +16,18 @@ export default defineConfig(() => {
     test: {
       environment: "jsdom",
       coverage: {
-        exclude: [...configDefaults.coverage.exclude!, "**/generated/**", "src/env"]
+        exclude: [
+          ...configDefaults.coverage.exclude!,
+          "**/generated/**",
+          "src/env",
+        ],
+        lines: 80,
       },
     },
     resolve: {
       alias: {
-        '~': path.resolve(__dirname, './src')
+        "~": path.resolve(__dirname, "./src"),
       },
     },
-  }
+  };
 });
