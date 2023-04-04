@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, vi } from "vitest";
 import { cleanup } from "@testing-library/react";
 import { renderWithProviders } from "./utils";
 
-const blogPosts = {
+export const blogPosts = {
   pages: [
     {
       items: [
@@ -77,6 +77,16 @@ const blogPosts = {
   ],
 };
 
+export const adminUser = {
+  createdAt: new Date(),
+  email: "email",
+  id: "admin-id",
+  image: "image",
+  name: "admin",
+  role: "ADMIN",
+  updatedAt: new Date(),
+};
+
 const setup = (blogPosts: any = { pages: [] }) => {
   vi.mock("next-auth/react", () => ({
     useSession: () => ({
@@ -92,15 +102,7 @@ const setup = (blogPosts: any = { pages: [] }) => {
       user: {
         currentUser: {
           useQuery: () => ({
-            data: {
-              createdAt: new Date(),
-              email: "email",
-              id: "admin-id",
-              image: "image",
-              name: "admin",
-              role: "ADMIN",
-              updatedAt: new Date(),
-            },
+            data: adminUser,
             isLoading: false,
           }),
         },

@@ -13,6 +13,33 @@ const reader = {
   updatedAt: new Date(),
 };
 
+export const mockComments = [
+  {
+    id: "comment-1",
+    blogPostId: "post-1",
+    content: "test comment",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    user: {
+      name: "test user 2",
+      id: "user-2",
+      image: "image",
+    },
+  },
+  {
+    id: "comment-2",
+    blogPostId: "post-1",
+    content: "test comment 2",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    user: {
+      name: "test user 3",
+      id: "user-3",
+      image: "image",
+    },
+  },
+];
+
 const setup = (user: any = null, post: any = null) => {
   vi.doMock("next/router", () => ({
     useRouter: () => ({
@@ -54,32 +81,7 @@ const setup = (user: any = null, post: any = null) => {
               updatedAt: new Date(),
               createdAt: new Date(),
               content: "content",
-              comments: [
-                {
-                  id: "comment-1",
-                  blogPostId: "post-1",
-                  content: "test comment",
-                  createdAt: new Date(),
-                  updatedAt: new Date(),
-                  user: {
-                    name: "test user 2",
-                    id: "user-2",
-                    image: "image",
-                  },
-                },
-                {
-                  id: "comment-2",
-                  blogPostId: "post-1",
-                  content: "test comment 2",
-                  createdAt: new Date(),
-                  updatedAt: new Date(),
-                  user: {
-                    name: "test user 3",
-                    id: "user-3",
-                    image: "image",
-                  },
-                },
-              ],
+              comments: mockComments,
               user: {
                 name: "test user",
                 image: "imageUrl",
