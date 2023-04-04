@@ -294,7 +294,7 @@ exports[`Profile tabbed view: Snapshot > should render profile tabbed view in bl
 <body>
   <div>
     <div
-      class="mt-4 flex min-h-screen w-full flex-col content-center items-center px-2 md:px-0"
+      class="mt-4 flex min-h-screen w-full flex-col content-center items-center pb-24 md:px-0"
     >
       <div
         class="p-8 mt-24"
@@ -676,7 +676,7 @@ exports[`Profile tabbed view: Snapshot > should render profile tabbed view in co
 <body>
   <div>
     <div
-      class="mt-4 flex min-h-screen w-full flex-col content-center items-center px-2 md:px-0"
+      class="mt-4 flex min-h-screen w-full flex-col content-center items-center pb-24 md:px-0"
     >
       <div
         class="p-8 mt-24"
