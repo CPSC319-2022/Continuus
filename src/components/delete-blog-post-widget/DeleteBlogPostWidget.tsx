@@ -64,7 +64,7 @@ export const DeleteBlogPostWidget: React.FC<DeleteBlogPostWidgetProps> = ({ id }
                 })
               }}
             >
-              <input type="submit" value="Delete"
+              <input type="submit" value="Delete" data-testid="submit-delete"
                 className="relative left-full -translate-x-full h-10 rounded-md border bg-highlight-red w-32 text-center text-white hover:cursor-pointer hover:bg-gray-700 transition-all"
               />
             </form>

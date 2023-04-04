@@ -26,7 +26,7 @@ export const BlogPostInputModal: React.FC<
         <div className="font-semibold">{action} Blog Post</div>
         {closeDisabled || (
           <button
-            className="rounded-full transition-colors after:content-['\2715'] hover:text-highlight-red hover:scale-125 transition-all"
+            className="rounded-full after:content-['\2715'] hover:text-highlight-red hover:scale-125 transition-all"
             onClick={() => closeDisabled || onRequestClose()}
           />
         )}

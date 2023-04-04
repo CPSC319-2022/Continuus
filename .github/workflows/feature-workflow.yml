@@ -80,33 +80,10 @@ jobs:
         chmod +x ./scripts/wait-for-build
         ./scripts/wait-for-build ${{ secrets.GCP_BUILD_TEST_ID }} ${GITHUB_HEAD_REF##*/} "Test (Integration)"
 
-  coverage-test:
-    name: Test (Coverage)
-    runs-on: ubuntu-latest
-    needs: [build]
-    steps:
-    - uses: actions/checkout@v3
-    - id: 'auth'
-      uses: 'google-github-actions/auth@v1'
-      with:
-        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
-
-    - name: 'Set up Cloud SDK'
-      uses: 'google-github-actions/setup-gcloud@v1'
-
-    - name: 'Use gcloud CLI'
-      run: 'gcloud info'
-
-    - name: 'Start Google Cloud Build trigger'
-      run: |
-        export CLOUDSDK_CORE_DISABLE_PROMPTS=1
-        chmod +x ./scripts/wait-for-build
-        ./scripts/wait-for-build ${{ secrets.GCP_BUILD_TEST_ID }} ${GITHUB_HEAD_REF##*/} "Test (Coverage)"
-
   cleanup:
     name: Cleanup Test Artifacts
     runs-on: ubuntu-latest
-    needs: [unit-test, integration-test, coverage-test]
+    needs: [unit-test, integration-test]
     steps:
     - uses: actions/checkout@v3
     - id: 'auth'

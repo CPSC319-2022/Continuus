@@ -12,7 +12,7 @@
     "prisma-generate": "npx prisma migrate dev",
     "lint": "next lint",
     "start": "next start",
-    "test": "vitest run",
+    "test": "vitest run --coverage",
     "cov": "vitest run --coverage",
     "db-seed": "NODE_ENV=development prisma db seed",
     "debug": "NODE_OPTIONS='--inspect' next dev"
@@ -24,6 +24,7 @@
     "@szhsin/react-menu": "^3.5.2",
     "@tanstack/react-query": "^4.20.0",
     "@tanstack/react-table": "^8.7.9",
+    "@testing-library/jest-dom": "^5.16.5",
     "@trpc/client": "^10.8.1",
     "@trpc/next": "^10.15.0",
     "@trpc/react-query": "^10.8.1",

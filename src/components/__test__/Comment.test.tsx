@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { cleanup, render, screen } from "@testing-library/react";
 import { CommentProps } from "~/components/Comment";
+import userEvent from "@testing-library/user-event";
 import { renderWithProviders } from "./utils";
 
 const mockCommentProps: CommentProps = {
@@ -13,12 +14,17 @@ const mockCommentProps: CommentProps = {
   dateUpdated: new Date(),
 };
 
+vi.mock("~/utils/time.ts", () => ({
+  timeAgo: () => "X seconds ago",
+}));
+
 vi.mock("next-auth/react", () => ({
   useSession: () => ({
     data: {
       expires: "1",
       user: { id: "test-user-id", email: "a", name: "hi", image: "c" },
     },
+    status: "authenticated",
   }),
 }));
 
@@ -52,7 +58,16 @@ const initialMock = {
     user: {
       currentUser: {
         useQuery: () => ({
-          data: null,
+          data: {
+            createdAt: new Date(),
+            email: "email",
+            id: "test-user-id",
+            image: "image",
+            name: "contributor",
+            role: "CONTRIBUTOR",
+            contributorRequest: [],
+            updatedAt: new Date(),
+          },
           isLoading: false,
         }),
       },
@@ -124,5 +139,27 @@ describe("Snapshot: Comment", () => {
       <Comment {...mockCommentProps} />
     ).baseElement;
     expect(body).toMatchSnapshot();
+  });
+
+  it("editing comment", async () => {
+    setup(initialMock);
+    const { Comment } = await import("~/components/Comment");
+    const body = renderWithProviders(<Comment {...mockCommentProps} />);
+    const button = screen.getAllByTestId("comment-actions-button")[0];
+    await userEvent.click(button!);
+    const editButton = screen.getByTestId("edit-comment");
+    await userEvent.click(editButton);
+    expect(body.baseElement).toMatchSnapshot();
+  });
+
+  it("deleting comment", async () => {
+    setup(initialMock);
+    const { Comment } = await import("~/components/Comment");
+    const body = renderWithProviders(<Comment {...mockCommentProps} />);
+    const button = screen.getAllByTestId("comment-actions-button")[0];
+    await userEvent.click(button!);
+    const deleteButton = screen.getByTestId("delete-comment");
+    await userEvent.click(deleteButton);
+    expect(body.baseElement).toMatchSnapshot();
   });
 });
