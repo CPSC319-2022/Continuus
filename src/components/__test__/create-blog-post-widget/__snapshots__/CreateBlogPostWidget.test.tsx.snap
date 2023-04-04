@@ -175,6 +175,9 @@ exports[`Snapshot: CreateBlogPostWidget > Authorized & Mutation is loading 1`] =
     style="position: absolute; opacity: 0;"
     tabindex="0"
   />
+  <div
+    class="ReactModalPortal"
+  />
   <div>
     <div
       aria-label="Create Blog Post Button"
