@@ -26,12 +26,14 @@ const userResults = [
   },
 ];
 
+const date = new Date();
+
 const blogResults = [
   {
     id: "id1",
     title: "title1",
-    updatedAt: new Date(),
-    createdAt: new Date(),
+    updatedAt: date,
+    createdAt: date,
     content: "test",
     user: {
       name: "test1",
@@ -41,8 +43,8 @@ const blogResults = [
   {
     id: "id2",
     title: "title2",
-    updatedAt: new Date(),
-    createdAt: new Date(),
+    updatedAt: date,
+    createdAt: date,
     content: "test",
     user: {
       name: "test2",

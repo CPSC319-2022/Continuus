@@ -4,14 +4,16 @@ import { CommentProps } from "~/components/Comment";
 import userEvent from "@testing-library/user-event";
 import { renderWithProviders } from "./utils";
 
+const date = new Date();
+
 const mockCommentProps: CommentProps = {
-  dateAdded: new Date(),
+  dateAdded: date,
   comment: "Hello world",
   name: "Test User",
   userId: "test-user-id",
   imgUrl: "https://i.stack.imgur.com/34AD2.jpg",
   commentId: "test-comment-id",
-  dateUpdated: new Date(),
+  dateUpdated: date,
 };
 
 vi.mock("~/utils/time.ts", () => ({
@@ -38,8 +40,8 @@ const initialMock = {
             userId: "test-user-id",
             blogPostId: "test-blog-post-id",
             content: "Hello world",
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            createdAt: date,
+            updatedAt: date,
           },
           isLoading: false,
         }),
@@ -59,14 +61,14 @@ const initialMock = {
       currentUser: {
         useQuery: () => ({
           data: {
-            createdAt: new Date(),
+            createdAt: date,
             email: "email",
             id: "test-user-id",
             image: "image",
             name: "contributor",
             role: "CONTRIBUTOR",
             contributorRequest: [],
-            updatedAt: new Date(),
+            updatedAt: date,
           },
           isLoading: false,
         }),
