@@ -29,14 +29,11 @@ export const Navbar: React.FC = () => {
               status === "authenticated" ?
                 <ProfileMenu />
                 :
-                <button className="rounded-full w-8 h-8" onClick={() => void router.push({
-                  pathname: "/auth/signinup",
-                  query: {
-                    redirect: router.asPath
-                  }
-                })}>
-                  <FiLogIn className="w-8 h-8" />
-                </button>
+                <Link href={`/auth/signinup?redirect=${router.asPath}`}>
+                  <button className="rounded-full w-8 h-8">
+                    <FiLogIn className="w-8 h-8" />
+                  </button>
+                </Link>
             )
         }
       </div>
