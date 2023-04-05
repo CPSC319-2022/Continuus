@@ -1,22 +1,10 @@
 import { PrismaClient, User } from "@prisma/client";
-import type { Session } from "next-auth";
 import { describe, it, expect, beforeEach } from "vitest";
 import { mockDeep, mockReset } from "vitest-mock-extended";
 import { appRouter } from "~/server/api/root";
 
 describe("Retrieving Blog Post Count", () => {
   const prismaMock = mockDeep<PrismaClient>();
-  const mockUser: User = {
-    id: "reader",
-    name: "Reader User",
-    role: "READER",
-    email: null,
-    password: null,
-    emailVerified: null,
-    image: null,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  };
 
   beforeEach(() => {
     mockReset(prismaMock);
