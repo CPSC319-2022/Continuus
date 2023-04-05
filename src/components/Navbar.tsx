@@ -15,7 +15,7 @@ export const Navbar: React.FC = () => {
   return (
     <div className="flex h-full justify-between border-b border-b-gray-200 p-6">
       <Link href="/" className="self-center text-xl font-bold">
-        Continuous
+        Continuus
       </Link>
       <div className="flex items-center gap-6">
         <RequestAccessButton />
