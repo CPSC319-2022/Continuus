@@ -113,7 +113,7 @@ exports[`Layout: Snapshot > Render layout 1`] = `
       </div>
     </nav>
     <main
-      class="inline-flex w-full overflow-x-auto justify-center"
+      class="inline-flex w-full overflow-x-auto justify-center mb-24 md:mb-0"
     />
   </div>
   <div
