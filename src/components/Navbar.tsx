@@ -15,29 +15,25 @@ export const Navbar: React.FC = () => {
   return (
     <div className="flex h-full justify-between border-b border-b-gray-200 p-6">
       <Link href="/" className="self-center text-xl font-bold">
-        Continuus
+        Continuous
       </Link>
       <div className="flex items-center gap-6">
         <RequestAccessButton />
-        <ContributorRequestWidget/>
-        <div className="hover:fill-highlight-green transition-all">
-          <SearchIcon/>
+        <ContributorRequestWidget />
+        <div className="transition-all hover:fill-highlight-green">
+          <SearchIcon />
         </div>
-        {
-          status === "loading" ?
-            <Spinner size={2} />
-            :
-            (
-              status === "authenticated" ?
-                <ProfileMenu />
-                :
-                <Link href={`/auth/signinup?redirect=${router.asPath}`}>
-                  <button className="rounded-full w-8 h-8">
-                  <FiLogIn className="scale-125 hover:stroke-highlight-green transition-all" />
-                  </button>
-                </Link>
-            )
-        }
+        {status === "loading" ? (
+          <Spinner size={2} />
+        ) : status === "authenticated" ? (
+          <ProfileMenu />
+        ) : (
+          <Link href={`/auth/signinup?redirect=${router.asPath}`}>
+            <button className="h-8 w-8 rounded-full">
+              <FiLogIn className="scale-125 transition-all hover:stroke-highlight-green" />
+            </button>
+          </Link>
+        )}
       </div>
     </div>
   );
