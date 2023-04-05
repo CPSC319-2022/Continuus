@@ -13,13 +13,13 @@ exports[`Layout: Snapshot > Render layout 1`] = `
           class="self-center text-xl font-bold"
           href="/"
         >
-          Continuus
+          Continuous
         </a>
         <div
           class="flex items-center gap-6"
         >
           <div
-            class="hover:fill-highlight-green transition-all"
+            class="transition-all hover:fill-highlight-green"
           >
             <div
               class="hover:cursor-pointer"
