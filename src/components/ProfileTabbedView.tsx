@@ -33,7 +33,7 @@ export const ProfileTabbedView: React.FC<ProfileTabbedViewProps> = ({
   ];
 
   return (
-    <div className="mt-4 flex min-h-screen w-full flex-col content-center items-center pb-24 md:px-0">
+    <div className="mt-4 flex min-h-screen w-full flex-col content-center items-center md:px-0">
       <ProfileCard
         dateJoined={createdAt}
         name={name}
