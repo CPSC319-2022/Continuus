@@ -175,9 +175,6 @@ exports[`Snapshot: CreateBlogPostWidget > Authorized & Mutation is loading 1`] =
     style="position: absolute; opacity: 0;"
     tabindex="0"
   />
-  <div
-    class="ReactModalPortal"
-  />
   <div>
     <div
       aria-label="Create Blog Post Button"
@@ -275,12 +272,12 @@ exports[`Snapshot: CreateBlogPostWidget > Authorized & Mutation is loading 1`] =
     class="ReactModalPortal"
   >
     <div
-      class="ReactModal__Overlay fixed inset-0 z-20 bg-black/75"
+      class="ReactModal__Overlay ReactModal__Overlay--after-open fixed inset-0 z-20 bg-black/75"
     >
       <div
         aria-label="Blog Post Input"
         aria-modal="true"
-        class="ReactModal__Content absolute top-1/2 left-1/2 z-40 w-11/12 -translate-x-1/2 -translate-y-1/2 rounded-md bg-white md:w-1/2 p-4"
+        class="ReactModal__Content ReactModal__Content--after-open absolute top-1/2 left-1/2 z-40 w-11/12 -translate-x-1/2 -translate-y-1/2 rounded-md bg-white md:w-1/2 p-4"
         role="dialog"
         tabindex="-1"
       >

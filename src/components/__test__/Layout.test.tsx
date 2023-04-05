@@ -20,59 +20,64 @@ const setup = () => {
     }),
   }));
 
-  vi.mock("~/utils/api", () => ({
-    api: {
-      user: {
-        currentUser: {
-          useQuery: () => ({
-            data: {
-              createdAt: new Date(),
-              email: "email",
-              id: "test-user-id",
-              image: "image",
-              name: "contributor",
-              role: "CONTRIBUTOR",
-              contributorRequest: [],
-              updatedAt: new Date(),
+
+  vi.mock("~/utils/api", () => {
+    const date = new Date();
+
+    return ({
+      api: {
+        user: {
+          currentUser: {
+            useQuery: () => ({
+              data: {
+                createdAt: date,
+                email: "email",
+                id: "test-user-id",
+                image: "image",
+                name: "contributor",
+                role: "CONTRIBUTOR",
+                contributorRequest: [],
+                updatedAt: date,
+              },
+              isLoading: false,
+            }),
+          },
+          searchUsers: {
+            useQuery: () => ({
+              data: [],
+              isLoading: false,
+            }),
+          },
+        },
+        contributorRequest: {
+          create: {
+            useMutation: () => ({
+              mutate: vi.fn(),
+              mutateAsync: vi.fn(),
+            }),
+          },
+        },
+        blogPost: {
+          search: {
+            useQuery: () => ({
+              data: [],
+              isLoading: false,
+            }),
+          },
+        },
+        useContext: () => ({
+          comment: {
+            get: {
+              invalidate: vi.fn(),
             },
-            isLoading: false,
-          }),
-        },
-        searchUsers: {
-          useQuery: () => ({
-            data: [],
-            isLoading: false,
-          }),
-        },
-      },
-      contributorRequest: {
-        create: {
-          useMutation: () => ({
-            mutate: vi.fn(),
-            mutateAsync: vi.fn(),
-          }),
-        },
-      },
-      blogPost: {
-        search: {
-          useQuery: () => ({
-            data: [],
-            isLoading: false,
-          }),
-        },
-      },
-      useContext: () => ({
-        comment: {
-          get: {
-            invalidate: vi.fn(),
+            count: {
+              invalidate: vi.fn(),
+            },
           },
-          count: {
-            invalidate: vi.fn(),
-          },
-        },
-      }),
-    },
-  }));
+        }),
+      },
+    })
+  });
 };
 
 describe("Layout: Snapshot", () => {

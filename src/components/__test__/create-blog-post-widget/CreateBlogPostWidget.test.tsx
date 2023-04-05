@@ -212,6 +212,8 @@ describe("Snapshot: CreateBlogPostWidget", () => {
         const body = render(<CreateBlogPostWidget />).baseElement;
         const actualButton = screen.getByRole("button");
         await user.click(actualButton)
+
+        await new Promise ((resolve) => setTimeout(() => resolve(true), 500));
         expect(body).toMatchSnapshot();
     });
 

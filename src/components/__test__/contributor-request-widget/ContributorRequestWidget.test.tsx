@@ -11,24 +11,26 @@ vi.mock("next-auth/react", () => ({
   }),
 }));
 
+const date = new Date();
+
 const adminuser = {
-  createdAt: new Date(),
+  createdAt: date,
   email: "email",
   id: "admin-id",
   image: "image",
   name: "admin",
   role: "ADMIN",
-  updatedAt: new Date(),
+  updatedAt: date,
 };
 
 const reader = {
-  createdAt: new Date(),
+  createdAt: date,
   email: "email",
   id: "reader-id",
   image: "image",
   name: "reader",
   role: "READER",
-  updatedAt: new Date(),
+  updatedAt: date,
 };
 
 describe("Contributor Request Menu: Snapshot", () => {
@@ -58,7 +60,7 @@ describe("Contributor Request Menu: Snapshot", () => {
               data: [
                 {
                   id: "contribreq-id-1",
-                  createdAt: new Date(),
+                  createdAt: date,
                   user: {
                     id: "user-id-1",
                     name: "test user 1",
@@ -67,7 +69,7 @@ describe("Contributor Request Menu: Snapshot", () => {
                 },
                 {
                   id: "contribreq-id-2",
-                  createdAt: new Date(),
+                  createdAt: date,
                   user: {
                     id: "user-id-2",
                     name: "test user 2",

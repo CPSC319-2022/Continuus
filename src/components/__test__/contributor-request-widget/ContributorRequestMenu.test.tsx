@@ -16,6 +16,8 @@ const props = {
   setIsOpen: vi.fn(),
 };
 
+const date = new Date();
+
 const initialMock = {
   api: {
     user: {
@@ -35,7 +37,7 @@ const initialMock = {
           data: [
             {
               id: "contribreq-id-1",
-              createdAt: new Date(),
+              createdAt: date,
               user: {
                 id: "user-id-1",
                 name: "test user 1",
@@ -44,7 +46,7 @@ const initialMock = {
             },
             {
               id: "contribreq-id-2",
-              createdAt: new Date(),
+              createdAt: date,
               user: {
                 id: "user-id-2",
                 name: "test user 2",

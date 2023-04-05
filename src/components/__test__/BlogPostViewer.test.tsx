@@ -2,6 +2,8 @@ import { describe, it, expect, beforeEach, vi } from "vitest";
 import { cleanup } from "@testing-library/react";
 import { renderWithProviders } from "./utils";
 
+const date = new Date();
+
 vi.mock("~/utils/time.ts", () => ({
   timeAgo: () => "X seconds ago",
 }));
@@ -14,8 +16,8 @@ export const blogPosts = {
           id: "post-1",
           userId: "user-1",
           title: "title",
-          updatedAt: new Date(),
-          createdAt: new Date(),
+          updatedAt: date,
+          createdAt: date,
           content: "content",
           comments: [
             {
@@ -23,8 +25,8 @@ export const blogPosts = {
               userId: "user-2",
               blogPostId: "post-1",
               content: "test comment",
-              createdAt: new Date(),
-              updatedAt: new Date(),
+              createdAt: date,
+              updatedAt: date,
             },
           ],
           user: {
@@ -36,8 +38,8 @@ export const blogPosts = {
           id: "post-2",
           userId: "user-3",
           title: "another title",
-          updatedAt: new Date(),
-          createdAt: new Date(),
+          updatedAt: date,
+          createdAt: date,
           content: "another content",
           comments: [
             {
@@ -45,8 +47,8 @@ export const blogPosts = {
               userId: "user-4",
               blogPostId: "post-2",
               content: "interesting post",
-              createdAt: new Date(),
-              updatedAt: new Date(),
+              createdAt: date,
+              updatedAt: date,
             },
           ],
           user: {
@@ -58,8 +60,8 @@ export const blogPosts = {
           id: "post-3",
           userId: "user-5",
           title: "different title",
-          updatedAt: new Date(),
-          createdAt: new Date(),
+          updatedAt: date,
+          createdAt: date,
           content: "different content",
           comments: [
             {
@@ -67,8 +69,8 @@ export const blogPosts = {
               userId: "user-6",
               blogPostId: "post-3",
               content: "great information",
-              createdAt: new Date(),
-              updatedAt: new Date(),
+              createdAt: date,
+              updatedAt: date,
             },
           ],
           user: {
@@ -82,13 +84,13 @@ export const blogPosts = {
 };
 
 export const adminUser = {
-  createdAt: new Date(),
+  createdAt: date,
   email: "email",
   id: "admin-id",
   image: "image",
   name: "admin",
   role: "ADMIN",
-  updatedAt: new Date(),
+  updatedAt: date,
 };
 
 const setup = (blogPosts: any = { pages: [] }) => {
