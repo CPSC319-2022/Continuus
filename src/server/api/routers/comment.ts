@@ -33,7 +33,7 @@ export const commentRouter = createTRPCRouter({
         }
       });
 
-      if (!["CONTRIBUTOR", "ADMIN"].includes(user.role)) {
+      if (!["CONTRIBUTOR", "ADMIN", "READER"].includes(user.role)) {
         throw new Error("Your account role is not permitted to update comments");
       }
       if (user.id !== comment.userId) {
