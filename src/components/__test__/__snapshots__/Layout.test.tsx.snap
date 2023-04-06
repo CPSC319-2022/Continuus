@@ -13,7 +13,7 @@ exports[`Layout: Snapshot > Render layout 1`] = `
           class="self-center text-xl font-bold"
           href="/"
         >
-          Continuous
+          Continuus
         </a>
         <div
           class="flex items-center gap-6"
