@@ -3,12 +3,12 @@
 name: GCP Cloud Build
 
 on:
-  push:
+  pull_request:
     branches: 
-    - '*' 
-    - '!dev'
-    - '!qa'
-    - '!prod'
+    - 'dev'
+    - 'qa'
+    - 'prod'
+    - 'demo'
 
 
 jobs:
@@ -32,7 +32,7 @@ jobs:
       run: |
         export CLOUDSDK_CORE_DISABLE_PROMPTS=1
         chmod +x ./scripts/wait-for-build
-        ./scripts/wait-for-build ${{ secrets.GCP_FEATURE_BUILD_ID }} ${GITHUB_REF##*/} Build
+        ./scripts/wait-for-build ${{ secrets.GCP_FEATURE_BUILD_ID }} ${GITHUB_HEAD_REF##*/} Build
   
   unit-test:
     name: Test (Unit)
@@ -55,7 +55,7 @@ jobs:
       run: |
         export CLOUDSDK_CORE_DISABLE_PROMPTS=1
         chmod +x ./scripts/wait-for-build
-        ./scripts/wait-for-build ${{ secrets.GCP_BUILD_TEST_ID }} ${GITHUB_REF##*/} "Test (Unit)"
+        ./scripts/wait-for-build ${{ secrets.GCP_BUILD_TEST_ID }} ${GITHUB_HEAD_REF##*/} "Test (Unit)"
 
   integration-test:
     name: Test (Integration)
@@ -78,12 +78,12 @@ jobs:
       run: |
         export CLOUDSDK_CORE_DISABLE_PROMPTS=1
         chmod +x ./scripts/wait-for-build
-        ./scripts/wait-for-build ${{ secrets.GCP_BUILD_TEST_ID }} ${GITHUB_REF##*/} "Test (Integration)"
+        ./scripts/wait-for-build ${{ secrets.GCP_BUILD_TEST_ID }} ${GITHUB_HEAD_REF##*/} "Test (Integration)"
 
-  coverage-test:
-    name: Test (Coverage)
+  cleanup:
+    name: Cleanup Test Artifacts
     runs-on: ubuntu-latest
-    needs: [build]
+    needs: [unit-test, integration-test]
     steps:
     - uses: actions/checkout@v3
     - id: 'auth'
@@ -100,5 +100,5 @@ jobs:
     - name: 'Start Google Cloud Build trigger'
       run: |
         export CLOUDSDK_CORE_DISABLE_PROMPTS=1
-        chmod +x ./scripts/wait-for-build
-        ./scripts/wait-for-build ${{ secrets.GCP_BUILD_TEST_ID }} ${GITHUB_REF##*/} "Test (Coverage)"
+        gcloud artifacts docker images delete northamerica-northeast2-docker.pkg.dev/automatic-bot-376307/continuus/$(git rev-parse --short ${{ github.event.pull_request.head.sha }})-test --delete-tags
+

@@ -1,0 +1,544 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Snapshot: CreateBlogPostWidget > Authorized & Create Blog Post modal is open 1`] = `
+<body
+  class="ReactModal__Body--open"
+>
+  <div
+    data-react-modal-body-trap=""
+    style="position: absolute; opacity: 0;"
+    tabindex="0"
+  />
+  <div>
+    <div
+      aria-label="Create Blog Post Button"
+      class="
+                    fixed
+                    bottom-24
+                    left-1/2 
+                    z-10
+                    md:left-[95%] 
+                    -translate-x-1/2
+                    translate-y-1/2
+                "
+    >
+      <div
+        class="
+                            absolute
+                            w-64
+                            min-h-0
+                            h-12
+                            -translate-y-full
+                            -translate-x-1/2
+                            left-1/2
+                            md:-translate-x-full
+                            md:left-full
+                            overflow-hidden
+                            -top-2
+                        "
+        style="height: 16rem;"
+      >
+        <div
+          class="
+                            top-full
+                            absolute
+                            w-full  
+                            border-black
+                            bg-gray-400
+                            rounded-md
+                            p-2
+                            transition-all
+                            after:absolute first-letter:
+                            after:left-0
+                            md:after:left-auto
+                            after:right-0
+                            after:my-0
+                            after:mx-auto
+                            after:w-0
+                            after:h-0
+                            after:border-t-[1rem]
+                            after:border-solid
+                            after:border-t-gray-400
+                            after:border-l-[2rem]
+                            after:border-r-[2rem]
+                            after:border-x-transparent
+                            after:transition-all
+                        "
+        >
+          <p
+            class="p-3 text-center md:text-left"
+          >
+            You do not have authorization to create posts
+          </p>
+        </div>
+      </div>
+      <button
+        class="
+                        bg-highlight-green hover:bg-gray-700 hover:scale-110 bg-highlight-green cursor-pointer transition-all 
+                        aspect-square
+                        w-16 
+                        rounded-full 
+                        after:block 
+                        before:block 
+                        after:bg-white 
+                        before:bg-white
+                        after:absolute 
+                        before:absolute
+                        after:top-1/2 
+                        before:top-1/2 
+                        after:left-1/2 
+                        before:left-1/2 
+                        after:-translate-x-1/2 
+                        before:-translate-x-1/2 
+                        after:-translate-y-1/2 
+                        before:-translate-y-1/2 
+                        after:h-8 
+                        before:h-2 
+                        after:w-2 
+                        before:w-8 
+                        after:transition-all 
+                        before:transition-all 
+                        "
+      />
+    </div>
+  </div>
+  <div
+    class="ReactModalPortal"
+  >
+    <div
+      class="ReactModal__Overlay fixed inset-0 z-20 bg-black/75"
+    >
+      <div
+        aria-label="Blog Post Input"
+        aria-modal="true"
+        class="ReactModal__Content absolute top-1/2 left-1/2 z-40 w-11/12 -translate-x-1/2 -translate-y-1/2 rounded-md bg-white md:w-1/2 p-4"
+        role="dialog"
+        tabindex="-1"
+      >
+        <div
+          class="flex pb-3 w-full flex-row items-center justify-between border-b border-b-gray-200 pl-4 pr-4"
+        >
+          <div
+            class="font-semibold"
+          >
+            Create
+             Blog Post
+          </div>
+          <button
+            class="rounded-full after:content-['\\\\2715'] hover:text-highlight-red hover:scale-125 transition-all"
+          />
+        </div>
+        <form
+          aria-label="Create Blog Post Form"
+        >
+          <div
+            class="py-4 flex flex-row items-start"
+          >
+            <div
+              class="flex flex-col w-full ml-2"
+            >
+              <input
+                class="w-full rounded-md p-2 mb-4 text-2xl font-bold"
+                placeholder="Write title here"
+                type="text"
+                value=""
+              />
+              <textarea
+                class="w-full resize-none rounded-md h-96 p-2"
+                placeholder="Write your blog post here"
+              />
+            </div>
+          </div>
+          <input
+            class="relative left-full -translate-x-full h-10 rounded-md border w-32 text-center text-gray-700 disabled cursor-not-allowed bg-gray-200"
+            type="submit"
+            value="Create"
+          />
+        </form>
+      </div>
+    </div>
+  </div>
+  <div
+    data-react-modal-body-trap=""
+    style="position: absolute; opacity: 0;"
+    tabindex="0"
+  />
+</body>
+`;
+
+exports[`Snapshot: CreateBlogPostWidget > Authorized & Mutation is loading 1`] = `
+<body
+  class="ReactModal__Body--open"
+>
+  <div
+    data-react-modal-body-trap=""
+    style="position: absolute; opacity: 0;"
+    tabindex="0"
+  />
+  <div>
+    <div
+      aria-label="Create Blog Post Button"
+      class="
+                    fixed
+                    bottom-24
+                    left-1/2 
+                    z-10
+                    md:left-[95%] 
+                    -translate-x-1/2
+                    translate-y-1/2
+                "
+    >
+      <div
+        class="
+                            absolute
+                            w-64
+                            min-h-0
+                            h-12
+                            -translate-y-full
+                            -translate-x-1/2
+                            left-1/2
+                            md:-translate-x-full
+                            md:left-full
+                            overflow-hidden
+                            -top-2
+                        "
+        style="height: 16rem;"
+      >
+        <div
+          class="
+                            top-full
+                            absolute
+                            w-full  
+                            border-black
+                            bg-gray-400
+                            rounded-md
+                            p-2
+                            transition-all
+                            after:absolute first-letter:
+                            after:left-0
+                            md:after:left-auto
+                            after:right-0
+                            after:my-0
+                            after:mx-auto
+                            after:w-0
+                            after:h-0
+                            after:border-t-[1rem]
+                            after:border-solid
+                            after:border-t-gray-400
+                            after:border-l-[2rem]
+                            after:border-r-[2rem]
+                            after:border-x-transparent
+                            after:transition-all
+                        "
+        >
+          <p
+            class="p-3 text-center md:text-left"
+          >
+            You do not have authorization to create posts
+          </p>
+        </div>
+      </div>
+      <button
+        class="
+                        bg-highlight-green hover:bg-gray-700 hover:scale-110 bg-highlight-green cursor-pointer transition-all 
+                        aspect-square
+                        w-16 
+                        rounded-full 
+                        after:block 
+                        before:block 
+                        after:bg-white 
+                        before:bg-white
+                        after:absolute 
+                        before:absolute
+                        after:top-1/2 
+                        before:top-1/2 
+                        after:left-1/2 
+                        before:left-1/2 
+                        after:-translate-x-1/2 
+                        before:-translate-x-1/2 
+                        after:-translate-y-1/2 
+                        before:-translate-y-1/2 
+                        after:h-8 
+                        before:h-2 
+                        after:w-2 
+                        before:w-8 
+                        after:transition-all 
+                        before:transition-all 
+                        "
+      />
+    </div>
+  </div>
+  <div
+    class="ReactModalPortal"
+  >
+    <div
+      class="ReactModal__Overlay ReactModal__Overlay--after-open fixed inset-0 z-20 bg-black/75"
+    >
+      <div
+        aria-label="Blog Post Input"
+        aria-modal="true"
+        class="ReactModal__Content ReactModal__Content--after-open absolute top-1/2 left-1/2 z-40 w-11/12 -translate-x-1/2 -translate-y-1/2 rounded-md bg-white md:w-1/2 p-4"
+        role="dialog"
+        tabindex="-1"
+      >
+        <div
+          class="flex pb-3 w-full flex-row items-center justify-between border-b border-b-gray-200 pl-4 pr-4"
+        >
+          <div
+            class="font-semibold"
+          >
+            Create
+             Blog Post
+          </div>
+        </div>
+        <div
+          class="flex h-96 w-full items-center justify-center"
+        >
+          <div
+            class="inline-block animate-spin rounded-full border-solid border-current border-r-transparent align-[-0.125em] text-highlight-green motion-reduce:animate-[spin_1.5s_linear_infinite]"
+            role="status"
+            style="width: 12rem; height: 12rem; border-width: 1rem;"
+          >
+            <span
+              class="absolute -m-px h-px w-px overflow-hidden whitespace-nowrap border-0 p-0 [clip:rect(0,0,0,0)]"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    data-react-modal-body-trap=""
+    style="position: absolute; opacity: 0;"
+    tabindex="0"
+  />
+</body>
+`;
+
+exports[`Snapshot: CreateBlogPostWidget > Authorized CreateBlogPostWidget 1`] = `
+<body>
+  <div>
+    <div
+      aria-label="Create Blog Post Button"
+      class="
+                    fixed
+                    bottom-24
+                    left-1/2 
+                    z-10
+                    md:left-[95%] 
+                    -translate-x-1/2
+                    translate-y-1/2
+                "
+    >
+      <div
+        class="
+                            absolute
+                            w-64
+                            min-h-0
+                            h-12
+                            -translate-y-full
+                            -translate-x-1/2
+                            left-1/2
+                            md:-translate-x-full
+                            md:left-full
+                            overflow-hidden
+                            -top-2
+                        "
+        style="height: 16rem;"
+      >
+        <div
+          class="
+                            top-full
+                            absolute
+                            w-full  
+                            border-black
+                            bg-gray-400
+                            rounded-md
+                            p-2
+                            transition-all
+                            after:absolute first-letter:
+                            after:left-0
+                            md:after:left-auto
+                            after:right-0
+                            after:my-0
+                            after:mx-auto
+                            after:w-0
+                            after:h-0
+                            after:border-t-[1rem]
+                            after:border-solid
+                            after:border-t-gray-400
+                            after:border-l-[2rem]
+                            after:border-r-[2rem]
+                            after:border-x-transparent
+                            after:transition-all
+                        "
+        >
+          <p
+            class="p-3 text-center md:text-left"
+          >
+            You do not have authorization to create posts
+          </p>
+        </div>
+      </div>
+      <button
+        class="
+                        bg-highlight-green hover:bg-gray-700 hover:scale-110 bg-highlight-green cursor-pointer transition-all 
+                        aspect-square
+                        w-16 
+                        rounded-full 
+                        after:block 
+                        before:block 
+                        after:bg-white 
+                        before:bg-white
+                        after:absolute 
+                        before:absolute
+                        after:top-1/2 
+                        before:top-1/2 
+                        after:left-1/2 
+                        before:left-1/2 
+                        after:-translate-x-1/2 
+                        before:-translate-x-1/2 
+                        after:-translate-y-1/2 
+                        before:-translate-y-1/2 
+                        after:h-8 
+                        before:h-2 
+                        after:w-2 
+                        before:w-8 
+                        after:transition-all 
+                        before:transition-all 
+                        "
+      />
+    </div>
+  </div>
+  <div
+    class="ReactModalPortal"
+  />
+</body>
+`;
+
+exports[`Snapshot: CreateBlogPostWidget > Loading CreateBlogPostWidget 1`] = `
+<body>
+  <div>
+    <div
+      aria-label="Create Blog Post Button"
+      class="
+                    fixed
+                    bottom-24
+                    left-1/2 
+                    z-10
+                    md:left-[95%] 
+                    -translate-x-1/2
+                    translate-y-1/2
+                "
+    >
+      <div
+        class="inline-block animate-spin rounded-full border-solid border-current border-r-transparent align-[-0.125em] text-highlight-green motion-reduce:animate-[spin_1.5s_linear_infinite]"
+        role="status"
+        style="width: 4rem; height: 4rem; border-width: 0.3333333333333333rem;"
+      >
+        <span
+          class="absolute -m-px h-px w-px overflow-hidden whitespace-nowrap border-0 p-0 [clip:rect(0,0,0,0)]"
+        />
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Snapshot: CreateBlogPostWidget > Unauthorized Plain CreateBlogPostWidget 1`] = `
+<body>
+  <div>
+    <div
+      aria-label="Create Blog Post Button"
+      class="
+                    fixed
+                    bottom-24
+                    left-1/2 
+                    z-10
+                    md:left-[95%] 
+                    -translate-x-1/2
+                    translate-y-1/2
+                "
+    >
+      <div
+        class="
+                            absolute
+                            w-64
+                            min-h-0
+                            h-12
+                            -translate-y-full
+                            -translate-x-1/2
+                            left-1/2
+                            md:-translate-x-full
+                            md:left-full
+                            overflow-hidden
+                            -top-2
+                        "
+        style="height: 16rem;"
+      >
+        <div
+          class="
+                            top-full
+                            absolute
+                            w-full  
+                            border-black
+                            bg-gray-400
+                            rounded-md
+                            p-2
+                            transition-all
+                            after:absolute first-letter:
+                            after:left-0
+                            md:after:left-auto
+                            after:right-0
+                            after:my-0
+                            after:mx-auto
+                            after:w-0
+                            after:h-0
+                            after:border-t-[1rem]
+                            after:border-solid
+                            after:border-t-gray-400
+                            after:border-l-[2rem]
+                            after:border-r-[2rem]
+                            after:border-x-transparent
+                            after:transition-all
+                        "
+        >
+          <p
+            class="p-3 text-center md:text-left"
+          >
+            You do not have authorization to create posts
+          </p>
+        </div>
+      </div>
+      <button
+        class="
+                        bg-gray-200 cursor-not-allowed 
+                        aspect-square
+                        w-16 
+                        rounded-full 
+                        after:block 
+                        before:block 
+                        after:bg-white 
+                        before:bg-white
+                        after:absolute 
+                        before:absolute
+                        after:top-1/2 
+                        before:top-1/2 
+                        after:left-1/2 
+                        before:left-1/2 
+                        after:-translate-x-1/2 
+                        before:-translate-x-1/2 
+                        after:-translate-y-1/2 
+                        before:-translate-y-1/2 
+                        after:h-8 
+                        before:h-2 
+                        after:w-2 
+                        before:w-8 
+                        after:transition-all 
+                        before:transition-all 
+                        "
+      />
+    </div>
+  </div>
+</body>
+`;
