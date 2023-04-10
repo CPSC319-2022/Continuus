@@ -7,7 +7,7 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <>
       <Head>
-        <title>Continuous Blog Application</title>
+        <title>Continuus Blog Application</title>
       </Head>
       <header className="sticky top-0 z-10 box-border h-12 w-full bg-white">
         <Navbar />
