@@ -5,12 +5,12 @@ resource "google_cloudbuild_trigger" "build-trigger" {
     name  = "Continuus"
     //Events section  
     push {
-      branch = "arun_terraform_demo"
+      branch = "dev|qa|prod|demo|arun_terraform_demo"
     }
   }
   ignored_files = [".gitignore"]
 
   //Configuration section
   // build config file
-  filename = "cloudbuild/feature-build.yaml"
+  filename = "cloudbuild/build-and-deploy.yaml"
 }

@@ -3,7 +3,11 @@ name: Terraform
 on:
   pull_request:
     branches:
-      - '*'
+      - 'dev'
+      - 'qa'
+      - 'prod'
+      - 'demo'
+      - 'arun_terraform_demo'
 
 permissions:
   pull-requests: write
@@ -75,7 +79,7 @@ jobs:
         run: exit 1
 
       - name: Terraform Apply
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'push'
         run: terraform apply -auto-approve -input=false
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.TF_GCP_CREDENTIALS }}

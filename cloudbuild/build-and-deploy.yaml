@@ -1,0 +1,43 @@
+steps:
+  # Docker Build (Prod container)
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args: ['-c', 'docker build . --tag northamerica-northeast2-docker.pkg.dev/automatic-bot-376307/continuus/$BRANCH_NAME-prod -f docker/prod/Dockerfile']  
+
+   # Docker Push
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args: ['-c', 'docker push northamerica-northeast2-docker.pkg.dev/automatic-bot-376307/continuus/$BRANCH_NAME-prod']
+
+  - name: gcr.io/cloud-builders/npm
+    env:
+      - NODE_ENV=production
+    entrypoint: sh
+    args:
+      - "-c"
+      - |
+        wget https://storage.googleapis.com/cloud-sql-connectors/cloud-sql-proxy/v2.0.0/cloud-sql-proxy.linux.amd64 -O cloud-sql-proxy
+        chmod +x cloud-sql-proxy
+        ./cloud-sql-proxy --port 5432 $$CLOUD_SQL_INSTANCE_NAME & sleep 3
+        export DATABASE_URL=postgresql://$$DB_USERNAME:$$DB_PASSWORD@localhost/$BRANCH_NAME
+        npx prisma migrate deploy
+    secretEnv: ['DB_USERNAME', 'DB_PASSWORD', 'CLOUD_SQL_INSTANCE_NAME']
+
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: bash
+    args:
+    - '-c'
+    - 'gcloud run deploy $BRANCH_NAME --image northamerica-northeast2-docker.pkg.dev/automatic-bot-376307/continuus/$BRANCH_NAME-prod --region northamerica-northeast2 --platform managed --allow-unauthenticated --set-cloudsql-instances $$CLOUD_SQL_INSTANCE_NAME --set-env-vars DATABASE_URL=postgresql://$$DB_USERNAME:$$DB_PASSWORD@localhost:5432/$BRANCH_NAME?host=/cloudsql/$$CLOUD_SQL_INSTANCE_NAME --set-secrets NEXTAUTH_URL=projects/871909765266/secrets/$BRANCH_NAME-NEXTAUTH_URL/versions/latest,NEXTAUTH_SECRET=projects/871909765266/secrets/$BRANCH_NAME-NEXTAUTH_SECRET/versions/latest,GOOGLE_CLIENT_ID=projects/871909765266/secrets/$BRANCH_NAME-GOOGLE_CLIENT_ID/versions/latest,GOOGLE_CLIENT_SECRET=projects/871909765266/secrets/$BRANCH_NAME-GOOGLE_CLIENT_SECRET/versions/latest'
+    secretEnv: ['DB_USERNAME', 'DB_PASSWORD', 'CLOUD_SQL_INSTANCE_NAME']
+
+availableSecrets:
+  secretManager:
+  - versionName: projects/871909765266/secrets/DB_USERNAME/versions/latest
+    env: 'DB_USERNAME'
+  - versionName: projects/871909765266/secrets/DB_PASSWORD/versions/latest
+    env: 'DB_PASSWORD'
+  - versionName: projects/871909765266/secrets/CLOUD_SQL_INSTANCE_NAME/versions/latest
+    env: 'CLOUD_SQL_INSTANCE_NAME'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
