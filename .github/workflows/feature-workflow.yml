@@ -9,6 +9,7 @@ on:
     - 'qa'
     - 'prod'
     - 'demo'
+    - 'arun_terraform_demo'
 
 
 jobs:
