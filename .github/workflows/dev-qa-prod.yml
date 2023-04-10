@@ -78,33 +78,10 @@ jobs:
         chmod +x ./scripts/wait-for-build
         ./scripts/wait-for-build ${{ secrets.GCP_BUILD_TEST_ID }} ${GITHUB_REF##*/} "Test (Integration)"
 
-  coverage-test:
-    name: Test (Coverage)
-    runs-on: ubuntu-latest
-    needs: [build]
-    steps:
-    - uses: actions/checkout@v3
-    - id: 'auth'
-      uses: 'google-github-actions/auth@v1'
-      with:
-        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
-
-    - name: 'Set up Cloud SDK'
-      uses: 'google-github-actions/setup-gcloud@v1'
-
-    - name: 'Use gcloud CLI'
-      run: 'gcloud info'
-
-    - name: 'Start Google Cloud Build trigger'
-      run: |
-        export CLOUDSDK_CORE_DISABLE_PROMPTS=1
-        chmod +x ./scripts/wait-for-build
-        ./scripts/wait-for-build ${{ secrets.GCP_BUILD_TEST_ID }} ${GITHUB_REF##*/} "Test (Coverage)"
-
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    needs: [unit-test, integration-test, coverage-test]
+    needs: [unit-test, integration-test]
     steps:
     - uses: actions/checkout@v3
     - id: 'auth'
@@ -127,7 +104,7 @@ jobs:
   cleanup:
     name: Cleanup Test Artifacts
     runs-on: ubuntu-latest
-    needs: [build]
+    needs: [unit-test, integration-test]
     steps:
     - uses: actions/checkout@v3
     - id: 'auth'
@@ -148,9 +125,5 @@ jobs:
     - name: 'Start Google Cloud Build trigger'
       run: |
         export CLOUDSDK_CORE_DISABLE_PROMPTS=1
-        chmod +x ./scripts/wait-for-build
-        ./scripts/wait-for-build ${{ secrets.GCP_BUILD_TEST_ID }} ${GITHUB_REF##*/} "Test (Unit)"
-        ./scripts/wait-for-build ${{ secrets.GCP_BUILD_TEST_ID }} ${GITHUB_REF##*/} "Test (Integration)"
-        ./scripts/wait-for-build ${{ secrets.GCP_BUILD_TEST_ID }} ${GITHUB_REF##*/} "Test (Coverage)"
         gcloud artifacts docker images delete northamerica-northeast2-docker.pkg.dev/automatic-bot-376307/continuus/${{ steps.vars.outputs.sha_short }}-test --delete-tags
 

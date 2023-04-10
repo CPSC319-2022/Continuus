@@ -13,20 +13,6 @@ vi.mock("next-auth/react", () => ({
 
 vi.mock("../src/utils/api", () => ({
   api: {
-    example: {
-      hello: {
-        useQuery: () => ({
-          data: {
-            greeting: "Hello world",
-          },
-        }),
-      },
-      getSecretMessage: {
-        useQuery: () => ({
-          data: "secret message",
-        }),
-      },
-    },
     user: {
       currentUser: {
         useQuery: () => ({

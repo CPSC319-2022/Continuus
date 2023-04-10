@@ -1,7 +1,9 @@
 import { type PrismaClient } from "@prisma/client";
 import { z } from "zod";
-import { UserUpdateOneSchema } from "~/generated/schemas";
+import { UserFindManySchema, UserUpdateOneSchema } from "~/generated/schemas";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
+import { TRPCError } from "@trpc/server";
+import { hash } from "argon2";
 
 const getCurrentUser = async (prisma: PrismaClient, userId?: string) => {
   return (
@@ -33,6 +35,11 @@ export const userRouter = createTRPCRouter({
   currentUser: publicProcedure.query(async ({ ctx }) => {
     return await getCurrentUser(ctx.prisma, ctx.session?.user?.id);
   }),
+  searchUsers: publicProcedure
+    .input(UserFindManySchema)
+    .query(async ({ ctx, input }) => {
+      return ctx.prisma.user.findMany(input);
+    }),
   paginatedUsers: protectedProcedure
     .input(
       z.object({
@@ -92,11 +99,56 @@ export const userRouter = createTRPCRouter({
 
       return triedRemovingLastAdmin;
     }),
-
+  selectedUser: publicProcedure
+    .input(
+      z
+        .object({
+          userId: z.string(),
+        })
+    )
+    .query(async ({ ctx, input }) => {
+      return await getCurrentUser(ctx.prisma, input.userId);
+    }),
   updateOne: protectedProcedure
     .input(UserUpdateOneSchema)
     .mutation(async ({ ctx, input }) => {
       await assertAdminRole(ctx.prisma, ctx.session.user.id);
       return ctx.prisma.user.update(input);
     }),
+  signup: publicProcedure
+    .input(z.object({
+      name: z.string().min(2).max(32),
+      email: z.string().email(),
+      password: z.string().min(4).max(12),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const lowerCaseInputEmail = input.email.toLowerCase();
+
+      const exists = await ctx.prisma.user.findFirst({
+        where: {
+          email: lowerCaseInputEmail
+        }
+      });
+
+      if (exists) {
+        throw new TRPCError({
+          code: "CONFLICT",
+          message: JSON.stringify([{
+            message: "That e-mail is already in use"
+          }]),
+        });
+      }
+
+      const hashedPassword = await hash(input.password);
+
+      const createdUser = await ctx.prisma.user.create({
+        data: {
+          name: input.name,
+          email: lowerCaseInputEmail,
+          password: hashedPassword,
+        },
+      });
+
+      return createdUser;
+    })
 });

@@ -2,6 +2,7 @@ import { type Dispatch, type SetStateAction, useEffect, useRef } from "react";
 import { CheckIcon } from "~/icons/Check";
 import { CloseIcon } from "~/icons/Close";
 import { api } from "~/utils/api";
+import {userPathToProfile} from "~/utils/profile";
 import { timeAgo } from "~/utils/time";
 import { ProfilePicture } from "../ProfilePicture";
 
@@ -61,36 +62,37 @@ export const ContributorRequestMenu: React.FC<ContributorRequestMenuProps> = ({
   return isOpen ? (
     <div
       ref={ref}
-      className="absolute right-5 top-10 max-h-[30rem] min-w-[18rem] rounded-md bg-white p-3 shadow-lg"
+      className="absolute right-0 md:right-5 top-12 w-full max-h-96 md:w-96 rounded-md bg-white p-3 shadow border"
     >
-      <div className="scrollbar-hide max-h-[28rem] overflow-scroll overflow-x-hidden">
+      <div className="scrollbar-hide max-h-80 overflow-auto overflow-x-hidden">
         <div className="sticky top-0 bg-white">
-          <p className="text-lg">Contributor Requests</p>
+          <p className="text-lg mb-2">Contributor Requests</p>
           <hr />
         </div>
         {users && users.length ? (
           users.map(({ id, createdAt, user: { id: userId, name, image } }) => (
-            <div className="my-2 flex justify-between" key={id}>
+            <div className="py-2 flex justify-between border-b" key={id}>
               <div className="flex">
                 <ProfilePicture
-                  className="self-center"
-                  imgUrl={image}
+                  className="self-center mt-1"
                   size={2}
+                  imgUrl={image}
+                  redirectLink={userPathToProfile(userId)}
                 />
                 <div className="mx-2">
                   <p>{name}</p>
-                  <p className="text-xs">{timeAgo(createdAt)}</p>
+                  <p className="text-xs text-gray-400">{timeAgo(createdAt)}</p>
                 </div>
               </div>
               <div className="mr-1 flex self-center">
                 <div
-                  className="mx-1 rounded-md bg-highlight-green p-1 hover:cursor-pointer hover:shadow-md"
+                  className="mx-2 scale-110 rounded-md bg-highlight-green p-1 hover:cursor-pointer hover:scale-125 hover:bg-gray-700 hover:fill-highlight-green transition-all"
                   onClick={() => void handleAcceptRequest(userId, id)}
                 >
                   <CheckIcon />
                 </div>
                 <div
-                  className="mx-1 rounded-md bg-slate-200 p-1 hover:cursor-pointer hover:shadow-md"
+                  className="mx-2 scale-110 rounded-md bg-gray-200 p-1 hover:cursor-pointer hover:scale-125 hover:bg-highlight-red hover:fill-white transition-all"
                   onClick={() => deleteRequest.mutate({ where: { id } })}
                 >
                   <CloseIcon />
@@ -100,7 +102,7 @@ export const ContributorRequestMenu: React.FC<ContributorRequestMenuProps> = ({
           ))
         ) : (
           <div className="flex w-full justify-center">
-            <p className="my-5 text-sm italic text-slate-500">
+            <p className="my-5 text-sm italic text-gray-400">
               No contributor requests
             </p>
           </div>

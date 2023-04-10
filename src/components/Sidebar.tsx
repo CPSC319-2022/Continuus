@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { api } from "~/utils/api";
+import { userPathToProfile } from "~/utils/profile";
 
 interface NavItemFields {
   title: string;
@@ -10,72 +11,75 @@ interface NavItemFields {
   adminOnly: boolean;
 }
 
-const navigationItems: NavItemFields[] = [
-  {
-    title: "Blog Feed",
-    path: "/",
-    authenticated: false,
-    adminOnly: false,
-  },
-  {
-    title: "Profile",
-    path: "/profile",
-    authenticated: true,
-    adminOnly: false,
-  },
-  {
-    title: "Admin Panel",
-    path: "/admin",
-    authenticated: true,
-    adminOnly: true,
-  },
-];
-
 export const Sidebar: React.FC = () => {
-  const [navItems, setNavItems] = useState<NavItemFields[]>([]);
+  const { data: userData, isLoading: isUserLoading } =
+    api.user.currentUser.useQuery();
+  const { asPath } = useRouter();
 
-  const { data: userData } = api.user.currentUser.useQuery();
-  const { pathname } = useRouter();
-
-  useEffect(() => {
-    setNavItems(
-      navigationItems.filter((e) => {
-        if (!userData) return !e.authenticated;
-        if (userData?.role !== "ADMIN") return !e.adminOnly;
-        return true;
-      })
-    );
-  }, [userData]);
+  const navigationItems: NavItemFields[] = useMemo(
+    () => [
+      {
+        title: "Blog Feed",
+        path: "/",
+        authenticated: false,
+        adminOnly: false,
+      },
+      {
+        title: "Profile",
+        path: isUserLoading ? asPath : userPathToProfile(userData?.id),
+        authenticated: true,
+        adminOnly: false,
+      },
+      {
+        title: "Admin Panel",
+        path: "/admin",
+        authenticated: true,
+        adminOnly: true,
+      },
+    ],
+    [asPath, isUserLoading, userData]
+  );
 
   return (
-    <div className="w-full flex flex-row h-full border-t border-t-gray-200 border-solid md:border-none md:h-auto md:flex-col md:p-6">
-      {navItems.map(({ title, path }) => (
-        <Link
-          href={path}
-          key={path}
-          className={`
-          ${path === pathname ? 'border-highlight-green' : 'border-transparent'} 
-          border-b-4 
-          border-solid 
-          flex
+    <div
+      className="flex h-full w-full flex-row border-t border-solid border-t-gray-200 md:h-auto md:flex-col md:border-none md:p-6"
+      data-testid="sidebar"
+    >
+      {navigationItems
+        .filter((e) => {
+          if (!userData) return !e.authenticated;
+          if (userData?.role !== "ADMIN") return !e.adminOnly;
+          return true;
+        })
+        .map(({ title, path }) => (
+          <Link
+            href={path}
+            key={path}
+            className={`
+          ${path === asPath ? "border-highlight-green" : "border-gray-200"} 
+          ${path === asPath ? "font-bold" : "font-normal"} 
+          flex 
+          h-full 
           flex-1
-          h-full
+          cursor-pointer
           items-center
           justify-center
-          cursor-pointer
-          hover:bg-slate-200
-          md:pl-2
-          md:justify-start
-          md:h-12
+          border-b-4
+          border-solid
+          transition-all
+          hover:border-highlight-green
+          hover:font-bold
+          md:h-14
           md:flex-auto
-          md:rounded-r-md 
-          md:my-2 
+          md:justify-start 
           md:border-l-4 
           md:border-b-0
-          `}>
-          {title}
-        </Link>
-      ))}
+          md:pl-4
+          `}
+          >
+            {title}
+          </Link>
+        ))}
     </div>
   );
 };

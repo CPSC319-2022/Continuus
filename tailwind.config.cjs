@@ -3,11 +3,15 @@ module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     fontFamily: {
-      sans: ["Work Sans"],
+      sans: ["Atkinson Hyperlegible"],
+    },
+    screens: {
+      'md': '900px',
     },
     extend: {
       colors: {
         "highlight-green": "#31efb8",
+        "highlight-red": "#e65244",
       },
     },
   },

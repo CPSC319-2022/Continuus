@@ -1,84 +1,103 @@
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
-import remarkGfm from "remark-gfm";
-import remarkSlug from "remark-slug";
 import { timeAgo } from "~/utils/time";
 import { ProfilePicture } from "./ProfilePicture";
 import { api } from "~/utils/api";
 import { BlogPostActionsMenu } from "~/components/BlogPostActionsMenu";
 import { useSession } from "next-auth/react";
-import React from "react";
 import { shouldSeeActions, isAuthor } from "~/components/util";
+import { ProfileName } from "./ProfileName";
+import { userPathToProfile } from "~/utils/profile";
+import { useAppDispatch } from "~/redux/hooks";
+import { setSelectedPost } from "~/redux/slices/posts";
 
 interface BlogPostProps extends React.ComponentProps<"div"> {
   id: string;
-  name: string;
-  author: string;
+  authorId: string;
   lastUpdated: Date;
   createdAt: Date;
   title: string;
   content: string;
-  imageUrl: string;
   comments: number;
+  authorName: string;
+  imgUrl?: string | null;
 }
 
 export const BlogPost: React.FC<BlogPostProps> = ({
   id,
-  author,
-  name,
+  authorId,
   lastUpdated,
   createdAt,
   title,
   content,
-  imageUrl,
   comments,
+  authorName,
+  imgUrl,
   ...props
 }) => {
   const currUser = api.user.currentUser.useQuery();
   const { status } = useSession();
+  const dispatch = useAppDispatch();
 
   return (
-    <div
-      className="bg-base-150 card w-full rounded-md shadow-md shadow-slate-300"
-      {...props}
-    >
-      <div className="card-body m-[-15px]">
-        <div className="mb-3 flex w-full justify-between">
-          <div className="flex">
-            <div className="avatar self-center">
-              <ProfilePicture size={2.5} imgUrl={imageUrl} />
-            </div>
-            <div className="ml-3">
-              <p className="text-lg font-bold">{name}</p>
-              <p className="text-sm text-slate-400">{`${timeAgo(createdAt)}${
-                createdAt.getTime() !== lastUpdated.getTime()
-                  ? ` (updated ${timeAgo(lastUpdated)})`
-                  : ""
-              }`}</p>
+    <div className="relative">
+      <div
+        className="card w-full rounded-md shadow-md border hover:cursor-pointer hover:border-highlight-green transition-all"
+        onClick={() => dispatch(setSelectedPost(id))}
+        {...props}
+      >
+        <div className="card-body">
+          <div className="mb-3 flex w-full justify-between">
+            <div className="flex">
+              <div className="avatar self-center hover:scale-110 transition-all">
+                <ProfilePicture
+                  size={2.5}
+                  imgUrl={imgUrl}
+                  redirectLink={userPathToProfile(authorId)}
+                />
+              </div>
+              <div className="ml-3">
+                <ProfileName name={authorName} userId={authorId}/>
+                <p className="text-sm text-gray-400">{`${timeAgo(createdAt)}${
+                  createdAt.getTime() !== lastUpdated.getTime()
+                    ? ` (updated ${timeAgo(lastUpdated)})`
+                    : ""
+                }`}</p>
+              </div>
             </div>
           </div>
-          {shouldSeeActions(status, currUser.data, author) && (
-            <BlogPostActionsMenu
-              id={id}
-              title={title}
-              content={content}
-              isAuthor={isAuthor(currUser.data, author)}
-            />
-          )}
+          <div className="mb-3 w-fit text-2xl font-bold">
+            {title}
+          </div>
+          <div className="prose relative">
+            <ReactMarkdown>
+              {content.length > 500
+                ? `${content.slice(
+                    0,
+                    499
+                  )}`
+                : content}
+            </ReactMarkdown>
+          {content.length > 500
+            ? <div className="bg-gradient-to-b from-transparent to-white w-full h-24 absolute bottom-6"></div>
+            : <div></div>
+            }
+          </div>
+          <div className="self-end">
+            <p className="text-highlight-green no-underline">
+              {comments} Comments
+            </p>
+          </div>
         </div>
-        <p className="mb-3 text-xl font-bold">{title}</p>
-        <div className="prose max-w-none ">
-          <ReactMarkdown remarkPlugins={[remarkGfm, remarkSlug]}>
-            {content.length > 500 ? `${content.slice(0, 499)}...` : content}
-          </ReactMarkdown>
-        </div>
-        <div className="self-end ">
-          <label
-            htmlFor={`modal-${id}`}
-            className="btn-link text-highlight-green no-underline hover:cursor-pointer"
-          >
-            {comments} Comments
-          </label>
-        </div>
+      </div>
+      <div className="absolute right-10 top-12">
+        {shouldSeeActions(status, currUser.data, authorId) && (
+                <BlogPostActionsMenu
+                  id={id}
+                  title={title}
+                  content={content}
+                  isAuthor={isAuthor(currUser.data, authorId)}
+                />
+              )}
       </div>
     </div>
   );

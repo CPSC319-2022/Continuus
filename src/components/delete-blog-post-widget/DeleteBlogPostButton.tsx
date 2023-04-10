@@ -1,12 +1,12 @@
 import React from "react";
 
-export const DeleteBlogPostButton: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
+export const DeleteBlogPostButton: React.FC<{ onClick?: () => void }> = ({
+  onClick,
+}) => {
   return (
     <>
-      <div onClick={onClick}>
-        <span>
-          Delete
-        </span>
+      <div data-testid="delete-blog-post-button" onClick={onClick}>
+        <span>Delete</span>
       </div>
     </>
   );

@@ -1,0 +1,200 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Contributor Request Menu: Snapshot > render menu closed 1`] = `
+<body>
+  <div />
+</body>
+`;
+
+exports[`Contributor Request Menu: Snapshot > render menu open with 2 requests 1`] = `
+<body>
+  <div>
+    <div
+      class="absolute right-0 md:right-5 top-12 w-full max-h-96 md:w-96 rounded-md bg-white p-3 shadow border"
+    >
+      <div
+        class="scrollbar-hide max-h-80 overflow-auto overflow-x-hidden"
+      >
+        <div
+          class="sticky top-0 bg-white"
+        >
+          <p
+            class="text-lg mb-2"
+          >
+            Contributor Requests
+          </p>
+          <hr />
+        </div>
+        <div
+          class="py-2 flex justify-between border-b"
+        >
+          <div
+            class="flex"
+          >
+             
+            <a
+              href="/profile/user-id-1"
+            >
+              <img
+                alt="avatar"
+                class="inline-block aspect-square rounded-[50%] self-center mt-1"
+                src="image"
+                style="width: 2rem;"
+              />
+            </a>
+            <div
+              class="mx-2"
+            >
+              <p>
+                test user 1
+              </p>
+              <p
+                class="text-xs text-gray-400"
+              >
+                0 seconds ago
+              </p>
+            </div>
+          </div>
+          <div
+            class="mr-1 flex self-center"
+          >
+            <div
+              class="mx-2 scale-110 rounded-md bg-highlight-green p-1 hover:cursor-pointer hover:scale-125 hover:bg-gray-700 hover:fill-highlight-green transition-all"
+            >
+              <div>
+                <svg
+                  height="20"
+                  viewBox="0 96 960 960"
+                  width="20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M395 771 226 601l50-50 119 118 289-288 50 51-339 339Z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div
+              class="mx-2 scale-110 rounded-md bg-gray-200 p-1 hover:cursor-pointer hover:scale-125 hover:bg-highlight-red hover:fill-white transition-all"
+            >
+              <div>
+                <svg
+                  height="20"
+                  viewBox="0 96 960 960"
+                  width="20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="m291 816-51-51 189-189-189-189 51-51 189 189 189-189 51 51-189 189 189 189-51 51-189-189-189 189Z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="py-2 flex justify-between border-b"
+        >
+          <div
+            class="flex"
+          >
+             
+            <a
+              href="/profile/user-id-2"
+            >
+              <img
+                alt="avatar"
+                class="inline-block aspect-square rounded-[50%] self-center mt-1"
+                src="image"
+                style="width: 2rem;"
+              />
+            </a>
+            <div
+              class="mx-2"
+            >
+              <p>
+                test user 2
+              </p>
+              <p
+                class="text-xs text-gray-400"
+              >
+                0 seconds ago
+              </p>
+            </div>
+          </div>
+          <div
+            class="mr-1 flex self-center"
+          >
+            <div
+              class="mx-2 scale-110 rounded-md bg-highlight-green p-1 hover:cursor-pointer hover:scale-125 hover:bg-gray-700 hover:fill-highlight-green transition-all"
+            >
+              <div>
+                <svg
+                  height="20"
+                  viewBox="0 96 960 960"
+                  width="20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M395 771 226 601l50-50 119 118 289-288 50 51-339 339Z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div
+              class="mx-2 scale-110 rounded-md bg-gray-200 p-1 hover:cursor-pointer hover:scale-125 hover:bg-highlight-red hover:fill-white transition-all"
+            >
+              <div>
+                <svg
+                  height="20"
+                  viewBox="0 96 960 960"
+                  width="20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="m291 816-51-51 189-189-189-189 51-51 189 189 189-189 51 51-189 189 189 189-51 51-189-189-189 189Z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Contributor Request Menu: Snapshot > render menu open with no requests 1`] = `
+<body>
+  <div>
+    <div
+      class="absolute right-0 md:right-5 top-12 w-full max-h-96 md:w-96 rounded-md bg-white p-3 shadow border"
+    >
+      <div
+        class="scrollbar-hide max-h-80 overflow-auto overflow-x-hidden"
+      >
+        <div
+          class="sticky top-0 bg-white"
+        >
+          <p
+            class="text-lg mb-2"
+          >
+            Contributor Requests
+          </p>
+          <hr />
+        </div>
+        <div
+          class="flex w-full justify-center"
+        >
+          <p
+            class="my-5 text-sm italic text-gray-400"
+          >
+            No contributor requests
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
