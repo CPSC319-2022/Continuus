@@ -71,7 +71,8 @@ jobs:
             <details><summary>Show Plan</summary>
             \`\`\`\n
             ${process.env.PLAN}
-            Once merged and build is complete, your deployment will be available at ${{ github.base_ref }}-hmcu4gyu5a-pd.a.run.app/
+            Once merged and build is complete, your deployment will be available at: 
+            *${{ github.base_ref }}-hmcu4gyu5a-pd.a.run.app/
             \`\`\`
             </details>
 
