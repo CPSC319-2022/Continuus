@@ -9,7 +9,7 @@ on:
     - 'qa'
     - 'prod'
     - 'demo'
-
+    - 'arunterraformdemo'
 
 jobs:
   build:
