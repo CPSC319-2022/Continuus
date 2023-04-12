@@ -1,6 +1,13 @@
 name: Terraform
 
 on:
+  push:
+    branches:
+      - 'dev'
+      - 'qa'
+      - 'prod'
+      - 'demo'
+      - 'arun_terraform_demo'
   pull_request:
     branches:
       - 'dev'
