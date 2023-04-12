@@ -71,7 +71,7 @@ jobs:
             <details><summary>Show Plan</summary>
             \`\`\`\n
             ${process.env.PLAN}
-            Once merged and build is complete, your deployment will be available [here](${{ github.event.pull_request.base.ref }}-hmcu4gyu5a-pd.a.run.app/)
+            Once merged and build is complete, your deployment will be available [here](${{ github.base_ref }}-hmcu4gyu5a-pd.a.run.app/)
             \`\`\`
             </details>
             *Pushed by: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
