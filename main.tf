@@ -5,7 +5,7 @@ resource "google_cloudbuild_trigger" "build-trigger" {
     name  = "Continuus"
     //Events section  
     push {
-      branch = "dev|qa|prod|demo|arunterraformdemo"
+      branch = "dev|qa|prod|demo|arun_terraform_demo"
     }
   }
   ignored_files = [".gitignore"]

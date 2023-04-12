@@ -7,14 +7,14 @@ on:
       - 'qa'
       - 'prod'
       - 'demo'
-      - 'arunterraformdemo'
+      - 'arun_terraform_demo'
   pull_request:
     branches:
       - 'dev'
       - 'qa'
       - 'prod'
       - 'demo'
-      - 'arunterraformdemo'
+      - 'arun_terraform_demo'
 
 permissions:
   pull-requests: write
