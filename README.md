@@ -1,6 +1,6 @@
 # Local Installation Guide
 
-## Google OAuth Setup
+## Google OAuth Setup 
 
 - Follow the instructions in **[Setting Up OAuth 2.0](https://support.google.com/cloud/answer/6158849)**
   1. For the "Application Type", choose "Web application"
